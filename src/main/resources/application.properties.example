@@ -1,5 +1,6 @@
 spring.datasource.url= jdbc:postgresql://localhost:5432/blihire
 spring.datasource.username=postgres
-spring.datasource.password=Bismillah
+spring.datasource.password=password (default kosong)
 
 spring.jpa.hibernate.ddl-auto=create-drop
+

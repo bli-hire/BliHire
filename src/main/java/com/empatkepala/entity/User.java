@@ -1,14 +1,14 @@
 package com.empatkepala.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by ARDI on 3/5/2017.
  */
 
 @Entity
+@Table(name="blihire_user")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
