@@ -1,21 +1,11 @@
-package com.empatkepala.entity;
+package com.empatkepala.entity.request;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
+import com.empatkepala.entity.User;
 
 /**
  * Created by Juan on 3/11/17.
  */
-@Entity
-@Table(name = "mpp")
-public class Mpp {
-
-    @Id
-    @GeneratedValue
-    private long id;
-
-    private Date createdDate = new Date();
+public class MppFormRequest {
 
     private long numberOfPerson;
     private String reason;
@@ -27,28 +17,8 @@ public class Mpp {
     private int expectedJoin;
     private int pcAmmount;
     private String pcSpec;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private User requestedBy;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private User approvedBy;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+    private Long idRequestedBy;
+    private Long idApprovedBy;
 
     public long getNumberOfPerson() {
         return numberOfPerson;
@@ -130,20 +100,19 @@ public class Mpp {
         this.pcSpec = pcSpec;
     }
 
-    public User getRequestedBy() {
-        return requestedBy;
+    public Long getIdRequestedBy() {
+        return idRequestedBy;
     }
 
-    public void setRequestedBy(User requestedBy) {
-        this.requestedBy = requestedBy;
+    public void setIdRequestedBy(Long idRequestedBy) {
+        this.idRequestedBy = idRequestedBy;
     }
 
-    public User getApprovedBy() {
-        return approvedBy;
+    public Long getIdApprovedBy() {
+        return idApprovedBy;
     }
 
-    public void setApprovedBy(User approvedBy) {
-        this.approvedBy = approvedBy;
+    public void setIdApprovedBy(Long idApprovedBy) {
+        this.idApprovedBy = idApprovedBy;
     }
-
 }

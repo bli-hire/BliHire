@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="blihire_user")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id

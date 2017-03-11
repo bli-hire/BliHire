@@ -3,32 +3,34 @@ package com.empatkepala.controller;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddUserRequest;
 import com.empatkepala.repository.UserRepository;
+import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by ARDI on 3/5/2017.
  */
 
-@RestController(value = "/users")
+@RestController
+@RequestMapping(value = "/users")
 public class UserController {
 
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public UserController(UserService userService){
+        this.userService = userService;
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public List<User> findAllUsers(){
-        return this.userRepository.findAll();
+    public Collection<User> findAllUsers(){
+        return userService.getAllUser();
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -37,6 +39,6 @@ public class UserController {
         User user = new User();
         user.setName(addUserRequest.getName());
         user.setSurname(addUserRequest.getSurname());
-        userRepository.save(user);
+        userService.addUser(user);
     }
 }
