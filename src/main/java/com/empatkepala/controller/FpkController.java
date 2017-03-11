@@ -3,6 +3,7 @@ package com.empatkepala.controller;
 import com.empatkepala.entity.Fpk;
 import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.service.FpkService;
+import com.empatkepala.service.impl.FpkServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
