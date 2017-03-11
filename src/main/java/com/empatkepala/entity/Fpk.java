@@ -1,4 +1,4 @@
-package com.empatkepala.repository;
+package com.empatkepala.entity;
 
 import com.empatkepala.entity.User;
 
