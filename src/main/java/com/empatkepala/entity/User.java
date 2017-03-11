@@ -8,12 +8,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="blihire_user")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     @Id
     @GeneratedValue
     private long id;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Role role;
 
     private String name;
     private String surname;
