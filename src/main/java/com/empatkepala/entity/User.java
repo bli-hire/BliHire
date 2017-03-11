@@ -15,6 +15,9 @@ public class User {
     @GeneratedValue
     private long id;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private Role role;
+
     private String name;
     private String surname;
 
