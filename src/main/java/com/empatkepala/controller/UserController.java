@@ -26,7 +26,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public List<User> findAllUsers(){
         return this.userRepository.findAll();
     }
