@@ -3,6 +3,7 @@ package com.empatkepala.service.impl;
 import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.User;
 import com.empatkepala.repository.FpkRepository;
+import com.empatkepala.repository.UserRepository;
 import com.empatkepala.service.FpkService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,9 @@ public class FpkServiceImpl implements FpkService{
         fpkRepository.save(data);
     }
 
-
     public User getUser(Long id) {
         User user = fpkRepository.findOne(id).getRequestedBy();
-        Hibernate.initialize(user);
+//        Hibernate.initialize(user);
         return user;
     }
 }

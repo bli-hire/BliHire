@@ -11,6 +11,9 @@ public class AddFpkRequest {
     private String school;
     private String workExperience;
     private String skillKnowledge;
+    private Long idUserApproved;
+    private Long idUserRequested;
+    private String completeness;
 
     public Long getIdUserRequested() {
         return idUserRequested;
@@ -20,8 +23,6 @@ public class AddFpkRequest {
         this.idUserRequested = idUser;
     }
 
-    private Long idUserRequested;
-
     public Long getIdUserApproved() {
         return idUserApproved;
     }
@@ -29,9 +30,6 @@ public class AddFpkRequest {
     public void setIdUserApproved(Long idUserApproved) {
         this.idUserApproved = idUserApproved;
     }
-
-    private Long idUserApproved;
-    private String completeness;
 
     public int getPosition() {
         return position;

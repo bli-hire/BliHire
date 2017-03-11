@@ -14,7 +14,8 @@ public class Fpk {
 
     @Id
     @GeneratedValue
-    private int idFpk;
+    private long idFpk;
+
     private int positionNeeded;
     private Date createdDate = new Date();
     private String reason;
@@ -25,9 +26,11 @@ public class Fpk {
     private String skillKnowledge;
     private String completeness;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User requestedBy;
-    @ManyToOne(fetch = FetchType.LAZY)
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User approvedBy;
 
     public Fpk(){}
@@ -47,11 +50,11 @@ public class Fpk {
         this.approvedBy = approvedBy;
     }
 
-    public int getIdFpk() {
+    public Long getIdFpk() {
         return idFpk;
     }
 
-    public void setIdFpk(int idFpk) {
+    public void setIdFpk(Long idFpk) {
         this.idFpk = idFpk;
     }
 
