@@ -1,8 +1,6 @@
 package com.empatkepala.entity.request;
 
-/**
- * Created by ARDI on 3/5/2017.
- */
+
 public class AddUserRequest {
 
     private String name;
