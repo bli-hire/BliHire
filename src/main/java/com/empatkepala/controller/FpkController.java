@@ -1,6 +1,8 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Fpk;
+import com.empatkepala.entity.User;
+import com.empatkepala.entity.request.AddFpkRequest;
 import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.service.FpkService;
 import com.empatkepala.service.impl.FpkServiceImpl;
@@ -12,24 +14,38 @@ import java.util.List;
 /**
  * Created by ALz on 3/11/2017.
  */
-@RestController(value="/fpk")
+@RestController(value="/internal/fpk")
 public class FpkController {
     @Autowired
     FpkService fpkService;
 
-    FpkRepository fpkTemp;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET,produces = "application/json")
     public List getAllFpk(){
         return fpkService.getAllData();
     }
 
-    @PostMapping
-    public void insertFpk(Fpk input){
+    @RequestMapping(method = RequestMethod.POST,produces = "application/json")
+    public void insertFpk(
+            @RequestBody
+                    AddFpkRequest addFpkRequest
+            ){
+        Fpk input =
+                new Fpk(addFpkRequest.getPosition(),
+                        addFpkRequest.getReason(),
+                        addFpkRequest.getFitnessWithMpp(),
+                        addFpkRequest.getEmployeeStatus(),
+                        addFpkRequest.getSchool(),
+                        addFpkRequest.getWorkExperience(),
+                        addFpkRequest.getSkillKnowledge(),
+                        addFpkRequest.getCompleteness(),
+                        fpkService.getUser(addFpkRequest.getIdUserRequested()),
+                        fpkService.getUser(addFpkRequest.getIdUserApproved())
+                        );
         fpkService.save(input);
     }
 
-    @PutMapping
+    @RequestMapping(method = RequestMethod.PUT,produces = "application/json")
     public void updateFpk(Fpk findOne){
         fpkService.update(findOne);
     }

@@ -1,8 +1,10 @@
 package com.empatkepala.service.impl;
 
 import com.empatkepala.entity.Fpk;
+import com.empatkepala.entity.User;
 import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.service.FpkService;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
  * Created by ALz on 3/11/2017.
  */
 
+@Service
 public class FpkServiceImpl implements FpkService{
     @Autowired
     FpkRepository fpkRepository;
@@ -27,5 +30,12 @@ public class FpkServiceImpl implements FpkService{
 
     public void update(Fpk data){
         fpkRepository.save(data);
+    }
+
+
+    public User getUser(Long id) {
+        User user = fpkRepository.findOne(id).getRequestedBy();
+        Hibernate.initialize(user);
+        return user;
     }
 }

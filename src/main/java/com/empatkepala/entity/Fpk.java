@@ -15,20 +15,37 @@ public class Fpk {
     @Id
     @GeneratedValue
     private int idFpk;
-    private int position;
-    private Date date;
+    private int positionNeeded;
+    private Date createdDate = new Date();
     private String reason;
     private String fitnessWithMpp;
     private String employeeStatus;
     private String school;
     private String workExperience;
     private String skillKnowledge;
-    private boolean completeness;
+    private String completeness;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User requestedBy;
     @ManyToOne(fetch = FetchType.LAZY)
     private User approvedBy;
+
+    public Fpk(){}
+
+    public Fpk(int positionNeeded,String reason,String fitnessWithMpp,String employeeStatus,
+               String school,String workExperience,String skillKnowledge,String completeness,
+               User requestedBy,User approvedBy) {
+        this.positionNeeded = positionNeeded;
+        this.reason = reason;
+        this.fitnessWithMpp = fitnessWithMpp;
+        this.employeeStatus = employeeStatus;
+        this.school = school;
+        this.workExperience = workExperience;
+        this.skillKnowledge = skillKnowledge;
+        this.completeness = completeness;
+        this.requestedBy = requestedBy;
+        this.approvedBy = approvedBy;
+    }
 
     public int getIdFpk() {
         return idFpk;
@@ -38,20 +55,20 @@ public class Fpk {
         this.idFpk = idFpk;
     }
 
-    public int getPosition() {
-        return position;
+    public int getpositionNeeded() {
+        return positionNeeded;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setpositionNeeded(int positionNeeded) {
+        this.positionNeeded = positionNeeded;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatedDate(Date date) {
+        this.createdDate = date;
     }
 
     public String getReason() {
@@ -102,11 +119,11 @@ public class Fpk {
         this.skillKnowledge = skillKnowledge;
     }
 
-    public boolean isCompleteness() {
+    public String isCompleteness() {
         return completeness;
     }
 
-    public void setCompleteness(boolean completeness) {
+    public void setCompleteness(String completeness) {
         this.completeness = completeness;
     }
 
