@@ -1,11 +1,9 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Fpk;
-import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddFpkRequest;
-import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.service.FpkService;
-import com.empatkepala.service.impl.FpkServiceImpl;
+import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +16,8 @@ import java.util.List;
 public class FpkController {
     @Autowired
     FpkService fpkService;
-
+    @Autowired
+    UserService userService;
 
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
     public List getAllFpk(){
@@ -39,8 +38,8 @@ public class FpkController {
                         addFpkRequest.getWorkExperience(),
                         addFpkRequest.getSkillKnowledge(),
                         addFpkRequest.getCompleteness(),
-                        fpkService.getUser(addFpkRequest.getIdUserRequested()),
-                        fpkService.getUser(addFpkRequest.getIdUserApproved())
+                        userService.getUser(addFpkRequest.getIdUserRequested()),
+                        userService.getUser(addFpkRequest.getIdUserApproved())
                         );
         fpkService.save(input);
     }

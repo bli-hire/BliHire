@@ -33,9 +33,15 @@ public class FpkServiceImpl implements FpkService{
         fpkRepository.save(data);
     }
 
-    public User getUser(Long id) {
-        User user = fpkRepository.findOne(id).getRequestedBy();
+    public User getRequestUserByFpk(Long id) {
+        Fpk fpk = fpkRepository.findOne(id);
 //        Hibernate.initialize(user);
-        return user;
+        return fpk.getRequestedBy();
+    }
+
+    public User getApprovedUserByFpk(Long id) {
+        Fpk fpk = fpkRepository.findOne(id);
+//        Hibernate.initialize(user);
+        return fpk.getRequestedBy();
     }
 }

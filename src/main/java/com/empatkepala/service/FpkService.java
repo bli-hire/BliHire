@@ -14,5 +14,6 @@ public interface FpkService{
     List getAllData();
     void save(Fpk data);
     void update(Fpk data);
-    User getUser(Long id);
+    User getRequestUserByFpk(Long id);
+    User getApprovedUserByFpk(Long id);
 }
