@@ -25,6 +25,9 @@ public class FpkServiceImpl implements FpkService{
         return fpkRepository.findAll();
     }
 
+    @Override
+    public Fpk getFpk(Long id) {return fpkRepository.findOne(id);}
+
     public void save(Fpk data){
         fpkRepository.save(data);
     }
@@ -32,6 +35,9 @@ public class FpkServiceImpl implements FpkService{
     public void update(Fpk data){
         fpkRepository.save(data);
     }
+
+    @Override
+    public void delete(Long id) {fpkRepository.delete(id);}
 
     public User getRequestUserByFpk(Long id) {
         Fpk fpk = fpkRepository.findOne(id);

@@ -24,6 +24,11 @@ public class FpkController {
         return fpkService.getAllData();
     }
 
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = "application/json")
+    public Fpk getFpk(@PathVariable("id") Long id ){
+        return fpkService.getFpk(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST,produces = "application/json")
     public void insertFpk(
             @RequestBody
@@ -47,5 +52,10 @@ public class FpkController {
     @RequestMapping(method = RequestMethod.PUT,produces = "application/json")
     public void updateFpk(Fpk findOne){
         fpkService.update(findOne);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE,produces = "application/json")
+    public void deleteFpk(@RequestBody AddFpkRequest addFpkRequest){
+        fpkService.delete(addFpkRequest.getId());
     }
 }
