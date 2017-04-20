@@ -10,8 +10,6 @@ public class Language {
     private String spokenEnglish;
     private String writtenEnglish;
 
-
-
     public Language(){}
     public Language(String _nameOfLanguage,String  _notesAchievement, String _spokenEnglish,String _writtenEnglish){
         setNameOfLanguage(_nameOfLanguage);
