@@ -85,7 +85,7 @@ public class CV {
     private String timeStartWork;
 
 
-
+    public CV(){}
     public CV(long idCV, String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, String drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurretJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs, String nameOfOrganization, String fieldOfOrganization, String attendancePeriod, String notes, String achievement, int yearAchievement, String notesAchievement,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork) {
         this.idCV = idCV;
         this.title = title;
