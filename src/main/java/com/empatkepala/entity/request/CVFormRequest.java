@@ -1,23 +1,17 @@
-package com.empatkepala.entity;
+package com.empatkepala.entity.request;
 
+import com.empatkepala.entity.CV;
 import com.empatkepala.entity.CVEntity.*;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 
 /**
- * Created by Ryan Bagus Susilo on 3/11/2017.
+ * Created by Ryan Bagus Susilo on 4/21/2017.
  */
+public class CVFormRequest {
 
-
-@Entity
-@Table(name="blihire_CV")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class CV {
-
-    @Id
-    @GeneratedValue
-    private long idCV;
     private String title;
     private String jobTitle;
     private String fullName;
@@ -84,86 +78,7 @@ public class CV {
     private String havePartTimejob;
     private String timeStartWork;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private CV requestedBy;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private CV approvedBy;
-
-    public CV(){}
-    public CV(long idCV, String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, String drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurretJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs, String nameOfOrganization, String fieldOfOrganization, String attendancePeriod, String notes, String achievement, int yearAchievement, String notesAchievement,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork) {
-        this.idCV = idCV;
-        this.title = title;
-        this.jobTitle = jobTitle;
-        this.fullName = fullName;
-        this.placeDateOfBirth = placeDateOfBirth;
-        this.idCardNumber = idCardNumber;
-        this.drivingLicense = drivingLicense;
-        this.emailAddress = emailAddress;
-        this.uploadCV = uploadCV;
-        this.twitter = twitter;
-        this.facebook = facebook;
-        this.linkedIn = linkedIn;
-        this.blog = blog;
-        this.handphone = handphone;
-        this.religion = religion;
-        this.ethnicity = ethnicity;
-        this.maritalStatus = maritalStatus;
-        this.currentAddress = currentAddress;
-        this.homeAddress = homeAddress;
-        this.homePhone = homePhone;
-        this.emergencyCall = emergencyCall;
-        this.fatherName = fatherName;
-        this.fatherBirthday = fatherBirthday;
-        this.fatherLatestEducation = fatherLatestEducation;
-        this.fatherCurrentJob = fatherCurrentJob;
-        this.motherName = motherName;
-        this.motherBirthday = motherBirthday;
-        this.motherLatestEducation = motherLatestEducation;
-        this.motherCurretJob = motherCurretJob;
-        this.spouseName = spouseName;
-        this.spousebirthDay = spousebirthDay;
-        this.spouseLatestEducation = spouseLatestEducation;
-        this.spouseCurrentJob = spouseCurrentJob;
-        this.responsibilities = responsibilities;
-        this.responsibilitiesType = responsibilitiesType;
-        this.reasonMajor = reasonMajor;
-        this.titleThesis = titleThesis;
-        this.nameOfOrganization = nameOfOrganization;
-        this.fieldOfOrganization = fieldOfOrganization;
-        this.attendancePeriod = attendancePeriod;
-        this.notes = notes;
-        this.achievement = achievement;
-        this.yearAchievement = yearAchievement;
-        this.notesAchievement = notesAchievement;
-        this.reasonInterestedInGDN = reasonInterestedInGDN;
-        this.reasonApplyOnThatPosition = reasonApplyOnThatPosition;
-        this.factorEncourageYouOnThatJob = factorEncourageYouOnThatJob;
-        this.kindOfEnvirontment = kindOfEnvirontment;
-        this.lifeValue = lifeValue;
-        this.spesificSkill = spesificSkill;
-        this.hobbies = hobbies;
-        this.describeAboutYou = describeAboutYou;
-        this.placeGetInformationGDN = placeGetInformationGDN;
-        this.relativeWorkingOnGDN = relativeWorkingOnGDN;
-        this.haveAppliedOnGDN = haveAppliedOnGDN;
-        this.havePartTimejob = havePartTimejob;
-        this.timeStartWork = timeStartWork;
-        this.Bro=Bro;
-        this.Chil=Chil;
-        this.school=school;
-        this.nonFrmlCrs=nonFrmlCrs;
-        this.WorkExp=WorkExp;
-    }
-
-
-    public long getIdCV() {
-        return idCV;
-    }
-
-    public void setIdCV(long idCV) {
-        this.idCV = idCV;
-    }
 
     public String getTitle() {
         return title;
@@ -477,11 +392,11 @@ public class CV {
         this.titleThesis = titleThesis;
     }
 
-    public ArrayList<NonFormalCourse> getS() {
+    public ArrayList<NonFormalCourse> getNonFrmlCrs() {
         return nonFrmlCrs;
     }
 
-    public void setS(ArrayList<NonFormalCourse> nonFrmlCrs) {
+    public void setNonFrmlCrs(ArrayList<NonFormalCourse> nonFrmlCrs) {
         this.nonFrmlCrs = nonFrmlCrs;
     }
 
@@ -653,19 +568,5 @@ public class CV {
         this.timeStartWork = timeStartWork;
     }
 
-    public CV getRequestedBy() {
-        return requestedBy;
-    }
 
-    public void setRequestedBy(CV requestedBy) {
-        this.requestedBy = requestedBy;
-    }
-
-    public CV getApprovedBy() {
-        return approvedBy;
-    }
-
-    public void setApprovedBy(CV approvedBy) {
-        this.approvedBy = approvedBy;
-    }
 }

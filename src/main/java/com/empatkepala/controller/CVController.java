@@ -2,6 +2,7 @@ package com.empatkepala.controller;
 
 import com.empatkepala.entity.CV;
 import com.empatkepala.entity.Mpp;
+import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.service.CVService;
 import com.empatkepala.service.UserService;
@@ -21,18 +22,23 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CVController {
     @Autowired
     private CVService cvService;
+
+    @Autowired
+    private UserService userService;
+
+
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
     @RequestMapping(method = RequestMethod.POST)
     public void addCV(
-            @RequestBody CV cvRequest){
+            @RequestBody CVFormRequest cvFormRequest){
         CV cv = new CV();
         cv.setIdCV(ID_GENERATOR.getAndIncrement());
-        cv.setAchievement(cvRequest.getAchievement());
-        cv.setAttendancePeriod(cvRequest.getAttendancePeriod());
-        cv.setBlog(cvRequest.getBlog());
-        cv.setCurrentAddress(cvRequest.getCurrentAddress());
-        cv.setDescribeAboutYou(cvRequest.getDescribeAboutYou());
-        cv.setDrivingLicense(cvRequest.getDrivingLicense());
+        cv.setAchievement(cv.getAchievement());
+        cv.setAttendancePeriod(cv.getAttendancePeriod());
+        cv.setBlog(cv.getBlog());
+        cv.setCurrentAddress(cv.getCurrentAddress());
+        cv.setDescribeAboutYou(cv.getDescribeAboutYou());
+        cv.setDrivingLicense(cv.getDrivingLicense());
         cv.setEmailAddress(cv.getEmailAddress());
         cv.setEmergencyCall(cv.getEmergencyCall());
         cv.setEthnicity(cv.getEthnicity());
@@ -65,9 +71,28 @@ public class CVController {
         cv.setPlaceGetInformationGDN(cv.getPlaceGetInformationGDN());
         cv.setNotes(cv.getNotes());
         cv.setNotesAchievement(cv.getNotesAchievement());
+        cv.setSpousebirthDay(cv.getSpousebirthDay());
+        cv.setSpouseCurrentJob(cv.getSpouseCurrentJob());
+        cv.setSpouseLatestEducation(cv.getSpouseLatestEducation());
+        cv.setSpouseName(cv.getSpouseName());
+        cv.setTimeStartWork(cv.getTimeStartWork());
+        cv.setReligion(cv.getReligion());
+        cv.setSpesificSkill(cv.getSpesificSkill());
+        cv.setYearAchievement(cv.getYearAchievement());
+        cv.setBro(cv.getBro());
+        cv.setBro(cv.getBro());
+        cv.setS(cv.getS());
+        cv.setChil(cv.getChil());
+        cv.setSchool(cv.getSchool());
+        cv.setWorkExp(cv.getWorkExp());
+        cv.setResponsibilities(cv.getResponsibilities());
+        cv.setResponsibilitiesType(cv.getResponsibilitiesType());
 
 
 
+       // cv.setRequestedBy(userService.getUser(cvFormRequest.getIdRequestedBy()));
+
+        cvService.addCV(cv);
 
 
     }

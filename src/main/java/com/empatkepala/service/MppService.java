@@ -17,6 +17,4 @@ public interface MppService {
     Collection<Mpp> getAllMpp();
 
     void addMpp(Mpp mpp);
-
-
 }
