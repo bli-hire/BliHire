@@ -3,6 +3,7 @@ package com.empatkepala.controller;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddUserRequest;
 import com.empatkepala.repository.UserRepository;
+import com.empatkepala.service.RoleService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,8 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    RoleService roleService;
+    @Autowired
     public UserController(UserService userService){
         this.userService = userService;
     }
@@ -41,6 +44,7 @@ public class UserController {
         User user = new User();
         user.setName(addUserRequest.getName());
         user.setSurname(addUserRequest.getSurname());
+        user.setRole(roleService.getRole(1L));
         userService.addUser(user);
     }
 }
