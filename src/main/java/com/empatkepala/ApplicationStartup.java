@@ -19,9 +19,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
-        Role role = new Role();
-        role.setRoleName("CEO");
-        roleService.addRole(role); //role 1
+        Role role1 = new Role();
+        role1.setRoleName("CEO");
+        roleService.addRole(role1); //role 1
+
+        Role role2 = new Role();
+        role2.setRoleName("HR");
+        roleService.addRole(role2); //role 1
+
 
         return;
     }
