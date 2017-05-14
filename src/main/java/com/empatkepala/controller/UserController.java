@@ -2,14 +2,12 @@ package com.empatkepala.controller;
 
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddUserRequest;
+import com.empatkepala.entity.request.LoginRequest;
 import com.empatkepala.repository.UserRepository;
 import com.empatkepala.service.RoleService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +19,6 @@ import java.util.List;
 @RestController
 
 @RequestMapping(value = "/users")
-
 public class UserController {
 
     private UserService userService;
@@ -38,13 +35,21 @@ public class UserController {
         return userService.getAllUser();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void addUser(
             @RequestBody AddUserRequest addUserRequest){
         User user = new User();
         user.setName(addUserRequest.getName());
         user.setSurname(addUserRequest.getSurname());
         user.setRole(roleService.getRole(1L));
+        user.setPassword(addUserRequest.getPassword());
+        user.setEmail(addUserRequest.getEmail());
         userService.addUser(user);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public User login(
+            @RequestBody LoginRequest loginRequest){
+        return userService.getUser(loginRequest.getEmail(), loginRequest.getPassword());
     }
 }

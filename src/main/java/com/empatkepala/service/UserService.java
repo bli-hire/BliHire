@@ -13,4 +13,5 @@ public interface UserService {
     public Collection<User> getAllUser();
     public User getUser(Long id);
     public void addUser(User user);
+    public User getUser(String email, String password);
 }
