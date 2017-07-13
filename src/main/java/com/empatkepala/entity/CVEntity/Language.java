@@ -1,9 +1,11 @@
 package com.empatkepala.entity.CVEntity;
 
+import java.io.Serializable;
+
 /**
  * Created by Ryan Bagus Susilo on 3/11/2017.
  */
-public class Language {
+public class Language implements Serializable {
 
     private String nameOfLanguage;
     private String notesAchievement;

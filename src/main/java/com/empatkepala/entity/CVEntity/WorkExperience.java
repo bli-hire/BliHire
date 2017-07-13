@@ -1,9 +1,11 @@
 package com.empatkepala.entity.CVEntity;
 
+import java.io.Serializable;
+
 /**
  * Created by Ryan Bagus Susilo on 3/11/2017.
  */
-public class WorkExperience {
+public class WorkExperience implements Serializable {
     private String companyName;
     private String companyField;
     private String position;

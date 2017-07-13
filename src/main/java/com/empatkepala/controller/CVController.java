@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -26,6 +29,10 @@ public class CVController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(method = RequestMethod.GET,produces = "application/json")
+    public Collection<CV> getAllCV(){
+        return cvService.getAllCV();
+    }
 
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
     @RequestMapping(method = RequestMethod.POST)
