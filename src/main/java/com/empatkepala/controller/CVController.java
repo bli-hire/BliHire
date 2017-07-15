@@ -35,7 +35,7 @@ public class CVController {
     }
 
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value ="/add" , method = RequestMethod.POST)
     public void addCV(
             @RequestBody CVFormRequest cvFormRequest){
         CV cv = new CV();
