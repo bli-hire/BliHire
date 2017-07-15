@@ -478,13 +478,14 @@ public class CV implements Serializable {
         this.titleThesis = titleThesis;
     }
 
-    public ArrayList<NonFormalCourse> getS() {
+    public ArrayList<NonFormalCourse> getNonFrmlCrs() {
         return nonFrmlCrs;
     }
 
-    public void setS(ArrayList<NonFormalCourse> nonFrmlCrs) {
+    public void setNonFrmlCrs(ArrayList<NonFormalCourse> nonFrmlCrs) {
         this.nonFrmlCrs = nonFrmlCrs;
     }
+
 
     public String getNameOfOrganization() {
         return nameOfOrganization;
