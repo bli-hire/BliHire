@@ -142,7 +142,8 @@ public class Mpp {
         return approvedBy;
     }
 
-    public void setApprovedBy(User approvedBy) {
+    public void
+    setApprovedBy(User approvedBy) {
         this.approvedBy = approvedBy;
     }
 
