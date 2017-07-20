@@ -17,7 +17,7 @@ public class CVFormRequest {
     private String fullName;
     private String placeDateOfBirth;
     private String idCardNumber;
-    private String drivingLicense;
+    private ArrayList<String> drivingLicense;
     private String emailAddress;
     private String uploadCV;
     private String twitter;
@@ -120,11 +120,11 @@ public class CVFormRequest {
         this.idCardNumber = idCardNumber;
     }
 
-    public String getDrivingLicense() {
+    public ArrayList<String> getDrivingLicense() {
         return drivingLicense;
     }
 
-    public void setDrivingLicense(String drivingLicense) {
+    public void setDrivingLicense(ArrayList<String> drivingLicense) {
         this.drivingLicense = drivingLicense;
     }
 

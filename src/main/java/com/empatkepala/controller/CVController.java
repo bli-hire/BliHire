@@ -7,10 +7,7 @@ import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.service.CVService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @RestController
 @RequestMapping(value = "/cv")
+@CrossOrigin("*")
 public class CVController {
     @Autowired
     private CVService cvService;
@@ -40,6 +38,7 @@ public class CVController {
             @RequestBody CVFormRequest cvFormRequest){
         CV cv = new CV();
         cv.setIdCV(ID_GENERATOR.getAndIncrement());
+        cv.setTitle(cvFormRequest.getTitle());
         cv.setAchievement(cvFormRequest.getAchievement());
         cv.setAttendancePeriod(cvFormRequest.getAttendancePeriod());
         cv.setBlog(cvFormRequest.getBlog());
