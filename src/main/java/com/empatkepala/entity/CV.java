@@ -24,7 +24,7 @@ public class CV implements Serializable {
     private String fullName;
     private String placeDateOfBirth;
     private String idCardNumber;
-    private String drivingLicense;
+    private ArrayList<String> drivingLicense;
     private String emailAddress;
     private String uploadCV;
     private String twitter;
@@ -92,7 +92,7 @@ public class CV implements Serializable {
     private CV approvedBy;
 
     public CV(){}
-    public CV(String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, String drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurretJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs, String nameOfOrganization, String fieldOfOrganization, String attendancePeriod, String notes, String achievement, int yearAchievement, String notesAchievement,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork) {
+    public CV(String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurretJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs, String nameOfOrganization, String fieldOfOrganization, String attendancePeriod, String notes, String achievement, int yearAchievement, String notesAchievement,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork) {
 
         this.title = title;
         this.jobTitle = jobTitle;
@@ -206,11 +206,11 @@ public class CV implements Serializable {
         this.idCardNumber = idCardNumber;
     }
 
-    public String getDrivingLicense() {
+    public ArrayList<String> getDrivingLicense() {
         return drivingLicense;
     }
 
-    public void setDrivingLicense(String drivingLicense) {
+    public void setDrivingLicense(ArrayList<String> drivingLicense) {
         this.drivingLicense = drivingLicense;
     }
 
