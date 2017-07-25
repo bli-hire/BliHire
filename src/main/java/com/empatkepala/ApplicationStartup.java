@@ -27,7 +27,10 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         role2.setRoleName("HR");
         roleService.addRole(role2); //role 2
 
-
+        Role role3 = new Role();
+        role3.setRoleName("Department");
+        roleService.addRole(role3);
+        
         return;
     }
 }
