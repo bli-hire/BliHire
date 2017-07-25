@@ -3,11 +3,14 @@ package com.empatkepala.controller;
 import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.handler.ResourceNotFoundException;
 import com.empatkepala.entity.request.AddFpkRequest;
+import com.empatkepala.enumeration.Department;
+import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.service.FpkService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -53,9 +56,28 @@ public class FpkController {
         fpkService.save(input);
     }
 
-    @RequestMapping(method = RequestMethod.PUT,produces = "application/json")
-    public void updateFpk(Fpk findOne){
-        fpkService.update(findOne);
+    @RequestMapping(value = "/approve", method = RequestMethod.POST, produces = "application/json")
+    public boolean approveFpk(@RequestBody long idApprover, long fpkId){
+                return fpkService.approveFpk(fpkService.getFpk(fpkId),userService.getUser(idApprover));
     }
 
+    @RequestMapping(value = "/reject", method = RequestMethod.POST, produces = "application/json")
+    public boolean rejectFpk(@RequestBody long idRejecter, long fpkId){
+        return fpkService.rejectFpk(fpkService.getFpk(fpkId),userService.getUser(idRejecter));
+    }
+
+    @RequestMapping(value = "/byDepartment", method = RequestMethod.GET, produces = "application/json")
+    public Collection<Fpk> findFpkByDepartment(@RequestHeader Department department){
+        return fpkService.getFpkByDepartment(department);
+    }
+
+    @RequestMapping(value = "/requestedBy", method = RequestMethod.GET, produces = "application/json")
+    public Collection<Fpk> findFpkByDepartment(@RequestHeader long userId){
+        return fpkService.getFpkByRequestedUser(userService.getUser(userId));
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json")
+    public boolean editFpk(@RequestHeader AddFpkRequest fpkRequested, long idUser, long idFpkOld){
+        return fpkService.editFpk(fpkRequested,userService.getUser(idUser),fpkService.getFpk(idFpkOld));
+    }
 }

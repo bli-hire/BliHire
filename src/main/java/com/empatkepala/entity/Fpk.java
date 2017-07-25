@@ -53,6 +53,22 @@ public class Fpk {
         this.requestedBy = requestedBy;
     }
 
+    public boolean isReject() {
+        return isReject;
+    }
+
+    public void setReject(boolean reject) {
+        isReject = reject;
+    }
+
+    public boolean isAccept() {
+        return isAccept;
+    }
+
+    public void setAccept(boolean accept) {
+        isAccept = accept;
+    }
+
     public Department getDepartment() {
         return department;
     }
