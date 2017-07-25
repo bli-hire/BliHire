@@ -4,7 +4,7 @@ package com.empatkepala.entity.request;
  * Created by ALz on 3/11/2017.
  */
 public class AddFpkRequest {
-    private Long idFpk;
+
     private int position;
     private String reason;
     private String fitnessWithMpp;
@@ -12,29 +12,26 @@ public class AddFpkRequest {
     private String school;
     private String workExperience;
     private String skillKnowledge;
-    private Long idUserApproved;
-    private Long idUserRequested;
+//    private long idUserApproved;
+    private long idUserRequested;
     private String completeness;
 
-    public Long getId() {return idFpk;}
 
-    public void setId(Long id) {this.idFpk = id;}
-
-    public Long getIdUserRequested() {
+    public long getIdUserRequested() {
         return idUserRequested;
     }
 
-    public void setIdUserRequested(Long idUser) {
+    public void setIdUserRequested(long idUser) {
         this.idUserRequested = idUser;
     }
 
-    public Long getIdUserApproved() {
-        return idUserApproved;
-    }
-
-    public void setIdUserApproved(Long idUserApproved) {
-        this.idUserApproved = idUserApproved;
-    }
+//    public long getIdUserApproved() {
+//        return idUserApproved;
+//    }
+//
+//    public void setIdUserApproved(long idUserApproved) {
+//        this.idUserApproved = idUserApproved;
+//    }
 
     public int getPosition() {
         return position;

@@ -1,6 +1,7 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.entity.User;
+import com.empatkepala.enumeration.Department;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,10 +14,10 @@ import java.util.Date;
 public class Fpk {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idFpk;
 
-    private int positionNeeded;
+    private int numberOfPerson;
     private Date createdDate = new Date();
     private String reason;
     private String fitnessWithMpp;
@@ -25,6 +26,9 @@ public class Fpk {
     private String workExperience;
     private String skillKnowledge;
     private String completeness;
+    private Department department;
+    private boolean isReject;
+    private boolean isAccept;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -37,8 +41,8 @@ public class Fpk {
 
     public Fpk(int positionNeeded,String reason,String fitnessWithMpp,String employeeStatus,
                String school,String workExperience,String skillKnowledge,String completeness,
-               User requestedBy,User approvedBy) {
-        this.positionNeeded = positionNeeded;
+               User requestedBy) {
+        this.numberOfPerson = positionNeeded;
         this.reason = reason;
         this.fitnessWithMpp = fitnessWithMpp;
         this.employeeStatus = employeeStatus;
@@ -47,10 +51,17 @@ public class Fpk {
         this.skillKnowledge = skillKnowledge;
         this.completeness = completeness;
         this.requestedBy = requestedBy;
-        this.approvedBy = approvedBy;
     }
 
-    public Long getIdFpk() {
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public long getIdFpk() {
         return idFpk;
     }
 
@@ -58,12 +69,12 @@ public class Fpk {
         this.idFpk = idFpk;
     }
 
-    public int getpositionNeeded() {
-        return positionNeeded;
+    public int getNumberOfPerson() {
+        return numberOfPerson;
     }
 
-    public void setpositionNeeded(int positionNeeded) {
-        this.positionNeeded = positionNeeded;
+    public void setNumberOfPerson(int positionNeeded) {
+        this.numberOfPerson = positionNeeded;
     }
 
     public Date getCreatedDate() {

@@ -48,8 +48,7 @@ public class FpkController {
                         addFpkRequest.getWorkExperience(),
                         addFpkRequest.getSkillKnowledge(),
                         addFpkRequest.getCompleteness(),
-                        userService.getUser(addFpkRequest.getIdUserRequested()),
-                        userService.getUser(addFpkRequest.getIdUserApproved())
+                        userService.getUser(addFpkRequest.getIdUserRequested())
                         );
         fpkService.save(input);
     }
@@ -59,8 +58,4 @@ public class FpkController {
         fpkService.update(findOne);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE,produces = "application/json")
-    public void deleteFpk(@RequestBody AddFpkRequest addFpkRequest){
-        fpkService.delete(addFpkRequest.getId());
-    }
 }
