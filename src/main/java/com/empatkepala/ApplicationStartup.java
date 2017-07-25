@@ -1,7 +1,9 @@
 package com.empatkepala;
 
 import com.empatkepala.entity.Role;
+import com.empatkepala.entity.User;
 import com.empatkepala.service.RoleService;
+import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
@@ -17,6 +19,9 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    UserService userService;
+
     @Override
     public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
         Role role1 = new Role();
@@ -30,7 +35,29 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         Role role3 = new Role();
         role3.setRoleName("Department");
         roleService.addRole(role3);
-        
+
+        User userCeo = new User();
+        userCeo.setEmail("ceo@mail.com");
+        userCeo.setName("ceo");
+        userCeo.setPassword("1234");
+        userCeo.setRole(roleService.getRole(1L));
+
+        User userHrd = new User();
+        userHrd.setEmail("hrd@mail.com");
+        userHrd.setName("hrd");
+        userHrd.setPassword("1234");
+        userHrd.setRole(roleService.getRole(2L));
+
+        User userDepartment = new User();
+        userDepartment.setEmail("department@mail.com");
+        userDepartment.setName("department");
+        userDepartment.setPassword("1234");
+        userDepartment.setRole(roleService.getRole(3L));
+
+        userService.addUser(userCeo);
+        userService.addUser(userHrd);
+        userService.addUser(userDepartment);
+
         return;
     }
 }
