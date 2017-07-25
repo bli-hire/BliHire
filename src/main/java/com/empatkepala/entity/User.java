@@ -1,5 +1,7 @@
 package com.empatkepala.entity;
 
+import com.empatkepala.enumeration.Department;
+
 import javax.persistence.*;
 
 /**
@@ -17,6 +19,7 @@ public class User {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Role role;
 
+    private Department department;
     private String name;
     private String surname;
     private String password;
@@ -68,5 +71,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
