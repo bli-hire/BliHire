@@ -44,7 +44,7 @@ public class UserController {
         User user = new User();
         user.setName(addUserRequest.getName());
         user.setSurname(addUserRequest.getSurname());
-        user.setRole(roleService.getRole(1L));
+        user.setRole(roleService.getRole(addUserRequest.getRole()));
         user.setPassword(addUserRequest.getPassword());
         user.setEmail(addUserRequest.getEmail());
         userService.addUser(user);
