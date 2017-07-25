@@ -1,7 +1,6 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Fpk;
-import com.empatkepala.entity.handler.ResourceNotFoundException;
 import com.empatkepala.entity.request.AddFpkRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.repository.FpkRepository;
@@ -26,10 +25,7 @@ public class FpkController {
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
     public List getAllFpk(){
         List<Fpk> result = fpkService.getAllData();
-        if(result.isEmpty())
-            throw new ResourceNotFoundException();
-        else
-            return result;
+        return result;
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = "application/json")
