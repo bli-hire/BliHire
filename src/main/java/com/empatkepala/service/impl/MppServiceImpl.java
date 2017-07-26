@@ -6,9 +6,11 @@ import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.service.MppService;
+import com.empatkepala.service.UserService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
@@ -19,6 +21,9 @@ import java.util.Collection;
 public class MppServiceImpl implements MppService{
     @Autowired
     MppRepository mppRepository;
+
+    @Autowired
+    UserService userService;
 
 //    public User getUserByRequestedBy(User user){
 //
@@ -46,7 +51,24 @@ public class MppServiceImpl implements MppService{
     }
 
     @Override
-    public void addMpp(Mpp mpp){
+    public void addMpp(@RequestBody MppFormRequest mppFormRequest)
+    {
+        Mpp mpp = new Mpp();
+//        mpp.setApprovedBy(userService.getUser(mppFormRequest.getIdApprovedBy()));
+
+        mpp.setEducation(mppFormRequest.getEducation());
+        mpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
+        mpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
+        mpp.setExperience(mppFormRequest.getExperience());
+        mpp.setKnowledge(mppFormRequest.getKnowledge());
+        mpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
+        mpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
+        mpp.setPcAmmount(mppFormRequest.getPcAmmount());
+        mpp.setPcSpec(mppFormRequest.getPcSpec());
+        mpp.setReason(mppFormRequest.getReason());
+        mpp.setDepartment(userService.getUser((mppFormRequest.getIdRequestedBy())).getDepartment());
+        mpp.setRequestedBy(userService.getUser(mppFormRequest.getIdRequestedBy()));
+
         mppRepository.save(mpp);
     }
 

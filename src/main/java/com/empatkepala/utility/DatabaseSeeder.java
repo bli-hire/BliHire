@@ -1,24 +1,27 @@
-package com.empatkepala;
+package com.empatkepala.utility;
 
 import com.empatkepala.entity.Role;
+import com.empatkepala.entity.User;
+import com.empatkepala.repository.UserRepository;
 import com.empatkepala.service.RoleService;
+import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by Juan on 4/21/17.
- */
+import javax.annotation.PostConstruct;
+
+
 @Component
-public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
+public class DatabaseSeeder {
 
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
+    @Autowired
+    private UserRepository userRepository;
 
-    @Override
-    public void onApplicationEvent(ApplicationReadyEvent applicationReadyEvent) {
+    @PostConstruct
+    private void initDataTest(){
+
         Role role1 = new Role();
         role1.setRoleName("CEO");
         roleService.addRole(role1); //role 1
@@ -27,17 +30,23 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         role2.setRoleName("HR");
         roleService.addRole(role2); //role 2
 
-
         Role role3 = new Role();
         role3.setRoleName("Department Head");
         roleService.addRole(role3); //role 3
-
-
 
         Role role4 = new Role();
         role4.setRoleName("Department Team Member");
         roleService.addRole(role4); //role 4
 
-        return;
+        User user = new User();
+        user.setName("Dummy");
+        user.setSurname("Account");
+        user.setRole(roleService.getRole(1L));
+        user.setPassword("dummy");
+        user.setEmail("dummy@account.com");
+        userRepository.save(user);
+        System.out.print(roleService.getRole(1L).getRoleName());
+
     }
+
 }
