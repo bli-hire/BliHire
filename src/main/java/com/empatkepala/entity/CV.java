@@ -47,7 +47,7 @@ public class CV implements Serializable {
     private String motherName;
     private String motherBirthday;
     private String motherLatestEducation;
-    private String motherCurretJob;
+    private String motherCurrentJob;
     private ArrayList<Brothers> Bro=new ArrayList<Brothers>();
     private String spouseName;
     private String spousebirthDay;
@@ -61,13 +61,10 @@ public class CV implements Serializable {
     private String reasonMajor;
     private String titleThesis;
     private ArrayList<NonFormalCourse> nonFrmlCrs =new ArrayList<NonFormalCourse>();
-    private String nameOfOrganization;
-    private String fieldOfOrganization;
-    private String attendancePeriod;
-    private String notes;
-    private String achievement;
-    private int yearAchievement;
-    private String notesAchievement;
+    private ArrayList<Achievements> achievements=new ArrayList<Achievements>();
+    private ArrayList<SocialActivity> socialact= new ArrayList<SocialActivity>();
+    private ArrayList<Language> language=new ArrayList<Language>();
+
     //----
     private ArrayList<WorkExperience> WorkExp=new ArrayList<WorkExperience>();
     private String reasonInterestedInGDN;
@@ -92,7 +89,7 @@ public class CV implements Serializable {
     private CV approvedBy;
 
     public CV(){}
-    public CV(String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurretJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs, String nameOfOrganization, String fieldOfOrganization, String attendancePeriod, String notes, String achievement, int yearAchievement, String notesAchievement,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork) {
+    public CV(String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurrentJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs,  ArrayList<Achievements> achievements, ArrayList<Language> language, ArrayList<SocialActivity> socialact,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork) {
 
         this.title = title;
         this.jobTitle = jobTitle;
@@ -121,7 +118,7 @@ public class CV implements Serializable {
         this.motherName = motherName;
         this.motherBirthday = motherBirthday;
         this.motherLatestEducation = motherLatestEducation;
-        this.motherCurretJob = motherCurretJob;
+        this.motherCurrentJob = motherCurrentJob;
         this.spouseName = spouseName;
         this.spousebirthDay = spousebirthDay;
         this.spouseLatestEducation = spouseLatestEducation;
@@ -130,13 +127,10 @@ public class CV implements Serializable {
         this.responsibilitiesType = responsibilitiesType;
         this.reasonMajor = reasonMajor;
         this.titleThesis = titleThesis;
-        this.nameOfOrganization = nameOfOrganization;
-        this.fieldOfOrganization = fieldOfOrganization;
-        this.attendancePeriod = attendancePeriod;
-        this.notes = notes;
-        this.achievement = achievement;
-        this.yearAchievement = yearAchievement;
-        this.notesAchievement = notesAchievement;
+        this.nonFrmlCrs=nonFrmlCrs;
+        this.achievements=achievements;
+        this.socialact=socialact;
+        this.language=language;
         this.reasonInterestedInGDN = reasonInterestedInGDN;
         this.reasonApplyOnThatPosition = reasonApplyOnThatPosition;
         this.factorEncourageYouOnThatJob = factorEncourageYouOnThatJob;
@@ -382,12 +376,12 @@ public class CV implements Serializable {
         this.motherLatestEducation = motherLatestEducation;
     }
 
-    public String getMotherCurretJob() {
-        return motherCurretJob;
+    public String getmotherCurrentJob() {
+        return motherCurrentJob;
     }
 
-    public void setMotherCurretJob(String motherCurretJob) {
-        this.motherCurretJob = motherCurretJob;
+    public void setmotherCurrentJob(String motherCurrentJob) {
+        this.motherCurrentJob = motherCurrentJob;
     }
 
     public ArrayList<Brothers> getBro() {
@@ -487,60 +481,28 @@ public class CV implements Serializable {
     }
 
 
-    public String getNameOfOrganization() {
-        return nameOfOrganization;
+    public ArrayList<Achievements> getAchievements() {
+        return achievements;
     }
 
-    public void setNameOfOrganization(String nameOfOrganization) {
-        this.nameOfOrganization = nameOfOrganization;
+    public void setAchievements(ArrayList<Achievements> achievements) {
+        this.achievements = achievements;
     }
 
-    public String getFieldOfOrganization() {
-        return fieldOfOrganization;
+    public ArrayList<SocialActivity> getSocialact() {
+        return socialact;
     }
 
-    public void setFieldOfOrganization(String fieldOfOrganization) {
-        this.fieldOfOrganization = fieldOfOrganization;
+    public void setSocialact(ArrayList<SocialActivity> socialact) {
+        this.socialact = socialact;
     }
 
-    public String getAttendancePeriod() {
-        return attendancePeriod;
+    public ArrayList<Language> getLanguage() {
+        return language;
     }
 
-    public void setAttendancePeriod(String attendancePeriod) {
-        this.attendancePeriod = attendancePeriod;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public String getAchievement() {
-        return achievement;
-    }
-
-    public void setAchievement(String achievement) {
-        this.achievement = achievement;
-    }
-
-    public int getYearAchievement() {
-        return yearAchievement;
-    }
-
-    public void setYearAchievement(int yearAchievement) {
-        this.yearAchievement = yearAchievement;
-    }
-
-    public String getNotesAchievement() {
-        return notesAchievement;
-    }
-
-    public void setNotesAchievement(String notesAchievement) {
-        this.notesAchievement = notesAchievement;
+    public void setLanguage(ArrayList<Language> language) {
+        this.language = language;
     }
 
     public ArrayList<WorkExperience> getWorkExp() {

@@ -39,8 +39,6 @@ public class CVController {
         CV cv = new CV();
         cv.setIdCV(ID_GENERATOR.getAndIncrement());
         cv.setTitle(cvFormRequest.getTitle());
-        cv.setAchievement(cvFormRequest.getAchievement());
-        cv.setAttendancePeriod(cvFormRequest.getAttendancePeriod());
         cv.setBlog(cvFormRequest.getBlog());
         cv.setCurrentAddress(cvFormRequest.getCurrentAddress());
         cv.setDescribeAboutYou(cvFormRequest.getDescribeAboutYou());
@@ -54,7 +52,6 @@ public class CVController {
         cv.setFatherCurrentJob(cvFormRequest.getFatherCurrentJob());
         cv.setFatherLatestEducation(cvFormRequest.getFatherLatestEducation());
         cv.setFatherName(cvFormRequest.getFatherName());
-        cv.setFieldOfOrganization(cvFormRequest.getFieldOfOrganization());
         cv.setFullName(cvFormRequest.getFullName());
         cv.setHandphone(cvFormRequest.getHandphone());
         cv.setHaveAppliedOnGDN(cvFormRequest.getHaveAppliedOnGDN());
@@ -75,12 +72,10 @@ public class CVController {
         cv.setMaritalStatus(cvFormRequest.getMaritalStatus());
         cv.setMotherBirthday(cvFormRequest.getMotherBirthday());
         cv.setMotherName(cvFormRequest.getMotherName());
-        cv.setMotherCurretJob(cvFormRequest.getMotherCurretJob());
+        cv.setmotherCurrentJob(cvFormRequest.getmotherCurrentJob());
         cv.setMotherLatestEducation(cvFormRequest.getMotherLatestEducation());
         cv.setPlaceDateOfBirth(cvFormRequest.getPlaceDateOfBirth());
         cv.setPlaceGetInformationGDN(cvFormRequest.getPlaceGetInformationGDN());
-        cv.setNotes(cvFormRequest.getNotes());
-        cv.setNotesAchievement(cvFormRequest.getNotesAchievement());
         cv.setSpousebirthDay(cvFormRequest.getSpousebirthDay());
         cv.setSpouseCurrentJob(cvFormRequest.getSpouseCurrentJob());
         cv.setSpouseLatestEducation(cvFormRequest.getSpouseLatestEducation());
@@ -90,8 +85,6 @@ public class CVController {
         cv.setSpesificSkill(cvFormRequest.getSpesificSkill());
         cv.setReasonInterestedInGDN(cvFormRequest.getReasonInterestedInGDN());
         cv.setReasonApplyOnThatPosition(cvFormRequest.getReasonApplyOnThatPosition());
-        cv.setNameOfOrganization(cvFormRequest.getNameOfOrganization());
-        cv.setYearAchievement(cvFormRequest.getYearAchievement());
         cv.setBro(cvFormRequest.getBro());
         cv.setNonFrmlCrs(cvFormRequest.getNonFrmlCrs());
         cv.setChil(cvFormRequest.getChil());
@@ -99,7 +92,7 @@ public class CVController {
         cv.setWorkExp(cvFormRequest.getWorkExp());
         cv.setResponsibilities(cvFormRequest.getResponsibilities());
         cv.setResponsibilitiesType(cvFormRequest.getResponsibilitiesType());
-
+        cv.setSocialact(cvFormRequest.getSocialact());
 
 
        // cv.setRequestedBy(userService.getUser(cvFormRequest.getIdRequestedBy()));

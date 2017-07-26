@@ -29,8 +29,8 @@ public class BliHireApplication {
 			dataChil.add(chil);
 
 			ArrayList<Language> dataLanguage = new ArrayList<>();
-			Language lang = new Language("123","123","123","123");
-			dataLanguage.add(lang);
+			//Language lang = new Language("123","123","123","123");
+			//dataLanguage.add(lang);
 
 			ArrayList<NonFormalCourse> dataNonformal = new ArrayList<>();
 			NonFormalCourse nonForm = new NonFormalCourse("123","123",1,"123");
@@ -48,7 +48,7 @@ public class BliHireApplication {
 			dataSIM.add("A");
 			dataSIM.add("B1");
 
-			cvRepository.save(new CV("123", "123", "123", "123", "123", dataSIM, "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123",dataBro,"13","123", "123", "123",dataChil, "123", "123", dataSekolah,"123", "123",dataNonformal, "123", "123", "123", "123", "123", 1996,"123",dataExp, "123", "123", "123", "123", "123", "123","123", "123", "123", "123", "123", "123", "123"));
+			//cvRepository.save(new CV("123", "123", "123", "123", "123", dataSIM, "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123",dataBro,"13","123", "123", "123",dataChil, "123", "123", dataSekolah,"123", "123",dataNonformal, "123", "123", "123", "123", "123", 1996,"123",dataExp, "123", "123", "123", "123", "123", "123","123", "123", "123", "123", "123", "123", "123"));
 
 		};
 		}
