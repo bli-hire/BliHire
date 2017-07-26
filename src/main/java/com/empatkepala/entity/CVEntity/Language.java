@@ -1,6 +1,7 @@
 package com.empatkepala.entity.CVEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Ryan Bagus Susilo on 3/11/2017.
@@ -8,39 +9,30 @@ import java.io.Serializable;
 public class Language implements Serializable {
 
     private String nameOfLanguage;
-    private String notesAchievement;
-    private String spokenEnglish;
-    private String writtenEnglish;
+    private ArrayList<String> spokenLanguage;
+    private ArrayList<String> writtenLanguage;
 
     public Language(){}
-    public Language(String _nameOfLanguage,String  _notesAchievement, String _spokenEnglish,String _writtenEnglish){
+    public Language(String _nameOfLanguage, ArrayList<String> _spokenLanguage,ArrayList<String> _writtenLanguage){
         setNameOfLanguage(_nameOfLanguage);
-        setNotesAchievement(_notesAchievement);
-        setSpokenEnglish(_spokenEnglish);
-        setWrittenEnglish(_writtenEnglish);
-    }
-    public String getNotesAchievement() {
-        return notesAchievement;
+        setspokenLanguage(_spokenLanguage);
+        setwrittenLanguage(_writtenLanguage);
     }
 
-    public void setNotesAchievement(String notesAchievement) {
-        this.notesAchievement = notesAchievement;
+    public ArrayList<String> getspokenLanguage() {
+        return spokenLanguage;
     }
 
-    public String getSpokenEnglish() {
-        return spokenEnglish;
+    public void setspokenLanguage(ArrayList<String> spokenLanguage) {
+        this.spokenLanguage = spokenLanguage;
     }
 
-    public void setSpokenEnglish(String spokenEnglish) {
-        this.spokenEnglish = spokenEnglish;
+    public ArrayList<String> getwrittenLanguage() {
+        return writtenLanguage;
     }
 
-    public String getWrittenEnglish() {
-        return writtenEnglish;
-    }
-
-    public void setWrittenEnglish(String writtenEnglish) {
-        this.writtenEnglish = writtenEnglish;
+    public void setwrittenLanguage(ArrayList<String> writtenLanguage) {
+        this.writtenLanguage = writtenLanguage;
     }
 
     public String getNameOfLanguage() {
