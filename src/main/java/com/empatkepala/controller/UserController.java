@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by ARDI on 3/5/2017.
- */
-
 @RestController
 
 @RequestMapping(value = "/users")
@@ -38,19 +34,15 @@ public class UserController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void addUser(
-            @RequestBody AddUserRequest addUserRequest){
-        User user = new User();
-        user.setName(addUserRequest.getName());
-        user.setSurname(addUserRequest.getSurname());
-        user.setRole(roleService.getRole(1L));
-        user.setPassword(addUserRequest.getPassword());
-        user.setEmail(addUserRequest.getEmail());
-        userService.addUser(user);
+            @RequestBody AddUserRequest addUserRequest)
+    {
+        userService.addUser(addUserRequest);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public User login(
-            @RequestBody LoginRequest loginRequest){
+            @RequestBody LoginRequest loginRequest)
+    {
         return userService.getUser(loginRequest.getEmail(), loginRequest.getPassword());
     }
 }
