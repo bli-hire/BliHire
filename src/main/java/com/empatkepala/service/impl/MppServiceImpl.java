@@ -4,6 +4,7 @@ import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
@@ -75,7 +76,7 @@ public class MppServiceImpl implements MppService{
     @Override
     public boolean approveMpp(Mpp mpp, User approver) {
         Mpp mppToApprove = mppRepository.findOne(mpp.getId());
-        if(approver.getRole().getRoleName() == "CEO"){
+        if(approver.getRole() == Role.CEO){
             mppToApprove.setApprovedBy(approver);
             mppToApprove.setAccept(true);
             mppToApprove.setReject(false);
@@ -89,7 +90,7 @@ public class MppServiceImpl implements MppService{
     @Override
     public boolean rejectMpp(Mpp mpp, User rejector) {
         Mpp mppToApprove = mppRepository.findOne(mpp.getId());
-        if(rejector.getRole().getRoleName() == "CEO"){
+        if(rejector.getRole() == Role.CEO){
 //            mppToApprove.setApprovedBy(approver);
             mppToApprove.setAccept(false);
             mppToApprove.setReject(true);
