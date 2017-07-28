@@ -3,6 +3,8 @@ package com.empatkepala.service.impl;
 import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddFpkRequest;
+import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.repository.UserRepository;
 import com.empatkepala.service.FpkService;
@@ -28,6 +30,16 @@ public class FpkServiceImpl implements FpkService{
     @Autowired
     UserService userService;
 
+    @Override
+    public Collection<Fpk> getFpkByDepartment(Department department) {
+        return null;
+    }
+
+    @Override
+    public Collection<Fpk> getFpkByRequestedBy(User requestedBy) {
+        return null;
+    }
+
     public List getAllData(){
         return fpkRepository.findAll();
     }
@@ -46,13 +58,13 @@ public class FpkServiceImpl implements FpkService{
                 addFpkRequest.getSkillKnowledge(),
                 addFpkRequest.getCompleteness(),
                 userService.getUser(addFpkRequest.getIdUserRequested()),
-                userService.getUser(addFpkRequest.getIdUserApproved())
+                userService.getUser(addFpkRequest.getIdUserRequested()).getDepartment()
         );
 
         fpkRepository.save(input);
     }
 
-    public User getRequestUserByFpk(Long id) {
+    public User getRequestUserByFpkId(Long id) {
         Fpk fpk = fpkRepository.findOne(id);
 //        Hibernate.initialize(user);
         return fpk.getRequestedBy();
@@ -64,11 +76,6 @@ public class FpkServiceImpl implements FpkService{
         return fpk.getRequestedBy();
     }
 
-    @Override
-    public User getRequestedUserByFpkId(Long id) {
-        Fpk fpk = fpkRepository.findOne(id);
-        return fpk.getRequestedBy();
-    }
 
     @Override
     public boolean editFpk(AddFpkRequest fpkRequest, User editor, Fpk fpkToEdit) {
@@ -92,7 +99,7 @@ public class FpkServiceImpl implements FpkService{
     @Override
     public boolean approveFpk(Fpk fpk, User approver) {
         Fpk fpkToApprove = fpkRepository.findOne(fpk.getIdFpk());
-        if(approver.getRole().getRoleName() == "CEO" || approver.getRole().getRoleName() == "HR"){
+        if(approver.getRole() == Role.CEO || approver.getRole() == Role.HR){
             fpkToApprove.setAccept(true);
             fpkToApprove.setReject(false);
         }
@@ -102,7 +109,7 @@ public class FpkServiceImpl implements FpkService{
     @Override
     public boolean rejectFpk(Fpk fpk, User rejecter) {
         Fpk fpkToApprove = fpkRepository.findOne(fpk.getIdFpk());
-        if(rejecter.getRole().getRoleName() == "CEO" || rejecter.getRole().getRoleName() == "HR"){
+        if(rejecter.getRole() == Role.CEO || rejecter.getRole() == Role.HR){
             fpkToApprove.setAccept(false);
             fpkToApprove.setReject(true);
         }

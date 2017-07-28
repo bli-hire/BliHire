@@ -11,6 +11,7 @@ import java.util.Date;
  */
 
 @Entity
+@Table(name = "fpk")
 public class Fpk {
 
     @Id
@@ -41,7 +42,7 @@ public class Fpk {
 
     public Fpk(int positionNeeded,String reason,String fitnessWithMpp,String employeeStatus,
                String school,String workExperience,String skillKnowledge,String completeness,
-               User requestedBy) {
+               User requestedBy,Department department) {
         this.numberOfPerson = positionNeeded;
         this.reason = reason;
         this.fitnessWithMpp = fitnessWithMpp;
@@ -51,6 +52,7 @@ public class Fpk {
         this.skillKnowledge = skillKnowledge;
         this.completeness = completeness;
         this.requestedBy = requestedBy;
+        this.department = department;
     }
 
     public boolean isReject() {
