@@ -5,6 +5,7 @@ import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
@@ -18,7 +19,7 @@ public interface MppService {
 
     Collection<Mpp> getAllMpp();
 
-    void addMpp(Mpp mpp);
+    void addMpp(@RequestBody MppFormRequest mppFormRequest);
 
     boolean approveMpp(Mpp mpp, User approver);
 

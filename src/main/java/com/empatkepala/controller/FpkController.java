@@ -34,22 +34,11 @@ public class FpkController {
     }
 
     @RequestMapping(method = RequestMethod.POST,produces = "application/json")
-    public void insertFpk(
-            @RequestBody
-                    AddFpkRequest addFpkRequest
-            ){
-        Fpk input =
-                new Fpk(addFpkRequest.getPosition(),
-                        addFpkRequest.getReason(),
-                        addFpkRequest.getFitnessWithMpp(),
-                        addFpkRequest.getEmployeeStatus(),
-                        addFpkRequest.getSchool(),
-                        addFpkRequest.getWorkExperience(),
-                        addFpkRequest.getSkillKnowledge(),
-                        addFpkRequest.getCompleteness(),
-                        userService.getUser(addFpkRequest.getIdUserRequested())
-                        );
-        fpkService.save(input);
+    public void addFpk(
+            @RequestBody AddFpkRequest addFpkRequest)
+    {
+
+        fpkService.addFpk(addFpkRequest);
     }
 
     @RequestMapping(value = "/approve", method = RequestMethod.POST, produces = "application/json")
