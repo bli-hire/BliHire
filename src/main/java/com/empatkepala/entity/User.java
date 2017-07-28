@@ -1,6 +1,7 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.Role;
 
 import javax.persistence.*;
 
@@ -16,14 +17,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
     private Role role;
-
     private Department department;
     private String name;
     private String surname;
     private String password;
     private String email;
+
+    public User(){}
+
+    public User(
+            Role role,
+            Department department,
+            String name,
+            String surname,
+            String password,
+            String email)
+    {
+        this.role = role;
+        this.department = department;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.email = email;
+    }
 
     public long getId() {
         return id;
