@@ -8,15 +8,15 @@ import java.io.Serializable;
 public class Children implements Serializable {
     private String childrenName;
     private String childrenBirthday;
-    private String childrenLatestEducation;
     private String childrenCurrentJob;
+    private String chilLatestEdu;
 
     public Children(){}
     public Children(String _childrenName,String _childrenBirthday,String _childrenLatestEducation,String _childrenCurrentJob)
     {
         setChildrenName(_childrenName);
+        setChilLatestEdu(_childrenLatestEducation);
         setChildrenBirthday(_childrenBirthday);
-        setChildrenLatestEducation(_childrenLatestEducation);
         setChildrenCurrentJob(_childrenCurrentJob);
     }
 
@@ -36,14 +36,13 @@ public class Children implements Serializable {
         this.childrenBirthday = childrenBirthday;
     }
 
-    public String getChildrenLatestEducation() {
-        return childrenLatestEducation;
+    public String getChilLatestEdu() {
+        return chilLatestEdu;
     }
 
-    public void setChildrenLatestEducation(String cshildrenLatestEducation) {
-        this.childrenLatestEducation = childrenLatestEducation;
+    public void setChilLatestEdu(String chilLatestEdu) {
+        this.chilLatestEdu = chilLatestEdu;
     }
-
     public String getChildrenCurrentJob() {
         return childrenCurrentJob;
     }

@@ -5,12 +5,13 @@ import com.empatkepala.entity.CVEntity.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Ryan Bagus Susilo on 4/21/2017.
  */
-public class CVFormRequest {
+public class CVFormRequest implements Serializable{
 
     private String title;
     private String jobTitle;
