@@ -93,6 +93,9 @@ public class CVController {
         cv.setResponsibilities(cvFormRequest.getResponsibilities());
         cv.setResponsibilitiesType(cvFormRequest.getResponsibilitiesType());
         cv.setSocialact(cvFormRequest.getSocialact());
+        cv.setAchievements(cvFormRequest.getAchievements());
+        cv.setLanguage(cvFormRequest.getLanguage());
+
 
 
        // cv.setRequestedBy(userService.getUser(cvFormRequest.getIdRequestedBy()));
