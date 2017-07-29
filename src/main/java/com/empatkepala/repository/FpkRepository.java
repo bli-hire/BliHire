@@ -1,13 +1,12 @@
 package com.empatkepala.repository;
 
-import com.empatkepala.entity.Role;
+import com.empatkepala.entity.Fpk;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Created by Juan on 3/11/17.
+ * Created by ALz on 3/11/2017.
  */
 @Repository
-public interface RoleRepository extends JpaRepository<Role,Long>{
-
+public interface FpkRepository extends JpaRepository<Fpk, Long> {
 }

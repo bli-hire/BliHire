@@ -1,5 +1,7 @@
 package com.empatkepala.entity;
 
+import com.empatkepala.enumeration.Department;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class Mpp {
     private Date createdDate = new Date();
 
     private long numberOfPerson;
+    private Department department;
     private String reason;
     private String mainResponsibility;
     private String education;
@@ -27,6 +30,8 @@ public class Mpp {
     private int expectedJoin;
     private int pcAmmount;
     private String pcSpec;
+    private boolean isReject;
+    private boolean isAccept;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private User requestedBy;
@@ -147,4 +152,27 @@ public class Mpp {
         this.approvedBy = approvedBy;
     }
 
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public boolean isReject() {
+        return isReject;
+    }
+
+    public void setReject(boolean reject) {
+        isReject = reject;
+    }
+
+    public boolean isAccept() {
+        return isAccept;
+    }
+
+    public void setAccept(boolean accept) {
+        isAccept = accept;
+    }
 }

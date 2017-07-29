@@ -27,6 +27,7 @@ public class CVController {
     @Autowired
     private UserService userService;
 
+
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
     public Collection<CV> getAllCV(){
         return cvService.getAllCV();
@@ -96,13 +97,8 @@ public class CVController {
         cv.setAchievements(cvFormRequest.getAchievements());
         cv.setLanguage(cvFormRequest.getLanguage());
 
-
-
        // cv.setRequestedBy(userService.getUser(cvFormRequest.getIdRequestedBy()));
-
         cvService.addCV(cv);
-
-
     }
 
 }

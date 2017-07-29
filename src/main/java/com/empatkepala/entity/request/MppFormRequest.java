@@ -18,7 +18,7 @@ public class MppFormRequest {
     private int pcAmmount;
     private String pcSpec;
     private Long idRequestedBy;
-    private Long idApprovedBy;
+//    private Long idApprovedBy;
 
     public long getNumberOfPerson() {
         return numberOfPerson;
@@ -108,11 +108,11 @@ public class MppFormRequest {
         this.idRequestedBy = idRequestedBy;
     }
 
-    public Long getIdApprovedBy() {
-        return idApprovedBy;
-    }
-
-    public void setIdApprovedBy(Long idApprovedBy) {
-        this.idApprovedBy = idApprovedBy;
-    }
+//    public Long getIdApprovedBy() {
+//        return idApprovedBy;
+//    }
+//
+//    public void setIdApprovedBy(Long idApprovedBy) {
+//        this.idApprovedBy = idApprovedBy;
+//    }
 }
