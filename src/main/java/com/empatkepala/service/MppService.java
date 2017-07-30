@@ -2,7 +2,10 @@ package com.empatkepala.service;
 
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
+import com.empatkepala.entity.request.MppFormRequest;
+import com.empatkepala.enumeration.Department;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
@@ -16,5 +19,17 @@ public interface MppService {
 
     Collection<Mpp> getAllMpp();
 
-    void addMpp(Mpp mpp);
+    void addMpp(@RequestBody MppFormRequest mppFormRequest);
+
+    boolean approveMpp(Mpp mpp, User approver);
+
+    boolean rejectMpp(Mpp mpp, User rejector);
+
+    Collection<Mpp> getMppByDepartment(Department department);
+
+    Collection<Mpp> getMppByRequestedBy(User requestedBy);
+
+    boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
+
+
 }
