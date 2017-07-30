@@ -6,6 +6,7 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Fpk;
+import com.empatkepala.entity.request.AddFpkRequest;
 import com.empatkepala.service.FpkService;
 import org.junit.Test;
 import org.junit.Before;
@@ -57,16 +58,16 @@ public class FpkControllerTest {
     
     @Test
     public void testGetAllFpk() throws Exception {
-        Fpk first = new Fpk();
-        Fpk second = new Fpk();
+        AddFpkRequest first = new AddFpkRequest();
+        AddFpkRequest second = new AddFpkRequest();
         first.setReason("For Testing");
         second.setReason("For Testing");
-        List<Fpk> result = new ArrayList<>();
+        List<AddFpkRequest> result = new ArrayList<>();
         result.add(first);
         result.add(second);
 
-        fpkService.save(first);
-        fpkService.save(second);
+        fpkService.addFpk(first);
+        fpkService.addFpk(second);
 
 //        mvc.perform(get("/internal/fpk"))
 //                .andExpect(status().isOk());

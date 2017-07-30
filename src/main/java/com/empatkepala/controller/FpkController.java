@@ -57,8 +57,8 @@ public class FpkController {
     }
 
     @RequestMapping(value = "/requestedBy", method = RequestMethod.GET, produces = "application/json")
-    public Collection<Fpk> findFpkByDepartment(@RequestHeader long userId){
-        return fpkService.getFpkByRequestedUser(userService.getUser(userId));
+    public Collection<Fpk> findFpkByRequestedUser(@RequestHeader long userId){
+        return fpkService.getFpkByRequestedBy(userService.getUser(userId));
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json")
