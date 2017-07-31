@@ -22,6 +22,8 @@ public class AddFpkRequest {
     private Department department;
     private boolean isReject;
     private boolean isAccept;
+    private boolean needApproveCeo;
+    private boolean needApproveHead;
     private long idUserRequested;
 
 
@@ -143,5 +145,21 @@ public class AddFpkRequest {
 
     public void setAccept(boolean accept) {
         isAccept = accept;
+    }
+
+    public boolean isNeedApproveCeo() {
+        return needApproveCeo;
+    }
+
+    public void setNeedApproveCeo(boolean needApproveCeo) {
+        this.needApproveCeo = needApproveCeo;
+    }
+
+    public boolean isNeedApproveHead() {
+        return needApproveHead;
+    }
+
+    public void setNeedApproveHead(boolean needApproveHead) {
+        this.needApproveHead = needApproveHead;
     }
 }

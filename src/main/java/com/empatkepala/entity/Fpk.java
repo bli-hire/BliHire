@@ -31,8 +31,12 @@ public class Fpk {
     private String completeness;
     private String comment;
     private Department department;
-    private boolean isReject;
-    private boolean isAccept;
+    private boolean reject;
+    private boolean accept;
+    private boolean needApproveCeo;
+    private boolean needAproveHead;
+    private boolean approveCeo;
+    private boolean approveHead;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -61,19 +65,19 @@ public class Fpk {
     }
 
     public boolean isReject() {
-        return isReject;
+        return reject;
     }
 
     public void setReject(boolean reject) {
-        isReject = reject;
+        this.reject = reject;
     }
 
     public boolean isAccept() {
-        return isAccept;
+        return accept;
     }
 
     public void setAccept(boolean accept) {
-        isAccept = accept;
+        this.accept = accept;
     }
 
     public Department getDepartment() {
@@ -210,5 +214,37 @@ public class Fpk {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public boolean isNeedApproveCeo() {
+        return needApproveCeo;
+    }
+
+    public void setNeedApproveCeo(boolean needApproveCeo) {
+        this.needApproveCeo = needApproveCeo;
+    }
+
+    public boolean isNeedAproveHead() {
+        return needAproveHead;
+    }
+
+    public void setNeedAproveHead(boolean needAproveHead) {
+        this.needAproveHead = needAproveHead;
+    }
+
+    public boolean isApproveCeo() {
+        return approveCeo;
+    }
+
+    public void setApproveCeo(boolean approveCeo) {
+        this.approveCeo = approveCeo;
+    }
+
+    public boolean isApproveHead() {
+        return approveHead;
+    }
+
+    public void setApproveHead(boolean approveHead) {
+        this.approveHead = approveHead;
     }
 }
