@@ -1,6 +1,7 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.CV;
+import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.entity.request.MppFormRequest;
@@ -103,6 +104,10 @@ public class CVController {
         cvService.addCV(cv);
 
 
+    }
+    @RequestMapping(method = RequestMethod.PUT,produces = "application/json")
+    public void updateFpk(CV findOne){
+        cvService.updateCV(findOne);
     }
 
 }

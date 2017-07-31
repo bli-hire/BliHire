@@ -1,6 +1,7 @@
 package com.empatkepala.service;
 
 import com.empatkepala.entity.CV;
+import com.empatkepala.entity.Fpk;
 
 import java.util.Collection;
 
@@ -15,4 +16,6 @@ public interface CVService  {
     Collection<CV> getAllCV();
 
     void addCV(CV cv);
+
+    void updateCV(CV cv);
 }

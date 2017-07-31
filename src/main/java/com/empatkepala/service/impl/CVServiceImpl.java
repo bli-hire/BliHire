@@ -1,6 +1,7 @@
 package com.empatkepala.service.impl;
 
 import com.empatkepala.entity.CV;
+import com.empatkepala.entity.Fpk;
 import com.empatkepala.repository.CVRepository;
 import com.empatkepala.service.CVService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,8 @@ public class CVServiceImpl implements CVService{
     public void addCV(CV cv){
         cvRepository.save(cv);
     }
-
+    public void updateCV(CV cv){
+        cvRepository.save(cv);
+    }
 
 }
