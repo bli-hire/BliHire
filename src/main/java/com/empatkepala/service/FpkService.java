@@ -22,7 +22,7 @@ public interface FpkService{
 
     List getAllData();
 
-    Fpk getFpk(Long id);
+    Fpk getFpk(long id);
 
     void addFpk(@RequestBody AddFpkRequest addFpkRequest);
 

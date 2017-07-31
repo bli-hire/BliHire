@@ -32,12 +32,12 @@ public class FpkServiceImpl implements FpkService{
 
     @Override
     public Collection<Fpk> getFpkByDepartment(Department department) {
-        return null;
+        return fpkRepository.findByDepartment(department);
     }
 
     @Override
     public Collection<Fpk> getFpkByRequestedBy(User requestedBy) {
-        return null;
+        return fpkRepository.findByRequestedBy(requestedBy);
     }
 
     public List getAllData(){
@@ -45,7 +45,7 @@ public class FpkServiceImpl implements FpkService{
     }
 
     @Override
-    public Fpk getFpk(Long id) {return fpkRepository.findOne(id);}
+    public Fpk getFpk(long id) {return fpkRepository.findOne(id);}
 
     public void addFpk(@RequestBody AddFpkRequest addFpkRequest){
 
@@ -58,7 +58,9 @@ public class FpkServiceImpl implements FpkService{
                 addFpkRequest.getSkillKnowledge(),
                 addFpkRequest.getCompleteness(),
                 userService.getUser(addFpkRequest.getIdUserRequested()),
-                userService.getUser(addFpkRequest.getIdUserRequested()).getDepartment()
+                userService.getUser(addFpkRequest.getIdUserRequested()).getDepartment(),
+                addFpkRequest.getDateNeeded(),
+                addFpkRequest.getJobPositionRequester()
         );
 
         fpkRepository.save(input);
