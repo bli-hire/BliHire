@@ -15,4 +15,5 @@ import java.util.Collection;
 public interface FpkRepository extends JpaRepository<Fpk, Long> {
     Collection<Fpk> findByRequestedBy(User requestedBy);
     Collection<Fpk> findByDepartment(Department department);
+    Collection<Fpk> findByDepartmentAndAcceptAndReject(Department department, boolean accepted, boolean rejected);
 }

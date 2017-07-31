@@ -20,6 +20,13 @@ public class FpkResponse {
         this.data = data;
     }
 
+    public FpkResponse(String status,String message,Collection<Fpk> data,int totalData){
+        this.status = status;
+        this.message = message;
+        this.data = data;
+        this.totalData = totalData;
+    }
+
     public String getStatus() {
         return status;
     }

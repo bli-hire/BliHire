@@ -20,6 +20,8 @@ public interface FpkService{
 
     Collection<Fpk> getFpkByRequestedBy(User requestedBy);
 
+    Collection<Fpk> getFpkHistoryByDepartment(Department department);
+
     List getAllData();
 
     Fpk getFpk(long id);

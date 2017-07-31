@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -38,6 +39,14 @@ public class FpkServiceImpl implements FpkService{
     @Override
     public Collection<Fpk> getFpkByRequestedBy(User requestedBy) {
         return fpkRepository.findByRequestedBy(requestedBy);
+    }
+
+    @Override
+    public Collection<Fpk> getFpkHistoryByDepartment(Department department) {
+        List<Fpk> result = new ArrayList<>();
+        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,true,false));
+        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,true));
+        return result;
     }
 
     public List getAllData(){
@@ -104,6 +113,8 @@ public class FpkServiceImpl implements FpkService{
         if(approver.getRole() == Role.CEO || approver.getRole() == Role.HR){
             fpkToApprove.setAccept(true);
             fpkToApprove.setReject(false);
+            fpkRepository.save(fpkToApprove);
+            return true;
         }
         return false;
     }
@@ -114,6 +125,8 @@ public class FpkServiceImpl implements FpkService{
         if(rejecter.getRole() == Role.CEO || rejecter.getRole() == Role.HR){
             fpkToApprove.setAccept(false);
             fpkToApprove.setReject(true);
+            fpkRepository.save(fpkToApprove);
+            return true;
         }
         return false;
     }
