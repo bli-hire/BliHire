@@ -18,7 +18,7 @@ public class CVServiceImpl implements CVService{
     @Autowired
     CVRepository cvRepository;
 
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
+
 
 
 //    public User getUserByRequestedBy(User user){
@@ -29,13 +29,11 @@ public class CVServiceImpl implements CVService{
 //    }
 
 
-    public CV getRequestedByCVId(Long id){
 
+    public CV getRequestedByCVId(Long id){
         CV cv = cvRepository.findOne(id);
-//        Hibernate.initialize(mpp.getRequestedBy());
         return cv.getRequestedBy();
     }
-
 
     public CV getCVById(Long id){
         return cvRepository.findOne(id);
@@ -45,6 +43,7 @@ public class CVServiceImpl implements CVService{
         return cvRepository.findAll();
     }
 
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
     public void addCV(
             @RequestBody CVFormRequest cvFormRequest)
     {
@@ -114,5 +113,6 @@ public class CVServiceImpl implements CVService{
     public void updateCV(CV cv){
         cvRepository.save(cv);
     }
+
 
 }
