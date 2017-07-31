@@ -20,6 +20,8 @@ public class Fpk {
 
     private int numberOfPerson;
     private Date createdDate = new Date();
+    private Date dateNeeded;
+    private String jobPositionRequester;
     private String reason;
     private String fitnessWithMpp;
     private String employeeStatus;
@@ -27,6 +29,7 @@ public class Fpk {
     private String workExperience;
     private String skillKnowledge;
     private String completeness;
+    private String comment;
     private Department department;
     private boolean isReject;
     private boolean isAccept;
@@ -42,7 +45,7 @@ public class Fpk {
 
     public Fpk(int positionNeeded,String reason,String fitnessWithMpp,String employeeStatus,
                String school,String workExperience,String skillKnowledge,String completeness,
-               User requestedBy,Department department) {
+               User requestedBy,Department department,Date needed, String jobPositionRequester) {
         this.numberOfPerson = positionNeeded;
         this.reason = reason;
         this.fitnessWithMpp = fitnessWithMpp;
@@ -53,6 +56,8 @@ public class Fpk {
         this.completeness = completeness;
         this.requestedBy = requestedBy;
         this.department = department;
+        this.dateNeeded = needed;
+        this.jobPositionRequester = jobPositionRequester;
     }
 
     public boolean isReject() {
@@ -173,5 +178,37 @@ public class Fpk {
 
     public void setApprovedBy(User approvedBy) {
         this.approvedBy = approvedBy;
+    }
+
+    public Date getDateNeeded() {
+        return dateNeeded;
+    }
+
+    public void setDateNeeded(Date dateNeeded) {
+        this.dateNeeded = dateNeeded;
+    }
+
+    public String getJobPositionRequester() {
+        return jobPositionRequester;
+    }
+
+    public void setJobPositionRequester(String jabatanPemohon) {
+        this.jobPositionRequester = jabatanPemohon;
+    }
+
+    public String getCompleteness() {
+        return completeness;
+    }
+
+    public void setIdFpk(long idFpk) {
+        this.idFpk = idFpk;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }
