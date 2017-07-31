@@ -1,16 +1,14 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Email;
+import com.empatkepala.entity.request.EmailSendRequest;
 import com.empatkepala.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -89,20 +87,18 @@ public class EmailController {
 
     // TODO POST EMAIL SEND SERVICE
     @RequestMapping(value = "/send", method = RequestMethod.POST)
-    public String createMail(
-            Model model,
-            @ModelAttribute("mailObject") @Valid Email email,
+    public void createMail(
+            @RequestBody EmailSendRequest emailSendRequest,
             Errors errors)
     {
         if (errors.hasErrors()) {
-            return "mail/send";
+            System.out.print("error");
+            return;
         }
         emailService.sendSimpleMessage(
-                email.getTo(),
-                email.getSubject(),
-                email.getText());
-
-        return "redirect:/home";
+                emailSendRequest.getTo(),
+                emailSendRequest.getSubject(),
+                emailSendRequest.getText());
     }
 
     // TODO POST EMAIL SEND WITH TEMPLATE SERVICE

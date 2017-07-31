@@ -1,5 +1,7 @@
 package com.empatkepala.entity.request;
 
+import com.empatkepala.entity.Role;
+
 /**
  * Created by ARDI on 3/5/2017.
  */
@@ -9,7 +11,7 @@ public class AddUserRequest {
     private String surname;
     private String password;
     private String email;
-    private long role;
+    private Role role;
 
     public String getName() {
         return name;
@@ -43,11 +45,11 @@ public class AddUserRequest {
         this.email = email;
     }
 
-    public long getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(long role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }
