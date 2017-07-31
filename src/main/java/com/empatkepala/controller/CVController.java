@@ -33,7 +33,7 @@ public class CVController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public void addUser(@RequestBody CVFormRequest addCVFormRequest)
+    public void addCV(@RequestBody CVFormRequest addCVFormRequest)
     {
         cvService.addCV(addCVFormRequest);
     }
