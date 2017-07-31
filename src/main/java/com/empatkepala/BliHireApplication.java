@@ -15,6 +15,8 @@ public class BliHireApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BliHireApplication.class, args);
+
+
 	}
 	@Bean
 	public CommandLineRunner loadData(CVRepository cvRepository) {
