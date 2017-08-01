@@ -20,7 +20,7 @@ public interface MppService {
 
     Collection<Mpp> getAllMpp();
 
-    void addMpp(Mpp mpp);
+    void addMpp(@RequestBody MppFormRequest mppFormRequest);
 
     boolean approveMpp(Mpp mpp, User approver);
 

@@ -18,7 +18,6 @@ public class Mpp {
     private long id;
 
     private Date createdDate = new Date();
-
     private long numberOfPerson;
     private Department department;
     private String reason;

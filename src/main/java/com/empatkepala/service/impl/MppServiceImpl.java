@@ -5,6 +5,7 @@ import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
@@ -52,14 +53,31 @@ public class MppServiceImpl implements MppService{
     }
 
     @Override
-    public void addMpp(Mpp mpp){
+    public void addMpp(@RequestBody MppFormRequest mppFormRequest)
+    {
+        Mpp mpp = new Mpp();
+//        mpp.setApprovedBy(userService.getUser(mppFormRequest.getIdApprovedBy()));
+
+        mpp.setEducation(mppFormRequest.getEducation());
+        mpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
+        mpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
+        mpp.setExperience(mppFormRequest.getExperience());
+        mpp.setKnowledge(mppFormRequest.getKnowledge());
+        mpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
+        mpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
+        mpp.setPcAmmount(mppFormRequest.getPcAmmount());
+        mpp.setPcSpec(mppFormRequest.getPcSpec());
+        mpp.setReason(mppFormRequest.getReason());
+        mpp.setDepartment(userService.getUser((mppFormRequest.getIdRequestedBy())).getDepartment());
+        mpp.setRequestedBy(userService.getUser(mppFormRequest.getIdRequestedBy()));
+
         mppRepository.save(mpp);
     }
 
     @Override
     public boolean approveMpp(Mpp mpp, User approver) {
         Mpp mppToApprove = mppRepository.findOne(mpp.getId());
-        if(approver.getRole().getRoleName() == "CEO"){
+        if(approver.getRole() == Role.CEO){
             mppToApprove.setApprovedBy(approver);
             mppToApprove.setAccept(true);
             mppToApprove.setReject(false);
@@ -73,7 +91,7 @@ public class MppServiceImpl implements MppService{
     @Override
     public boolean rejectMpp(Mpp mpp, User rejector) {
         Mpp mppToApprove = mppRepository.findOne(mpp.getId());
-        if(rejector.getRole().getRoleName() == "CEO"){
+        if(rejector.getRole() == Role.CEO){
 //            mppToApprove.setApprovedBy(approver);
             mppToApprove.setAccept(false);
             mppToApprove.setReject(true);
