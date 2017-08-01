@@ -18,7 +18,6 @@ public class Mpp {
     private long id;
 
     private Date createdDate = new Date();
-    private String position;
     private long numberOfPerson;
     private Department department;
     private String reason;
@@ -174,13 +173,5 @@ public class Mpp {
 
     public void setAccept(boolean accept) {
         isAccept = accept;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
     }
 }
