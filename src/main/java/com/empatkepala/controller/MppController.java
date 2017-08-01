@@ -1,6 +1,7 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Mpp;
+import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.service.MppService;
@@ -24,25 +25,26 @@ public class MppController {
 
     @RequestMapping(method = RequestMethod.POST)
     public void addMpp(
-            @RequestBody MppFormRequest mppFormRequest){
-        Mpp mpp = new Mpp();
-//        mpp.setApprovedBy(userService.getUser(mppFormRequest.getIdApprovedBy()));
-
-        mpp.setEducation(mppFormRequest.getEducation());
-        mpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
-        mpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
-        mpp.setExperience(mppFormRequest.getExperience());
-        mpp.setKnowledge(mppFormRequest.getKnowledge());
-        mpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
-        mpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
-        mpp.setPcAmmount(mppFormRequest.getPcAmmount());
-        mpp.setPcSpec(mppFormRequest.getPcSpec());
-        mpp.setReason(mppFormRequest.getReason());
-        mpp.setDepartment(userService.getUser((mppFormRequest.getIdRequestedBy())).getDepartment());
-        mpp.setRequestedBy(userService.getUser(mppFormRequest.getIdRequestedBy()));
-
-
-        mppService.addMpp(mpp);
+            @RequestBody AddMppRequest addMppRequest){
+//        Mpp mpp = new Mpp();
+////        mpp.setApprovedBy(userService.getUser(mppFormRequest.getIdApprovedBy()));
+//
+//        mpp.setEducation(mppFormRequest.getEducation());
+//        mpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
+//        mpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
+//        mpp.setExperience(mppFormRequest.getExperience());
+//        mpp.setKnowledge(mppFormRequest.getKnowledge());
+//        mpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
+//        mpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
+//        mpp.setPcAmmount(mppFormRequest.getPcAmmount());
+//        mpp.setPcSpec(mppFormRequest.getPcSpec());
+//        mpp.setReason(mppFormRequest.getReason());
+//        mpp.setDepartment(userService.getUser((mppFormRequest.getIdRequestedBy())).getDepartment());
+//        mpp.setRequestedBy(userService.getUser(mppFormRequest.getIdRequestedBy()));
+//
+//
+//        mppService.addMpp(mpp);
+        mppService.addMpp(addMppRequest);
 
     }
 
