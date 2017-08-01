@@ -22,6 +22,7 @@ public class Mpp {
     private long numberOfPerson;
     private Department department;
     private String reason;
+    private String position;
     private String mainResponsibility;
     private String education;
     private String experience;
@@ -32,6 +33,29 @@ public class Mpp {
     private String pcSpec;
     private boolean isReject;
     private boolean isAccept;
+
+    public Mpp(){
+
+    }
+
+    public Mpp(String position, long numberOfPerson, String reason, String mainResponsibility,
+               String education, String experience, String knowledge, String employeeStatus, int expectedJoin,
+               int pcAmmount, String pcSpec, User requestedBy, Department department){
+        this.position = position;
+        this.numberOfPerson = numberOfPerson;
+        this.reason = reason;
+        this.mainResponsibility = mainResponsibility;
+        this.education = education;
+        this.experience = experience;
+        this.knowledge = knowledge;
+        this.employeeStatus = employeeStatus;
+        this.expectedJoin = expectedJoin;
+        this.pcAmmount = pcAmmount;
+        this.pcSpec = pcSpec;
+        this.requestedBy = requestedBy;
+        this.department = department;
+
+    }
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private User requestedBy;
@@ -174,5 +198,13 @@ public class Mpp {
 
     public void setAccept(boolean accept) {
         isAccept = accept;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }
