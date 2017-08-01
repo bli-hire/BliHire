@@ -3,10 +3,12 @@ package com.empatkepala.controller;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
+import com.empatkepala.entity.response.MppResponse;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -24,7 +26,7 @@ public class MppController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public void addMpp(
+    public MppResponse addMpp(
             @RequestBody AddMppRequest addMppRequest){
 //        Mpp mpp = new Mpp();
 ////        mpp.setApprovedBy(userService.getUser(mppFormRequest.getIdApprovedBy()));
@@ -45,6 +47,7 @@ public class MppController {
 //
 //        mppService.addMpp(mpp);
         mppService.addMpp(addMppRequest);
+        return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Add Mpp",null);
 
     }
 
