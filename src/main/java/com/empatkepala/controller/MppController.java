@@ -18,6 +18,7 @@ import java.util.Collection;
  */
 @RestController
 @RequestMapping(value = "/mpp")
+@CrossOrigin(origins = "*")
 public class MppController {
     @Autowired
     private MppService mppService;
@@ -25,7 +26,7 @@ public class MppController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public MppResponse addMpp(
             @RequestBody AddMppRequest addMppRequest){
 //        Mpp mpp = new Mpp();
