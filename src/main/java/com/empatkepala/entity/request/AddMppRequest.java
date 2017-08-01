@@ -9,9 +9,7 @@ import java.util.Date;
  */
 public class AddMppRequest {
     private long numberOfPerson;
-    private Date dateNeeded;
     private String position;
-    private Department department;
     private String reason;
     private String mainResponsibility;
     private String education;
@@ -32,28 +30,12 @@ public class AddMppRequest {
         this.numberOfPerson = numberOfPerson;
     }
 
-    public Date getDateNeeded() {
-        return dateNeeded;
-    }
-
-    public void setDateNeeded(Date dateNeeded) {
-        this.dateNeeded = dateNeeded;
-    }
-
     public String getPosition() {
         return position;
     }
 
     public void setPosition(String position) {
         this.position = position;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     public String getReason() {
