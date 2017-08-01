@@ -2,6 +2,7 @@ package com.empatkepala.service.impl;
 
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
+import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.repository.MppRepository;
@@ -9,6 +10,7 @@ import com.empatkepala.service.MppService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
 
@@ -108,6 +110,11 @@ public class MppServiceImpl implements MppService{
         }
 
         return false;
+
+    }
+
+    @Override
+    public void addMpp(@RequestBody AddMppRequest addMppRequest) {
 
     }
 
