@@ -2,6 +2,7 @@ package com.empatkepala.service.impl;
 
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
+import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
@@ -132,6 +133,19 @@ public class MppServiceImpl implements MppService{
 
         return false;
 
+    }
+
+    @Override
+    public void addMpp(@RequestBody AddMppRequest addMppRequest) {
+        Mpp input = new Mpp(addMppRequest.getPosition(), addMppRequest.getNumberOfPerson(),
+                addMppRequest.getReason(), addMppRequest.getMainResponsibility(),
+                addMppRequest.getEducation(), addMppRequest.getExperience(),
+                addMppRequest.getKnowledge(), addMppRequest.getEmployeeStatus(),
+                addMppRequest.getExpectedJoin(), addMppRequest.getPcAmmount(),
+                addMppRequest.getPcSpec(), userService.getUser(addMppRequest.getIdRequested()), userService.getUser(addMppRequest.getIdRequested()).getDepartment());
+
+
+        mppRepository.save(input);
     }
 
 
