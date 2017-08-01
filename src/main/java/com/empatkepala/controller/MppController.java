@@ -8,6 +8,8 @@ import com.empatkepala.enumeration.Department;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,8 +76,10 @@ public class MppController {
     }
 
     @RequestMapping(value = "/byDepartment", method = RequestMethod.GET, produces = "application/json")
-    public Collection<Mpp> findByDepartment(@RequestHeader Department department){
-        return mppService.getMppByDepartment(department);
+    public MppResponse findByDepartment(@RequestHeader Department department){
+        Collection<Mpp> data = mppService.getMppByDepartment(department);
+//        return mppService.getMppByDepartment(department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Department",data,data.size());
     }
 
     @RequestMapping(value = "/requestedBy", method = RequestMethod.GET, produces = "application/json")
