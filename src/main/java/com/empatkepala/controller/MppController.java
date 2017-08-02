@@ -62,7 +62,7 @@ public class MppController {
         return mppService.getAllMpp();
     }
 
-    @RequestMapping(value="/detail/{id}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value="/{id}", method = RequestMethod.GET, produces = "application/json")
     public MppResponse findById(@PathVariable Long id){
 //        return mppService.getMppById(id);
         Mpp mpp = mppService.getMppById(id);
