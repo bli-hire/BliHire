@@ -11,6 +11,9 @@ public class MppResponse {
     private String status,message;
     private Collection<Mpp> data;
     private int totalData;
+    private String requestHeader;
+    private String requestBody;
+    private String method;
 
     public MppResponse() {}
 
@@ -25,6 +28,18 @@ public class MppResponse {
         this.message = message;
         this.data = data;
         this.totalData = totalData;
+    }
+
+    public MppResponse(String status, String message, Collection<Mpp> data, int totalData,
+                       String method, String requestHeader, String requestBody){
+        this.status = status;
+        this.message = message;
+        this.data = data;
+        this.totalData = totalData;
+        this.method = method;
+        this.requestHeader = requestHeader;
+        this.requestBody = requestBody;
+
     }
 
     public String getStatus() {
@@ -57,5 +72,29 @@ public class MppResponse {
 
     public void setTotalData(int number){
         this.totalData=number;
+    }
+
+    public String getRequestHeader() {
+        return requestHeader;
+    }
+
+    public void setRequestHeader(String requestHeader) {
+        this.requestHeader = requestHeader;
+    }
+
+    public String getRequestBody() {
+        return requestBody;
+    }
+
+    public void setRequestBody(String requestBody) {
+        this.requestBody = requestBody;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 }

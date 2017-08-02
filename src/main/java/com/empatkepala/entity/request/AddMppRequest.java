@@ -117,4 +117,25 @@ public class AddMppRequest {
     public void setIdRequested(Long idRequested) {
         this.idRequested = idRequested;
     }
+
+    public static String getRequestBody() {
+        return "AddMppRequest{" +
+                "numberOfPerson" +
+                ", position" +
+                ", reason" +
+                ", mainResponsibility" +
+                ", education" +
+                ", experience" +
+                ", knowledge" +
+                ", employeeStatus" +
+                ", expectedJoin" +
+                ", pcAmmount" +
+                ", pcSpec" +
+                ", idRequested" +
+                '}';
+    }
+
+    public static String getHeaderContentType(){
+        return "Content-Type : Application/json";
+    }
 }

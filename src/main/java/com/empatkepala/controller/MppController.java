@@ -48,7 +48,7 @@ public class MppController {
 //
 //        mppService.addMpp(mpp);
         mppService.addMpp(addMppRequest);
-        return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Add Mpp",null);
+        return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Add Mpp",null, 1, "POST", addMppRequest.getRequestBody(), addMppRequest.getHeaderContentType());
 
     }
 
