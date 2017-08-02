@@ -28,7 +28,7 @@ public class FpkController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/gteAllFpk", method = RequestMethod.GET,produces = "application/json")
+    @RequestMapping(value = "/getAllFpk", method = RequestMethod.GET,produces = "application/json")
     public FpkResponse getAllFpk(){
         FpkResponse result = new FpkResponse();
         Collection<Fpk> data = new ArrayList<>();
