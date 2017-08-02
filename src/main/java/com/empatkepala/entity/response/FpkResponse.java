@@ -28,7 +28,7 @@ public class FpkResponse {
     }
 
     public FpkResponse(String status,String message,Collection<Fpk> data,int totalData,
-                       String method,String requestBody, String requestHeader){
+                       String method,String requestHeader, String requestBody){
         this.status = status;
         this.message = message;
         this.data = data;
