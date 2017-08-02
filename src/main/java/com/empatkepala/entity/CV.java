@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @Entity
 @Table(name="blihire_CV")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class CV implements Serializable {
+public class CV {
 
     @Id
     @GeneratedValue
