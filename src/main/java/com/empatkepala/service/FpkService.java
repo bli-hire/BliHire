@@ -22,6 +22,8 @@ public interface FpkService{
 
     Collection<Fpk> getFpkHistoryByDepartment(Department department);
 
+    Collection<Fpk> getFpkActiveByDepartment(Department department);
+
     List getAllData();
 
     Fpk getFpk(long id);

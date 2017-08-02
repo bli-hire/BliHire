@@ -84,6 +84,13 @@ public class FpkController {
         return new FpkResponse(HttpStatus.FOUND.toString(),"Success Get Fpk By Department",data,data.size());
     }
 
+    @RequestMapping(value = "/byDepartment/active", method = RequestMethod.GET, produces = "application/json")
+    public FpkResponse findFpkByDepartmentActive(@RequestHeader Department department){
+        Collection<Fpk> data = fpkService.getFpkActiveByDepartment(department);
+        return new FpkResponse(HttpStatus.FOUND.toString(),"Success Get Fpk By Department",data,data.size());
+    }
+
+
     @RequestMapping(value = "/byDepartment/history", method = RequestMethod.GET, produces = "application/json")
     public FpkResponse findFpkByDepartmentHistory(@RequestHeader Department department){
         Collection<Fpk> data = fpkService.getFpkHistoryByDepartment(department);

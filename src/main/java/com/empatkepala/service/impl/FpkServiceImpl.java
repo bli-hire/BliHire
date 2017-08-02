@@ -49,6 +49,13 @@ public class FpkServiceImpl implements FpkService{
         return result;
     }
 
+    @Override
+    public Collection<Fpk> getFpkActiveByDepartment(Department department) {
+        List<Fpk> result = new ArrayList<>();
+        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,false));
+        return result;
+    }
+
     public List getAllData(){
         return fpkRepository.findAll();
     }
