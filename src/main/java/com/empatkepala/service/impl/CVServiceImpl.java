@@ -5,9 +5,11 @@ import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.repository.CVRepository;
 import com.empatkepala.service.CVService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Transient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.Collection;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -17,17 +19,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CVServiceImpl implements CVService{
     @Autowired
     CVRepository cvRepository;
-
-
-
-
-//    public User getUserByRequestedBy(User user){
-//
-//        Mpp mpp = mppRepository.findOne(1L);
-//        Hibernate.initialize(mpp.getRequestedBy());
-//        return mpp.getRequestedBy();
-//    }
-
 
 
     public CV getRequestedByCVId(Long id){
@@ -44,12 +35,15 @@ public class CVServiceImpl implements CVService{
     }
 
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
+    @Transient
+    private UUID corrId = UUID.randomUUID();
     public void addCV(
             @RequestBody CVFormRequest cvFormRequest)
     {
 
         CV cv = new CV();
         cv.setIdCV(ID_GENERATOR.getAndIncrement());
+        cv.setUid(corrId);
         cv.setTitle(cvFormRequest.getTitle());
         cv.setBlog(cvFormRequest.getBlog());
         cv.setCurrentAddress(cvFormRequest.getCurrentAddress());

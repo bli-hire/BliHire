@@ -5,6 +5,7 @@ import com.empatkepala.entity.CVEntity.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Ryan Bagus Susilo on 3/11/2017.
@@ -19,6 +20,8 @@ public class CV {
     @Id
     @GeneratedValue
     private long idCV;
+    @Transient
+    private UUID uid = UUID.randomUUID();
     private String title;
     private String jobTitle;
     private String fullName;
@@ -158,6 +161,14 @@ public class CV {
 
     public void setIdCV(long idCV) {
         this.idCV = idCV;
+    }
+
+    public UUID getUid() {
+        return uid;
+    }
+
+    public void setUid(UUID uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {
