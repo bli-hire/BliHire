@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -57,8 +58,18 @@ public class MppController {
 //        mppService.
 //    }
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public Collection<Mpp> findMppById(){
+    public Collection<Mpp> findAll(){
         return mppService.getAllMpp();
+    }
+
+    @RequestMapping(value="/detail/{id}", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findById(@PathVariable Long id){
+//        return mppService.getMppById(id);
+        Mpp mpp = mppService.getMppById(id);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+        return new MppResponse(HttpStatus.FOUND.toString(), "Success Get Mpp By Id", data, data.size());
+
     }
 
 
