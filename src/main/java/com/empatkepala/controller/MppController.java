@@ -8,8 +8,6 @@ import com.empatkepala.enumeration.Department;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,13 +81,19 @@ public class MppController {
     }
 
     @RequestMapping(value = "/requestedBy", method = RequestMethod.GET, produces = "application/json")
-    public Collection<Mpp> findByRequestedBy(@RequestHeader Long userId){
-        return mppService.getMppByRequestedBy(userService.getUser(userId));
+    public MppResponse findByRequestedBy(@RequestHeader Long userId){
+        Collection<Mpp> data = mppService.getMppByRequestedBy(userService.getUser(userId));
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
+
+//        return mppService.getMppByRequestedBy(userService.getUser(userId));
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json")
-    public boolean editMpp(@RequestBody MppFormRequest mppFormRequest, Long id, Long mppId){
-        return mppService.editMpp(mppFormRequest, userService.getUser(id), mppService.getMppById(mppId));
+    public MppResponse editMpp(@RequestBody MppFormRequest mppFormRequest, Long id, Long mppId){
+        mppService.editMpp(mppFormRequest, userService.getUser(id), mppService.getMppById(mppId));
+        return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Edit Mpp",null);
+
+//        return mppService.editMpp(mppFormRequest, userService.getUser(id), mppService.getMppById(mppId));
 
     }
 
