@@ -162,4 +162,29 @@ public class AddFpkRequest {
     public void setNeedApproveHead(boolean needApproveHead) {
         this.needApproveHead = needApproveHead;
     }
+
+    public static String getRequestBody() {
+        return "AddFpkRequest{" +
+                "position" +
+                ", dateNeeded" +
+                ", jobPositionRequester" +
+                ", reason" +
+                ", fitnessWithMpp" +
+                ", employeeStatus" +
+                ", school" +
+                ", workExperience" +
+                ", skillKnowledge" +
+                ", completeness" +
+                ", department" +
+                ", isReject" +
+                ", isAccept" +
+                ", needApproveCeo" +
+                ", needApproveHead" +
+                ", idUserRequested" +
+                '}';
+    }
+
+    public static String getHeaderContentType(){
+        return "Content-Type : Application/json";
+    }
 }

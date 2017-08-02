@@ -28,15 +28,18 @@ public class FpkController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET,produces = "application/json")
+    @RequestMapping(value = "/gteAllFpk", method = RequestMethod.GET,produces = "application/json")
     public FpkResponse getAllFpk(){
         FpkResponse result = new FpkResponse();
         Collection<Fpk> data = new ArrayList<>();
         data = fpkService.getAllData();
         result.setData(data);
         result.setTotalData(data.size());
-        result.setStatus(HttpStatus.FOUND.toString());
+        result.setStatus(HttpStatus.OK.toString());
         result.setMessage("Success");
+        result.setMethod("GET");
+        result.setRequestHeader(AddFpkRequest.getHeaderContentType());
+        result.setRequestBody("");
         return result;
     }
 
@@ -57,7 +60,8 @@ public class FpkController {
             @RequestBody AddFpkRequest addFpkRequest)
     {
         fpkService.addFpk(addFpkRequest);
-        return new FpkResponse(HttpStatus.ACCEPTED.toString(),"Success Add Fpk",null);
+        return new FpkResponse(HttpStatus.ACCEPTED.toString(),"Success Add Fpk",null,1,
+                "POST",AddFpkRequest.getHeaderContentType(),AddFpkRequest.getRequestBody());
     }
 
     @RequestMapping(value = "/approve", method = RequestMethod.POST, produces = "application/json")
