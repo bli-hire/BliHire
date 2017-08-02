@@ -20,6 +20,7 @@ public class AddMppRequest {
     private int pcAmmount;
     private String pcSpec;
     private Long idRequested;
+    private ExpectJoinRequest expectJoin;
 
 
     public long getNumberOfPerson() {
@@ -137,5 +138,13 @@ public class AddMppRequest {
 
     public static String getHeaderContentType(){
         return "Content-Type : Application/json";
+    }
+
+    public ExpectJoinRequest getExpectJoin() {
+        return expectJoin;
+    }
+
+    public void setExpectJoin(ExpectJoinRequest expectJoin) {
+        this.expectJoin = expectJoin;
     }
 }

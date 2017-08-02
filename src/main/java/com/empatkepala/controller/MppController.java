@@ -2,6 +2,7 @@ package com.empatkepala.controller;
 
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.AddMppRequest;
+import com.empatkepala.entity.request.ApproveRejectMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.entity.response.MppResponse;
 import com.empatkepala.enumeration.Department;
@@ -74,8 +75,28 @@ public class MppController {
 
 
     @RequestMapping(value = "/approve", method = RequestMethod.POST, produces = "application/json")
-    public boolean approveMpp(@RequestBody Long idWhoApprove, Long MppId){
-        return mppService.approveMpp(mppService.getMppById(MppId), userService.getUser(idWhoApprove));
+    public MppResponse approveMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+//        try {
+//            if(mppService.approveMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser()))){
+//                return new MppResponse("Sukses Approve", "Success Approve Mpp", null);
+//
+//            }
+//            else{
+//                return new MppResponse("gagal","gagal approve",null);
+//
+//            }
+//        }catch(Exception ex){
+//            return new MppResponse(ex.toString(),ex.getStackTrace().toString(),null);
+//        }
+        if(mppService.approveMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Approve Mpp", null);
+
+        }
+        else{
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+
+        }
+//        return mppService.approveMpp(mppService.getMppById(MppId), userService.getUser(idWhoApprove));
     }
 
     @RequestMapping(value = "/reject", method = RequestMethod.POST, produces = "application/json")
@@ -88,6 +109,18 @@ public class MppController {
     public MppResponse findByDepartment(@RequestHeader Department department){
         Collection<Mpp> data = mppService.getMppByDepartment(department);
 //        return mppService.getMppByDepartment(department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Department",data,data.size());
+    }
+    @RequestMapping(value = "/byDepartment/active", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findFpkByDepartmentActive(@RequestHeader Department department){
+        Collection<Mpp> data = mppService.getMppActiveByDepartment(department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Department",data,data.size());
+    }
+
+
+    @RequestMapping(value = "/byDepartment/history", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findFpkByDepartmentHistory(@RequestHeader Department department){
+        Collection<Mpp> data = mppService.getMppHistoryByDepartment(department);
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Department",data,data.size());
     }
 

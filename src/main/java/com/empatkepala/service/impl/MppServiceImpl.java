@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -70,7 +71,6 @@ public class MppServiceImpl implements MppService{
         mpp.setReason(mppFormRequest.getReason());
         mpp.setDepartment(userService.getUser((mppFormRequest.getIdRequestedBy())).getDepartment());
         mpp.setRequestedBy(userService.getUser(mppFormRequest.getIdRequestedBy()));
-
         mppRepository.save(mpp);
     }
 
@@ -105,6 +105,22 @@ public class MppServiceImpl implements MppService{
     @Override
     public Collection<Mpp> getMppByDepartment(Department department) {
         return mppRepository.findByDepartment(department);
+    }
+
+    @Override
+    public Collection<Mpp> getMppHistoryByDepartment(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndReject(department,true,false));
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndReject(department,false,true));
+        return mpps;
+
+    }
+
+    @Override
+    public Collection<Mpp> getMppActiveByDepartment(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndReject(department,false,false));
+        return mpps;
     }
 
     @Override
@@ -143,6 +159,19 @@ public class MppServiceImpl implements MppService{
                 addMppRequest.getKnowledge(), addMppRequest.getEmployeeStatus(),
                 addMppRequest.getExpectedJoin(), addMppRequest.getPcAmmount(),
                 addMppRequest.getPcSpec(), userService.getUser(addMppRequest.getIdRequested()), userService.getUser(addMppRequest.getIdRequested()).getDepartment());
+        input.setJanuaryExpect(addMppRequest.getExpectJoin().getJanuaryExpect());
+        input.setFebruaryExpect(addMppRequest.getExpectJoin().getFebruaryExpect());
+        input.setMarchExpect(addMppRequest.getExpectJoin().getMarchExpect());
+        input.setAprilExpect(addMppRequest.getExpectJoin().getAprilExpect());
+        input.setMayExpect(addMppRequest.getExpectJoin().getMayExpect());
+        input.setJuneExpect(addMppRequest.getExpectJoin().getJuneExpect());
+
+        input.setJulyExpect(addMppRequest.getExpectJoin().getJulyExpect());
+        input.setAugustExpect(addMppRequest.getExpectJoin().getAugustExpect());
+        input.setSeptemberExpect(addMppRequest.getExpectJoin().getSeptemberExpect());
+        input.setOctoberExpect(addMppRequest.getExpectJoin().getOctoberExpect());
+        input.setNovemberExpect(addMppRequest.getExpectJoin().getNovemberExpect());
+        input.setDecemberExpect(addMppRequest.getExpectJoin().getDecemberExpect());
 
 
         mppRepository.save(input);
