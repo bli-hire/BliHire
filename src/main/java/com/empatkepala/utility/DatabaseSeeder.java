@@ -120,6 +120,7 @@ public class DatabaseSeeder {
         fpk2.setJobPositionRequester("Senior Developer");
         fpkRepository.save(fpk2);
 
+        //Ini buat prepare data di data job vacancy, kalo seeder dihapus tolong tetap diadakan - Juan
         JobVacancy humanResource = new JobVacancy();
         humanResource.setDepartment(Department.HumanResource);
         JobVacancy marketing = new JobVacancy();
@@ -149,6 +150,9 @@ public class DatabaseSeeder {
         jobVacancyRepository.save(projectManagement);
         jobVacancyRepository.save(productManagement);
 
+        //....
+        //...
+        // Juan
     }
 
 }
