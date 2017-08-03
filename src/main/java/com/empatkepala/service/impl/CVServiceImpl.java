@@ -4,6 +4,7 @@ import com.empatkepala.entity.CV;
 import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.repository.CVRepository;
 import com.empatkepala.service.CVService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Transient;
 import org.springframework.stereotype.Service;
@@ -34,16 +35,11 @@ public class CVServiceImpl implements CVService{
         return cvRepository.findAll();
     }
 
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
-    @Transient
-    private UUID corrId = UUID.randomUUID();
     public void addCV(
             @RequestBody CVFormRequest cvFormRequest)
     {
 
         CV cv = new CV();
-        cv.setIdCV(ID_GENERATOR.getAndIncrement());
-        cv.setUid(corrId);
         cv.setTitle(cvFormRequest.getTitle());
         cv.setBlog(cvFormRequest.getBlog());
         cv.setCurrentAddress(cvFormRequest.getCurrentAddress());

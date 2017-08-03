@@ -1,6 +1,7 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.entity.CVEntity.*;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,8 +21,7 @@ public class CV {
     @Id
     @GeneratedValue
     private long idCV;
-    @Transient
-    private UUID uid = UUID.randomUUID();
+    private String uid = RandomStringUtils.randomAlphanumeric(16);
     private String title;
     private String jobTitle;
     private String fullName;
@@ -163,11 +163,11 @@ public class CV {
         this.idCV = idCV;
     }
 
-    public UUID getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(UUID uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
