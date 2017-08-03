@@ -4,11 +4,13 @@ import com.empatkepala.entity.CV;
 import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.repository.CVRepository;
 import com.empatkepala.service.CVService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Transient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.Collection;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -18,17 +20,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CVServiceImpl implements CVService{
     @Autowired
     CVRepository cvRepository;
-
-
-
-
-//    public User getUserByRequestedBy(User user){
-//
-//        Mpp mpp = mppRepository.findOne(1L);
-//        Hibernate.initialize(mpp.getRequestedBy());
-//        return mpp.getRequestedBy();
-//    }
-
 
 
     public CV getRequestedByCVId(Long id){
@@ -44,13 +35,11 @@ public class CVServiceImpl implements CVService{
         return cvRepository.findAll();
     }
 
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
     public void addCV(
             @RequestBody CVFormRequest cvFormRequest)
     {
 
         CV cv = new CV();
-        cv.setIdCV(ID_GENERATOR.getAndIncrement());
         cv.setTitle(cvFormRequest.getTitle());
         cv.setBlog(cvFormRequest.getBlog());
         cv.setCurrentAddress(cvFormRequest.getCurrentAddress());
@@ -111,7 +100,9 @@ public class CVServiceImpl implements CVService{
 
         cvRepository.save(cv);
     }
-
+    public void updateCV(CV cv){
+        cvRepository.save(cv);
+    }
 
 
 }
