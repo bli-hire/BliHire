@@ -100,8 +100,15 @@ public class MppController {
     }
 
     @RequestMapping(value = "/reject", method = RequestMethod.POST, produces = "application/json")
-    public boolean rejectMpp(@RequestBody Long idWhoReject, Long MppId){
-        return mppService.rejectMpp(mppService.getMppById(MppId), userService.getUser(idWhoReject));
+    public MppResponse rejectMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+        if(mppService.rejectMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Reject Mpp", null);
+
+        }
+        else{
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+
+        }
 
     }
 
@@ -164,7 +171,6 @@ public class MppController {
         Collection<Mpp> data = mppService.getMppByRequestedByRejected(userService.getUser(userId));
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
     }
-
 
 
 
