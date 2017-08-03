@@ -1,9 +1,10 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.enumeration.Department;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by Juan on 3/11/17.
@@ -16,7 +17,9 @@ public class Mpp {
     @GeneratedValue
     private long id;
 
-    private Date createdDate = new Date();
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime createdDate = new DateTime();
+
     private long numberOfPerson;
     private Department department;
     private String reason;
@@ -82,11 +85,11 @@ public class Mpp {
         this.id = id;
     }
 
-    public Date getCreatedDate() {
+    public DateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(DateTime createdDate) {
         this.createdDate = createdDate;
     }
 
