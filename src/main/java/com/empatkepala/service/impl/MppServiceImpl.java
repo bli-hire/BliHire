@@ -117,6 +117,14 @@ public class MppServiceImpl implements MppService{
     }
 
     @Override
+    public Collection<Mpp> getMppAcceptedByDepartment(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndReject(department,true,false));
+        return mpps;
+
+    }
+
+    @Override
     public Collection<Mpp> getMppActiveByDepartment(Department department) {
         Collection<Mpp> mpps = new ArrayList<>();
         mpps.addAll(mppRepository.findByDepartmentAndAcceptAndReject(department,false,false));
