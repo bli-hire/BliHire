@@ -30,6 +30,8 @@ public interface MppService {
     Collection<Mpp> getMppHistoryByDepartment(Department department);
 
     Collection<Mpp> getMppActiveByDepartment(Department department);
+    Collection<Mpp> getMppAcceptedByDepartment(Department department);
+    Collection<Mpp> getMppAcceptedByDepartmentNotPublished(Department department);
 
     Collection<Mpp> getMppByRequestedBy(User requestedBy);
 
@@ -41,5 +43,7 @@ public interface MppService {
 
     boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
     void addMpp(@RequestBody AddMppRequest addMppRequest);
+
+    boolean publishMpp(Mpp mpp, User whoPublish);
 
 }

@@ -117,6 +117,21 @@ public class MppServiceImpl implements MppService{
     }
 
     @Override
+    public Collection<Mpp> getMppAcceptedByDepartment(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndReject(department,true,false));
+        return mpps;
+
+    }
+
+    @Override
+    public Collection<Mpp> getMppAcceptedByDepartmentNotPublished(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndRejectAndPublished(department,true,false, false));
+        return mpps;
+    }
+
+    @Override
     public Collection<Mpp> getMppActiveByDepartment(Department department) {
         Collection<Mpp> mpps = new ArrayList<>();
         mpps.addAll(mppRepository.findByDepartmentAndAcceptAndReject(department,false,false));
@@ -197,6 +212,17 @@ public class MppServiceImpl implements MppService{
 
 
         mppRepository.save(input);
+    }
+
+    @Override
+    public boolean publishMpp(Mpp mpp, User whoPublish) {
+        if(whoPublish.getRole() == Role.HR && mppRepository.getOne(mpp.getId()).isAccept() == true ){
+            Mpp mppToPublish = mppRepository.getOne(mpp.getId());
+            mppToPublish.setPublished(true);
+            mppRepository.save(mppToPublish);
+            return true;
+        }
+        return false;
     }
 
 
