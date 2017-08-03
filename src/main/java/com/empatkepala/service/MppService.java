@@ -30,6 +30,7 @@ public interface MppService {
     Collection<Mpp> getMppHistoryByDepartment(Department department);
 
     Collection<Mpp> getMppActiveByDepartment(Department department);
+    Collection<Mpp> getMppAcceptedByDepartment(Department department);
 
     Collection<Mpp> getMppByRequestedBy(User requestedBy);
 
