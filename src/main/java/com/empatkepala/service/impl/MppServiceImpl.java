@@ -143,6 +143,14 @@ public class MppServiceImpl implements MppService{
     }
 
     @Override
+    public Collection<Mpp> getMppByRequestedByRejected(User requestedBy) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByRequestedByAndAcceptAndReject(requestedBy,false,true));
+        return mpps;
+    }
+
+
+    @Override
     public boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit) {
         if(editor.getId() == mppFormRequest.getIdRequestedBy()){
             Mpp preparedMpp = mppRepository.findOne(mppToEdit.getId());

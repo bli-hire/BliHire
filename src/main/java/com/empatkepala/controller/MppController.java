@@ -153,7 +153,11 @@ public class MppController {
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
     }
 
-
+    @RequestMapping(value = "/byRequested/rejected", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findMppByRequestedRejected(@RequestHeader Long userId){
+        Collection<Mpp> data = mppService.getMppByRequestedByRejected(userService.getUser(userId));
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
+    }
 
 
 

@@ -37,6 +37,8 @@ public interface MppService {
 
     public Collection<Mpp> getMppByRequestedByAccepted(User requestedBy);
 
+    Collection<Mpp> getMppByRequestedByRejected(User requestedBy);
+
     boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
     void addMpp(@RequestBody AddMppRequest addMppRequest);
 
