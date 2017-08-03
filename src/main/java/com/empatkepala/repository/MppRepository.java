@@ -16,5 +16,6 @@ public interface MppRepository extends JpaRepository<Mpp, Long>{
     Collection<Mpp> findByRequestedBy(User requestedBy);
     Collection<Mpp> findByDepartment(Department department);
     Collection<Mpp> findByDepartmentAndAcceptAndReject(Department department, boolean accepted, boolean rejected);
+    Collection<Mpp> findByRequestedByAndAcceptAndReject(User requestedBy, boolean accepted, boolean rejected);
 
 }

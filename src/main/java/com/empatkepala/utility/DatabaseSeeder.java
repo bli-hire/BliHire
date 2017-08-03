@@ -86,6 +86,13 @@ public class DatabaseSeeder {
         mpp.setEmployeeStatus("Tes");
         mppRepository.save(mpp);
 
+        Mpp mpp2 = new Mpp();
+        mpp2.setReason("Tes");
+        mpp2.setDepartment(Department.Finance);
+        mpp2.setEmployeeStatus("Tes");
+        mpp2.setAccept(true);
+        mppRepository.save(mpp2);
+
         Fpk fpk2 = new Fpk();
         fpk2.setCompleteness("Tes2");
         fpk2.setReason("Tes2");

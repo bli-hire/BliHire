@@ -112,14 +112,14 @@ public class MppController {
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Department",data,data.size());
     }
     @RequestMapping(value = "/byDepartment/active", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findFpkByDepartmentActive(@RequestHeader Department department){
+    public MppResponse findMppByDepartmentActive(@RequestHeader Department department){
         Collection<Mpp> data = mppService.getMppActiveByDepartment(department);
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Department",data,data.size());
     }
 
 
     @RequestMapping(value = "/byDepartment/history", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findFpkByDepartmentHistory(@RequestHeader Department department){
+    public MppResponse findMppByDepartmentHistory(@RequestHeader Department department){
         Collection<Mpp> data = mppService.getMppHistoryByDepartment(department);
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Department",data,data.size());
     }
@@ -140,6 +140,19 @@ public class MppController {
 //        return mppService.editMpp(mppFormRequest, userService.getUser(id), mppService.getMppById(mppId));
 
     }
+
+    @RequestMapping(value = "/byRequested/pending", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findMppByRequestedPending(@RequestHeader Long userId){
+        Collection<Mpp> data = mppService.getMppByRequestedByPending(userService.getUser(userId));
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
+    }
+
+    @RequestMapping(value = "/byRequested/accepted", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findMppByRequestedAccepted(@RequestHeader Long userId){
+        Collection<Mpp> data = mppService.getMppByRequestedByAccepted(userService.getUser(userId));
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
+    }
+
 
 
 
