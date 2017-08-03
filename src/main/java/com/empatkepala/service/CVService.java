@@ -3,7 +3,6 @@ package com.empatkepala.service;
 import com.empatkepala.entity.CV;
 import com.empatkepala.entity.request.CVFormRequest;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.Collection;
 
 /**
@@ -16,5 +15,8 @@ public interface CVService  {
 
     Collection<CV> getAllCV();
 
+    void updateCV(CV cv);
+
     void addCV(@RequestBody CVFormRequest cvFormRequest);
+
 }

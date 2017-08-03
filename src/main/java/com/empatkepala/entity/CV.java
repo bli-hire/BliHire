@@ -1,10 +1,12 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.entity.CVEntity.*;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Ryan Bagus Susilo on 3/11/2017.
@@ -14,11 +16,12 @@ import java.util.ArrayList;
 @Entity
 @Table(name="blihire_CV")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class CV implements Serializable {
+public class CV {
 
     @Id
     @GeneratedValue
     private long idCV;
+    private String uid = RandomStringUtils.randomAlphanumeric(16);
     private String title;
     private String jobTitle;
     private String fullName;
@@ -158,6 +161,14 @@ public class CV implements Serializable {
 
     public void setIdCV(long idCV) {
         this.idCV = idCV;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {
