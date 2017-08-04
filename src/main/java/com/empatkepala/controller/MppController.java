@@ -207,15 +207,20 @@ public class MppController {
 //        }catch(Exception ex){
 //            return new MppResponse(ex.toString(),ex.getStackTrace().toString(),null);
 //        }
-        if(mppService.publishMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
-            jobVacancyService.addPersonNeeded(mppService.getMppById(approveRejectMppRequest.getIdMpp()).getDepartment(), (int) mppService.getMppById(approveRejectMppRequest.getIdMpp()).getNumberOfPerson());
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Publish Mpp", null);
 
-        }
-        else{
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+        //edit
+//        if(mppService.publishMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
+//            jobVacancyService.addPersonNeeded(mppService.getMppById(approveRejectMppRequest.getIdMpp()).getDepartment(), (int) mppService.getMppById(approveRejectMppRequest.getIdMpp()).getNumberOfPerson());
+//            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Publish Mpp", null);
+//
+//        }
+//        else{
+//            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+//
+//        }
 
-        }
+        return null;
+
 //        return mppService.approveMpp(mppService.getMppById(MppId), userService.getUser(idWhoApprove));
     }
 

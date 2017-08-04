@@ -87,22 +87,22 @@ public class DatabaseSeeder {
         fpkRepository.save(fpk);
 
         Mpp mpp = new Mpp();
-        mpp.setReason("Tes");
+//        mpp.setReason("Tes");
         mpp.setDepartment(Department.Finance);
-        mpp.setEmployeeStatus("Tes");
+//        mpp.setEmployeeStatus("Tes");
         mppRepository.save(mpp);
 
         Mpp mpp2 = new Mpp();
-        mpp2.setReason("Tes");
+//        mpp2.setReason("Tes");
         mpp2.setDepartment(Department.Finance);
-        mpp2.setEmployeeStatus("Tes");
+//        mpp2.setEmployeeStatus("Tes");
         mpp2.setAccept(true);
         mppRepository.save(mpp2);
 
         Mpp mpp3 = new Mpp();
-        mpp3.setReason("Tes");
+//        mpp3.setReason("Tes");
         mpp3.setDepartment(Department.Finance);
-        mpp3.setEmployeeStatus("Tes");
+//        mpp3.setEmployeeStatus("Tes");
         mpp3.setAccept(true);
         mppRepository.save(mpp3);
 

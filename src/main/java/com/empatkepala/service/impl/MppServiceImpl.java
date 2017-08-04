@@ -1,11 +1,14 @@
 package com.empatkepala.service.impl;
 
 import com.empatkepala.entity.Mpp;
+import com.empatkepala.entity.MppDetail;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddMppRequest;
+import com.empatkepala.entity.request.MppDetailRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
+import com.empatkepala.repository.MppDetailRepository;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
@@ -24,6 +27,9 @@ import java.util.Collection;
 public class MppServiceImpl implements MppService{
     @Autowired
     MppRepository mppRepository;
+
+    @Autowired
+    MppDetailRepository mppDetailRepository;
 
     @Autowired
     UserService userService;
@@ -53,26 +59,26 @@ public class MppServiceImpl implements MppService{
         return mppRepository.findAll();
     }
 
-    @Override
-    public void addMpp(@RequestBody MppFormRequest mppFormRequest)
-    {
-        Mpp mpp = new Mpp();
-//        mpp.setApprovedBy(userService.getUser(mppFormRequest.getIdApprovedBy()));
-
-        mpp.setEducation(mppFormRequest.getEducation());
-        mpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
-        mpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
-        mpp.setExperience(mppFormRequest.getExperience());
-        mpp.setKnowledge(mppFormRequest.getKnowledge());
-        mpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
-        mpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
-        mpp.setPcAmmount(mppFormRequest.getPcAmmount());
-        mpp.setPcSpec(mppFormRequest.getPcSpec());
-        mpp.setReason(mppFormRequest.getReason());
-        mpp.setDepartment(userService.getUser((mppFormRequest.getIdRequestedBy())).getDepartment());
-        mpp.setRequestedBy(userService.getUser(mppFormRequest.getIdRequestedBy()));
-        mppRepository.save(mpp);
-    }
+//    @Override
+//    public void addMpp(@RequestBody MppFormRequest mppFormRequest)
+//    {
+//        Mpp mpp = new Mpp();
+////        mpp.setApprovedBy(userService.getUser(mppFormRequest.getIdApprovedBy()));
+//
+//        mpp.setEducation(mppFormRequest.getEducation());
+//        mpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
+//        mpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
+//        mpp.setExperience(mppFormRequest.getExperience());
+//        mpp.setKnowledge(mppFormRequest.getKnowledge());
+//        mpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
+//        mpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
+//        mpp.setPcAmmount(mppFormRequest.getPcAmmount());
+//        mpp.setPcSpec(mppFormRequest.getPcSpec());
+//        mpp.setReason(mppFormRequest.getReason());
+//        mpp.setDepartment(userService.getUser((mppFormRequest.getIdRequestedBy())).getDepartment());
+//        mpp.setRequestedBy(userService.getUser(mppFormRequest.getIdRequestedBy()));
+//        mppRepository.save(mpp);
+//    }
 
     @Override
     public boolean approveMpp(Mpp mpp, User approver) {
@@ -184,16 +190,16 @@ public class MppServiceImpl implements MppService{
     public boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit) {
         if(editor.getId() == mppFormRequest.getIdRequestedBy()){
             Mpp preparedMpp = mppRepository.findOne(mppToEdit.getId());
-            preparedMpp.setEducation(mppFormRequest.getEducation());
-            preparedMpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
-            preparedMpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
-            preparedMpp.setExperience(mppFormRequest.getExperience());
-            preparedMpp.setKnowledge(mppFormRequest.getKnowledge());
-            preparedMpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
-            preparedMpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
-            preparedMpp.setPcAmmount(mppFormRequest.getPcAmmount());
-            preparedMpp.setPcSpec(mppFormRequest.getPcSpec());
-            preparedMpp.setReason(mppFormRequest.getReason());
+//            preparedMpp.setEducation(mppFormRequest.getEducation());
+//            preparedMpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
+//            preparedMpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
+//            preparedMpp.setExperience(mppFormRequest.getExperience());
+//            preparedMpp.setKnowledge(mppFormRequest.getKnowledge());
+//            preparedMpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
+//            preparedMpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
+//            preparedMpp.setPcAmmount(mppFormRequest.getPcAmmount());
+//            preparedMpp.setPcSpec(mppFormRequest.getPcSpec());
+//            preparedMpp.setReason(mppFormRequest.getReason());
 
             mppRepository.save(preparedMpp);
             return true;
@@ -205,28 +211,43 @@ public class MppServiceImpl implements MppService{
 
     @Override
     public void addMpp(@RequestBody AddMppRequest addMppRequest) {
-        Mpp input = new Mpp(addMppRequest.getPosition(), addMppRequest.getNumberOfPerson(),
-                addMppRequest.getReason(), addMppRequest.getMainResponsibility(),
-                addMppRequest.getEducation(), addMppRequest.getExperience(),
-                addMppRequest.getKnowledge(), addMppRequest.getEmployeeStatus(),
-                addMppRequest.getExpectedJoin(), addMppRequest.getPcAmmount(),
-                addMppRequest.getPcSpec(), userService.getUser(addMppRequest.getIdRequested()), userService.getUser(addMppRequest.getIdRequested()).getDepartment());
-        input.setJanuaryExpect(addMppRequest.getExpectJoin().getJanuaryExpect());
-        input.setFebruaryExpect(addMppRequest.getExpectJoin().getFebruaryExpect());
-        input.setMarchExpect(addMppRequest.getExpectJoin().getMarchExpect());
-        input.setAprilExpect(addMppRequest.getExpectJoin().getAprilExpect());
-        input.setMayExpect(addMppRequest.getExpectJoin().getMayExpect());
-        input.setJuneExpect(addMppRequest.getExpectJoin().getJuneExpect());
-
-        input.setJulyExpect(addMppRequest.getExpectJoin().getJulyExpect());
-        input.setAugustExpect(addMppRequest.getExpectJoin().getAugustExpect());
-        input.setSeptemberExpect(addMppRequest.getExpectJoin().getSeptemberExpect());
-        input.setOctoberExpect(addMppRequest.getExpectJoin().getOctoberExpect());
-        input.setNovemberExpect(addMppRequest.getExpectJoin().getNovemberExpect());
-        input.setDecemberExpect(addMppRequest.getExpectJoin().getDecemberExpect());
+//        Mpp input = new Mpp(addMppRequest.getPosition(), addMppRequest.getNumberOfPerson(),
+//                addMppRequest.getReason(), addMppRequest.getMainResponsibility(),
+//                addMppRequest.getEducation(), addMppRequest.getExperience(),
+//                addMppRequest.getKnowledge(), addMppRequest.getEmployeeStatus(),
+//                addMppRequest.getExpectedJoin(), addMppRequest.getPcAmmount(),
+//                addMppRequest.getPcSpec(), userService.getUser(addMppRequest.getIdRequested()), userService.getUser(addMppRequest.getIdRequested()).getDepartment());
+        Mpp input = new Mpp(userService.getUser(addMppRequest.getIdRequested()), userService.getUser(addMppRequest.getIdRequested()).getDepartment());
 
 
-        mppRepository.save(input);
+//        Collection<MppDetail> mppDetails = new ArrayList<>();
+        Mpp mpp = mppRepository.save(input);
+
+        for(MppDetailRequest mppDetailRequest : addMppRequest.getMppDetails()){
+            MppDetail mppDetailBaru = new MppDetail(mppDetailRequest.getPosition(), mppDetailRequest.getNumberOfPerson(),
+                    mppDetailRequest.getReason(), mppDetailRequest.getMainResponsibility(), mppDetailRequest.getEducation(),
+                    mppDetailRequest.getExperience(), mppDetailRequest.getKnowledge(), mppDetailRequest.getEmployeeStatus(),
+                    mppDetailRequest.getExpectedJoin(), mppDetailRequest.getPcAmmount(), mppDetailRequest.getPcSpec(), mpp);
+
+            mppDetailBaru.setJanuaryExpect(mppDetailRequest.getExpectJoin().getJanuaryExpect());
+            mppDetailBaru.setFebruaryExpect(mppDetailRequest.getExpectJoin().getFebruaryExpect());
+            mppDetailBaru.setMarchExpect(mppDetailRequest.getExpectJoin().getMarchExpect());
+            mppDetailBaru.setAprilExpect(mppDetailRequest.getExpectJoin().getAprilExpect());
+            mppDetailBaru.setMayExpect(mppDetailRequest.getExpectJoin().getMayExpect());
+            mppDetailBaru.setJuneExpect(mppDetailRequest.getExpectJoin().getJuneExpect());
+
+            mppDetailBaru.setJulyExpect(mppDetailRequest.getExpectJoin().getJulyExpect());
+            mppDetailBaru.setAugustExpect(mppDetailRequest.getExpectJoin().getAugustExpect());
+            mppDetailBaru.setSeptemberExpect(mppDetailRequest.getExpectJoin().getSeptemberExpect());
+            mppDetailBaru.setOctoberExpect(mppDetailRequest.getExpectJoin().getOctoberExpect());
+            mppDetailBaru.setNovemberExpect(mppDetailRequest.getExpectJoin().getNovemberExpect());
+            mppDetailBaru.setDecemberExpect(mppDetailRequest.getExpectJoin().getDecemberExpect());
+
+            mppDetailRepository.save(mppDetailBaru);
+        }
+
+
+
     }
 
     @Override
