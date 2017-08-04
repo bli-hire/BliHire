@@ -1,5 +1,7 @@
 package com.empatkepala.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -29,6 +31,9 @@ public class MppDetail {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Mpp mpp;
 
+    public MppDetail(){
+
+    }
     public MppDetail(String position, long numberOfPerson, String reason, String mainResponsibility, String education, String experience, String knowledge, String employeeStatus, int expectedJoin, int pcAmmount, String pcSpec, Mpp mpp) {
         this.position = position;
         this.numberOfPerson = numberOfPerson;
@@ -154,6 +159,7 @@ public class MppDetail {
         this.pcSpec = pcSpec;
     }
 
+    @JsonIgnore
     public Mpp getMpp() {
         return mpp;
     }
