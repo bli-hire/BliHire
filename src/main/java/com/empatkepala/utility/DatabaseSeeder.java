@@ -1,11 +1,13 @@
 package com.empatkepala.utility;
 
 import com.empatkepala.entity.Fpk;
+import com.empatkepala.entity.JobVacancy;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.FpkRepository;
+import com.empatkepala.repository.JobVacancyRepository;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,10 @@ public class DatabaseSeeder {
 
     @Autowired
     private MppRepository mppRepository;
+
+    @Autowired
+    private JobVacancyRepository jobVacancyRepository;
+
     @PostConstruct
     private void initDataTest(){
 
@@ -114,7 +120,39 @@ public class DatabaseSeeder {
         fpk2.setJobPositionRequester("Senior Developer");
         fpkRepository.save(fpk2);
 
+        //Ini buat prepare data di data job vacancy, kalo seeder dihapus tolong tetap diadakan - Juan
+        JobVacancy humanResource = new JobVacancy();
+        humanResource.setDepartment(Department.HumanResource);
+        JobVacancy marketing = new JobVacancy();
+        marketing.setDepartment(Department.Marketing);
+        JobVacancy tradePartnership = new JobVacancy();
+        tradePartnership.setDepartment(Department.TradePartnership);
+        JobVacancy operation = new JobVacancy();
+        operation.setDepartment(Department.Operation);
+        JobVacancy technology = new JobVacancy();
+        technology.setDepartment(Department.Technology);
+        JobVacancy businessDevelopment = new JobVacancy();
+        businessDevelopment.setDepartment(Department.BusinessDevelopment);
+        JobVacancy finance = new JobVacancy();
+        finance.setDepartment(Department.Finance);
+        JobVacancy projectManagement = new JobVacancy();
+        projectManagement.setDepartment(Department.ProjectManagement);
+        JobVacancy productManagement = new JobVacancy();
+        productManagement.setDepartment(Department.ProductManagement);
 
+        jobVacancyRepository.save(humanResource);
+        jobVacancyRepository.save(marketing);
+        jobVacancyRepository.save(tradePartnership);
+        jobVacancyRepository.save(operation);
+        jobVacancyRepository.save(technology);
+        jobVacancyRepository.save(businessDevelopment);
+        jobVacancyRepository.save(finance);
+        jobVacancyRepository.save(projectManagement);
+        jobVacancyRepository.save(productManagement);
+
+        //....
+        //...
+        // Juan
     }
 
 }

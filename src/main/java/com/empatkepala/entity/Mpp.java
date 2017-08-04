@@ -48,6 +48,10 @@ public class Mpp {
     private int octoberExpect;
     private int novemberExpect;
     private int decemberExpect;
+    private boolean published;
+
+
+
     public Mpp(){
 
     }
@@ -339,5 +343,13 @@ public class Mpp {
 
     public void setDecemberExpect(int decemberExpect) {
         this.decemberExpect = decemberExpect;
+    }
+
+    public boolean isPublished() {
+        return published;
+    }
+
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 }
