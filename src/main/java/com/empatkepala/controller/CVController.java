@@ -5,9 +5,13 @@ import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.entity.request.MppFormRequest;
+import com.empatkepala.entity.response.CVResponse;
 import com.empatkepala.service.CVService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,8 +31,16 @@ public class CVController {
 
 
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
-    public Collection<CV> getAllCV(){
-        return cvService.getAllCV();
+    public CVResponse getAllCV() {
+        CVResponse result = new CVResponse();
+        Collection<CV> data =new ArrayList<>();
+        data = cvService.getAllCV();
+        result.setData(data);
+        result.setTotalData(data.size());
+        result.setStatus(HttpStatus.FOUND.toString());
+        result.setMethod(HttpMethod.GET.name());
+        result.setMessage("Success");
+        return result;
     }
 
     @RequestMapping(method = RequestMethod.PUT,produces = "application/json")
