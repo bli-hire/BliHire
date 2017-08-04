@@ -24,7 +24,7 @@ public class JobVacancyServiceImpl implements JobVacancyService{
     @Override
     public void addPersonNeeded(Department department, int personNeeded) {
         JobVacancy toUpdateJobVacancy = jobVacancyRepository.findOneByDepartment(department);
-        int finalAmmount = toUpdateJobVacancy.getAmmount() + 5;
+        int finalAmmount = toUpdateJobVacancy.getAmmount() + personNeeded;
         toUpdateJobVacancy.setAmmount(finalAmmount);
         jobVacancyRepository.save(toUpdateJobVacancy);
 //        return jobVacancyRepository.findOneByDepartment(department);
