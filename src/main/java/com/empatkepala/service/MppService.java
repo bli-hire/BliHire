@@ -40,8 +40,7 @@ public interface MppService {
     Collection<Mpp> getRejectedMppByRejectorAndDepartment(User rejector, Department department);
     Collection<Mpp> getAcceptedMppByAcceptorAndDepartment(User acceptor, Department department);
 
-
-
+    Collection<Mpp> getPublishedMppByDepartment(Department department);
     boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
     void addMpp(@RequestBody AddMppRequest addMppRequest);
 

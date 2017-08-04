@@ -179,6 +179,13 @@ public class MppServiceImpl implements MppService{
         return mpps;
     }
 
+    @Override
+    public Collection<Mpp> getPublishedMppByDepartment(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndPublished(department, true));
+        return mpps;
+    }
+
 
     @Override
     public boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit) {
@@ -233,6 +240,7 @@ public class MppServiceImpl implements MppService{
     public boolean publishMpp(Mpp mpp, User whoPublish) {
         if(whoPublish.getRole() == Role.HR && mppRepository.getOne(mpp.getId()).isAccept() == true ){
             Mpp mppToPublish = mppRepository.getOne(mpp.getId());
+            mppToPublish.setPublishedBy(whoPublish);
             mppToPublish.setPublished(true);
             mppRepository.save(mppToPublish);
             return true;
