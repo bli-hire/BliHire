@@ -53,7 +53,7 @@ public class DatabaseSeeder {
         user3.setRole(Role.DepartmentTeamMember);
         user3.setPassword("member-department");
         user3.setDepartment(Department.Finance);
-        user3.setEmail("dummy-memberd@account.com");
+        user3.setEmail("dummy-member@account.com");
         userRepository.save(user3);
 
         User user4 = new User();
@@ -63,6 +63,14 @@ public class DatabaseSeeder {
         user4.setPassword("dummy-hrd");
         user4.setEmail("dummy-hrd@account.com");
         userRepository.save(user4);
+
+        User user5 = new User();
+        user5.setName("Human Resource Head");
+        user5.setSurname("Account Human Resource");
+        user5.setRole(Role.HeadHR);
+        user5.setPassword("dummy-hrd-head");
+        user5.setEmail("dummy-hrd-head@account.com");
+        userRepository.save(user5);
 
         /**
          * Data Seed for FPK
