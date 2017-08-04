@@ -8,6 +8,7 @@ import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.repository.UserRepository;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -76,7 +77,7 @@ public class DatabaseSeeder {
         fpk.setSchool("Tes");
         fpk.setSkillKnowledge("Tes");
         fpk.setWorkExperience("Tes");
-        fpk.setDateNeeded(new Date(2017,12,3));
+        fpk.setDateNeeded(new DateTime(2017,12,30,0,0));
         fpk.setJobPositionRequester("Senior Developer");
         fpkRepository.save(fpk);
 
@@ -110,7 +111,7 @@ public class DatabaseSeeder {
         fpk2.setSchool("Tes2");
         fpk2.setSkillKnowledge("Tes2");
         fpk2.setWorkExperience("Tes2");
-        fpk2.setDateNeeded(new Date(2017,12,3));
+        fpk2.setDateNeeded(new DateTime(2017,12,3,0,0));
         fpk2.setJobPositionRequester("Senior Developer");
         fpkRepository.save(fpk2);
 

@@ -2,9 +2,10 @@ package com.empatkepala.entity;
 
 import com.empatkepala.entity.User;
 import com.empatkepala.enumeration.Department;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  * Created by ALz on 3/11/2017.
@@ -19,8 +20,13 @@ public class Fpk {
     private long idFpk;
 
     private int numberOfPerson;
-    private Date createdDate = new Date();
-    private Date dateNeeded;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime createdDate = new DateTime();
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime dateNeeded;
+
     private String jobPositionRequester;
     private String reason;
     private String fitnessWithMpp;
@@ -49,7 +55,7 @@ public class Fpk {
 
     public Fpk(int positionNeeded,String reason,String fitnessWithMpp,String employeeStatus,
                String school,String workExperience,String skillKnowledge,String completeness,
-               User requestedBy,Department department,Date needed, String jobPositionRequester) {
+               User requestedBy,Department department,DateTime needed, String jobPositionRequester) {
         this.numberOfPerson = positionNeeded;
         this.reason = reason;
         this.fitnessWithMpp = fitnessWithMpp;
@@ -104,11 +110,11 @@ public class Fpk {
         this.numberOfPerson = positionNeeded;
     }
 
-    public Date getCreatedDate() {
+    public DateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date date) {
+    public void setCreatedDate(DateTime date) {
         this.createdDate = date;
     }
 
@@ -184,11 +190,12 @@ public class Fpk {
         this.approvedBy = approvedBy;
     }
 
-    public Date getDateNeeded() {
+    public DateTime getDateNeeded() {
         return dateNeeded;
     }
 
-    public void setDateNeeded(Date dateNeeded) {
+    public void setDateNeeded(DateTime
+                                      dateNeeded) {
         this.dateNeeded = dateNeeded;
     }
 

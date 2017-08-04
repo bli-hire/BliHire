@@ -1,6 +1,7 @@
 package com.empatkepala.entity.request;
 
 import com.empatkepala.enumeration.Department;
+import org.joda.time.DateTime;
 
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import java.util.Date;
 public class AddFpkRequest {
 
     private int position;
-    private Date dateNeeded;
+    private DateTime dateNeeded;
     private String jobPositionRequester;
     private String reason;
     private String fitnessWithMpp;
@@ -107,11 +108,11 @@ public class AddFpkRequest {
         this.completeness = completeness;
     }
 
-    public Date getDateNeeded() {
+    public DateTime getDateNeeded() {
         return dateNeeded;
     }
 
-    public void setDateNeeded(Date dateNeeded) {
+    public void setDateNeeded(DateTime dateNeeded) {
         this.dateNeeded = dateNeeded;
     }
 
