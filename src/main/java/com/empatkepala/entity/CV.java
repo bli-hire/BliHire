@@ -2,11 +2,9 @@ package com.empatkepala.entity;
 
 import com.empatkepala.entity.CVEntity.*;
 import org.apache.commons.lang3.RandomStringUtils;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.UUID;
+
 
 /**
  * Created by Ryan Bagus Susilo on 3/11/2017.

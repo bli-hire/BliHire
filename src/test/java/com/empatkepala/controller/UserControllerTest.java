@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 
+import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -40,21 +41,21 @@ public class UserControllerTest {
     private static final String EMAIL = "dummy@account.com";
 
 
-//    @Test
-//    public void all() {
-//        when(userService.getAllUser()).thenReturn(Arrays.asList(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL)));
-//
-//        given()
-//                .contentType("application/json")
-//                .when()
-//                .port(serverPort)
-//                .get("/users")
-//                .then()
-//                .body(containsString(NAME))
-//                .statusCode(200);
-//
-//        verify(userService).getAllUser();
-//    }
+    @Test
+    public void all() {
+        when(userService.getAllUser()).thenReturn(Arrays.asList(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL)));
+
+        given()
+                .contentType("application/json")
+                .when()
+                .port(serverPort)
+                .get("/users")
+                .then()
+                .body(containsString(NAME))
+                .statusCode(200);
+
+        verify(userService).getAllUser();
+    }
 
 
 
