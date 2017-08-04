@@ -93,6 +93,7 @@ public class MppServiceImpl implements MppService{
         Mpp mppToApprove = mppRepository.findOne(mpp.getId());
         if(rejector.getRole() == Role.CEO){
 //            mppToApprove.setApprovedBy(approver);
+            mppToApprove.setRejectedBy(rejector);
             mppToApprove.setAccept(false);
             mppToApprove.setReject(true);
             mppRepository.save(mppToApprove);
@@ -154,6 +155,20 @@ public class MppServiceImpl implements MppService{
     public Collection<Mpp> getMppByRequestedByRejected(User requestedBy) {
         Collection<Mpp> mpps = new ArrayList<>();
         mpps.addAll(mppRepository.findByRequestedByAndAcceptAndReject(requestedBy,false,true));
+        return mpps;
+    }
+
+    @Override
+    public Collection<Mpp> getRejectedMppByRejectorAndDepartment(User rejector, Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByRejectedByAndDepartmentAndReject(rejector,department, true ));
+        return mpps;
+    }
+
+    @Override
+    public Collection<Mpp> getAcceptedMppByAcceptorAndDepartment(User acceptor, Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByApprovedByAndDepartmentAndAccept(acceptor, department, true));
         return mpps;
     }
 

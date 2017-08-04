@@ -114,6 +114,7 @@ public class DatabaseSeeder {
         fpk2.setJobPositionRequester("Senior Developer");
         fpkRepository.save(fpk2);
 
+
     }
 
 }

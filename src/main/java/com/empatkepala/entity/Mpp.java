@@ -77,6 +77,29 @@ public class Mpp {
     @ManyToOne(cascade = CascadeType.MERGE)
     private User approvedBy;
 
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User rejectedBy;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User publishedBy;
+
+    public User getRejectedBy() {
+        return rejectedBy;
+    }
+
+    public void setRejectedBy(User rejectedBy) {
+        this.rejectedBy = rejectedBy;
+    }
+
+    public User getPublishedBy() {
+        return publishedBy;
+    }
+
+    public void setPublishedBy(User publishedBy) {
+        this.publishedBy = publishedBy;
+    }
+
     public long getId() {
         return id;
     }
