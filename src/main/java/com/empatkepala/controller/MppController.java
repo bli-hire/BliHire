@@ -104,8 +104,15 @@ public class MppController {
     }
 
     @RequestMapping(value = "/reject", method = RequestMethod.POST, produces = "application/json")
-    public boolean rejectMpp(@RequestBody Long idWhoReject, Long MppId){
-        return mppService.rejectMpp(mppService.getMppById(MppId), userService.getUser(idWhoReject));
+    public MppResponse rejectMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+        if(mppService.rejectMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Reject Mpp", null);
+
+        }
+        else{
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+
+        }
 
     }
 
@@ -175,6 +182,17 @@ public class MppController {
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
     }
 
+    @RequestMapping(value = "/byDepartment/accepted/ceo", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findAcceptedMppByAcceptorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
+        Collection<Mpp> data = mppService.getAcceptedMppByAcceptorAndDepartment(userService.getUser(userId), department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Accepted Mpp By Acceptor",data,data.size());
+    }
+
+    @RequestMapping(value = "/byDepartment/rejected/ceo", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findRejectedMppByRejectorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
+        Collection<Mpp> data = mppService.getRejectedMppByRejectorAndDepartment(userService.getUser(userId), department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Rejected Mpp By Rejector",data,data.size());
+    }
     @RequestMapping(value = "/publishFromMpp", method = RequestMethod.POST, produces = "application/json")
     public MppResponse publishJobVacancy(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
 //        try {
