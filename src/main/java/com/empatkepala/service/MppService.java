@@ -27,8 +27,18 @@ public interface MppService {
     boolean rejectMpp(Mpp mpp, User rejector);
 
     Collection<Mpp> getMppByDepartment(Department department);
+    Collection<Mpp> getMppHistoryByDepartment(Department department);
+
+    Collection<Mpp> getMppActiveByDepartment(Department department);
+    Collection<Mpp> getMppAcceptedByDepartment(Department department);
 
     Collection<Mpp> getMppByRequestedBy(User requestedBy);
+
+    Collection<Mpp> getMppByRequestedByPending(User requestedBy);
+
+    public Collection<Mpp> getMppByRequestedByAccepted(User requestedBy);
+
+    Collection<Mpp> getMppByRequestedByRejected(User requestedBy);
 
     boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
     void addMpp(@RequestBody AddMppRequest addMppRequest);

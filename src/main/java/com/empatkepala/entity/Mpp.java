@@ -1,10 +1,10 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.enumeration.Department;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Juan on 3/11/17.
@@ -17,7 +17,9 @@ public class Mpp {
     @GeneratedValue
     private long id;
 
-    private Date createdDate = new Date();
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime createdDate = new DateTime();
+
     private long numberOfPerson;
     private Department department;
     private String reason;
@@ -30,9 +32,22 @@ public class Mpp {
     private int expectedJoin;
     private int pcAmmount;
     private String pcSpec;
-    private boolean isReject;
-    private boolean isAccept;
+    private boolean reject;
+    private boolean accept;
+    private int januaryExpect;
+    private int februaryExpect;
+    private int marchExpect;
+    private int aprilExpect;
+    private int mayExpect;
+    private int juneExpect;
 
+
+    private int julyExpect;
+    private int augustExpect;
+    private int septemberExpect;
+    private int octoberExpect;
+    private int novemberExpect;
+    private int decemberExpect;
     public Mpp(){
 
     }
@@ -70,11 +85,11 @@ public class Mpp {
         this.id = id;
     }
 
-    public Date getCreatedDate() {
+    public DateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(DateTime createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -184,19 +199,19 @@ public class Mpp {
     }
 
     public boolean isReject() {
-        return isReject;
+        return reject;
     }
 
     public void setReject(boolean reject) {
-        isReject = reject;
+        this.reject = reject;
     }
 
     public boolean isAccept() {
-        return isAccept;
+        return accept;
     }
 
     public void setAccept(boolean accept) {
-        isAccept = accept;
+        this.accept = accept;
     }
 
     public String getPosition() {
@@ -205,5 +220,101 @@ public class Mpp {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public int getJanuaryExpect() {
+        return januaryExpect;
+    }
+
+    public void setJanuaryExpect(int januaryExpect) {
+        this.januaryExpect = januaryExpect;
+    }
+
+    public int getFebruaryExpect() {
+        return februaryExpect;
+    }
+
+    public void setFebruaryExpect(int februaryExpect) {
+        this.februaryExpect = februaryExpect;
+    }
+
+    public int getMarchExpect() {
+        return marchExpect;
+    }
+
+    public void setMarchExpect(int marchExpect) {
+        this.marchExpect = marchExpect;
+    }
+
+    public int getAprilExpect() {
+        return aprilExpect;
+    }
+
+    public void setAprilExpect(int aprilExpect) {
+        this.aprilExpect = aprilExpect;
+    }
+
+    public int getMayExpect() {
+        return mayExpect;
+    }
+
+    public void setMayExpect(int mayExpect) {
+        this.mayExpect = mayExpect;
+    }
+
+    public int getJuneExpect() {
+        return juneExpect;
+    }
+
+    public void setJuneExpect(int juneExpect) {
+        this.juneExpect = juneExpect;
+    }
+
+    public int getJulyExpect() {
+        return julyExpect;
+    }
+
+    public void setJulyExpect(int julyExpect) {
+        this.julyExpect = julyExpect;
+    }
+
+    public int getAugustExpect() {
+        return augustExpect;
+    }
+
+    public void setAugustExpect(int augustExpect) {
+        this.augustExpect = augustExpect;
+    }
+
+    public int getSeptemberExpect() {
+        return septemberExpect;
+    }
+
+    public void setSeptemberExpect(int septemberExpect) {
+        this.septemberExpect = septemberExpect;
+    }
+
+    public int getOctoberExpect() {
+        return octoberExpect;
+    }
+
+    public void setOctoberExpect(int octoberExpect) {
+        this.octoberExpect = octoberExpect;
+    }
+
+    public int getNovemberExpect() {
+        return novemberExpect;
+    }
+
+    public void setNovemberExpect(int novemberExpect) {
+        this.novemberExpect = novemberExpect;
+    }
+
+    public int getDecemberExpect() {
+        return decemberExpect;
+    }
+
+    public void setDecemberExpect(int decemberExpect) {
+        this.decemberExpect = decemberExpect;
     }
 }

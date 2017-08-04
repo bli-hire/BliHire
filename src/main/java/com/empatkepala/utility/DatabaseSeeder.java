@@ -1,10 +1,12 @@
 package com.empatkepala.utility;
 
 import com.empatkepala.entity.Fpk;
+import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.FpkRepository;
+import com.empatkepala.repository.MppRepository;
 import com.empatkepala.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,8 @@ public class DatabaseSeeder {
     @Autowired
     private FpkRepository fpkRepository;
 
+    @Autowired
+    private MppRepository mppRepository;
     @PostConstruct
     private void initDataTest(){
 
@@ -75,6 +79,26 @@ public class DatabaseSeeder {
         fpk.setDateNeeded(new Date(2017,12,3));
         fpk.setJobPositionRequester("Senior Developer");
         fpkRepository.save(fpk);
+
+        Mpp mpp = new Mpp();
+        mpp.setReason("Tes");
+        mpp.setDepartment(Department.Finance);
+        mpp.setEmployeeStatus("Tes");
+        mppRepository.save(mpp);
+
+        Mpp mpp2 = new Mpp();
+        mpp2.setReason("Tes");
+        mpp2.setDepartment(Department.Finance);
+        mpp2.setEmployeeStatus("Tes");
+        mpp2.setAccept(true);
+        mppRepository.save(mpp2);
+
+        Mpp mpp3 = new Mpp();
+        mpp3.setReason("Tes");
+        mpp3.setDepartment(Department.Finance);
+        mpp3.setEmployeeStatus("Tes");
+        mpp3.setAccept(true);
+        mppRepository.save(mpp3);
 
         Fpk fpk2 = new Fpk();
         fpk2.setCompleteness("Tes2");
