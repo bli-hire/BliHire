@@ -15,6 +15,16 @@ public class JobVacancy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     Department department;
+    String position;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
     int ammount = 0;
 
     public long getId() {

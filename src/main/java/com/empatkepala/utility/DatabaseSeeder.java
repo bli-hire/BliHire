@@ -10,6 +10,8 @@ import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.repository.JobVacancyRepository;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.repository.UserRepository;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -103,6 +105,7 @@ public class DatabaseSeeder {
 //        mpp3.setReason("Tes");
         mpp3.setDepartment(Department.Technology);
 //        mpp3.setEmployeeStatus("Tes");
+        mpp3.setCreatedDate(new DateTime());
         mpp3.setAccept(true);
         mppRepository.save(mpp3);
 
@@ -131,6 +134,7 @@ public class DatabaseSeeder {
         operation.setDepartment(Department.Operation);
         JobVacancy technology = new JobVacancy();
         technology.setDepartment(Department.Technology);
+
         JobVacancy businessDevelopment = new JobVacancy();
         businessDevelopment.setDepartment(Department.BusinessDevelopment);
         JobVacancy finance = new JobVacancy();
