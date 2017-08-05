@@ -31,6 +31,11 @@ public class CVServiceImpl implements CVService{
         return cvRepository.findOne(id);
     }
 
+    public CV findByUid(String uid){
+        CV getCV=cvRepository.findByUid(uid);
+        return getCV;
+    }
+
     public Collection<CV> getAllCV(){
         return cvRepository.findAll();
     }
@@ -103,7 +108,7 @@ public class CVServiceImpl implements CVService{
     }
 
     @Override
-    public void updateStatusApplicant(CVFormRequest cvFormRequest,CV cvEdit) {
+    public void updateStatusApplicant(@RequestBody  CVFormRequest cvFormRequest,CV cvEdit) {
         CV updatedCV = cvRepository.findOne((cvEdit.getIdCV()));
         updatedCV.setApplicantStatus(cvFormRequest.getApplicantStatus());
         cvRepository.save(updatedCV);

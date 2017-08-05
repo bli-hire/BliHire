@@ -13,6 +13,8 @@ public interface CVService  {
 
     CV getCVById(Long id);
 
+    CV findByUid(String uid);
+
     Collection<CV> getAllCV();
 
     void addCV(@RequestBody CVFormRequest cvFormRequest);

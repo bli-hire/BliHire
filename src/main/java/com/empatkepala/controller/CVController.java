@@ -44,8 +44,8 @@ public class CVController {
     }
 
     @RequestMapping(value = "/updateStatusApplicant", method = RequestMethod.POST)
-    public CVResponse updateStatusApplicant(CVFormRequest cvFormRequest,long idCVWillUpdt ){
-        cvService.updateStatusApplicant(cvFormRequest,cvService.getCVById(idCVWillUpdt));
+    public CVResponse updateStatusApplicant(CVFormRequest cvFormRequest,String idCVWillUpdt ){
+        cvService.updateStatusApplicant(cvFormRequest,cvService.findByUid(idCVWillUpdt));
         return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null);
     }
 
