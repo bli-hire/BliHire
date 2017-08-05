@@ -19,6 +19,13 @@ public class CVResponse {
     public CVResponse() {
     }
 
+
+
+    public CVResponse(String status, String message, Collection<CV> data){
+        this.status = status;
+        this.message = message;
+        this.data = data;
+    }
     public CVResponse(String status, String message, Collection<CV> data, int totalData, String requestHeader, String requestBody, String method) {
         this.status = status;
         this.message = message;

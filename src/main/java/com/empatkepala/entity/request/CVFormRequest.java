@@ -74,6 +74,7 @@ public class CVFormRequest implements Serializable{
     private String haveAppliedOnGDN;
     private String havePartTimejob;
     private String timeStartWork;
+    private String applicantStatus;
 
 
 
@@ -533,5 +534,11 @@ public class CVFormRequest implements Serializable{
         this.timeStartWork = timeStartWork;
     }
 
+    public String getApplicantStatus() {
+        return applicantStatus;
+    }
 
+    public void setApplicantStatus(String applicantStatus) {
+        this.applicantStatus = applicantStatus;
+    }
 }

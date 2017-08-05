@@ -43,9 +43,10 @@ public class CVController {
         return result;
     }
 
-    @RequestMapping(method = RequestMethod.PUT,produces = "application/json")
-    public void updateFpk(CV findOne){
-        cvService.updateCV(findOne);
+    @RequestMapping(value = "/updateStatusApplicant", method = RequestMethod.POST)
+    public CVResponse updateStatusApplicant(CVFormRequest cvFormRequest,long idCVWillUpdt ){
+        cvService.updateStatusApplicant(cvFormRequest,cvService.getCVById(idCVWillUpdt));
+        return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

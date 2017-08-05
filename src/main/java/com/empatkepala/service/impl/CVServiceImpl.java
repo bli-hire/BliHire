@@ -35,6 +35,7 @@ public class CVServiceImpl implements CVService{
         return cvRepository.findAll();
     }
 
+
     public void addCV(
             @RequestBody CVFormRequest cvFormRequest)
     {
@@ -100,9 +101,14 @@ public class CVServiceImpl implements CVService{
 
         cvRepository.save(cv);
     }
-    public void updateCV(CV cv){
-        cvRepository.save(cv);
+
+    @Override
+    public void updateStatusApplicant(CVFormRequest cvFormRequest,CV cvEdit) {
+        CV updatedCV = cvRepository.findOne((cvEdit.getIdCV()));
+        updatedCV.setApplicantStatus(cvFormRequest.getApplicantStatus());
+        cvRepository.save(updatedCV);
     }
+
 
 
 }

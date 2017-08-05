@@ -15,8 +15,8 @@ public interface CVService  {
 
     Collection<CV> getAllCV();
 
-    void updateCV(CV cv);
-
     void addCV(@RequestBody CVFormRequest cvFormRequest);
+
+    void updateStatusApplicant(CVFormRequest cvFormRequest,CV cvEdit);
 
 }

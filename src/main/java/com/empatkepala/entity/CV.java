@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class CV {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idCV;
     private String uid = RandomStringUtils.randomAlphanumeric(16);
     private String title;
