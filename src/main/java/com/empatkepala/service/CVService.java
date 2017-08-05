@@ -19,6 +19,6 @@ public interface CVService  {
 
     void addCV(@RequestBody CVFormRequest cvFormRequest);
 
-    void updateStatusApplicant(CVFormRequest cvFormRequest,CV cvEdit);
+    void updateStatusApplicant(CVFormRequest cvFormRequest, String uid);
 
 }
