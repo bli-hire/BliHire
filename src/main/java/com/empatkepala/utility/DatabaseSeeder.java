@@ -49,7 +49,7 @@ public class DatabaseSeeder {
         user2.setRole(Role.DepartmentHead);
         user2.setPassword("head-department");
         user2.setEmail("dummy-head@account.com");
-        user2.setDepartment(Department.Finance);
+        user2.setDepartment(Department.Technology);
         userRepository.save(user2);
 
         User user3 = new User();
@@ -57,7 +57,7 @@ public class DatabaseSeeder {
         user3.setSurname("Dummy Member");
         user3.setRole(Role.DepartmentTeamMember);
         user3.setPassword("member-department");
-        user3.setDepartment(Department.Finance);
+        user3.setDepartment(Department.Technology);
         user3.setEmail("dummy-memberd@account.com");
         userRepository.save(user3);
 
@@ -88,20 +88,20 @@ public class DatabaseSeeder {
 
         Mpp mpp = new Mpp();
 //        mpp.setReason("Tes");
-        mpp.setDepartment(Department.Finance);
+        mpp.setDepartment(Department.Technology);
 //        mpp.setEmployeeStatus("Tes");
         mppRepository.save(mpp);
 
         Mpp mpp2 = new Mpp();
 //        mpp2.setReason("Tes");
-        mpp2.setDepartment(Department.Finance);
+        mpp2.setDepartment(Department.Technology);
 //        mpp2.setEmployeeStatus("Tes");
         mpp2.setAccept(true);
         mppRepository.save(mpp2);
 
         Mpp mpp3 = new Mpp();
 //        mpp3.setReason("Tes");
-        mpp3.setDepartment(Department.Finance);
+        mpp3.setDepartment(Department.Technology);
 //        mpp3.setEmployeeStatus("Tes");
         mpp3.setAccept(true);
         mppRepository.save(mpp3);
