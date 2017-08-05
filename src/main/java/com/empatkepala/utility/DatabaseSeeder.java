@@ -44,7 +44,7 @@ public class DatabaseSeeder {
         user2.setRole(Role.DepartmentHead);
         user2.setPassword("head-department");
         user2.setEmail("dummy-head@account.com");
-        user2.setDepartment(Department.Finance);
+        user2.setDepartment(Department.Technology);
         userRepository.save(user2);
 
         User user3 = new User();

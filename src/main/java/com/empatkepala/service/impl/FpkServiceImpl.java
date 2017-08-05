@@ -10,6 +10,7 @@ import com.empatkepala.repository.UserRepository;
 import com.empatkepala.service.FpkService;
 import com.empatkepala.service.UserService;
 import org.hibernate.Hibernate;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,7 +76,7 @@ public class FpkServiceImpl implements FpkService{
                 addFpkRequest.getCompleteness(),
                 userService.getUser(addFpkRequest.getIdUserRequested()),
                 userService.getUser(addFpkRequest.getIdUserRequested()).getDepartment(),
-                addFpkRequest.getDateNeeded(),
+                new DateTime(addFpkRequest.getDateNeeded()),
                 addFpkRequest.getJobPositionRequester()
         );
 

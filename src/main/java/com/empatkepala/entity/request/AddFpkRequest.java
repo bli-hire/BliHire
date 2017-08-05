@@ -11,7 +11,7 @@ import java.util.Date;
 public class AddFpkRequest {
 
     private int position;
-    private DateTime dateNeeded;
+    private String dateNeeded;
     private String jobPositionRequester;
     private String reason;
     private String fitnessWithMpp;
@@ -108,11 +108,11 @@ public class AddFpkRequest {
         this.completeness = completeness;
     }
 
-    public DateTime getDateNeeded() {
+    public String getDateNeeded() {
         return dateNeeded;
     }
 
-    public void setDateNeeded(DateTime dateNeeded) {
+    public void setDateNeeded(String dateNeeded) {
         this.dateNeeded = dateNeeded;
     }
 
