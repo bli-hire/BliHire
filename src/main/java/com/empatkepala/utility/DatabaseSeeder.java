@@ -90,20 +90,20 @@ public class DatabaseSeeder {
 
         Mpp mpp = new Mpp();
 //        mpp.setReason("Tes");
-        mpp.setDepartment(Department.Technology);
+        mpp.setDepartment(Department.Finance);
 //        mpp.setEmployeeStatus("Tes");
         mppRepository.save(mpp);
 
         Mpp mpp2 = new Mpp();
 //        mpp2.setReason("Tes");
-        mpp2.setDepartment(Department.Technology);
+        mpp2.setDepartment(Department.Finance);
 //        mpp2.setEmployeeStatus("Tes");
         mpp2.setAccept(true);
         mppRepository.save(mpp2);
 
         Mpp mpp3 = new Mpp();
 //        mpp3.setReason("Tes");
-        mpp3.setDepartment(Department.Technology);
+        mpp3.setDepartment(Department.Finance);
 //        mpp3.setEmployeeStatus("Tes");
         mpp3.setCreatedDate(new DateTime());
         mpp3.setAccept(true);

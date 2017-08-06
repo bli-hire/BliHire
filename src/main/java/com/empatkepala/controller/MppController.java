@@ -1,6 +1,7 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Mpp;
+import com.empatkepala.entity.MppDetail;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.ApproveRejectMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
@@ -209,17 +210,20 @@ public class MppController {
 //        }
 
         //edit
-//        if(mppService.publishMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
-//            jobVacancyService.addPersonNeeded(mppService.getMppById(approveRejectMppRequest.getIdMpp()).getDepartment(), (int) mppService.getMppById(approveRejectMppRequest.getIdMpp()).getNumberOfPerson());
-//            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Publish Mpp", null);
-//
-//        }
-//        else{
-//            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
-//
-//        }
+        if(mppService.publishMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
 
-        return null;
+            for(MppDetail mppDetail: mppService.getMppById(approveRejectMppRequest.getIdMpp()).getMppDetails()) {
+
+                jobVacancyService.addPersonNeeded(mppService.getMppById(approveRejectMppRequest.getIdMpp()).getDepartment(), (int) mppDetail.getNumberOfPerson(), mppDetail.getPosition());
+
+            }
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Publish Mpp", null);
+
+        }
+        else{
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+
+        }
 
 //        return mppService.approveMpp(mppService.getMppById(MppId), userService.getUser(idWhoApprove));
     }
