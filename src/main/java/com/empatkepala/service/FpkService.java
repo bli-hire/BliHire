@@ -24,11 +24,17 @@ public interface FpkService{
 
     Collection<Fpk> getFpkActiveByDepartment(Department department);
 
+    Collection<Fpk> getFpkAcceptedByDepartment(Department department);
+
+    Collection<Fpk> getFpkRejectedByDepartment(Department department);
+
+    Collection<Fpk> getFpkPendingByDepartment(Department department);
+
     List getAllData();
 
     Fpk getFpk(long id);
 
-    void addFpk(@RequestBody AddFpkRequest addFpkRequest);
+    void addFpk(@RequestBody AddFpkRequest addFpkRequest, boolean headApprove);
 
     boolean editFpk(AddFpkRequest fpkRequest, User editor, Fpk fpkToEdit);
 

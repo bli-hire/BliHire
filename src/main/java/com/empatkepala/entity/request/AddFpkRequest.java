@@ -21,11 +21,14 @@ public class AddFpkRequest {
     private String skillKnowledge;
     private String completeness;
     private Department department;
-    private boolean isReject;
-    private boolean isAccept;
-    private boolean needApproveCeo;
-    private boolean needApproveHead;
+    private boolean reject;
+    private boolean accept;
+    private boolean approveCeo;
+    private boolean approveHead;
     private long idUserRequested;
+    private long idCeoApporved;
+    private long idHrdAcceptedd;
+    private long idHadDepartmentApproved;
 
 
     public long getIdUserRequested() {
@@ -133,35 +136,59 @@ public class AddFpkRequest {
     }
 
     public boolean isReject() {
-        return isReject;
+        return reject;
     }
 
     public void setReject(boolean reject) {
-        isReject = reject;
+        this.reject = reject;
     }
 
     public boolean isAccept() {
-        return isAccept;
+        return accept;
     }
 
     public void setAccept(boolean accept) {
-        isAccept = accept;
+        this.accept = accept;
     }
 
-    public boolean isNeedApproveCeo() {
-        return needApproveCeo;
+    public boolean isApproveCeo() {
+        return approveCeo;
     }
 
-    public void setNeedApproveCeo(boolean needApproveCeo) {
-        this.needApproveCeo = needApproveCeo;
+    public void setApproveCeo(boolean approveCeo) {
+        this.approveCeo = approveCeo;
     }
 
-    public boolean isNeedApproveHead() {
-        return needApproveHead;
+    public boolean isApproveHead() {
+        return approveHead;
     }
 
-    public void setNeedApproveHead(boolean needApproveHead) {
-        this.needApproveHead = needApproveHead;
+    public void setApproveHead(boolean approveHead) {
+        this.approveHead = approveHead;
+    }
+
+    public long getIdCeoApporved() {
+        return idCeoApporved;
+    }
+
+    public void setIdCeoApporved(long idCeoApporved) {
+        this.idCeoApporved = idCeoApporved;
+    }
+
+    public long getIdHrdAcceptedd() {
+        return idHrdAcceptedd;
+    }
+
+    public void setIdHrdAcceptedd(long idHrdAcceptedd) {
+        this.idHrdAcceptedd = idHrdAcceptedd;
+    }
+
+    public long getIdHadDepartmentApproved() {
+        return idHadDepartmentApproved;
+    }
+
+    public void setIdHadDepartmentApproved(long idHadDepartmentApproved) {
+        this.idHadDepartmentApproved = idHadDepartmentApproved;
     }
 
     public static String getRequestBody() {

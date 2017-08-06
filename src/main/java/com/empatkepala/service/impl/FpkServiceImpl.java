@@ -45,13 +45,34 @@ public class FpkServiceImpl implements FpkService{
     @Override
     public Collection<Fpk> getFpkHistoryByDepartment(Department department) {
         List<Fpk> result = new ArrayList<>();
-        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,true,false));
-        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,true));
+        result.addAll(getFpkAcceptedByDepartment(department));
+        result.addAll(getFpkRejectedByDepartment(department));
         return result;
     }
 
     @Override
     public Collection<Fpk> getFpkActiveByDepartment(Department department) {
+        List<Fpk> result = new ArrayList<>();
+        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,false));
+        return result;
+    }
+
+    @Override
+    public Collection<Fpk> getFpkAcceptedByDepartment(Department department) {
+        List<Fpk> result = new ArrayList<>();
+        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,true,false));
+        return result;
+    }
+
+    @Override
+    public Collection<Fpk> getFpkRejectedByDepartment(Department department) {
+        List<Fpk> result = new ArrayList<>();
+        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,true));
+        return result;
+    }
+
+    @Override
+    public Collection<Fpk> getFpkPendingByDepartment(Department department) {
         List<Fpk> result = new ArrayList<>();
         result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,false));
         return result;
@@ -64,7 +85,7 @@ public class FpkServiceImpl implements FpkService{
     @Override
     public Fpk getFpk(long id) {return fpkRepository.findOne(id);}
 
-    public void addFpk(@RequestBody AddFpkRequest addFpkRequest){
+    public void addFpk(@RequestBody AddFpkRequest addFpkRequest, boolean approveHead){
 
         Fpk input = new Fpk(addFpkRequest.getPosition(),
                 addFpkRequest.getReason(),
@@ -79,7 +100,7 @@ public class FpkServiceImpl implements FpkService{
                 new DateTime(addFpkRequest.getDateNeeded()),
                 addFpkRequest.getJobPositionRequester()
         );
-
+        input.setApproveHead(approveHead);
         fpkRepository.save(input);
     }
 
@@ -118,9 +139,16 @@ public class FpkServiceImpl implements FpkService{
     @Override
     public boolean approveFpk(Fpk fpk, User approver) {
         Fpk fpkToApprove = fpkRepository.findOne(fpk.getIdFpk());
-        if(approver.getRole() == Role.CEO || approver.getRole() == Role.HR){
+        if(approver.getRole() == Role.HR || approver.getRole() == Role.HeadHR){
             fpkToApprove.setAccept(true);
-            fpkToApprove.setReject(false);
+            fpkRepository.save(fpkToApprove);
+            return true;
+        } else if (approver.getRole() == Role.DepartmentHead) {
+            fpkToApprove.setApproveHead(true);
+            fpkRepository.save(fpkToApprove);
+            return true;
+        } else if (approver.getRole() == Role.CEO ) {
+            fpkToApprove.setApproveCeo(true);
             fpkRepository.save(fpkToApprove);
             return true;
         }
@@ -129,11 +157,18 @@ public class FpkServiceImpl implements FpkService{
 
     @Override
     public boolean rejectFpk(Fpk fpk, User rejecter) {
-        Fpk fpkToApprove = fpkRepository.findOne(fpk.getIdFpk());
-        if(rejecter.getRole() == Role.CEO || rejecter.getRole() == Role.HR){
-            fpkToApprove.setAccept(false);
-            fpkToApprove.setReject(true);
-            fpkRepository.save(fpkToApprove);
+        Fpk fpkToReject = fpkRepository.findOne(fpk.getIdFpk());
+        if(rejecter.getRole() == Role.HR || rejecter.getRole() == Role.HeadHR ){
+            fpkToReject.setAccept(false);
+            fpkRepository.save(fpkToReject);
+            return true;
+        } else if (rejecter.getRole() == Role.CEO) {
+            fpkToReject.setApproveCeo(false);
+            fpkRepository.save(fpkToReject);
+            return true;
+        } else if (rejecter.getRole() == Role.DepartmentHead) {
+            fpkToReject.setApproveHead(false);
+            fpkRepository.save(fpkToReject);;
             return true;
         }
         return false;

@@ -39,8 +39,6 @@ public class Fpk {
     private Department department;
     private boolean reject;
     private boolean accept;
-    private boolean needApproveCeo;
-    private boolean needAproveHead;
     private boolean approveCeo;
     private boolean approveHead;
 
@@ -49,7 +47,11 @@ public class Fpk {
     private User requestedBy;
 //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne(cascade = CascadeType.MERGE)
-    private User approvedBy;
+    private User ceoApproved;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User headApproved;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User hrdAccepted;
 
     public Fpk(){}
 
@@ -182,14 +184,6 @@ public class Fpk {
         this.requestedBy = requestedBy;
     }
 
-    public User getApprovedBy() {
-        return approvedBy;
-    }
-
-    public void setApprovedBy(User approvedBy) {
-        this.approvedBy = approvedBy;
-    }
-
     public DateTime getDateNeeded() {
         return dateNeeded;
     }
@@ -223,22 +217,6 @@ public class Fpk {
         this.comment = comment;
     }
 
-    public boolean isNeedApproveCeo() {
-        return needApproveCeo;
-    }
-
-    public void setNeedApproveCeo(boolean needApproveCeo) {
-        this.needApproveCeo = needApproveCeo;
-    }
-
-    public boolean isNeedAproveHead() {
-        return needAproveHead;
-    }
-
-    public void setNeedAproveHead(boolean needAproveHead) {
-        this.needAproveHead = needAproveHead;
-    }
-
     public boolean isApproveCeo() {
         return approveCeo;
     }
@@ -253,5 +231,29 @@ public class Fpk {
 
     public void setApproveHead(boolean approveHead) {
         this.approveHead = approveHead;
+    }
+
+    public User getCeoApproved() {
+        return ceoApproved;
+    }
+
+    public void setCeoApproved(User ceoApproved) {
+        this.ceoApproved = ceoApproved;
+    }
+
+    public User getHeadApproved() {
+        return headApproved;
+    }
+
+    public void setHeadApproved(User headApproved) {
+        this.headApproved = headApproved;
+    }
+
+    public User getHrdAccepted() {
+        return hrdAccepted;
+    }
+
+    public void setHrdAccepted(User hrdAccepted) {
+        this.hrdAccepted = hrdAccepted;
     }
 }
