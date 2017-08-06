@@ -62,4 +62,17 @@ public class CVController {
         cvService.addCV(addCVFormRequest);
     }
 
+    @RequestMapping(value = "/getCVByUid", method = RequestMethod.GET)
+    public CVResponse getCVByUid(
+            @RequestHeader String uid){
+        try {
+            List<CV> resultCv = new ArrayList<>();
+            resultCv.add(cvService.findByUid(uid));
+            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Get Data ",resultCv);
+        }catch(Exception ex){
+            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null);
+        }
+
+    }
+
 }

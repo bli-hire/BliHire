@@ -21,4 +21,7 @@ public interface CVService  {
 
     void updateStatusApplicant(CVFormRequest cvFormRequest, String uid);
 
+    CV getCVByUid(String uid);
+
+
 }

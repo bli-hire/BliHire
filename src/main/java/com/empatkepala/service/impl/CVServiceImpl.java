@@ -114,6 +114,9 @@ public class CVServiceImpl implements CVService{
         cvRepository.save(updatedCV);
     }
 
-
+    @Override
+    public CV getCVByUid(String uid){
+        return  cvRepository.findOneByUid(uid);
+    }
 
 }
