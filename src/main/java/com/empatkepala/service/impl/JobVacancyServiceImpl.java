@@ -22,11 +22,22 @@ public class JobVacancyServiceImpl implements JobVacancyService{
     }
 
     @Override
-    public void addPersonNeeded(Department department, int personNeeded) {
-        JobVacancy toUpdateJobVacancy = jobVacancyRepository.findOneByDepartment(department);
-        int finalAmmount = toUpdateJobVacancy.getAmmount() + 5;
-        toUpdateJobVacancy.setAmmount(finalAmmount);
-        jobVacancyRepository.save(toUpdateJobVacancy);
+    public void addPersonNeeded(Department department, int personNeeded, String position) {
+
+
+        if(jobVacancyRepository.findOneByPosition(position) != null) {
+            JobVacancy toUpdateJobVacancy = jobVacancyRepository.findOneByPosition(position);
+            int finalAmmount = toUpdateJobVacancy.getAmmount() + personNeeded;
+            toUpdateJobVacancy.setAmmount(finalAmmount);
+            jobVacancyRepository.save(toUpdateJobVacancy);
 //        return jobVacancyRepository.findOneByDepartment(department);
+        }else{
+            JobVacancy newJobVacancy = new JobVacancy();
+            newJobVacancy.setDepartment(department);
+            newJobVacancy.setPosition(position);
+            newJobVacancy.setAmmount(0+ personNeeded);
+            jobVacancyRepository.save(newJobVacancy);
+        }
+
     }
 }
