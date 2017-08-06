@@ -52,7 +52,7 @@ public class DatabaseSeeder {
         user3.setSurname("Dummy Member");
         user3.setRole(Role.DepartmentTeamMember);
         user3.setPassword("member-department");
-        user3.setDepartment(Department.Finance);
+        user3.setDepartment(Department.Technology);
         user3.setEmail("dummy-member@account.com");
         userRepository.save(user3);
 

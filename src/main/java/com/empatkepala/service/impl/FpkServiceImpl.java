@@ -43,38 +43,54 @@ public class FpkServiceImpl implements FpkService{
     }
 
     @Override
-    public Collection<Fpk> getFpkHistoryByDepartment(Department department) {
+    public Collection<Fpk> getFpkHistoryByDepartment(Department department, Role role) {
         List<Fpk> result = new ArrayList<>();
-        result.addAll(getFpkAcceptedByDepartment(department));
-        result.addAll(getFpkRejectedByDepartment(department));
+        result.addAll(getFpkAcceptedByDepartment(department, role));
+        result.addAll(getFpkRejectedByDepartment(department, role));
         return result;
     }
 
     @Override
-    public Collection<Fpk> getFpkActiveByDepartment(Department department) {
+    public Collection<Fpk> getFpkActiveByDepartment(Department department, Role role) {
         List<Fpk> result = new ArrayList<>();
-        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,false));
+        if(role == Role.DepartmentHead) {
+            result.addAll(fpkRepository.findByDepartmentAndApproveHeadAndStatusHeadApprove(department, false, false));
+        } else if (role == Role.CEO) {
+            result.addAll(fpkRepository.findByDepartmentAndApproveCeoAndStatusCeoApprove(department, false, false));
+        }
         return result;
     }
 
     @Override
-    public Collection<Fpk> getFpkAcceptedByDepartment(Department department) {
+    public Collection<Fpk> getFpkAcceptedByDepartment(Department department, Role role) {
         List<Fpk> result = new ArrayList<>();
-        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,true,false));
+        if(role == Role.DepartmentHead) {
+            result.addAll(fpkRepository.findByDepartmentAndApproveHeadAndStatusHeadApprove(department, true, true));
+        } else if (role == Role.CEO) {
+            result.addAll(fpkRepository.findByDepartmentAndApproveCeoAndStatusCeoApprove(department, true, true));
+        }
         return result;
     }
 
     @Override
-    public Collection<Fpk> getFpkRejectedByDepartment(Department department) {
+    public Collection<Fpk> getFpkRejectedByDepartment(Department department, Role role) {
         List<Fpk> result = new ArrayList<>();
-        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,true));
+        if(role == Role.DepartmentHead) {
+            result.addAll(fpkRepository.findByDepartmentAndApproveHeadAndStatusHeadApprove(department, true, false));
+        } else if (role == Role.CEO) {
+            result.addAll(fpkRepository.findByDepartmentAndApproveCeoAndStatusCeoApprove(department, true, false));
+        }
         return result;
     }
 
     @Override
-    public Collection<Fpk> getFpkPendingByDepartment(Department department) {
+    public Collection<Fpk> getFpkPendingByDepartment(Department department,Role role) {
         List<Fpk> result = new ArrayList<>();
-        result.addAll(fpkRepository.findByDepartmentAndAcceptAndReject(department,false,false));
+        if(role == Role.DepartmentHead) {
+            result.addAll(fpkRepository.findByDepartmentAndApproveHeadAndStatusHeadApprove(department, false, false));
+        } else if (role == Role.CEO) {
+            result.addAll(fpkRepository.findByDepartmentAndApproveCeoAndStatusCeoApprove(department, false, false));
+        }
         return result;
     }
 
@@ -85,7 +101,7 @@ public class FpkServiceImpl implements FpkService{
     @Override
     public Fpk getFpk(long id) {return fpkRepository.findOne(id);}
 
-    public void addFpk(@RequestBody AddFpkRequest addFpkRequest, boolean approveHead){
+    public void addFpk(@RequestBody AddFpkRequest addFpkRequest, boolean approveHead, boolean rejectOrNot){
 
         Fpk input = new Fpk(addFpkRequest.getPosition(),
                 addFpkRequest.getReason(),
@@ -101,6 +117,7 @@ public class FpkServiceImpl implements FpkService{
                 addFpkRequest.getJobPositionRequester()
         );
         input.setApproveHead(approveHead);
+        input.setStatusHeadApprove(rejectOrNot);
         fpkRepository.save(input);
     }
 
@@ -145,10 +162,12 @@ public class FpkServiceImpl implements FpkService{
             return true;
         } else if (approver.getRole() == Role.DepartmentHead) {
             fpkToApprove.setApproveHead(true);
+            fpkToApprove.setStatusHeadApprove(true);
             fpkRepository.save(fpkToApprove);
             return true;
         } else if (approver.getRole() == Role.CEO ) {
             fpkToApprove.setApproveCeo(true);
+            fpkToApprove.setStatusCeoApprove(true);
             fpkRepository.save(fpkToApprove);
             return true;
         }
@@ -163,11 +182,13 @@ public class FpkServiceImpl implements FpkService{
             fpkRepository.save(fpkToReject);
             return true;
         } else if (rejecter.getRole() == Role.CEO) {
-            fpkToReject.setApproveCeo(false);
+            fpkToReject.setApproveCeo(true);
+            fpkToReject.setStatusCeoApprove(false);
             fpkRepository.save(fpkToReject);
             return true;
         } else if (rejecter.getRole() == Role.DepartmentHead) {
-            fpkToReject.setApproveHead(false);
+            fpkToReject.setApproveHead(true);
+            fpkToReject.setStatusCeoApprove(false);
             fpkRepository.save(fpkToReject);;
             return true;
         }

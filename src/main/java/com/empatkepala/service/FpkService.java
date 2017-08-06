@@ -4,6 +4,7 @@ import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddFpkRequest;
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.Role;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -20,21 +21,21 @@ public interface FpkService{
 
     Collection<Fpk> getFpkByRequestedBy(User requestedBy);
 
-    Collection<Fpk> getFpkHistoryByDepartment(Department department);
+    Collection<Fpk> getFpkHistoryByDepartment(Department department, Role role);
 
-    Collection<Fpk> getFpkActiveByDepartment(Department department);
+    Collection<Fpk> getFpkActiveByDepartment(Department department, Role role);
 
-    Collection<Fpk> getFpkAcceptedByDepartment(Department department);
+    Collection<Fpk> getFpkAcceptedByDepartment(Department department, Role role);
 
-    Collection<Fpk> getFpkRejectedByDepartment(Department department);
+    Collection<Fpk> getFpkRejectedByDepartment(Department department, Role role);
 
-    Collection<Fpk> getFpkPendingByDepartment(Department department);
+    Collection<Fpk> getFpkPendingByDepartment(Department department, Role role);
 
     List getAllData();
 
     Fpk getFpk(long id);
 
-    void addFpk(@RequestBody AddFpkRequest addFpkRequest, boolean headApprove);
+    void addFpk(@RequestBody AddFpkRequest addFpkRequest, boolean headApprove, boolean isHeadRejectOrApprove);
 
     boolean editFpk(AddFpkRequest fpkRequest, User editor, Fpk fpkToEdit);
 

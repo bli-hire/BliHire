@@ -5,6 +5,7 @@ import com.empatkepala.entity.request.AddFpkRequest;
 import com.empatkepala.entity.request.ApproveRejectFpkRequest;
 import com.empatkepala.entity.response.FpkResponse;
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.service.FpkService;
 import com.empatkepala.service.UserService;
@@ -59,7 +60,7 @@ public class FpkController {
     public FpkResponse addFpk(
             @RequestBody AddFpkRequest addFpkRequest)
     {
-        fpkService.addFpk(addFpkRequest,false);
+        fpkService.addFpk(addFpkRequest,false,false);
         return new FpkResponse(HttpStatus.ACCEPTED.toString(),"Success Add Fpk",null,1,
                 "POST",AddFpkRequest.getHeaderContentType(),AddFpkRequest.getRequestBody());
     }
@@ -68,7 +69,7 @@ public class FpkController {
     public FpkResponse addFpkByMemberDepartment(
             @RequestBody AddFpkRequest addFpkRequest)
     {
-        fpkService.addFpk(addFpkRequest,false);
+        fpkService.addFpk(addFpkRequest,false, false);
         return new FpkResponse(HttpStatus.ACCEPTED.toString(),"Success Add Fpk",null,1,
                 "POST",AddFpkRequest.getHeaderContentType(),AddFpkRequest.getRequestBody());
     }
@@ -77,7 +78,7 @@ public class FpkController {
     public FpkResponse addFpkByHeadDepartment(
             @RequestBody AddFpkRequest addFpkRequest)
     {
-        fpkService.addFpk(addFpkRequest,true);
+        fpkService.addFpk(addFpkRequest,true, true);
         return new FpkResponse(HttpStatus.ACCEPTED.toString(),"Success Add Fpk",null,1,
                 "POST",AddFpkRequest.getHeaderContentType(),AddFpkRequest.getRequestBody());
     }
@@ -107,33 +108,32 @@ public class FpkController {
     }
 
     @RequestMapping(value = "/byDepartment/active", method = RequestMethod.GET, produces = "application/json")
-    public FpkResponse findFpkByDepartmentActive(@RequestHeader Department department){
-        Collection<Fpk> data = fpkService.getFpkActiveByDepartment(department);
+    public FpkResponse findFpkByDepartmentActive(@RequestHeader Department department, @RequestHeader Role role){
+        Collection<Fpk> data = fpkService.getFpkActiveByDepartment(department, role);
         return new FpkResponse(HttpStatus.FOUND.toString(),"Success Get Fpk By Department",data,data.size());
     }
 
-
     @RequestMapping(value = "/byDepartment/history", method = RequestMethod.GET, produces = "application/json")
-    public FpkResponse findFpkByDepartmentHistory(@RequestHeader Department department){
-        Collection<Fpk> data = fpkService.getFpkHistoryByDepartment(department);
+    public FpkResponse findFpkByDepartmentHistory(@RequestHeader Department department, @RequestHeader Role role){
+        Collection<Fpk> data = fpkService.getFpkHistoryByDepartment(department, role);
         return new FpkResponse(HttpStatus.FOUND.toString(),"Success Get Fpk By Department",data,data.size());
     }
 
     @RequestMapping(value = "/byDepartment/pending", method = RequestMethod.GET, produces = "application/json")
-    public FpkResponse findFpkByDepartmentPending(@RequestHeader Department department){
-        Collection<Fpk> data = fpkService.getFpkPendingByDepartment(department);
+    public FpkResponse findFpkByDepartmentPending(@RequestHeader Department department, @RequestHeader Role role){
+        Collection<Fpk> data = fpkService.getFpkPendingByDepartment(department, role);
         return new FpkResponse(HttpStatus.FOUND.toString(),"Success Get Fpk By Department",data,data.size());
     }
 
     @RequestMapping(value = "/byDepartment/accepted", method = RequestMethod.GET, produces = "application/json")
-    public FpkResponse findFpkByDepartmentAccepted(@RequestHeader Department department){
-        Collection<Fpk> data = fpkService.getFpkAcceptedByDepartment(department);
+    public FpkResponse findFpkByDepartmentAccepted(@RequestHeader Department department, @RequestHeader Role role){
+        Collection<Fpk> data = fpkService.getFpkAcceptedByDepartment(department, role);
         return new FpkResponse(HttpStatus.FOUND.toString(),"Success Get Fpk By Department",data,data.size());
     }
 
     @RequestMapping(value = "/byDepartment/rejected", method = RequestMethod.GET, produces = "application/json")
-    public FpkResponse findFpkByDepartmentRejected(@RequestHeader Department department){
-        Collection<Fpk> data = fpkService.getFpkRejectedByDepartment(department);
+    public FpkResponse findFpkByDepartmentRejected(@RequestHeader Department department, @RequestHeader Role role){
+        Collection<Fpk> data = fpkService.getFpkRejectedByDepartment(department, role);
         return new FpkResponse(HttpStatus.FOUND.toString(),"Success Get Fpk By Department",data,data.size());
     }
 

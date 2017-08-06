@@ -40,7 +40,9 @@ public class Fpk {
     private boolean reject;
     private boolean accept;
     private boolean approveCeo;
+    private boolean statusCeoApprove;
     private boolean approveHead;
+    private boolean statusHeadApprove;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne(cascade = CascadeType.MERGE)
@@ -255,5 +257,21 @@ public class Fpk {
 
     public void setHrdAccepted(User hrdAccepted) {
         this.hrdAccepted = hrdAccepted;
+    }
+
+    public boolean isStatusCeoApprove() {
+        return statusCeoApprove;
+    }
+
+    public void setStatusCeoApprove(boolean statusCeoApprove) {
+        this.statusCeoApprove = statusCeoApprove;
+    }
+
+    public boolean isStatusHeadApprove() {
+        return statusHeadApprove;
+    }
+
+    public void setStatusHeadApprove(boolean statusHeadApprove) {
+        this.statusHeadApprove = statusHeadApprove;
     }
 }
