@@ -228,4 +228,10 @@ public class MppController {
 //        return mppService.approveMpp(mppService.getMppById(MppId), userService.getUser(idWhoApprove));
     }
 
+    @RequestMapping(value = "/byDepartment/published", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findMppByDepartmentPublished(@RequestHeader Department department){
+        Collection<Mpp> data = mppService.getPublishedMppByDepartment(department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Published Mpp By Department",data,data.size());
+    }
+
 }

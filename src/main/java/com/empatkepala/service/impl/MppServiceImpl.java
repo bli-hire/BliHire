@@ -185,6 +185,13 @@ public class MppServiceImpl implements MppService{
         return mpps;
     }
 
+    @Override
+    public Collection<Mpp> getPublishedMppByDepartment(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndPublished(department, true));
+        return mpps;
+    }
+
 
     @Override
     public boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit) {

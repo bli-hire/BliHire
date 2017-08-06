@@ -34,6 +34,7 @@ public class JobVacancyServiceImpl implements JobVacancyService{
         }else{
             JobVacancy newJobVacancy = new JobVacancy();
             newJobVacancy.setDepartment(department);
+            newJobVacancy.setPosition(position);
             newJobVacancy.setAmmount(0+ personNeeded);
             jobVacancyRepository.save(newJobVacancy);
         }
