@@ -21,10 +21,11 @@ public class CVResponse {
 
 
 
-    public CVResponse(String status, String message, Collection<CV> data){
+    public CVResponse(String status, String message, Collection<CV> data, int totalData){
         this.status = status;
         this.message = message;
         this.data = data;
+        this.totalData = totalData;
     }
     public CVResponse(String status, String message, Collection<CV> data, int totalData, String requestHeader, String requestBody, String method) {
         this.status = status;

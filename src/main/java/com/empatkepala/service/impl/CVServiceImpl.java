@@ -102,6 +102,7 @@ public class CVServiceImpl implements CVService{
         cv.setSocialact(cvFormRequest.getSocialact());
         cv.setAchievements(cvFormRequest.getAchievements());
         cv.setLanguage(cvFormRequest.getLanguage());
+        cv.setApplicantStatus(cvFormRequest.getApplicantStatus());
 
         cvRepository.save(cv);
     }

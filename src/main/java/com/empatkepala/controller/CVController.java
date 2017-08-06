@@ -49,9 +49,9 @@ public class CVController {
             @RequestBody CVFormRequest cvFormRequest ){
         try {
             cvService.updateStatusApplicant(cvFormRequest,uid);
-            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null);
+            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null,0);
         }catch(Exception ex){
-            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null);
+            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
         }
 
     }
@@ -68,9 +68,9 @@ public class CVController {
         try {
             List<CV> resultCv = new ArrayList<>();
             resultCv.add(cvService.findByUid(uid));
-            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Get Data ",resultCv);
+            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Get Data ",resultCv, resultCv.size());
         }catch(Exception ex){
-            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null);
+            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
         }
 
     }
