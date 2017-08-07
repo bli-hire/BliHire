@@ -262,6 +262,7 @@ public class MppServiceImpl implements MppService{
         if(whoPublish.getRole() == Role.HR && mppRepository.getOne(mpp.getId()).isAccept() == true ){
             Mpp mppToPublish = mppRepository.getOne(mpp.getId());
             mppToPublish.setPublished(true);
+            mppToPublish.setPublishedBy(whoPublish);
             mppRepository.save(mppToPublish);
             return true;
         }
