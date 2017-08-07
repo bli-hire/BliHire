@@ -60,6 +60,7 @@ public class DatabaseSeeder {
         user4.setName("Human Resource");
         user4.setSurname("Account Human Resource");
         user4.setRole(Role.HR);
+        user4.setDepartment(Department.HumanResource);
         user4.setPassword("dummy-hrd");
         user4.setEmail("dummy-hrd@account.com");
         userRepository.save(user4);
@@ -68,6 +69,7 @@ public class DatabaseSeeder {
         user5.setName("Human Resource Head");
         user5.setSurname("Account Human Resource");
         user5.setRole(Role.HeadHR);
+        user5.setDepartment(Department.HumanResource);
         user5.setPassword("dummy-hrd-head");
         user5.setEmail("dummy-hrd-head@account.com");
         userRepository.save(user5);
@@ -122,6 +124,46 @@ public class DatabaseSeeder {
         fpk2.setDateNeeded(new DateTime(2017,12,3,0,0));
         fpk2.setJobPositionRequester("Senior Developer");
         fpkRepository.save(fpk2);
+
+        Fpk fpk3 = new Fpk();
+        fpk3.setCompleteness("Ready To Publish");
+        fpk3.setReason("Ready To Publish");
+        fpk3.setDepartment(Department.HumanResource);
+        fpk3.setEmployeeStatus("Ready To Publish");
+        fpk3.setFitnessWithMpp("Ready To Publish");
+        fpk3.setNumberOfPerson(5);
+        fpk3.setSchool("Ready To Publish");
+        fpk3.setSkillKnowledge("Ready To Publish");
+        fpk3.setWorkExperience("Ready To Publish");
+        fpk3.setDateNeeded(new DateTime(2017,12,3,0,0));
+        fpk3.setJobPositionRequester("Ready To Publish");
+        fpk3.setApproveCeo(true);
+        fpk3.setApproveHead(true);
+        fpk3.setStatusHeadApprove(true);
+        fpk3.setStatusCeoApprove(true);
+        fpk3.setAccept(false);
+        fpk3.setStatusAccept(false);
+        fpkRepository.save(fpk3);
+
+        Fpk fpk4 = new Fpk();
+        fpk4.setCompleteness("Published");
+        fpk4.setReason("Published");
+        fpk4.setDepartment(Department.HumanResource);
+        fpk4.setEmployeeStatus("Published");
+        fpk4.setFitnessWithMpp("Published");
+        fpk4.setNumberOfPerson(5);
+        fpk4.setSchool("Published");
+        fpk4.setSkillKnowledge("Published");
+        fpk4.setWorkExperience("Published");
+        fpk4.setDateNeeded(new DateTime(2017,12,3,0,0));
+        fpk4.setJobPositionRequester("Published");
+        fpk4.setApproveCeo(true);
+        fpk4.setApproveHead(true);
+        fpk4.setStatusHeadApprove(true);
+        fpk4.setStatusCeoApprove(true);
+        fpk4.setAccept(true);
+        fpk4.setStatusAccept(true);
+        fpkRepository.save(fpk4);
 
     }
 

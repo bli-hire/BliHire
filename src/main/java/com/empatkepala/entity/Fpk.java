@@ -37,7 +37,7 @@ public class Fpk {
     private String completeness;
     private String comment;
     private Department department;
-    private boolean reject;
+    private boolean statusAccept;
     private boolean accept;
     private boolean approveCeo;
     private boolean statusCeoApprove;
@@ -74,12 +74,12 @@ public class Fpk {
         this.jobPositionRequester = jobPositionRequester;
     }
 
-    public boolean isReject() {
-        return reject;
+    public boolean isStatusAccept() {
+        return statusAccept;
     }
 
-    public void setReject(boolean reject) {
-        this.reject = reject;
+    public void setStatusAccept(boolean statusAccept) {
+        this.statusAccept = statusAccept;
     }
 
     public boolean isAccept() {

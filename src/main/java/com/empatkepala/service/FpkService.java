@@ -31,6 +31,10 @@ public interface FpkService{
 
     Collection<Fpk> getFpkPendingByDepartment(Department department, Role role);
 
+    Collection<Fpk> getFpkPublished(Department department);
+
+    Collection<Fpk> getFpkReadyToPublish(Department department);
+
     List getAllData();
 
     Fpk getFpk(long id);
@@ -40,6 +44,10 @@ public interface FpkService{
     boolean editFpk(AddFpkRequest fpkRequest, User editor, Fpk fpkToEdit);
 
     boolean approveFpk(Fpk fpk, User approver);
+
+    boolean approveFpkAsHeadDepartment(Fpk fpk, User approver);
+
+    boolean rejectFpkAsHeadDepartment(Fpk fpk, User approver);
 
     boolean rejectFpk(Fpk fpk, User rejecter);
 }

@@ -94,6 +94,20 @@ public class FpkServiceImpl implements FpkService{
         return result;
     }
 
+    @Override
+    public Collection<Fpk> getFpkPublished(Department department) {
+        List<Fpk> result = new ArrayList<>();
+        result.addAll(fpkRepository.findByDepartmentAndAcceptAndStatusAccept(department, true, true));
+        return result;
+    }
+
+    @Override
+    public Collection<Fpk> getFpkReadyToPublish(Department department) {
+        List<Fpk> result = new ArrayList<>();
+        result.addAll(fpkRepository.findByDepartmentAndAcceptAndApproveCeoAndStatusCeoApprove(department, false, true, true));
+        return result;
+    }
+
     public List getAllData(){
         return fpkRepository.findAll();
     }
@@ -158,16 +172,20 @@ public class FpkServiceImpl implements FpkService{
         Fpk fpkToApprove = fpkRepository.findOne(fpk.getIdFpk());
         if(approver.getRole() == Role.HR || approver.getRole() == Role.HeadHR){
             fpkToApprove.setAccept(true);
+            fpkToApprove.setStatusAccept(true);
+            fpkToApprove.setHrdAccepted(userService.getUser(approver.getId()));
             fpkRepository.save(fpkToApprove);
             return true;
         } else if (approver.getRole() == Role.DepartmentHead) {
             fpkToApprove.setApproveHead(true);
             fpkToApprove.setStatusHeadApprove(true);
+            fpkToApprove.setHeadApproved(userService.getUser(approver.getId()));
             fpkRepository.save(fpkToApprove);
             return true;
         } else if (approver.getRole() == Role.CEO ) {
             fpkToApprove.setApproveCeo(true);
             fpkToApprove.setStatusCeoApprove(true);
+            fpkToApprove.setCeoApproved(userService.getUser(approver.getId()));
             fpkRepository.save(fpkToApprove);
             return true;
         }
@@ -175,10 +193,30 @@ public class FpkServiceImpl implements FpkService{
     }
 
     @Override
+    public boolean approveFpkAsHeadDepartment(Fpk fpk, User approver) {
+        Fpk fpkToApprove = fpkRepository.findOne(fpk.getIdFpk());
+        fpkToApprove.setApproveHead(true);
+        fpkToApprove.setStatusHeadApprove(true);
+        fpkToApprove.setHeadApproved(userService.getUser(approver.getId()));
+        fpkRepository.save(fpkToApprove);
+        return true;
+    }
+
+    @Override
+    public boolean rejectFpkAsHeadDepartment(Fpk fpk, User approver) {
+        Fpk fpkToReject = fpkRepository.findOne(fpk.getIdFpk());
+        fpkToReject.setApproveHead(true);
+        fpkToReject.setStatusCeoApprove(false);
+        fpkRepository.save(fpkToReject);;
+        return true;
+    }
+
+    @Override
     public boolean rejectFpk(Fpk fpk, User rejecter) {
         Fpk fpkToReject = fpkRepository.findOne(fpk.getIdFpk());
         if(rejecter.getRole() == Role.HR || rejecter.getRole() == Role.HeadHR ){
-            fpkToReject.setAccept(false);
+            fpkToReject.setAccept(true);
+            fpkToReject.setStatusAccept(false);
             fpkRepository.save(fpkToReject);
             return true;
         } else if (rejecter.getRole() == Role.CEO) {
