@@ -84,7 +84,12 @@
 			<artifactId>usertype.jodatime</artifactId>
 			<version>2.0.1</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-standalone</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>
