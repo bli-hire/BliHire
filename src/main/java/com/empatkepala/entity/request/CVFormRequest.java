@@ -5,19 +5,20 @@ import com.empatkepala.entity.CVEntity.*;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Ryan Bagus Susilo on 4/21/2017.
  */
-public class CVFormRequest {
+public class CVFormRequest implements Serializable{
 
     private String title;
     private String jobTitle;
     private String fullName;
     private String placeDateOfBirth;
     private String idCardNumber;
-    private String drivingLicense;
+    private ArrayList<String> drivingLicense;
     private String emailAddress;
     private String uploadCV;
     private String twitter;
@@ -40,7 +41,7 @@ public class CVFormRequest {
     private String motherName;
     private String motherBirthday;
     private String motherLatestEducation;
-    private String motherCurretJob;
+    private String motherCurrentJob;
     private ArrayList<Brothers> Bro=new ArrayList<Brothers>();
     private String spouseName;
     private String spousebirthDay;
@@ -54,13 +55,9 @@ public class CVFormRequest {
     private String reasonMajor;
     private String titleThesis;
     private ArrayList<NonFormalCourse> nonFrmlCrs =new ArrayList<NonFormalCourse>();
-    private String nameOfOrganization;
-    private String fieldOfOrganization;
-    private String attendancePeriod;
-    private String notes;
-    private String achievement;
-    private int yearAchievement;
-    private String notesAchievement;
+    private ArrayList<Achievements> achievements=new ArrayList<Achievements>();
+    private ArrayList<SocialActivity> socialact= new ArrayList<SocialActivity>();
+    private ArrayList<Language> language=new ArrayList<Language>();
     //----
     private ArrayList<WorkExperience> WorkExp=new ArrayList<WorkExperience>();
     private String reasonInterestedInGDN;
@@ -120,11 +117,11 @@ public class CVFormRequest {
         this.idCardNumber = idCardNumber;
     }
 
-    public String getDrivingLicense() {
+    public ArrayList<String> getDrivingLicense() {
         return drivingLicense;
     }
 
-    public void setDrivingLicense(String drivingLicense) {
+    public void setDrivingLicense(ArrayList<String> drivingLicense) {
         this.drivingLicense = drivingLicense;
     }
 
@@ -296,12 +293,12 @@ public class CVFormRequest {
         this.motherLatestEducation = motherLatestEducation;
     }
 
-    public String getMotherCurretJob() {
-        return motherCurretJob;
+    public String getmotherCurrentJob() {
+        return motherCurrentJob;
     }
 
-    public void setMotherCurretJob(String motherCurretJob) {
-        this.motherCurretJob = motherCurretJob;
+    public void setmotherCurrentJob(String motherCurrentJob) {
+        this.motherCurrentJob = motherCurrentJob;
     }
 
     public ArrayList<Brothers> getBro() {
@@ -400,60 +397,28 @@ public class CVFormRequest {
         this.nonFrmlCrs = nonFrmlCrs;
     }
 
-    public String getNameOfOrganization() {
-        return nameOfOrganization;
+    public ArrayList<Achievements> getAchievements() {
+        return achievements;
     }
 
-    public void setNameOfOrganization(String nameOfOrganization) {
-        this.nameOfOrganization = nameOfOrganization;
+    public void setAchievements(ArrayList<Achievements> achievements) {
+        this.achievements = achievements;
     }
 
-    public String getFieldOfOrganization() {
-        return fieldOfOrganization;
+    public ArrayList<SocialActivity> getSocialact() {
+        return socialact;
     }
 
-    public void setFieldOfOrganization(String fieldOfOrganization) {
-        this.fieldOfOrganization = fieldOfOrganization;
+    public void setSocialact(ArrayList<SocialActivity> socialact) {
+        this.socialact = socialact;
     }
 
-    public String getAttendancePeriod() {
-        return attendancePeriod;
+    public ArrayList<Language> getLanguage() {
+        return language;
     }
 
-    public void setAttendancePeriod(String attendancePeriod) {
-        this.attendancePeriod = attendancePeriod;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public String getAchievement() {
-        return achievement;
-    }
-
-    public void setAchievement(String achievement) {
-        this.achievement = achievement;
-    }
-
-    public int getYearAchievement() {
-        return yearAchievement;
-    }
-
-    public void setYearAchievement(int yearAchievement) {
-        this.yearAchievement = yearAchievement;
-    }
-
-    public String getNotesAchievement() {
-        return notesAchievement;
-    }
-
-    public void setNotesAchievement(String notesAchievement) {
-        this.notesAchievement = notesAchievement;
+    public void setLanguage(ArrayList<Language> language) {
+        this.language = language;
     }
 
     public ArrayList<WorkExperience> getWorkExp() {

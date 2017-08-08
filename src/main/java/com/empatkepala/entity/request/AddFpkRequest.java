@@ -1,40 +1,47 @@
 package com.empatkepala.entity.request;
 
+import com.empatkepala.enumeration.Department;
+
+import java.util.Date;
+
 /**
  * Created by ALz on 3/11/2017.
  */
 public class AddFpkRequest {
-    private Long idFpk;
+
     private int position;
+    private Date dateNeeded;
+    private String jobPositionRequester;
     private String reason;
     private String fitnessWithMpp;
     private String employeeStatus;
     private String school;
     private String workExperience;
     private String skillKnowledge;
-    private Long idUserApproved;
-    private Long idUserRequested;
     private String completeness;
+    private Department department;
+    private boolean isReject;
+    private boolean isAccept;
+    private boolean needApproveCeo;
+    private boolean needApproveHead;
+    private long idUserRequested;
 
-    public Long getId() {return idFpk;}
 
-    public void setId(Long id) {this.idFpk = id;}
-
-    public Long getIdUserRequested() {
+    public long getIdUserRequested() {
         return idUserRequested;
     }
 
-    public void setIdUserRequested(Long idUser) {
+    public void setIdUserRequested(long idUser) {
         this.idUserRequested = idUser;
     }
 
-    public Long getIdUserApproved() {
-        return idUserApproved;
-    }
-
-    public void setIdUserApproved(Long idUserApproved) {
-        this.idUserApproved = idUserApproved;
-    }
+//    public long getIdUserApproved() {
+//        return idUserApproved;
+//    }
+//
+//    public void setIdUserApproved(long idUserApproved) {
+//        this.idUserApproved = idUserApproved;
+//    }
 
     public int getPosition() {
         return position;
@@ -100,4 +107,59 @@ public class AddFpkRequest {
         this.completeness = completeness;
     }
 
+    public Date getDateNeeded() {
+        return dateNeeded;
+    }
+
+    public void setDateNeeded(Date dateNeeded) {
+        this.dateNeeded = dateNeeded;
+    }
+
+    public String getJobPositionRequester() {
+        return jobPositionRequester;
+    }
+
+    public void setJobPositionRequester(String jobPositionRequester) {
+        this.jobPositionRequester = jobPositionRequester;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public boolean isReject() {
+        return isReject;
+    }
+
+    public void setReject(boolean reject) {
+        isReject = reject;
+    }
+
+    public boolean isAccept() {
+        return isAccept;
+    }
+
+    public void setAccept(boolean accept) {
+        isAccept = accept;
+    }
+
+    public boolean isNeedApproveCeo() {
+        return needApproveCeo;
+    }
+
+    public void setNeedApproveCeo(boolean needApproveCeo) {
+        this.needApproveCeo = needApproveCeo;
+    }
+
+    public boolean isNeedApproveHead() {
+        return needApproveHead;
+    }
+
+    public void setNeedApproveHead(boolean needApproveHead) {
+        this.needApproveHead = needApproveHead;
+    }
 }
