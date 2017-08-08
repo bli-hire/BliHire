@@ -2,8 +2,12 @@ package com.empatkepala.entity;
 
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by ARDI on 3/5/2017.
@@ -16,7 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    private String username;
     private Role role;
     private Department department;
     private String name;
@@ -24,7 +28,12 @@ public class User {
     private String password;
     private String email;
 
-    public User(){}
+    @javax.persistence.Transient
+    private final Set<GrantedAuthority> authorities = new HashSet<>();
+
+    public User() {
+        authorities.add(new SimpleGrantedAuthority("USER"));
+    }
 
     public User(
             Role role,
@@ -40,6 +49,7 @@ public class User {
         this.surname = surname;
         this.password = password;
         this.email = email;
+        authorities.add(new SimpleGrantedAuthority("USER"));
     }
 
     public long getId() {
@@ -48,6 +58,14 @@ public class User {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {

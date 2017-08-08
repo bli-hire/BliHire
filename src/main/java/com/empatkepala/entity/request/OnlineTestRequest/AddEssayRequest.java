@@ -2,21 +2,26 @@ package com.empatkepala.entity.request.OnlineTestRequest;
 
 import com.empatkepala.enumeration.Department;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 /**
  * Created by ARDI on 8/6/2017.
  */
 public class AddEssayRequest {
 
-    private Department department;
+    private String department;
 
     private String problem;
     private String answer;
 
-    public Department getDepartment() {
+    private String difficulty;
+
+    public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
 
@@ -34,5 +39,13 @@ public class AddEssayRequest {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 }
