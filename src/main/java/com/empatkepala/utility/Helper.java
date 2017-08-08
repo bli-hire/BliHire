@@ -1,7 +1,11 @@
 package com.empatkepala.utility;
 
+import com.empatkepala.entity.OnlineTestEntity.Essay;
+import com.empatkepala.entity.OnlineTestEntity.MultipleChoices;
 import com.empatkepala.entity.User;
 
+import com.empatkepala.enumeration.ProblemDifficulty;
+import com.empatkepala.repository.OnlineTestRepository.EssayRepository;
 import com.empatkepala.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -12,6 +16,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by ARDI on 8/7/2017.
@@ -23,6 +30,7 @@ public class Helper {
     UserRepository userRepository;
     @Autowired
     protected AuthenticationManager authenticationManager;
+
 
     public boolean isLoggedIn() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -37,6 +45,18 @@ public class Helper {
         }
         System.out.println("not logged in");
         return null;
+    }
+
+    public static List<Essay> pickAndRandomEssay(List<Essay> list, int numObject) {
+        List<Essay> copy = new ArrayList<Essay>(list);
+        Collections.shuffle(copy);
+        return copy.subList(0, numObject);
+    }
+
+    public static List<MultipleChoices> pickAndRandomMultipleChoices(List<MultipleChoices> list, int numObject) {
+        List<MultipleChoices> copy = new ArrayList<MultipleChoices>(list);
+        Collections.shuffle(copy);
+        return copy.subList(0, numObject);
     }
 
 }

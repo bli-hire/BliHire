@@ -9,11 +9,9 @@ import javax.persistence.*;
  * Created by ARDI on 8/6/2017.
  */
 @Entity
-public class Essay {
+public class Essay extends Problem{
 
-    @Id
-    @GeneratedValue
-    private long id;
+
 
     @Enumerated(EnumType.STRING)
     private Department department;
@@ -24,24 +22,21 @@ public class Essay {
     @Enumerated(EnumType.STRING)
     private ProblemDifficulty problemDifficulty;
 
+    private boolean canBeGenerated;
+
     public Essay(){
 
     }
 
-    public Essay(Department department, String problem, String answer, ProblemDifficulty problemDifficulty) {
+    public Essay(Department department, String problem, String answer, ProblemDifficulty problemDifficulty, boolean canBeGenerated) {
         this.department = department;
         this.problem = problem;
         this.answer = answer;
         this.problemDifficulty = problemDifficulty;
+        this.canBeGenerated = canBeGenerated;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public Department getDepartment() {
         return department;
@@ -73,5 +68,13 @@ public class Essay {
 
     public void setProblemDifficulty(ProblemDifficulty problemDifficulty) {
         this.problemDifficulty = problemDifficulty;
+    }
+
+    public boolean isCanBeGenerated() {
+        return canBeGenerated;
+    }
+
+    public void setCanBeGenerated(boolean canBeGenerated) {
+        this.canBeGenerated = canBeGenerated;
     }
 }

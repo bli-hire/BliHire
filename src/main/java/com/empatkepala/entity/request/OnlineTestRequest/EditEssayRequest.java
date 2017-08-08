@@ -1,30 +1,12 @@
 package com.empatkepala.entity.request.OnlineTestRequest;
 
-import com.empatkepala.enumeration.Department;
-
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
-/**
- * Created by ARDI on 8/6/2017.
- */
-public class AddEssayRequest {
-
-    private String department;
+public class EditEssayRequest {
 
     private String problem;
     private String answer;
 
     private String difficulty;
     private boolean canBeGenerated;
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 
     public String getProblem() {
         return problem;

@@ -1,11 +1,6 @@
 package com.empatkepala.entity.request.OnlineTestRequest;
 
-/**
- * Created by ARDI on 8/7/2017.
- */
-public class AddMultipleChoicesRequest {
-
-    private String department;
+public class EditMultipleChoicesRequest {
 
     private String problem;
     private String answerA;
@@ -17,14 +12,6 @@ public class AddMultipleChoicesRequest {
 
     private String difficulty;
     private boolean canBeGenerated;
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 
     public String getProblem() {
         return problem;

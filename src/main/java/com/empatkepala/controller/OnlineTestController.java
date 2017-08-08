@@ -2,8 +2,8 @@ package com.empatkepala.controller;
 
 import com.empatkepala.entity.OnlineTestEntity.Essay;
 import com.empatkepala.entity.OnlineTestEntity.MultipleChoices;
-import com.empatkepala.entity.request.OnlineTestRequest.AddEssayRequest;
-import com.empatkepala.entity.request.OnlineTestRequest.AddMultipleChoicesRequest;
+import com.empatkepala.entity.OnlineTestEntity.Problem;
+import com.empatkepala.entity.request.OnlineTestRequest.*;
 import com.empatkepala.service.OnlineTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,8 @@ public class OnlineTestController {
 
     @Autowired
     OnlineTestService onlineTestService;
+
+    // ------- ESSAY -------
 
     // TODO GET ALL ESSAY PROBLEMS
     @RequestMapping(value = "/essay/all-problems", method = RequestMethod.GET, produces = "application/json")
@@ -59,6 +61,17 @@ public class OnlineTestController {
         return onlineTestService.essayGetAllDepartmentProblemsService();
     }
 
+    // TODO EDIT ESSAY PROBLEM
+    @RequestMapping(value = "/essay/{id}/edit", method = RequestMethod.POST)
+    public void essayEditProblem(
+            @PathVariable long id,
+            @RequestBody EditEssayRequest editEssayRequest)
+    {
+        onlineTestService.essayEditProblemService(id, editEssayRequest);
+    }
+
+    // ------- Multiple Choices -------
+
     // TODO GET ALL MULTIPLE CHOICES PROBLEMS
     @RequestMapping(value = "/multiple-choices/problems", method = RequestMethod.GET, produces = "application/json")
     public List<MultipleChoices> multipleChoicesGetAllProblems(){
@@ -83,10 +96,29 @@ public class OnlineTestController {
     }
 
     // TODO FIND ALL MULTIPLE CHOICES PROBLEM BY DEPARTMENT PARAM DEPARTMENT
-    @RequestMapping(value = "/essay/{department}/problems", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/multiple-choices/{department}/problems", method = RequestMethod.GET, produces = "application/json")
     public List<MultipleChoices> multipleChoicesfindAllProblemsByDepartment(
             @PathVariable String department)
     {
         return onlineTestService.multipleChoicesfindAllProblemsByDepartmentService(department);
+    }
+
+    // TODO EDIT MULTIPLE CHOICES PROBLEM
+    @RequestMapping(value = "/multiple-choices/{id}/edit", method = RequestMethod.POST)
+    public void multipleChoicesEditProblem(
+            @PathVariable long id,
+            @RequestBody EditMultipleChoicesRequest editMultipleChoicesRequest)
+    {
+        onlineTestService.multipleChoicesEditProblemService(id, editMultipleChoicesRequest);
+    }
+
+    // ------- ALL SERVICE -------
+
+    // TODO CREATE PROBLEM SET
+    @RequestMapping(value = "/create-problemset", produces = "application/json")
+    public List<Problem> createProblemSet(
+            @RequestBody CreateProblemSetRequest createProblemSetRequest)
+    {
+        return onlineTestService.createProblemSetService(createProblemSetRequest);
     }
 }

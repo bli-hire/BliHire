@@ -9,11 +9,9 @@ import javax.persistence.*;
  * Created by ARDI on 8/7/2017.
  */
 @Entity
-public class MultipleChoices {
+public class MultipleChoices extends Problem{
 
-    @Id
-    @GeneratedValue
-    private long id;
+
 
     @Enumerated(EnumType.STRING)
     private Department department;
@@ -28,11 +26,13 @@ public class MultipleChoices {
     @Enumerated(EnumType.STRING)
     private ProblemDifficulty problemDifficulty;
 
+    private boolean canBeGenerated;
+
     public MultipleChoices(){
 
     }
 
-    public MultipleChoices(Department department, String problem, String answerA, String answerB, String answerC, String answerD, String realAnswer, ProblemDifficulty problemDifficulty) {
+    public MultipleChoices(Department department, String problem, String answerA, String answerB, String answerC, String answerD, String realAnswer, ProblemDifficulty problemDifficulty, boolean canBeGenerated) {
         this.department = department;
         this.problem = problem;
         this.answerA = answerA;
@@ -41,15 +41,10 @@ public class MultipleChoices {
         this.answerD = answerD;
         this.realAnswer = realAnswer;
         this.problemDifficulty = problemDifficulty;
+        this.canBeGenerated = canBeGenerated;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public Department getDepartment() {
         return department;
@@ -115,4 +110,11 @@ public class MultipleChoices {
         this.problemDifficulty = problemDifficulty;
     }
 
+    public boolean isCanBeGenerated() {
+        return canBeGenerated;
+    }
+
+    public void setCanBeGenerated(boolean canBeGenerated) {
+        this.canBeGenerated = canBeGenerated;
+    }
 }
