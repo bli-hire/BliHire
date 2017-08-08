@@ -1,14 +1,17 @@
 package com.empatkepala.utility;
 
 import com.empatkepala.entity.Fpk;
+import com.empatkepala.entity.JobVacancy;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.FpkRepository;
+import com.empatkepala.repository.JobVacancyRepository;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.repository.UserRepository;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +30,10 @@ public class DatabaseSeeder {
 
     @Autowired
     private MppRepository mppRepository;
+
+    @Autowired
+    private JobVacancyRepository jobVacancyRepository;
+
     @PostConstruct
     private void initDataTest(){
 
@@ -92,22 +99,23 @@ public class DatabaseSeeder {
         fpkRepository.save(fpk);
 
         Mpp mpp = new Mpp();
-        mpp.setReason("Tes");
+//        mpp.setReason("Tes");
         mpp.setDepartment(Department.Finance);
-        mpp.setEmployeeStatus("Tes");
+//        mpp.setEmployeeStatus("Tes");
         mppRepository.save(mpp);
 
         Mpp mpp2 = new Mpp();
-        mpp2.setReason("Tes");
+//        mpp2.setReason("Tes");
         mpp2.setDepartment(Department.Finance);
-        mpp2.setEmployeeStatus("Tes");
+//        mpp2.setEmployeeStatus("Tes");
         mpp2.setAccept(true);
         mppRepository.save(mpp2);
 
         Mpp mpp3 = new Mpp();
-        mpp3.setReason("Tes");
+//        mpp3.setReason("Tes");
         mpp3.setDepartment(Department.Finance);
-        mpp3.setEmployeeStatus("Tes");
+//        mpp3.setEmployeeStatus("Tes");
+        mpp3.setCreatedDate(new DateTime());
         mpp3.setAccept(true);
         mppRepository.save(mpp3);
 
@@ -171,6 +179,40 @@ public class DatabaseSeeder {
         fpk4.setStatusAccept(true);
         fpkRepository.save(fpk4);
 
+        //Ini buat prepare data di data job vacancy, kalo seeder dihapus tolong tetap diadakan - Juan
+        JobVacancy humanResource = new JobVacancy();
+        humanResource.setDepartment(Department.HumanResource);
+        JobVacancy marketing = new JobVacancy();
+        marketing.setDepartment(Department.Marketing);
+        JobVacancy tradePartnership = new JobVacancy();
+        tradePartnership.setDepartment(Department.TradePartnership);
+        JobVacancy operation = new JobVacancy();
+        operation.setDepartment(Department.Operation);
+        JobVacancy technology = new JobVacancy();
+        technology.setDepartment(Department.Technology);
+
+        JobVacancy businessDevelopment = new JobVacancy();
+        businessDevelopment.setDepartment(Department.BusinessDevelopment);
+        JobVacancy finance = new JobVacancy();
+        finance.setDepartment(Department.Finance);
+        JobVacancy projectManagement = new JobVacancy();
+        projectManagement.setDepartment(Department.ProjectManagement);
+        JobVacancy productManagement = new JobVacancy();
+        productManagement.setDepartment(Department.ProductManagement);
+
+        jobVacancyRepository.save(humanResource);
+        jobVacancyRepository.save(marketing);
+        jobVacancyRepository.save(tradePartnership);
+        jobVacancyRepository.save(operation);
+        jobVacancyRepository.save(technology);
+        jobVacancyRepository.save(businessDevelopment);
+        jobVacancyRepository.save(finance);
+        jobVacancyRepository.save(projectManagement);
+        jobVacancyRepository.save(productManagement);
+
+        //....
+        //...
+        // Juan
     }
 
 }
