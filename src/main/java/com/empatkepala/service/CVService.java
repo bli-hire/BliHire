@@ -23,5 +23,6 @@ public interface CVService  {
 
     CV getCVByUid(String uid);
 
+    CV getLastAddedCv();
 
 }

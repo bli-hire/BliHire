@@ -39,6 +39,7 @@ public class CVController {
         result.setTotalData(data.size());
         result.setStatus(HttpStatus.FOUND.toString());
         result.setMethod(HttpMethod.GET.name());
+
         result.setMessage("Success");
         return result;
     }
@@ -56,23 +57,33 @@ public class CVController {
 
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public void addCV(@RequestBody CVFormRequest addCVFormRequest)
-    {
-        cvService.addCV(addCVFormRequest);
-    }
-
     @RequestMapping(value = "/getCVByUid", method = RequestMethod.GET)
     public CVResponse getCVByUid(
             @RequestHeader String uid){
         try {
             List<CV> resultCv = new ArrayList<>();
             resultCv.add(cvService.findByUid(uid));
-            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Get Data ",resultCv, resultCv.size());
+            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Get Data ",resultCv,resultCv.size());
         }catch(Exception ex){
             return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
         }
 
     }
 
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    public CVResponse sendCv(@RequestBody CVFormRequest addCVFormRequest)
+    {
+        cvService.addCV(addCVFormRequest);
+        List<CV> result = new ArrayList<>();
+        result.add(cvService.getLastAddedCv());
+        return new CVResponse("400","Success Send CV", result, 1);
+    }
+
+    @RequestMapping(value = "/getLastUid", method = RequestMethod.GET)
+    public CVResponse getLastCv()
+    {
+        List<CV> result = new ArrayList<>();
+        result.add(cvService.getLastAddedCv());
+        return new CVResponse("400","Success Send CV", result, 1);
+    }
 }

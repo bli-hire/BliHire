@@ -120,4 +120,8 @@ public class CVServiceImpl implements CVService{
         return  cvRepository.findOneByUid(uid);
     }
 
+    @Override
+    public CV getLastAddedCv() {
+        return cvRepository.findFirstByOrderByUidDesc();
+    }
 }
