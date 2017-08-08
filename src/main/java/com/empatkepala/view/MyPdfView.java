@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,45 +20,111 @@ public class MyPdfView extends AbstractPdfView {
     protected void buildPdfDocument(Map<String, Object> model, Document document, PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<CV> cvs = (List<CV>) model.get("cv");
 
-        PdfPTable table = new PdfPTable(2);
+        PdfPTable table = new PdfPTable(1);
         table.setWidthPercentage(60);
-        table.setWidths(new int[] {1, 3});
+        table.setWidths(new int[] {4});
 
         Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
 
         PdfPCell hcell;
-        hcell = new PdfPCell(new Phrase("Id CV"));
+        hcell = new PdfPCell(new Phrase("Data", headFont));
         hcell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(hcell);
 
-        hcell = new PdfPCell(new Phrase("Nama"));
-        hcell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        hcell.setHorizontalAlignment(Element.ALIGN_LEFT);
-        table.addCell(hcell);
-
-        hcell = new PdfPCell(new Phrase("UID"));
-        hcell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-        hcell.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        table.addCell(hcell);
 
         for (CV cv : cvs) {
 
             PdfPCell cell;
 
-            cell = new PdfPCell(new Phrase(Long.toString(cv.getIdCV()), headFont));
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell = new PdfPCell(new Phrase("ID CV :"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(cv.getFullName(), headFont));
+            cell = new PdfPCell(new Phrase(Long.toString(cv.getIdCV())));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Uid :"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(cv.getUid()));
             cell.setPaddingLeft(5);
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
 
-            cell = new PdfPCell(new Phrase(String.valueOf(cv.getUid()), headFont));
-            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell.setPaddingRight(5);
+            cell = new PdfPCell(new Phrase("Title :"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(cv.getTitle()));
+            cell.setPaddingLeft(5);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Job Title :"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(cv.getJobTitle()));
+            cell.setPaddingLeft(5);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Full Name :"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(cv.getFullName()));
+            cell.setPaddingLeft(5);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Place Date Of Birth :"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(cv.getTitle()));
+            cell.setPaddingLeft(5);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("idCardNumber :"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase(cv.getIdCardNumber()));
+            cell.setPaddingLeft(5);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            cell = new PdfPCell(new Phrase("Driving License :"));
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
+            ArrayList<String> 
+            cell = new PdfPCell(new Phrase(cv.getTitle()));
+            cell.setPaddingLeft(5);
+            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            table.addCell(cell);
+
         }
 
         document.add(table);
