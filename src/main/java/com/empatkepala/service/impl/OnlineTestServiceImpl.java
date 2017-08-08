@@ -3,12 +3,15 @@ package com.empatkepala.service.impl;
 import com.empatkepala.entity.OnlineTestEntity.Essay;
 import com.empatkepala.entity.OnlineTestEntity.MultipleChoices;
 import com.empatkepala.entity.OnlineTestEntity.Problem;
+import com.empatkepala.entity.OnlineTestEntity.TechnicalTest;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.OnlineTestRequest.*;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.ProblemDifficulty;
+import com.empatkepala.repository.CVRepository;
 import com.empatkepala.repository.OnlineTestRepository.EssayRepository;
 import com.empatkepala.repository.OnlineTestRepository.MultipleChoicesRepository;
+import com.empatkepala.repository.OnlineTestRepository.TechnicalTestRepository;
 import com.empatkepala.service.OnlineTestService;
 import com.empatkepala.utility.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +33,21 @@ public class OnlineTestServiceImpl implements OnlineTestService{
     @Autowired
     MultipleChoicesRepository multipleChoicesRepository;
     @Autowired
+    CVRepository cvRepository;
+    @Autowired
+    TechnicalTestRepository technicalTestRepository;
+    @Autowired
     Helper helper;
 
+    // ------- ESSAY -------
+
+    // TODO GET ALL ESSAY PROBLEMS
     @Override
     public List<Essay> essayGetAllProblemsService() {
         return essayRepository.findAll();
     }
 
+    // TODO ADD ESSAY PROBLEM
     @Override
     public void essayAddProblemService(
             @RequestBody AddEssayRequest addEssayRequest)
@@ -51,11 +62,13 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         essayRepository.save(essay);
     }
 
+    // TODO DELETE ESSAY PROBLEM
     @Override
     public void essayDeleteProblemService(@PathVariable long id) {
         essayRepository.delete(id);
     }
 
+    // TODO FIND ALL ESSAY PROBLEM BY DEPARTMENT PARAM DEPARTMENT
     @Override
     public List<Essay> essayfindAllProblemsByDepartmentService(String department) {
         Department dep = Department.valueOf(department);
@@ -63,6 +76,7 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         return essays;
     }
 
+    // TODO GET ALL ESSAY PROBLEM BY DEPARTMENT
     @Override
     public List<Essay> essayGetAllDepartmentProblemsService() {
         User user = helper.getCurrentUser();
@@ -72,6 +86,7 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         return essays;
     }
 
+    // TODO EDIT ESSAY PROBLEM
     @Override
     public void essayEditProblemService(
             @PathVariable long id,
@@ -87,12 +102,17 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         essayRepository.save(essay);
     }
 
+
+    // ------- Multiple Choices -------
+
+    // TODO GET ALL MULTIPLE CHOICES PROBLEMS
     @Override
     public List<MultipleChoices> multipleChoicesGetAllProblemsService()
     {
         return multipleChoicesRepository.findAll();
     }
 
+    // TODO ADD MULTIPLE CHOICES PROBLEM
     @Override
     public void multipleChoicesAddProblemService(
             @RequestBody AddMultipleChoicesRequest addMultipleChoicesRequest)
@@ -111,6 +131,7 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         multipleChoicesRepository.save(multipleChoices);
     }
 
+    // TODO DELETE MULTIPLE CHOICES PROBLEM
     @Override
     public void multipleChoicesDeleteProblemService(
             @PathVariable long id)
@@ -118,6 +139,7 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         multipleChoicesRepository.delete(id);
     }
 
+    // TODO FIND ALL MULTIPLE CHOICES PROBLEM BY DEPARTMENT PARAM DEPARTMENT
     @Override
     public List<MultipleChoices> multipleChoicesfindAllProblemsByDepartmentService(
             String department)
@@ -127,6 +149,7 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         return multipleChoicesList;
     }
 
+    // TODO EDIT MULTIPLE CHOICES PROBLEM
     @Override
     public void multipleChoicesEditProblemService(
             @PathVariable long id,
@@ -146,7 +169,10 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         multipleChoicesRepository.save(multipleChoices);
     }
 
-    @Override
+
+    // ------- OTHER SERVICES -------
+
+    // TODO CREATE PROBLEM SET
     public List<Problem> createProblemSetService(
             @RequestBody CreateProblemSetRequest createProblemSetRequest)
     {
@@ -168,6 +194,21 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         problemset.addAll(helper.pickAndRandomMultipleChoices(multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Hard), (int) numMultipleChoicesHard));
 
         return problemset;
+
+    }
+
+    // TODO CREATE TECHNICAL TEST
+    @Override
+    public void createTechnicalTestService(
+            @RequestBody CreateProblemSetRequest createProblemSetRequest)
+    {
+        List<Problem> problemSet = createProblemSetService(createProblemSetRequest);
+        TechnicalTest technicalTest = new TechnicalTest();
+
+        technicalTest.setProblems(problemSet);
+        technicalTest.setCv(cvRepository.findOne(createProblemSetRequest.getIdCV()));
+
+        technicalTestRepository.save(technicalTest);
 
     }
 
