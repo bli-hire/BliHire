@@ -21,12 +21,6 @@ public class CVServiceImpl implements CVService{
     @Autowired
     CVRepository cvRepository;
 
-
-    public CV getRequestedByCVId(Long id){
-        CV cv = cvRepository.findOne(id);
-        return cv.getRequestedBy();
-    }
-
     public CV getCVById(Long id){
         return cvRepository.findOne(id);
     }
@@ -111,7 +105,6 @@ public class CVServiceImpl implements CVService{
     public void updateStatusApplicant(@RequestBody  CVFormRequest cvFormRequest, String uid) {
         CV updatedCV = cvRepository.findOneByUid(uid);
         updatedCV.setApplicantStatus(cvFormRequest.getApplicantStatus());
-//        cvEdit.setApplicantStatus(cvFormRequest.getApplicantStatus());
         cvRepository.save(updatedCV);
     }
 
