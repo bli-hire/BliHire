@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class CVFormRequest implements Serializable{
 
     private String title;
+    private String department;
     private String jobTitle;
     private String fullName;
     private String placeDateOfBirth;
@@ -540,5 +541,13 @@ public class CVFormRequest implements Serializable{
 
     public void setApplicantStatus(String applicantStatus) {
         this.applicantStatus = applicantStatus;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

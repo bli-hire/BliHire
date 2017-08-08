@@ -20,6 +20,7 @@ public class CV {
     private long idCV;
     private String uid = RandomStringUtils.randomAlphanumeric(16);
     private String title;
+    private String department;
     private String jobTitle;
     private String fullName;
     private String placeDateOfBirth;
@@ -84,9 +85,10 @@ public class CV {
     private String applicantStatus;
 
     public CV(){}
-    public CV(String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurrentJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs,  ArrayList<Achievements> achievements, ArrayList<Language> language, ArrayList<SocialActivity> socialact,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork, String applicantStatus) {
+    public CV(String title, String department, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurrentJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs,  ArrayList<Achievements> achievements, ArrayList<Language> language, ArrayList<SocialActivity> socialact,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork, String applicantStatus) {
 
         this.title = title;
+        this.department =department;
         this.jobTitle = jobTitle;
         this.fullName = fullName;
         this.placeDateOfBirth = placeDateOfBirth;
@@ -627,5 +629,13 @@ public class CV {
 
     public void setApplicantStatus(String applicantStatus) {
         this.applicantStatus = applicantStatus;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

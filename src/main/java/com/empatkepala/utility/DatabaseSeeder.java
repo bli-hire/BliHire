@@ -290,7 +290,7 @@ public class DatabaseSeeder {
         dataSIM.add("A");
         dataSIM.add("B1");
 
-        cvRepository.save(new CV("123", "123", "123", "123", "123",dataSIM, "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123",dataBro,"123", "123", "123", "123",dataChil, "123", "123", dataSekolah, "123", "123",dataNonformal, dataAchieve, dataLanguage, dataSocial,dataExp, "123","123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "CV Received"));
+        cvRepository.save(new CV("123","123", "123", "123", "123", "123",dataSIM, "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123",dataBro,"123", "123", "123", "123",dataChil, "123", "123", dataSekolah, "123", "123",dataNonformal, dataAchieve, dataLanguage, dataSocial,dataExp, "123","123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "CV Received"));
 
     }
 
