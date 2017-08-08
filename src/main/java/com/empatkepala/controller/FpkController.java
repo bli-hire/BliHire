@@ -168,7 +168,10 @@ public class FpkController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json")
-    public FpkResponse editFpk(@RequestHeader AddFpkRequest fpkRequested, long idUser, long idFpkOld){
+    public FpkResponse editFpk(
+            @RequestBody AddFpkRequest fpkRequested,
+            @RequestHeader long idUser,
+            @RequestHeader long idFpkOld){
         fpkService.editFpk(fpkRequested,userService.getUser(idUser),fpkService.getFpk(idFpkOld));
         return new FpkResponse(HttpStatus.ACCEPTED.toString(),"Success Update Fpk",null);
     }

@@ -160,7 +160,8 @@ public class FpkServiceImpl implements FpkService{
             updatedFpk.setSkillKnowledge(fpkRequest.getSkillKnowledge());
             updatedFpk.setWorkExperience(fpkRequest.getWorkExperience());
             updatedFpk.setCompleteness(fpkRequest.getCompleteness());
-
+            updatedFpk.setJobPositionRequester(fpkRequest.getJobPositionRequester());
+            updatedFpk.setDateNeeded(new DateTime(fpkRequest.getDateNeeded()));
             fpkRepository.save(updatedFpk);
             return true;
         }
