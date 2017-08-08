@@ -20,7 +20,7 @@ public class JobVacancyController {
     JobVacancyService jobVacancyService;
 
     @RequestMapping(method= RequestMethod.GET)
-    public JobVacancyResponse getAllCV(@RequestHeader Department department) {
+    public JobVacancyResponse getAllJobVacancyByDepartment(@RequestHeader Department department) {
         JobVacancyResponse result = new JobVacancyResponse();
         JobVacancy data =new JobVacancy();
         data = jobVacancyService.getByDepartment(department);
@@ -29,6 +29,17 @@ public class JobVacancyController {
         result.setMethod(HttpMethod.GET.name());
         result.setMessage("Success");
         return result;
+    }
+
+    @RequestMapping(method= RequestMethod.GET)
+    public JobVacancyResponse getAllJobVacancyByAddPersonNeeded(@RequestHeader Department department,@RequestHeader int personNeeded,@RequestHeader String position) {
+        try{
+            jobVacancyService.addPersonNeeded(department, personNeeded, position);
+            return new JobVacancyResponse(HttpStatus.ACCEPTED.toString(),"Success get Data Person Needed",null,HttpMethod.GET.toString());
+        }catch (Exception ex){
+            return new JobVacancyResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null, HttpMethod.GET.toString());
+        }
+
     }
 
 
