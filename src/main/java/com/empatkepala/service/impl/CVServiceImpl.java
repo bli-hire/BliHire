@@ -31,9 +31,14 @@ public class CVServiceImpl implements CVService{
         return cvRepository.findOne(id);
     }
 
+    public CV findByUid(String uid){
+        return cvRepository.findOneByUid(uid);
+    }
+
     public Collection<CV> getAllCV(){
         return cvRepository.findAll();
     }
+
 
     public void addCV(
             @RequestBody CVFormRequest cvFormRequest)
@@ -97,12 +102,26 @@ public class CVServiceImpl implements CVService{
         cv.setSocialact(cvFormRequest.getSocialact());
         cv.setAchievements(cvFormRequest.getAchievements());
         cv.setLanguage(cvFormRequest.getLanguage());
+        cv.setApplicantStatus(cvFormRequest.getApplicantStatus());
 
         cvRepository.save(cv);
     }
-    public void updateCV(CV cv){
-        cvRepository.save(cv);
+
+    @Override
+    public void updateStatusApplicant(@RequestBody  CVFormRequest cvFormRequest, String uid) {
+        CV updatedCV = cvRepository.findOneByUid(uid);
+        updatedCV.setApplicantStatus(cvFormRequest.getApplicantStatus());
+//        cvEdit.setApplicantStatus(cvFormRequest.getApplicantStatus());
+        cvRepository.save(updatedCV);
     }
 
+    @Override
+    public CV getCVByUid(String uid){
+        return  cvRepository.findOneByUid(uid);
+    }
 
+    @Override
+    public CV getLastAddedCv() {
+        return cvRepository.findFirstByOrderByUidDesc();
+    }
 }

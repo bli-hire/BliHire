@@ -1,21 +1,23 @@
 package com.empatkepala.utility;
 
-import com.empatkepala.entity.Fpk;
-import com.empatkepala.entity.JobVacancy;
-import com.empatkepala.entity.Mpp;
-import com.empatkepala.entity.User;
+import com.empatkepala.entity.*;
+import com.empatkepala.entity.CVEntity.*;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
+
+import com.empatkepala.repository.*;
 import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.repository.JobVacancyRepository;
 import com.empatkepala.repository.MppRepository;
 import com.empatkepala.repository.UserRepository;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -33,6 +35,9 @@ public class DatabaseSeeder {
 
     @Autowired
     private JobVacancyRepository jobVacancyRepository;
+
+    @Autowired
+    private CVRepository cvRepository;
 
     @PostConstruct
     private void initDataTest(){
@@ -157,6 +162,67 @@ public class DatabaseSeeder {
         //....
         //...
         // Juan
+
+
+        //DataSeed Untuk CV
+        //ryan
+        ArrayList<Brothers> dataBro = new ArrayList<>();
+        Brothers bro = new Brothers("123","123","123","123");
+        dataBro.add(bro);
+
+        ArrayList<Children> dataChil = new ArrayList<>();
+        Children chil = new Children("123","123","123","123");
+        dataChil.add(chil);
+
+        ArrayList<Language> dataLanguage = new ArrayList<>();
+        ArrayList<String> spoken =new ArrayList<>();
+        spoken.add("Active");
+        spoken.add("Passive");
+        ArrayList<String> written = new ArrayList<>();
+        written.add("Active");
+        written.add("Passive");
+        Language lang = new Language();
+        lang = new Language("bahasa Spanyol",spoken,written);
+        dataLanguage.add(lang);
+
+        ArrayList<NonFormalCourse> dataNonformal = new ArrayList<>();
+        NonFormalCourse nonForm = new NonFormalCourse("123","123",1,"123");
+        dataNonformal.add(nonForm);
+        NonFormalCourse nonForm2 = new NonFormalCourse("123","123",1,"123");
+        dataNonformal.add(nonForm2);
+        NonFormalCourse nonForm3 = new NonFormalCourse("123","123",1,"123");
+        dataNonformal.add(nonForm3);
+
+        ArrayList<School> dataSekolah = new ArrayList<>();
+        School scho = new School("123","123","123","123",2.3);
+        dataSekolah.add(scho);
+        School scho2 = new School("123","123","123","123",2.3);
+        dataSekolah.add(scho2);
+
+        ArrayList<WorkExperience> dataExp = new ArrayList<>();
+        WorkExperience we = new WorkExperience("123","123","123","123","123","123","123","123","123","123");
+        WorkExperience we2 = new WorkExperience("123","123","123","123","123","123","123","123","123","123");
+        dataExp.add(we);
+        dataExp.add(we2);
+
+        ArrayList<Achievements> dataAchieve = new ArrayList<>();
+        Achievements achieve = new Achievements("Olimpiade matematika", 1990, "Juara 1");
+        dataAchieve.add(achieve);
+        Achievements achieve2 = new Achievements("Olimpiade matematika", 1990, "Juara 1");
+        dataAchieve.add(achieve2);
+
+        ArrayList<SocialActivity> dataSocial = new ArrayList<>();
+        SocialActivity socialAct = new SocialActivity("123","123","123","123");
+        dataSocial.add(socialAct);
+        SocialActivity socialAct2 = new SocialActivity("123","123","123","123");
+        dataSocial.add(socialAct2);
+
+        ArrayList<String> dataSIM = new ArrayList<>();
+        dataSIM.add("A");
+        dataSIM.add("B1");
+
+        cvRepository.save(new CV("123", "123", "123", "123", "123",dataSIM, "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123",dataBro,"123", "123", "123", "123",dataChil, "123", "123", dataSekolah, "123", "123",dataNonformal, dataAchieve, dataLanguage, dataSocial,dataExp, "123","123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "CV Received"));
+
     }
 
 }

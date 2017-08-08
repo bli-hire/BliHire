@@ -5,9 +5,13 @@ import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.entity.request.MppFormRequest;
+import com.empatkepala.entity.response.CVResponse;
 import com.empatkepala.service.CVService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,19 +31,58 @@ public class CVController {
 
 
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
-    public Collection<CV> getAllCV(){
-        return cvService.getAllCV();
+    public CVResponse getAllCV() {
+        CVResponse result = new CVResponse();
+        Collection<CV> data =new ArrayList<>();
+        data = cvService.getAllCV();
+        result.setData(data);
+        result.setTotalData(data.size());
+        result.setStatus(HttpStatus.FOUND.toString());
+        result.setMethod(HttpMethod.GET.name());
+        result.setMessage("Success");
+        return result;
     }
 
-    @RequestMapping(method = RequestMethod.PUT,produces = "application/json")
-    public void updateFpk(CV findOne){
-        cvService.updateCV(findOne);
+    @RequestMapping(value = "/updateStatusApplicant", method = RequestMethod.POST)
+    public CVResponse updateStatusApplicant(
+            @RequestHeader String uid,
+            @RequestBody CVFormRequest cvFormRequest ){
+        try {
+            cvService.updateStatusApplicant(cvFormRequest,uid);
+            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null,0);
+        }catch(Exception ex){
+            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
+        }
+
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public void addCV(@RequestBody CVFormRequest addCVFormRequest)
+    @RequestMapping(value = "/getCVByUid", method = RequestMethod.GET)
+    public CVResponse getCVByUid(
+            @RequestHeader String uid){
+        try {
+            List<CV> resultCv = new ArrayList<>();
+            resultCv.add(cvService.findByUid(uid));
+            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Get Data ",resultCv,resultCv.size());
+        }catch(Exception ex){
+            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
+        }
+
+    }
+
+    @RequestMapping(value = "/send", method = RequestMethod.POST)
+    public CVResponse sendCv(@RequestBody CVFormRequest addCVFormRequest)
     {
         cvService.addCV(addCVFormRequest);
+        List<CV> result = new ArrayList<>();
+        result.add(cvService.getLastAddedCv());
+        return new CVResponse("400","Success Send CV", result, 1);
     }
 
+    @RequestMapping(value = "/getLastUid", method = RequestMethod.GET)
+    public CVResponse getLastCv()
+    {
+        List<CV> result = new ArrayList<>();
+        result.add(cvService.getLastAddedCv());
+        return new CVResponse("400","Success get last data CV", result, 1);
+    }
 }
