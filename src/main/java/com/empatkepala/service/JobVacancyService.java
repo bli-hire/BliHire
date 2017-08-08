@@ -11,5 +11,5 @@ import org.springframework.stereotype.Service;
 public interface JobVacancyService {
     JobVacancy getByDepartment(Department department);
 
-    void addPersonNeeded(Department department, int personNeeded);
+    void addPersonNeeded(Department department, int personNeeded, String position);
 }

@@ -4,7 +4,15 @@ import com.empatkepala.entity.*;
 import com.empatkepala.entity.CVEntity.*;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
+
 import com.empatkepala.repository.*;
+import com.empatkepala.repository.FpkRepository;
+import com.empatkepala.repository.JobVacancyRepository;
+import com.empatkepala.repository.MppRepository;
+import com.empatkepala.repository.UserRepository;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -48,7 +56,7 @@ public class DatabaseSeeder {
         user2.setRole(Role.DepartmentHead);
         user2.setPassword("head-department");
         user2.setEmail("dummy-head@account.com");
-        user2.setDepartment(Department.Finance);
+        user2.setDepartment(Department.Technology);
         userRepository.save(user2);
 
         User user3 = new User();
@@ -56,7 +64,7 @@ public class DatabaseSeeder {
         user3.setSurname("Dummy Member");
         user3.setRole(Role.DepartmentTeamMember);
         user3.setPassword("member-department");
-        user3.setDepartment(Department.Finance);
+        user3.setDepartment(Department.Technology);
         user3.setEmail("dummy-memberd@account.com");
         userRepository.save(user3);
 
@@ -86,22 +94,23 @@ public class DatabaseSeeder {
         fpkRepository.save(fpk);
 
         Mpp mpp = new Mpp();
-        mpp.setReason("Tes");
+//        mpp.setReason("Tes");
         mpp.setDepartment(Department.Finance);
-        mpp.setEmployeeStatus("Tes");
+//        mpp.setEmployeeStatus("Tes");
         mppRepository.save(mpp);
 
         Mpp mpp2 = new Mpp();
-        mpp2.setReason("Tes");
+//        mpp2.setReason("Tes");
         mpp2.setDepartment(Department.Finance);
-        mpp2.setEmployeeStatus("Tes");
+//        mpp2.setEmployeeStatus("Tes");
         mpp2.setAccept(true);
         mppRepository.save(mpp2);
 
         Mpp mpp3 = new Mpp();
-        mpp3.setReason("Tes");
+//        mpp3.setReason("Tes");
         mpp3.setDepartment(Department.Finance);
-        mpp3.setEmployeeStatus("Tes");
+//        mpp3.setEmployeeStatus("Tes");
+        mpp3.setCreatedDate(new DateTime());
         mpp3.setAccept(true);
         mppRepository.save(mpp3);
 
@@ -130,6 +139,7 @@ public class DatabaseSeeder {
         operation.setDepartment(Department.Operation);
         JobVacancy technology = new JobVacancy();
         technology.setDepartment(Department.Technology);
+
         JobVacancy businessDevelopment = new JobVacancy();
         businessDevelopment.setDepartment(Department.BusinessDevelopment);
         JobVacancy finance = new JobVacancy();
