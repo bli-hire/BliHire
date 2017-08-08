@@ -8,7 +8,7 @@ import java.util.Collection;
  * Created by D on 30-Jul-17.
  */
 public class FpkResponse {
-    private String status,message;
+    private String status,message,requestHeader,requestBody,method;
     private Collection<Fpk> data;
     private int totalData;
 
@@ -25,6 +25,17 @@ public class FpkResponse {
         this.message = message;
         this.data = data;
         this.totalData = totalData;
+    }
+
+    public FpkResponse(String status,String message,Collection<Fpk> data,int totalData,
+                       String method,String requestHeader, String requestBody){
+        this.status = status;
+        this.message = message;
+        this.data = data;
+        this.totalData = totalData;
+        this.method = method;
+        this.requestBody = requestBody;
+        this.requestHeader = requestHeader;
     }
 
     public String getStatus() {
@@ -59,4 +70,27 @@ public class FpkResponse {
         this.totalData=number;
     }
 
+    public String getRequestHeader() {
+        return requestHeader;
+    }
+
+    public void setRequestHeader(String requestHeader) {
+        this.requestHeader = requestHeader;
+    }
+
+    public String getRequestBody() {
+        return requestBody;
+    }
+
+    public void setRequestBody(String requestBody) {
+        this.requestBody = requestBody;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
 }
