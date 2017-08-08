@@ -123,6 +123,12 @@ public class DatabaseSeeder {
         fpk2.setWorkExperience("Tes2");
         fpk2.setDateNeeded(new DateTime(2017,12,3,0,0));
         fpk2.setJobPositionRequester("Senior Developer");
+        fpk2.setApproveCeo(false);
+        fpk2.setApproveHead(false);
+        fpk2.setStatusHeadApprove(false);
+        fpk2.setStatusCeoApprove(false);
+        fpk2.setAccept(false);
+        fpk2.setStatusAccept(false);
         fpkRepository.save(fpk2);
 
         Fpk fpk3 = new Fpk();
