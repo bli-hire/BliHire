@@ -16,12 +16,12 @@ public interface CVService  {
 
     Collection<CV> getAllCV();
 
-    void addCV(@RequestBody CVFormRequest cvFormRequest);
+    CV addCV(@RequestBody CVFormRequest cvFormRequest);
 
     void updateStatusApplicant(CVFormRequest cvFormRequest, String uid);
 
     CV getCVByUid(String uid);
 
-    CV getLastAddedCv();
+//    CV getLastAddedCv();
 
 }

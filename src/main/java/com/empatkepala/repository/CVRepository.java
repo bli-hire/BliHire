@@ -14,5 +14,5 @@ import java.util.Collection;
 public interface CVRepository extends JpaRepository<CV, Long> {
     Collection<CV> findByUid(String uid);
     CV findOneByUid(String uid);
-    CV findFirstByOrderByUidDesc();
+//    CV findFirstByOrderByUidDesc();
 }

@@ -89,7 +89,14 @@
             <artifactId>wiremock-standalone</artifactId>
             <version>RELEASE</version>
         </dependency>
-    </dependencies>
+
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>4.2.2</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>
