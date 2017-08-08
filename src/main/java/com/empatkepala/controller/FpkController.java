@@ -1,6 +1,7 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Fpk;
+import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddFpkRequest;
 import com.empatkepala.entity.request.ApproveRejectFpkRequest;
 import com.empatkepala.entity.response.FpkResponse;
@@ -8,6 +9,7 @@ import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.FpkRepository;
 import com.empatkepala.service.FpkService;
+import com.empatkepala.service.JobVacancyService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,8 @@ public class FpkController {
     FpkService fpkService;
     @Autowired
     UserService userService;
+    @Autowired
+    JobVacancyService jobVacancyService;
 
     @RequestMapping(value = "/getAllFpk", method = RequestMethod.GET,produces = "application/json")
     public FpkResponse getAllFpk(){
@@ -86,9 +90,10 @@ public class FpkController {
     @RequestMapping(value = "/approve", method = RequestMethod.POST, produces = "application/json")
     public FpkResponse approveFpk(@RequestBody ApproveRejectFpkRequest approveRejectFpkRequest){
         try {
-            fpkService.approveFpk(
-                    fpkService.getFpk(approveRejectFpkRequest.getIdFpk()),
-                    userService.getUser(approveRejectFpkRequest.getIdUser()));
+            User userRequested = userService.getUser(approveRejectFpkRequest.getIdUser());
+            Fpk fpkToPublish = fpkService.getFpk(approveRejectFpkRequest.getIdFpk());
+            fpkService.approveFpk(fpkToPublish, userRequested);
+            jobVacancyService.addPersonNeeded(userRequested.getDepartment(),fpkToPublish.getNumberOfPerson(),fpkToPublish.getJobPositionRequester());
             return new FpkResponse("Sukses Approve", "Success Approve Fpk", null);
         }catch(Exception ex){
             return new FpkResponse(ex.toString(),ex.getStackTrace().toString(),null);
@@ -191,5 +196,4 @@ public class FpkController {
         Collection<Fpk> data = fpkService.getFpkPublished(department);
         return new FpkResponse(HttpStatus.FOUND.toString(),"Success Get Fpk By Department",data,data.size());
     }
-
 }
