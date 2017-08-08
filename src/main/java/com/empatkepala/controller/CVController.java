@@ -39,7 +39,6 @@ public class CVController {
         result.setTotalData(data.size());
         result.setStatus(HttpStatus.FOUND.toString());
         result.setMethod(HttpMethod.GET.name());
-
         result.setMessage("Success");
         return result;
     }
@@ -84,6 +83,6 @@ public class CVController {
     {
         List<CV> result = new ArrayList<>();
         result.add(cvService.getLastAddedCv());
-        return new CVResponse("400","Success Send CV", result, 1);
+        return new CVResponse("400","Success get last data CV", result, 1);
     }
 }
