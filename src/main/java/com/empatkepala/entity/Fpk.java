@@ -2,9 +2,10 @@ package com.empatkepala.entity;
 
 import com.empatkepala.entity.User;
 import com.empatkepala.enumeration.Department;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  * Created by ALz on 3/11/2017.
@@ -19,8 +20,13 @@ public class Fpk {
     private long idFpk;
 
     private int numberOfPerson;
-    private Date createdDate = new Date();
-    private Date dateNeeded;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime createdDate = new DateTime();
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime dateNeeded;
+
     private String jobPositionRequester;
     private String reason;
     private String fitnessWithMpp;
@@ -31,25 +37,29 @@ public class Fpk {
     private String completeness;
     private String comment;
     private Department department;
-    private boolean reject;
+    private boolean statusAccept;
     private boolean accept;
-    private boolean needApproveCeo;
-    private boolean needAproveHead;
     private boolean approveCeo;
+    private boolean statusCeoApprove;
     private boolean approveHead;
+    private boolean statusHeadApprove;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne(cascade = CascadeType.MERGE)
     private User requestedBy;
 //    @ManyToOne(fetch = FetchType.LAZY)
     @ManyToOne(cascade = CascadeType.MERGE)
-    private User approvedBy;
+    private User ceoApproved;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User headApproved;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User hrdAccepted;
 
     public Fpk(){}
 
     public Fpk(int positionNeeded,String reason,String fitnessWithMpp,String employeeStatus,
                String school,String workExperience,String skillKnowledge,String completeness,
-               User requestedBy,Department department,Date needed, String jobPositionRequester) {
+               User requestedBy,Department department,DateTime needed, String jobPositionRequester) {
         this.numberOfPerson = positionNeeded;
         this.reason = reason;
         this.fitnessWithMpp = fitnessWithMpp;
@@ -64,12 +74,12 @@ public class Fpk {
         this.jobPositionRequester = jobPositionRequester;
     }
 
-    public boolean isReject() {
-        return reject;
+    public boolean isStatusAccept() {
+        return statusAccept;
     }
 
-    public void setReject(boolean reject) {
-        this.reject = reject;
+    public void setStatusAccept(boolean statusAccept) {
+        this.statusAccept = statusAccept;
     }
 
     public boolean isAccept() {
@@ -104,11 +114,11 @@ public class Fpk {
         this.numberOfPerson = positionNeeded;
     }
 
-    public Date getCreatedDate() {
+    public DateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date date) {
+    public void setCreatedDate(DateTime date) {
         this.createdDate = date;
     }
 
@@ -176,19 +186,12 @@ public class Fpk {
         this.requestedBy = requestedBy;
     }
 
-    public User getApprovedBy() {
-        return approvedBy;
-    }
-
-    public void setApprovedBy(User approvedBy) {
-        this.approvedBy = approvedBy;
-    }
-
-    public Date getDateNeeded() {
+    public DateTime getDateNeeded() {
         return dateNeeded;
     }
 
-    public void setDateNeeded(Date dateNeeded) {
+    public void setDateNeeded(DateTime
+                                      dateNeeded) {
         this.dateNeeded = dateNeeded;
     }
 
@@ -216,22 +219,6 @@ public class Fpk {
         this.comment = comment;
     }
 
-    public boolean isNeedApproveCeo() {
-        return needApproveCeo;
-    }
-
-    public void setNeedApproveCeo(boolean needApproveCeo) {
-        this.needApproveCeo = needApproveCeo;
-    }
-
-    public boolean isNeedAproveHead() {
-        return needAproveHead;
-    }
-
-    public void setNeedAproveHead(boolean needAproveHead) {
-        this.needAproveHead = needAproveHead;
-    }
-
     public boolean isApproveCeo() {
         return approveCeo;
     }
@@ -246,5 +233,45 @@ public class Fpk {
 
     public void setApproveHead(boolean approveHead) {
         this.approveHead = approveHead;
+    }
+
+    public User getCeoApproved() {
+        return ceoApproved;
+    }
+
+    public void setCeoApproved(User ceoApproved) {
+        this.ceoApproved = ceoApproved;
+    }
+
+    public User getHeadApproved() {
+        return headApproved;
+    }
+
+    public void setHeadApproved(User headApproved) {
+        this.headApproved = headApproved;
+    }
+
+    public User getHrdAccepted() {
+        return hrdAccepted;
+    }
+
+    public void setHrdAccepted(User hrdAccepted) {
+        this.hrdAccepted = hrdAccepted;
+    }
+
+    public boolean isStatusCeoApprove() {
+        return statusCeoApprove;
+    }
+
+    public void setStatusCeoApprove(boolean statusCeoApprove) {
+        this.statusCeoApprove = statusCeoApprove;
+    }
+
+    public boolean isStatusHeadApprove() {
+        return statusHeadApprove;
+    }
+
+    public void setStatusHeadApprove(boolean statusHeadApprove) {
+        this.statusHeadApprove = statusHeadApprove;
     }
 }
