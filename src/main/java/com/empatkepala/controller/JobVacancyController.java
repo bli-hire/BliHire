@@ -31,7 +31,7 @@ public class JobVacancyController {
         return result;
     }
 
-    @RequestMapping(method= RequestMethod.GET)
+    @RequestMapping(value = "/updateStatusApplicant", method = RequestMethod.POST)
     public JobVacancyResponse getAllJobVacancyByAddPersonNeeded(@RequestHeader Department department,@RequestHeader int personNeeded,@RequestHeader String position) {
         try{
             jobVacancyService.addPersonNeeded(department, personNeeded, position);

@@ -34,7 +34,7 @@ public class CVServiceImpl implements CVService{
     }
 
 
-    public void addCV(
+    public CV addCV(
             @RequestBody CVFormRequest cvFormRequest)
     {
 
@@ -98,7 +98,8 @@ public class CVServiceImpl implements CVService{
         cv.setLanguage(cvFormRequest.getLanguage());
         cv.setApplicantStatus(cvFormRequest.getApplicantStatus());
 
-        cvRepository.save(cv);
+        return cvRepository.save(cv);
+
     }
 
     @Override
@@ -113,8 +114,8 @@ public class CVServiceImpl implements CVService{
         return  cvRepository.findOneByUid(uid);
     }
 
-    @Override
-    public CV getLastAddedCv() {
-        return cvRepository.findFirstByOrderByUidDesc();
-    }
+//    @Override
+//    public CV getLastAddedCv() {
+//        return cvRepository.findFirstByOrderByUidDesc();
+//    }
 }

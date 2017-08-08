@@ -8,15 +8,15 @@ import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.entity.response.CVResponse;
 import com.empatkepala.service.CVService;
 import com.empatkepala.service.UserService;
+import com.empatkepala.view.MyPdfView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -72,17 +72,29 @@ public class CVController {
     @RequestMapping(value = "/send", method = RequestMethod.POST)
     public CVResponse sendCv(@RequestBody CVFormRequest addCVFormRequest)
     {
-        cvService.addCV(addCVFormRequest);
-        List<CV> result = new ArrayList<>();
-        result.add(cvService.getLastAddedCv());
-        return new CVResponse("400","Success Send CV", result, 1);
+        CV addedCv = cvService.addCV(addCVFormRequest);
+        ArrayList<CV> list = new ArrayList<>();
+        list.add(addedCv);
+        return new CVResponse("400","Success Send CV", list, 1);
     }
 
-    @RequestMapping(value = "/getLastUid", method = RequestMethod.GET)
-    public CVResponse getLastCv()
-    {
-        List<CV> result = new ArrayList<>();
-        result.add(cvService.getLastAddedCv());
-        return new CVResponse("400","Success get last data CV", result, 1);
+//    @RequestMapping(value = "/getLastUid", method = RequestMethod.GET)
+//    public CVResponse getLastCv()
+//    {
+//        List<CV> result = new ArrayList<>();
+//        result.add(cvService.getLastAddedCv());
+//        return new CVResponse("400","Success get last data CV", result, 1);
+//    }
+
+    @RequestMapping(path = "/reportCV", method = RequestMethod.GET)
+    public ModelAndView report() {
+
+        Map<String, Object> model = new HashMap<>();
+        Collection<CV> cvCollection= cvService.getAllCV();
+        List<CV> cvList = new ArrayList<>();
+        cvList.addAll(cvCollection);
+        model.put("cv", cvList);
+
+        return new ModelAndView(new MyPdfView(), model);
     }
 }
