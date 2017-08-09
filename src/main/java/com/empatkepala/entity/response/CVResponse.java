@@ -1,41 +1,40 @@
 package com.empatkepala.entity.response;
 
-import com.empatkepala.entity.Fpk;
+import com.empatkepala.entity.CV;
+
 
 import java.util.Collection;
 
 /**
- * Created by D on 30-Jul-17.
+ * Created by Ryan Bagus Susilo on 8/4/2017.
  */
-public class FpkResponse {
-    private String status,message,requestHeader,requestBody,method;
-    private Collection<Fpk> data;
+public class CVResponse {
+    private String status,message;
+    private Collection<CV> data;
     private int totalData;
+    private String requestHeader;
+    private String requestBody;
+    private String method;
 
-    public FpkResponse() {}
-
-    public FpkResponse(String status,String message,Collection<Fpk> data){
-        this.status = status;
-        this.message = message;
-        this.data = data;
+    public CVResponse() {
     }
 
-    public FpkResponse(String status,String message,Collection<Fpk> data,int totalData){
+
+
+    public CVResponse(String status, String message, Collection<CV> data, int totalData){
         this.status = status;
         this.message = message;
         this.data = data;
         this.totalData = totalData;
     }
-
-    public FpkResponse(String status,String message,Collection<Fpk> data,int totalData,
-                       String method,String requestHeader, String requestBody){
+    public CVResponse(String status, String message, Collection<CV> data, int totalData, String requestHeader, String requestBody, String method) {
         this.status = status;
         this.message = message;
         this.data = data;
         this.totalData = totalData;
-        this.method = method;
-        this.requestBody = requestBody;
         this.requestHeader = requestHeader;
+        this.requestBody = requestBody;
+        this.method = method;
     }
 
     public String getStatus() {
@@ -54,20 +53,20 @@ public class FpkResponse {
         this.message = message;
     }
 
-    public Collection<Fpk> getData() {
+    public Collection<CV> getData() {
         return data;
     }
 
-    public void setData(Collection<Fpk> data) {
+    public void setData(Collection<CV> data) {
         this.data = data;
     }
 
-    public int getTotalData(){
-        return this.totalData;
+    public int getTotalData() {
+        return totalData;
     }
 
-    public void setTotalData(int number){
-        this.totalData=number;
+    public void setTotalData(int totalData) {
+        this.totalData = totalData;
     }
 
     public String getRequestHeader() {

@@ -21,21 +21,20 @@ public class CVServiceImpl implements CVService{
     @Autowired
     CVRepository cvRepository;
 
-
-    public CV getRequestedByCVId(Long id){
-        CV cv = cvRepository.findOne(id);
-        return cv.getRequestedBy();
-    }
-
     public CV getCVById(Long id){
         return cvRepository.findOne(id);
+    }
+
+    public CV findByUid(String uid){
+        return cvRepository.findOneByUid(uid);
     }
 
     public Collection<CV> getAllCV(){
         return cvRepository.findAll();
     }
 
-    public void addCV(
+
+    public CV addCV(
             @RequestBody CVFormRequest cvFormRequest)
     {
 
@@ -97,12 +96,33 @@ public class CVServiceImpl implements CVService{
         cv.setSocialact(cvFormRequest.getSocialact());
         cv.setAchievements(cvFormRequest.getAchievements());
         cv.setLanguage(cvFormRequest.getLanguage());
+        cv.setApplicantStatus(cvFormRequest.getApplicantStatus());
 
-        cvRepository.save(cv);
+        return cvRepository.save(cv);
+
     }
-    public void updateCV(CV cv){
-        cvRepository.save(cv);
+
+    @Override
+    public void updateStatusApplicant(@RequestBody  CVFormRequest cvFormRequest, String uid) {
+        CV updatedCV = cvRepository.findOneByUid(uid);
+        updatedCV.setApplicantStatus(cvFormRequest.getApplicantStatus());
+        cvRepository.save(updatedCV);
     }
 
+    @Override
+    public void updateStatusApplicant(String applicantStatus, String uid) {
+        CV updatedCV = cvRepository.findOneByUid(uid);
+        updatedCV.setApplicantStatus(applicantStatus);
+        cvRepository.save(updatedCV);
+    }
 
+    @Override
+    public CV getCVByUid(String uid){
+        return  cvRepository.findOneByUid(uid);
+    }
+
+//    @Override
+//    public CV getLastAddedCv() {
+//        return cvRepository.findFirstByOrderByUidDesc();
+//    }
 }

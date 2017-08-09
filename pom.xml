@@ -90,6 +90,18 @@
 			<version>2.0.1</version>
 
 		</dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-standalone</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>4.2.2</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
