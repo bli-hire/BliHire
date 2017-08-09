@@ -21,6 +21,12 @@ public interface FpkService{
 
     Collection<Fpk> getFpkByRequestedBy(User requestedBy);
 
+    Collection<Fpk> getFpkPendingByRequestedBy(User requestedBy);
+
+    Collection<Fpk> getFpkRejectedByRequestedBy(User requestedBy);
+
+    Collection<Fpk> getFpkAcceptedByRequestedBy(Long userId);
+
     Collection<Fpk> getFpkHistoryByDepartment(Department department, Role role);
 
     Collection<Fpk> getFpkActiveByDepartment(Department department, Role role);
@@ -46,6 +52,8 @@ public interface FpkService{
     boolean approveFpk(Fpk fpk, User approver);
 
     boolean approveFpkAsHeadDepartment(Fpk fpk, User approver);
+
+    boolean approveFpkAsCeo(Fpk fpk, User approver);
 
     boolean rejectFpkAsHeadDepartment(Fpk fpk, User approver);
 
