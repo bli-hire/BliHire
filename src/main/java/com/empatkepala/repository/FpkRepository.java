@@ -14,6 +14,7 @@ import java.util.Collection;
 @Repository
 public interface FpkRepository extends JpaRepository<Fpk, Long> {
     Collection<Fpk> findByRequestedBy(User requestedBy);
+    Collection<Fpk> findByRequestedByAndApproveHeadAndStatusHeadApprove(User requestedBy,boolean isHeadActed, boolean statusHeadAction);
     Collection<Fpk> findByDepartment(Department department);
     Collection<Fpk> findByDepartmentAndAcceptAndStatusAccept(Department department, boolean accepted, boolean statusAccept);
     Collection<Fpk> findByDepartmentAndApproveCeoAndStatusCeoApprove(Department department, boolean approveCeo, boolean statusApprove);

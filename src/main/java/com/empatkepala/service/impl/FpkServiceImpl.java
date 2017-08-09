@@ -43,6 +43,23 @@ public class FpkServiceImpl implements FpkService{
     }
 
     @Override
+    public Collection<Fpk> getFpkPendingByRequestedBy(User requestedBy) {
+        List<Fpk> result = new ArrayList<>();
+        result.addAll(fpkRepository.findByRequestedByAndApproveHeadAndStatusHeadApprove(requestedBy,false,false));
+        return result;
+    }
+
+    @Override
+    public Collection<Fpk> getFpkRejectedByRequestedBy(User requestedBy) {
+        return fpkRepository.findByRequestedByAndApproveHeadAndStatusHeadApprove(requestedBy, true,false);
+    }
+
+    @Override
+    public Collection<Fpk> getFpkAcceptedByRequestedBy(Long userId) {
+        return fpkRepository.findByRequestedByAndApproveHeadAndStatusHeadApprove(userService.getUser(userId),true,true);
+    }
+
+    @Override
     public Collection<Fpk> getFpkHistoryByDepartment(Department department, Role role) {
         List<Fpk> result = new ArrayList<>();
         result.addAll(getFpkAcceptedByDepartment(department, role));
@@ -198,6 +215,16 @@ public class FpkServiceImpl implements FpkService{
         Fpk fpkToApprove = fpkRepository.findOne(fpk.getIdFpk());
         fpkToApprove.setApproveHead(true);
         fpkToApprove.setStatusHeadApprove(true);
+        fpkToApprove.setHeadApproved(userService.getUser(approver.getId()));
+        fpkRepository.save(fpkToApprove);
+        return true;
+    }
+
+    @Override
+    public boolean approveFpkAsCeo(Fpk fpk, User approver) {
+        Fpk fpkToApprove = fpkRepository.findOne(fpk.getIdFpk());
+        fpkToApprove.setApproveCeo(true);
+        fpkToApprove.setStatusCeoApprove(true);
         fpkToApprove.setHeadApproved(userService.getUser(approver.getId()));
         fpkRepository.save(fpkToApprove);
         return true;
