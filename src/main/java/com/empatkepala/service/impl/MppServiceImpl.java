@@ -259,7 +259,7 @@ public class MppServiceImpl implements MppService{
 
     @Override
     public boolean publishMpp(Mpp mpp, User whoPublish) {
-        if(whoPublish.getRole() == Role.HR && mppRepository.getOne(mpp.getId()).isAccept() == true ){
+        if((whoPublish.getRole() == Role.HR || whoPublish.getRole() == Role.HeadHR) && mppRepository.getOne(mpp.getId()).isAccept() == true ){
             Mpp mppToPublish = mppRepository.getOne(mpp.getId());
             mppToPublish.setPublished(true);
             mppToPublish.setPublishedBy(whoPublish);

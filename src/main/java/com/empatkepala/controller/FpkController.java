@@ -93,7 +93,7 @@ public class FpkController {
             User userRequested = userService.getUser(approveRejectFpkRequest.getIdUser());
             Fpk fpkToPublish = fpkService.getFpk(approveRejectFpkRequest.getIdFpk());
             fpkService.approveFpk(fpkToPublish, userRequested);
-            jobVacancyService.addPersonNeeded(userRequested.getDepartment(),fpkToPublish.getNumberOfPerson(),fpkToPublish.getJobPositionRequester());
+            jobVacancyService.addPersonNeeded(fpkService.getFpk(approveRejectFpkRequest.getIdFpk()).getDepartment(),fpkToPublish.getNumberOfPerson(),fpkToPublish.getJobPositionRequester());
             return new FpkResponse("Sukses Approve", "Success Approve Fpk", null);
         }catch(Exception ex){
             return new FpkResponse(ex.toString(),ex.getStackTrace().toString(),null);
