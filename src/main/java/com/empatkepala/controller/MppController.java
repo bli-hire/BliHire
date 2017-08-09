@@ -36,33 +36,11 @@ public class MppController {
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public MppResponse addMpp(
             @RequestBody AddMppRequest addMppRequest){
-//        Mpp mpp = new Mpp();
-////        mpp.setApprovedBy(userService.getUser(mppFormRequest.getIdApprovedBy()));
-//
-//        mpp.setEducation(mppFormRequest.getEducation());
-//        mpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
-//        mpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
-//        mpp.setExperience(mppFormRequest.getExperience());
-//        mpp.setKnowledge(mppFormRequest.getKnowledge());
-//        mpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
-//        mpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
-//        mpp.setPcAmmount(mppFormRequest.getPcAmmount());
-//        mpp.setPcSpec(mppFormRequest.getPcSpec());
-//        mpp.setReason(mppFormRequest.getReason());
-//        mpp.setDepartment(userService.getUser((mppFormRequest.getIdRequestedBy())).getDepartment());
-//        mpp.setRequestedBy(userService.getUser(mppFormRequest.getIdRequestedBy()));
-//
-//
-//        mppService.addMpp(mpp);
         mppService.addMpp(addMppRequest);
         return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Add Mpp",null, 1, "POST", addMppRequest.getRequestBody(), addMppRequest.getHeaderContentType());
 
     }
 
-//    @RequestMapping(method = RequestMethod.GET, produces = "application/json", value = "/{id}")
-//    public void findMppById(@PathVariable Long id){
-//        mppService.
-//    }
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public Collection<Mpp> findAll(){
         return mppService.getAllMpp();
@@ -81,18 +59,7 @@ public class MppController {
 
     @RequestMapping(value = "/approve", method = RequestMethod.POST, produces = "application/json")
     public MppResponse approveMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
-//        try {
-//            if(mppService.approveMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser()))){
-//                return new MppResponse("Sukses Approve", "Success Approve Mpp", null);
-//
-//            }
-//            else{
-//                return new MppResponse("gagal","gagal approve",null);
-//
-//            }
-//        }catch(Exception ex){
-//            return new MppResponse(ex.toString(),ex.getStackTrace().toString(),null);
-//        }
+
         if(mppService.approveMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
             return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Approve Mpp", null);
 
@@ -101,7 +68,6 @@ public class MppController {
             return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
 
         }
-//        return mppService.approveMpp(mppService.getMppById(MppId), userService.getUser(idWhoApprove));
     }
 
     @RequestMapping(value = "/reject", method = RequestMethod.POST, produces = "application/json")
@@ -153,7 +119,6 @@ public class MppController {
         Collection<Mpp> data = mppService.getMppByRequestedBy(userService.getUser(userId));
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
 
-//        return mppService.getMppByRequestedBy(userService.getUser(userId));
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json")
@@ -161,7 +126,6 @@ public class MppController {
         mppService.editMpp(mppFormRequest, userService.getUser(id), mppService.getMppById(mppId));
         return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Edit Mpp",null);
 
-//        return mppService.editMpp(mppFormRequest, userService.getUser(id), mppService.getMppById(mppId));
 
     }
 
@@ -196,20 +160,6 @@ public class MppController {
     }
     @RequestMapping(value = "/publishFromMpp", method = RequestMethod.POST, produces = "application/json")
     public MppResponse publishJobVacancy(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
-//        try {
-//            if(mppService.approveMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser()))){
-//                return new MppResponse("Sukses Approve", "Success Approve Mpp", null);
-//
-//            }
-//            else{
-//                return new MppResponse("gagal","gagal approve",null);
-//
-//            }
-//        }catch(Exception ex){
-//            return new MppResponse(ex.toString(),ex.getStackTrace().toString(),null);
-//        }
-
-        //edit
         if(mppService.publishMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
 
             for(MppDetail mppDetail: mppService.getMppById(approveRejectMppRequest.getIdMpp()).getMppDetails()) {
@@ -225,7 +175,6 @@ public class MppController {
 
         }
 
-//        return mppService.approveMpp(mppService.getMppById(MppId), userService.getUser(idWhoApprove));
     }
 
     @RequestMapping(value = "/byDepartment/published", method = RequestMethod.GET, produces = "application/json")
