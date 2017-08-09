@@ -2,7 +2,7 @@ package com.empatkepala.entity.OnlineTestEntity;
 
 
 import com.empatkepala.entity.CV;
-import org.springframework.beans.factory.parsing.Problem;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,11 +17,12 @@ public class TechnicalTest {
     @OneToMany(mappedBy = "technicalTest", fetch = FetchType.EAGER)
     private List<Problem> problems;
 
+    @OneToOne
     private CV cv;
 
-    private List<String> testAnswer;
+    private String applicantAnswer;
 
-    private List<Long> scoreEachAnswer;
+    private String scoreEachAnswer;
 
     // Score is stated in percent (%)
     private long score;
@@ -40,29 +41,9 @@ public class TechnicalTest {
         this.id = id;
     }
 
-    public List<Problem> getProblems() {
-        return problems;
-    }
 
-    public void setProblems(List<Problem> problems) {
-        this.problems = problems;
-    }
 
-    public CV getCv() {
-        return cv;
-    }
 
-    public void setCv(CV cv) {
-        this.cv = cv;
-    }
-
-    public List<String> getTestAnswer() {
-        return testAnswer;
-    }
-
-    public void setTestAnswer(List<String> testAnswer) {
-        this.testAnswer = testAnswer;
-    }
 
     public long getScore() {
         return score;
@@ -80,11 +61,36 @@ public class TechnicalTest {
         isDone = done;
     }
 
-    public List<Long> getScoreEachAnswer() {
+    public List<Problem> getProblems() {
+        return problems;
+    }
+
+    public void setProblems(List<Problem> problems) {
+        this.problems = problems;
+    }
+
+    public CV getCv() {
+        return cv;
+    }
+
+    public void setCv(CV cv) {
+        this.cv = cv;
+    }
+
+
+    public String getApplicantAnswer() {
+        return applicantAnswer;
+    }
+
+    public void setApplicantAnswer(String applicantAnswer) {
+        this.applicantAnswer = applicantAnswer;
+    }
+
+    public String getScoreEachAnswer() {
         return scoreEachAnswer;
     }
 
-    public void setScoreEachAnswer(List<Long> scoreEachAnswer) {
+    public void setScoreEachAnswer(String scoreEachAnswer) {
         this.scoreEachAnswer = scoreEachAnswer;
     }
 }
