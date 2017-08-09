@@ -17,8 +17,9 @@ public class TechnicalTest {
     @OneToOne
     private CV cv;
 
+    private String applicantAnswer;
 
-
+    private String scoreEachAnswer;
 
     // Score is stated in percent (%)
     private long score;
@@ -70,5 +71,21 @@ public class TechnicalTest {
 
     public void setCv(CV cv) {
         this.cv = cv;
+    }
+
+    public String getApplicantAnswer() {
+        return applicantAnswer;
+    }
+
+    public void setApplicantAnswer(String applicantAnswer) {
+        this.applicantAnswer = applicantAnswer;
+    }
+
+    public String getScoreEachAnswer() {
+        return scoreEachAnswer;
+    }
+
+    public void setScoreEachAnswer(String scoreEachAnswer) {
+        this.scoreEachAnswer = scoreEachAnswer;
     }
 }
