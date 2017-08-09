@@ -2,6 +2,7 @@ package com.empatkepala.entity;
 
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -92,6 +93,7 @@ public class User {
         this.role = role;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
