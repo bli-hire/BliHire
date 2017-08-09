@@ -1,6 +1,7 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.Mpp;
+import com.empatkepala.entity.MppDetail;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.ApproveRejectMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
@@ -104,8 +105,15 @@ public class MppController {
     }
 
     @RequestMapping(value = "/reject", method = RequestMethod.POST, produces = "application/json")
-    public boolean rejectMpp(@RequestBody Long idWhoReject, Long MppId){
-        return mppService.rejectMpp(mppService.getMppById(MppId), userService.getUser(idWhoReject));
+    public MppResponse rejectMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+        if(mppService.rejectMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Reject Mpp", null);
+
+        }
+        else{
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+
+        }
 
     }
 
@@ -175,6 +183,17 @@ public class MppController {
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,data.size());
     }
 
+    @RequestMapping(value = "/byDepartment/accepted/ceo", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findAcceptedMppByAcceptorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
+        Collection<Mpp> data = mppService.getAcceptedMppByAcceptorAndDepartment(userService.getUser(userId), department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Accepted Mpp By Acceptor",data,data.size());
+    }
+
+    @RequestMapping(value = "/byDepartment/rejected/ceo", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findRejectedMppByRejectorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
+        Collection<Mpp> data = mppService.getRejectedMppByRejectorAndDepartment(userService.getUser(userId), department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Rejected Mpp By Rejector",data,data.size());
+    }
     @RequestMapping(value = "/publishFromMpp", method = RequestMethod.POST, produces = "application/json")
     public MppResponse publishJobVacancy(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
 //        try {
@@ -189,8 +208,15 @@ public class MppController {
 //        }catch(Exception ex){
 //            return new MppResponse(ex.toString(),ex.getStackTrace().toString(),null);
 //        }
+
+        //edit
         if(mppService.publishMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
-            jobVacancyService.addPersonNeeded(mppService.getMppById(approveRejectMppRequest.getIdMpp()).getDepartment(), (int) mppService.getMppById(approveRejectMppRequest.getIdMpp()).getNumberOfPerson());
+
+            for(MppDetail mppDetail: mppService.getMppById(approveRejectMppRequest.getIdMpp()).getMppDetails()) {
+
+                jobVacancyService.addPersonNeeded(mppService.getMppById(approveRejectMppRequest.getIdMpp()).getDepartment(), (int) mppDetail.getNumberOfPerson(), mppDetail.getPosition());
+
+            }
             return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Publish Mpp", null);
 
         }
@@ -198,7 +224,14 @@ public class MppController {
             return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
 
         }
+
 //        return mppService.approveMpp(mppService.getMppById(MppId), userService.getUser(idWhoApprove));
+    }
+
+    @RequestMapping(value = "/byDepartment/published", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findMppByDepartmentPublished(@RequestHeader Department department){
+        Collection<Mpp> data = mppService.getPublishedMppByDepartment(department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Published Mpp By Department",data,data.size());
     }
 
 }
