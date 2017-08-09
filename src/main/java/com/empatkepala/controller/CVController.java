@@ -87,14 +87,11 @@ public class CVController {
 //    }
 
     @RequestMapping(path = "/reportCV", method = RequestMethod.GET)
-    public ModelAndView report() {
+    public ModelAndView report(@RequestHeader String uid) {
 
         Map<String, Object> model = new HashMap<>();
-        Collection<CV> cvCollection= cvService.getAllCV();
-        List<CV> cvList = new ArrayList<>();
-        cvList.addAll(cvCollection);
-        model.put("cv", cvList);
-
+        CV cvCollection= cvService.findByUid(uid);
+        model.put("cv", cvCollection);
         return new ModelAndView(new MyPdfView(), model);
     }
 }
