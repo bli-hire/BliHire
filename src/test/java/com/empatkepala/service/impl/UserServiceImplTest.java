@@ -1,4 +1,5 @@
-package com.empatkepala.controller;
+package com.empatkepala.service.impl;
+
 
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddUserRequest;
@@ -6,7 +7,6 @@ import com.empatkepala.entity.request.LoginRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.UserRepository;
-import com.empatkepala.service.UserService;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,19 +20,17 @@ import java.util.Arrays;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 
-/**
- * Created by ARDI on 7/27/2017.
- */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-public class UserControllerTest {
+public class UserServiceImplTest {
 
     @MockBean
-    private UserService userService;
-
+    private UserRepository userRepository;
 
     @LocalServerPort
     private int serverPort;
@@ -44,11 +42,10 @@ public class UserControllerTest {
     private static final String PASSWORD = "dummy";
     private static final String EMAIL = "dummy@account.com";
 
-
     @Test
-    public void findAllUserTest()
+    public void getAllUser()
     {
-        when(userService.getAllUser()).thenReturn(Arrays.asList(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL)));
+        when(userRepository.findAll()).thenReturn(Arrays.asList(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL)));
 
         given()
                 .contentType("application/json")
@@ -59,15 +56,15 @@ public class UserControllerTest {
                 .body(containsString(NAME))
                 .statusCode(200);
 
-        verify(userService).getAllUser();
+        verify(userRepository).findAll();
     }
 
     @Test
     public void addUser()
     {
-        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
         AddUserRequest addUserRequest = new AddUserRequest(NAME, SURNAME, PASSWORD, EMAIL, ROLE, DEPARTMENT);
 
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
 
         given()
                 .contentType("application/json")
@@ -77,8 +74,7 @@ public class UserControllerTest {
                 .post("/users/add")
                 .then()
                 .statusCode(200);
-        //verify(userService, atLeast(1)).addUser(addUserRequest);
-
+        //verify(userRepository).save(user);
     }
 
     @Test
@@ -91,7 +87,7 @@ public class UserControllerTest {
         loginRequest.setEmail(EMAIL);
         loginRequest.setPassword(PASSWORD);
 
-        when(userService.getUser(EMAIL, PASSWORD)).thenReturn(user);
+        when(userRepository.findOneByEmailAndPassword(EMAIL, PASSWORD)).thenReturn(user);
 
         given().
                 contentType("application/json")
@@ -102,14 +98,13 @@ public class UserControllerTest {
                 .then()
                 .statusCode(200);
 
-        verify(userService).getUser(EMAIL, PASSWORD);
+        verify(userRepository).findOneByEmailAndPassword(EMAIL, PASSWORD);
     }
 
     @After
     public void tearDown()
     {
-        //verifyNoMoreInteractions(this.userService);
+        //verifyNoMoreInteractions(this.userRepository);
     }
-
 
 }

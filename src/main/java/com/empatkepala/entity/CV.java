@@ -2,15 +2,19 @@ package com.empatkepala.entity;
 
 import com.empatkepala.entity.CVEntity.*;
 
+import com.empatkepala.enumeration.Department;
+import org.apache.commons.lang3.RandomStringUtils;
+
+
 import com.empatkepala.entity.OnlineTestEntity.TechnicalTest;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
 
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.UUID;
+
 
 /**
  * Created by Ryan Bagus Susilo on 3/11/2017.
@@ -18,15 +22,15 @@ import java.util.UUID;
 
 
 @Entity
-@Table(name="blihire_CV")
-@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name="CV")
 public class CV {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idCV;
     private String uid = RandomStringUtils.randomAlphanumeric(16);
     private String title;
+    private Department department;
     private String jobTitle;
     private String fullName;
     private String placeDateOfBirth;
@@ -88,19 +92,15 @@ public class CV {
     private String haveAppliedOnGDN;
     private String havePartTimejob;
     private String timeStartWork;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private CV requestedBy;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private CV approvedBy;
+    private String applicantStatus;
 
     private TechnicalTest technicalTest;
 
     public CV(){}
-    public CV(String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurrentJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs,  ArrayList<Achievements> achievements, ArrayList<Language> language, ArrayList<SocialActivity> socialact,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork) {
+    public CV(String title, Department department, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurrentJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs,  ArrayList<Achievements> achievements, ArrayList<Language> language, ArrayList<SocialActivity> socialact,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork, String applicantStatus) {
 
         this.title = title;
+        this.department =department;
         this.jobTitle = jobTitle;
         this.fullName = fullName;
         this.placeDateOfBirth = placeDateOfBirth;
@@ -158,6 +158,7 @@ public class CV {
         this.school=school;
         this.nonFrmlCrs=nonFrmlCrs;
         this.WorkExp=WorkExp;
+        this.applicantStatus=applicantStatus;
     }
 
 
@@ -634,20 +635,20 @@ public class CV {
         this.timeStartWork = timeStartWork;
     }
 
-    public CV getRequestedBy() {
-        return requestedBy;
+    public String getApplicantStatus() {
+        return applicantStatus;
     }
 
-    public void setRequestedBy(CV requestedBy) {
-        this.requestedBy = requestedBy;
+    public void setApplicantStatus(String applicantStatus) {
+        this.applicantStatus = applicantStatus;
     }
 
-    public CV getApprovedBy() {
-        return approvedBy;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setApprovedBy(CV approvedBy) {
-        this.approvedBy = approvedBy;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public TechnicalTest getTechnicalTest() {

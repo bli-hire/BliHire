@@ -9,14 +9,21 @@ import java.util.Collection;
  * Created by Ryan Bagus Susilo on 4/21/2017.
  */
 public interface CVService  {
-    CV getRequestedByCVId(Long id);
 
     CV getCVById(Long id);
 
+    CV findByUid(String uid);
+
     Collection<CV> getAllCV();
 
-    void updateCV(CV cv);
+    CV addCV(@RequestBody CVFormRequest cvFormRequest);
 
-    void addCV(@RequestBody CVFormRequest cvFormRequest);
+    void updateStatusApplicant(CVFormRequest cvFormRequest, String uid);
+
+    void updateStatusApplicant(String applicantStatus, String uid);
+
+    CV getCVByUid(String uid);
+
+//    CV getLastAddedCv();
 
 }
