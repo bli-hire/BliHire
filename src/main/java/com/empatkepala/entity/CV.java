@@ -2,7 +2,11 @@ package com.empatkepala.entity;
 
 import com.empatkepala.entity.CVEntity.*;
 
+import com.empatkepala.entity.OnlineTestEntity.TechnicalTest;
+
+
 import com.empatkepala.enumeration.Department;
+
 import org.apache.commons.lang3.RandomStringUtils;
 
 
@@ -94,6 +98,9 @@ public class CV {
     private String timeStartWork;
     private String applicantStatus;
 
+    private TechnicalTest technicalTest;
+
+    @OneToOne
     private TechnicalTest technicalTest;
 
     public CV(){}
