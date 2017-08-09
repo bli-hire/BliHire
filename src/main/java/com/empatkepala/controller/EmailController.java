@@ -23,6 +23,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/mail")
+@CrossOrigin(origins = "*")
 public class EmailController {
 
     @Autowired
