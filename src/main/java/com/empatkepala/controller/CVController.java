@@ -1,17 +1,18 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.CV;
+import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.service.CVService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -19,19 +20,26 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @RestController
 @RequestMapping(value = "/cv")
+@CrossOrigin("*")
 public class CVController {
     @Autowired
     private CVService cvService;
 
-    @Autowired
-    private UserService userService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void addCV(
-            @RequestBody CVFormRequest cvFormRequest)
+    @RequestMapping(method = RequestMethod.GET,produces = "application/json")
+    public Collection<CV> getAllCV(){
+        return cvService.getAllCV();
+    }
+
+    @RequestMapping(method = RequestMethod.PUT,produces = "application/json")
+    public void updateFpk(CV findOne){
+        cvService.updateCV(findOne);
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public void addCV(@RequestBody CVFormRequest addCVFormRequest)
     {
-       // cv.setRequestedBy(userService.getUser(cvFormRequest.getIdRequestedBy()));
-        cvService.addCV(cvFormRequest);
+        cvService.addCV(addCVFormRequest);
     }
 
 }

@@ -2,6 +2,7 @@ package com.empatkepala.service;
 
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
+import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,23 @@ public interface MppService {
     boolean rejectMpp(Mpp mpp, User rejector);
 
     Collection<Mpp> getMppByDepartment(Department department);
+    Collection<Mpp> getMppHistoryByDepartment(Department department);
+
+    Collection<Mpp> getMppActiveByDepartment(Department department);
+    Collection<Mpp> getMppAcceptedByDepartment(Department department);
+    Collection<Mpp> getMppAcceptedByDepartmentNotPublished(Department department);
 
     Collection<Mpp> getMppByRequestedBy(User requestedBy);
 
-    boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
+    Collection<Mpp> getMppByRequestedByPending(User requestedBy);
 
+    public Collection<Mpp> getMppByRequestedByAccepted(User requestedBy);
+
+    Collection<Mpp> getMppByRequestedByRejected(User requestedBy);
+
+    boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
+    void addMpp(@RequestBody AddMppRequest addMppRequest);
+
+    boolean publishMpp(Mpp mpp, User whoPublish);
 
 }

@@ -3,9 +3,11 @@ package com.empatkepala.service;
 import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddFpkRequest;
+import com.empatkepala.enumeration.Department;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -14,17 +16,21 @@ import java.util.List;
 @Service
 public interface FpkService{
 
+    Collection<Fpk> getFpkByDepartment(Department department);
+
+    Collection<Fpk> getFpkByRequestedBy(User requestedBy);
+
+    Collection<Fpk> getFpkHistoryByDepartment(Department department);
+
     List getAllData();
 
-    Fpk getFpk(Long id);
+    Fpk getFpk(long id);
 
     void addFpk(@RequestBody AddFpkRequest addFpkRequest);
 
-    void update(Fpk data);
+    boolean editFpk(AddFpkRequest fpkRequest, User editor, Fpk fpkToEdit);
 
-    void delete(Long id);
+    boolean approveFpk(Fpk fpk, User approver);
 
-    User getRequestUserByFpk(Long id);
-
-    User getApprovedUserByFpk(Long id);
+    boolean rejectFpk(Fpk fpk, User rejecter);
 }
