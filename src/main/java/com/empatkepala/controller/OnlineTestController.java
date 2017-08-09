@@ -121,4 +121,13 @@ public class OnlineTestController {
     {
         return onlineTestService.createProblemSetService(createProblemSetRequest);
     }
+
+    // TODO CREATE TECHNICAL TEST
+    @RequestMapping(value = "/create-test", method = RequestMethod.POST)
+    public void createTechnicalTest(
+            @RequestBody CreateProblemSetRequest createProblemSetRequest
+    )
+    {
+        onlineTestService.createTechnicalTestService(createProblemSetRequest);
+    }
 }

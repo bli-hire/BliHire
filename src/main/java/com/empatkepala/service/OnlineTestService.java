@@ -56,5 +56,9 @@ public interface OnlineTestService {
             );
 
 
+    // ------ OTHER SERVICES -------
+
+    public void createTechnicalTestService(
+            @RequestBody CreateProblemSetRequest createProblemSetRequest);
 
 }

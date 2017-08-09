@@ -1,6 +1,7 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.entity.CVEntity.*;
+import com.empatkepala.entity.OnlineTestEntity.TechnicalTest;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.*;
@@ -90,6 +91,9 @@ public class CV {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private CV approvedBy;
+
+    @OneToOne
+    private TechnicalTest technicalTest;
 
     public CV(){}
     public CV(String title, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurrentJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs,  ArrayList<Achievements> achievements, ArrayList<Language> language, ArrayList<SocialActivity> socialact,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork) {

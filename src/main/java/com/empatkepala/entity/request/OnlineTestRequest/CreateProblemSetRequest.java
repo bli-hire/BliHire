@@ -9,6 +9,8 @@ public class CreateProblemSetRequest {
     private long numMultipleChoicesMedium;
     private long numMultipleChoicesHard;
 
+    private long idCV;
+
     public long getNumEssayEasy() {
         return numEssayEasy;
     }
@@ -55,5 +57,13 @@ public class CreateProblemSetRequest {
 
     public void setNumMultipleChoicesHard(long numMultipleChoicesHard) {
         this.numMultipleChoicesHard = numMultipleChoicesHard;
+    }
+
+    public long getIdCV() {
+        return idCV;
+    }
+
+    public void setIdCV(long idCV) {
+        this.idCV = idCV;
     }
 }

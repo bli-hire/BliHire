@@ -3,12 +3,15 @@ package com.empatkepala.service.impl;
 import com.empatkepala.entity.OnlineTestEntity.Essay;
 import com.empatkepala.entity.OnlineTestEntity.MultipleChoices;
 import com.empatkepala.entity.OnlineTestEntity.Problem;
+import com.empatkepala.entity.OnlineTestEntity.TechnicalTest;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.OnlineTestRequest.*;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.ProblemDifficulty;
+import com.empatkepala.repository.CVRepository;
 import com.empatkepala.repository.OnlineTestRepository.EssayRepository;
 import com.empatkepala.repository.OnlineTestRepository.MultipleChoicesRepository;
+import com.empatkepala.repository.OnlineTestRepository.TechnicalTestRepository;
 import com.empatkepala.service.OnlineTestService;
 import com.empatkepala.utility.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,10 @@ public class OnlineTestServiceImpl implements OnlineTestService{
     EssayRepository essayRepository;
     @Autowired
     MultipleChoicesRepository multipleChoicesRepository;
+    @Autowired
+    TechnicalTestRepository technicalTestRepository;
+    @Autowired
+    CVRepository cvRepository;
     @Autowired
     Helper helper;
 
@@ -171,5 +178,19 @@ public class OnlineTestServiceImpl implements OnlineTestService{
 
     }
 
+    // TODO CREATE TECHNICAL TEST
+    @Override
+    public void createTechnicalTestService(
+            @RequestBody CreateProblemSetRequest createProblemSetRequest)
+    {
+            List<Problem> problemSet = createProblemSetService(createProblemSetRequest);
+            TechnicalTest technicalTest = new TechnicalTest();
+
+            technicalTest.setProblems(problemSet);
+            technicalTest.setCv(cvRepository.findOne(createProblemSetRequest.getIdCV()));
+
+            technicalTestRepository.save(technicalTest);
+
+    }
 
 }
