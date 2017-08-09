@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CVRepository extends JpaRepository<CV, Long> {
-    CV findByRequestedBy(User user);
+//    CV findByRequestedBy(User user);
 }

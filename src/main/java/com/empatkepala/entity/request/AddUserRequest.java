@@ -1,6 +1,7 @@
 package com.empatkepala.entity.request;
 
-import com.empatkepala.entity.Role;
+
+import com.empatkepala.enumeration.Role;
 
 /**
  * Created by ARDI on 3/5/2017.

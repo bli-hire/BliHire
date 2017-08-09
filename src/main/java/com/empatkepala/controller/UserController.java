@@ -3,13 +3,10 @@ package com.empatkepala.controller;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddUserRequest;
 import com.empatkepala.entity.request.LoginRequest;
-import com.empatkepala.repository.UserRepository;
-import com.empatkepala.service.RoleService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -18,17 +15,16 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
-    @Autowired
-    RoleService roleService;
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public Collection<User> findAllUsers(){
+    public List<User> findAllUsers(){
         return userService.getAllUser();
     }
 

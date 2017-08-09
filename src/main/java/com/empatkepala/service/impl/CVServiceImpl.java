@@ -4,11 +4,13 @@ import com.empatkepala.entity.CV;
 import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.repository.CVRepository;
 import com.empatkepala.service.CVService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Transient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.Collection;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -19,24 +21,11 @@ public class CVServiceImpl implements CVService{
     @Autowired
     CVRepository cvRepository;
 
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1000);
-
-
-//    public User getUserByRequestedBy(User user){
-//
-//        Mpp mpp = mppRepository.findOne(1L);
-//        Hibernate.initialize(mpp.getRequestedBy());
-//        return mpp.getRequestedBy();
-//    }
-
 
     public CV getRequestedByCVId(Long id){
-
         CV cv = cvRepository.findOne(id);
-//        Hibernate.initialize(mpp.getRequestedBy());
         return cv.getRequestedBy();
     }
-
 
     public CV getCVById(Long id){
         return cvRepository.findOne(id);
@@ -51,62 +40,67 @@ public class CVServiceImpl implements CVService{
     {
 
         CV cv = new CV();
-        cv.setIdCV(ID_GENERATOR.getAndIncrement());
-        cv.setAchievement(cv.getAchievement());
-        cv.setAttendancePeriod(cv.getAttendancePeriod());
-        cv.setBlog(cv.getBlog());
-        cv.setCurrentAddress(cv.getCurrentAddress());
-        cv.setDescribeAboutYou(cv.getDescribeAboutYou());
-        cv.setDrivingLicense(cv.getDrivingLicense());
-        cv.setEmailAddress(cv.getEmailAddress());
-        cv.setEmergencyCall(cv.getEmergencyCall());
-        cv.setEthnicity(cv.getEthnicity());
-        cv.setFacebook(cv.getFacebook());
-        cv.setFactorEncourageYouOnThatJob(cv.getFactorEncourageYouOnThatJob());
-        cv.setFatherBirthday(cv.getMotherBirthday());
-        cv.setFatherCurrentJob(cv.getFatherCurrentJob());
-        cv.setFatherLatestEducation(cv.getFatherLatestEducation());
-        cv.setFatherName(cv.getFatherName());
-        cv.setFieldOfOrganization(cv.getFieldOfOrganization());
-        cv.setFullName(cv.getFullName());
-        cv.setHandphone(cv.getHandphone());
-        cv.setHaveAppliedOnGDN(cv.getHaveAppliedOnGDN());
-        cv.setIdCardNumber(cv.getIdCardNumber());
-        cv.setHavePartTimejob(cv.getHavePartTimejob());
-        cv.setHobbies(cv.getHobbies());
-        cv.setFactorEncourageYouOnThatJob(cv.getFactorEncourageYouOnThatJob());
-        cv.setHomeAddress(cv.getHomeAddress());
-        cv.setHomePhone(cv.getHomePhone());
-        cv.setKindOfEnvirontment(cv.getKindOfEnvirontment());
-        cv.setJobTitle(cv.getJobTitle());
-        cv.setLifeValue(cv.getLifeValue());
-        cv.setLinkedIn(cv.getLinkedIn());
-        cv.setMaritalStatus(cv.getMaritalStatus());
-        cv.setMotherBirthday(cv.getMotherBirthday());
-        cv.setMotherName(cv.getMotherName());
-        cv.setMotherCurretJob(cv.getMotherCurretJob());
-        cv.setMotherLatestEducation(cv.getMotherLatestEducation());
-        cv.setPlaceDateOfBirth(cv.getPlaceDateOfBirth());
-        cv.setPlaceGetInformationGDN(cv.getPlaceGetInformationGDN());
-        cv.setNotes(cv.getNotes());
-        cv.setNotesAchievement(cv.getNotesAchievement());
-        cv.setSpousebirthDay(cv.getSpousebirthDay());
-        cv.setSpouseCurrentJob(cv.getSpouseCurrentJob());
-        cv.setSpouseLatestEducation(cv.getSpouseLatestEducation());
-        cv.setSpouseName(cv.getSpouseName());
-        cv.setTimeStartWork(cv.getTimeStartWork());
-        cv.setReligion(cv.getReligion());
-        cv.setSpesificSkill(cv.getSpesificSkill());
-        cv.setYearAchievement(cv.getYearAchievement());
-        cv.setBro(cv.getBro());
-        cv.setBro(cv.getBro());
-        cv.setS(cv.getS());
-        cv.setChil(cv.getChil());
-        cv.setSchool(cv.getSchool());
-        cv.setWorkExp(cv.getWorkExp());
-        cv.setResponsibilities(cv.getResponsibilities());
-        cv.setResponsibilitiesType(cv.getResponsibilitiesType());
+        cv.setTitle(cvFormRequest.getTitle());
+        cv.setBlog(cvFormRequest.getBlog());
+        cv.setCurrentAddress(cvFormRequest.getCurrentAddress());
+        cv.setDescribeAboutYou(cvFormRequest.getDescribeAboutYou());
+        cv.setDrivingLicense(cvFormRequest.getDrivingLicense());
+        cv.setEmailAddress(cvFormRequest.getEmailAddress());
+        cv.setEmergencyCall(cvFormRequest.getEmergencyCall());
+        cv.setEthnicity(cvFormRequest.getEthnicity());
+        cv.setFacebook(cvFormRequest.getFacebook());
+        cv.setFactorEncourageYouOnThatJob(cvFormRequest.getFactorEncourageYouOnThatJob());
+        cv.setFatherBirthday(cvFormRequest.getMotherBirthday());
+        cv.setFatherCurrentJob(cvFormRequest.getFatherCurrentJob());
+        cv.setFatherLatestEducation(cvFormRequest.getFatherLatestEducation());
+        cv.setFatherName(cvFormRequest.getFatherName());
+        cv.setFullName(cvFormRequest.getFullName());
+        cv.setHandphone(cvFormRequest.getHandphone());
+        cv.setHaveAppliedOnGDN(cvFormRequest.getHaveAppliedOnGDN());
+        cv.setIdCardNumber(cvFormRequest.getIdCardNumber());
+        cv.setHavePartTimejob(cvFormRequest.getHavePartTimejob());
+        cv.setHobbies(cvFormRequest.getHobbies());
+        cv.setFactorEncourageYouOnThatJob(cvFormRequest.getFactorEncourageYouOnThatJob());
+        cv.setHomeAddress(cvFormRequest.getHomeAddress());
+        cv.setHomePhone(cvFormRequest.getHomePhone());
+        cv.setKindOfEnvirontment(cvFormRequest.getKindOfEnvirontment());
+        cv.setJobTitle(cvFormRequest.getJobTitle());
+        cv.setReasonMajor(cvFormRequest.getReasonMajor());
+        cv.setTitleThesis(cvFormRequest.getTitleThesis());
+        cv.setRelativeWorkingOnGDN(cvFormRequest.getRelativeWorkingOnGDN());
+        cv.setTwitter(cvFormRequest.getTwitter());
+        cv.setLifeValue(cvFormRequest.getLifeValue());
+        cv.setLinkedIn(cvFormRequest.getLinkedIn());
+        cv.setMaritalStatus(cvFormRequest.getMaritalStatus());
+        cv.setMotherBirthday(cvFormRequest.getMotherBirthday());
+        cv.setMotherName(cvFormRequest.getMotherName());
+        cv.setmotherCurrentJob(cvFormRequest.getmotherCurrentJob());
+        cv.setMotherLatestEducation(cvFormRequest.getMotherLatestEducation());
+        cv.setPlaceDateOfBirth(cvFormRequest.getPlaceDateOfBirth());
+        cv.setPlaceGetInformationGDN(cvFormRequest.getPlaceGetInformationGDN());
+        cv.setSpousebirthDay(cvFormRequest.getSpousebirthDay());
+        cv.setSpouseCurrentJob(cvFormRequest.getSpouseCurrentJob());
+        cv.setSpouseLatestEducation(cvFormRequest.getSpouseLatestEducation());
+        cv.setSpouseName(cvFormRequest.getSpouseName());
+        cv.setTimeStartWork(cvFormRequest.getTimeStartWork());
+        cv.setReligion(cvFormRequest.getReligion());
+        cv.setSpesificSkill(cvFormRequest.getSpesificSkill());
+        cv.setReasonInterestedInGDN(cvFormRequest.getReasonInterestedInGDN());
+        cv.setReasonApplyOnThatPosition(cvFormRequest.getReasonApplyOnThatPosition());
+        cv.setBro(cvFormRequest.getBro());
+        cv.setNonFrmlCrs(cvFormRequest.getNonFrmlCrs());
+        cv.setChil(cvFormRequest.getChil());
+        cv.setSchool(cvFormRequest.getSchool());
+        cv.setWorkExp(cvFormRequest.getWorkExp());
+        cv.setResponsibilities(cvFormRequest.getResponsibilities());
+        cv.setResponsibilitiesType(cvFormRequest.getResponsibilitiesType());
+        cv.setSocialact(cvFormRequest.getSocialact());
+        cv.setAchievements(cvFormRequest.getAchievements());
+        cv.setLanguage(cvFormRequest.getLanguage());
 
+        cvRepository.save(cv);
+    }
+    public void updateCV(CV cv){
         cvRepository.save(cv);
     }
 

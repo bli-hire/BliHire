@@ -2,14 +2,14 @@ package com.empatkepala.service.impl;
 
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddUserRequest;
+import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.UserRepository;
-import com.empatkepala.service.RoleService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Juan on 3/11/17.
@@ -18,10 +18,8 @@ import java.util.Collection;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private RoleService roleService;
 
-    public Collection<User> getAllUser(){
+    public List<User> getAllUser(){
         return userRepository.findAll();
     }
 
@@ -35,7 +33,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(addUserRequest.getName());
         user.setSurname(addUserRequest.getSurname());
-        user.setRole(roleService.getRole(1L));
+        user.setRole(Role.CEO);
         user.setPassword(addUserRequest.getPassword());
         user.setEmail(addUserRequest.getEmail());
         userRepository.save(user);

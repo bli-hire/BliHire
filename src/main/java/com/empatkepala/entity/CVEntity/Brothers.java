@@ -1,9 +1,11 @@
 package com.empatkepala.entity.CVEntity;
 
+import java.io.Serializable;
+
 /**
  * Created by Ryan Bagus Susilo on 3/11/2017.
  */
-public class Brothers {
+public class Brothers implements Serializable{
 
     private String brothersName;
     private String brothersBirthday;
