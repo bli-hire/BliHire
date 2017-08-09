@@ -51,11 +51,9 @@ public interface OnlineTestService {
             @RequestBody EditMultipleChoicesRequest editMultipleChoicesRequest
             );
 
-
-    // ------ OTHER SERVICES -------
-
-    public void createTechnicalTestService(
-            @RequestBody CreateProblemSetRequest createProblemSetRequest);
+    public List<Problem> createProblemSetService(
+            @RequestBody CreateProblemSetRequest createProblemSetRequest
+            );
 
 
 

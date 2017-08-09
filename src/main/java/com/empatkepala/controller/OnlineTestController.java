@@ -112,18 +112,13 @@ public class OnlineTestController {
         onlineTestService.multipleChoicesEditProblemService(id, editMultipleChoicesRequest);
     }
 
-    // ------- OTHER SERVICES -------
+    // ------- ALL SERVICE -------
 
-    // TODO CREATE TECHNICAL TEST
-    @RequestMapping(value = "/create-test", method = RequestMethod.POST)
-    public void createTechnicalTest(
-            @RequestBody CreateProblemSetRequest createProblemSetRequest
-    )
+    // TODO CREATE PROBLEM SET
+    @RequestMapping(value = "/create-problemset", produces = "application/json")
+    public List<Problem> createProblemSet(
+            @RequestBody CreateProblemSetRequest createProblemSetRequest)
     {
-        onlineTestService.createTechnicalTestService(createProblemSetRequest);
+        return onlineTestService.createProblemSetService(createProblemSetRequest);
     }
-
-
-
-
 }

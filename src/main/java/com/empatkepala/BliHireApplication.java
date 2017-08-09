@@ -7,7 +7,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 import java.util.ArrayList;
 
@@ -19,12 +18,6 @@ public class BliHireApplication {
 
 
 	}
-
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/assets/**")
-				.addResourceLocations("classpath:/static/");
-	}
-
 	@Bean
 	public CommandLineRunner loadData(CVRepository cvRepository) {
 		return (args) -> {
