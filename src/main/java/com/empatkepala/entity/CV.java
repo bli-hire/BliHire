@@ -98,8 +98,6 @@ public class CV {
     private String timeStartWork;
     private String applicantStatus;
 
-    private TechnicalTest technicalTest;
-
     @OneToOne
     private TechnicalTest technicalTest;
 
