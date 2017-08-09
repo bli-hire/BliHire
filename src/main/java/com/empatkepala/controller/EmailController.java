@@ -103,37 +103,34 @@ public class EmailController {
 
     // TODO POST EMAIL SEND WITH TEMPLATE SERVICE
     @RequestMapping(value = "/sendTemplate", method = RequestMethod.POST)
-    public String createMailWithTemplate(
-            Model model,
-            @ModelAttribute("mailObject") @Valid Email email,
+    public void createMailWithTemplate(
+            @RequestBody EmailSendRequest emailSendRequest,
             Errors errors)
     {
         if (errors.hasErrors()) {
-            return "mail/send";
+            System.out.print("error");
+            return;
         }
         emailService.sendSimpleMessageUsingTemplate(
-                email.getTo(),
-                email.getSubject(),
+                emailSendRequest.getTo(),
+                emailSendRequest.getSubject(),
                 simpleMailMessage,
-                email.getText());
-
-        return "redirect:/home";
+                emailSendRequest.getText());
     }
 
     // TODO POST EMAIL SEND WITH ATTACHMENT SERVICE
     @RequestMapping(value = "/sendAttachment", method = RequestMethod.POST)
     public String createMailWithAttachment(
-            Model model,
-            @ModelAttribute("mailObject") @Valid Email email,
+            @RequestBody EmailSendRequest emailSendRequest,
             Errors errors)
     {
         if (errors.hasErrors()) {
             return "mail/send";
         }
         emailService.sendMessageWithAttachment(
-                email.getTo(),
-                email.getSubject(),
-                email.getText(),
+                emailSendRequest.getTo(),
+                emailSendRequest.getSubject(),
+                emailSendRequest.getText(),
                 attachmentPath);
 
         return "redirect:/home";
