@@ -91,13 +91,13 @@ public class CVController {
 //        return new CVResponse("400","Success get last data CV", result, 1);
 //    }
 
-    @RequestMapping(path = "/reportCV", method = RequestMethod.GET)
-    public ModelAndView report() {
+    @RequestMapping(path = "/reportCV/{uid}", method = RequestMethod.GET)
+    public ModelAndView report(@PathVariable("uid") String uid) {
 
         Map<String, Object> model = new HashMap<>();
-        Collection<CV> cvCollection= cvService.getAllCV();
+        CV cv= cvService.getCVByUid(uid);
         List<CV> cvList = new ArrayList<>();
-        cvList.addAll(cvCollection);
+        cvList.add(cv);
         model.put("cv", cvList);
 
         return new ModelAndView(new MyPdfView(), model);
