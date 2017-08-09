@@ -1,6 +1,8 @@
 package com.empatkepala.entity.OnlineTestEntity;
 
+
 import com.empatkepala.entity.CV;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,6 +16,7 @@ public class TechnicalTest {
 
     @OneToMany(mappedBy = "technicalTest", fetch = FetchType.EAGER)
     private List<Problem> problems;
+
     @OneToOne
     private CV cv;
 
@@ -37,6 +40,7 @@ public class TechnicalTest {
     public void setId(long id) {
         this.id = id;
     }
+
 
 
 
@@ -72,6 +76,7 @@ public class TechnicalTest {
     public void setCv(CV cv) {
         this.cv = cv;
     }
+
 
     public String getApplicantAnswer() {
         return applicantAnswer;

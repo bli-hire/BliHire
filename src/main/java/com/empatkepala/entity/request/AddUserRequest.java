@@ -1,5 +1,11 @@
 package com.empatkepala.entity.request;
 
+
+
+import com.empatkepala.enumeration.Department;
+
+import com.empatkepala.enumeration.Role;
+
 /**
  * Created by ARDI on 3/5/2017.
  */
@@ -9,7 +15,21 @@ public class AddUserRequest {
     private String surname;
     private String password;
     private String email;
-    private long role;
+    private Role role;
+    private Department department;
+
+    public AddUserRequest(){
+
+    }
+
+    public AddUserRequest(String name, String surname, String password, String email, Role role, Department department) {
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.department = department;
+    }
 
     public String getName() {
         return name;
@@ -43,11 +63,19 @@ public class AddUserRequest {
         this.email = email;
     }
 
-    public long getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(long role) {
+    public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }
