@@ -1,9 +1,6 @@
 package com.empatkepala.service.impl;
 
-import com.empatkepala.entity.OnlineTestEntity.Essay;
-import com.empatkepala.entity.OnlineTestEntity.MultipleChoices;
-import com.empatkepala.entity.OnlineTestEntity.Problem;
-import com.empatkepala.entity.OnlineTestEntity.TechnicalTest;
+import com.empatkepala.entity.OnlineTestEntity.*;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.OnlineTestRequest.*;
 import com.empatkepala.enumeration.Department;
@@ -38,6 +35,8 @@ public class OnlineTestServiceImpl implements OnlineTestService{
     CVRepository cvRepository;
     @Autowired
     Helper helper;
+    @Autowired
+    ProblemGeneratorServiceImpl problemGeneratorServiceImpl;
 
     @Override
     public List<Essay> essayGetAllProblemsService() {
@@ -165,6 +164,10 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         long numMultipleChoicesMedium = createProblemSetRequest.getNumMultipleChoicesMedium();
         long numMultipleChoicesHard = createProblemSetRequest.getNumMultipleChoicesHard();
 
+        long numProblemGeneratorEasy = createProblemSetRequest.getNumProblemGeneratorEasy();
+        long numProblemGeneratorMedium = createProblemSetRequest.getNumProblemGeneratorMedium();
+        long numProblemGeneratorHard = createProblemSetRequest.getNumProblemGeneratorHard();
+
         List<Problem> problemset = new ArrayList<Problem>();
         problemset.addAll(helper.pickAndRandomEssay(essayRepository.findAllByProblemDifficulty(ProblemDifficulty.Easy), (int) numEssayEasy));
         problemset.addAll(helper.pickAndRandomEssay(essayRepository.findAllByProblemDifficulty(ProblemDifficulty.Medium), (int) numEssayMedium));
@@ -173,6 +176,9 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         problemset.addAll(helper.pickAndRandomMultipleChoices(multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Easy), (int) numMultipleChoicesEasy));
         problemset.addAll(helper.pickAndRandomMultipleChoices(multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Medium), (int) numMultipleChoicesMedium));
         problemset.addAll(helper.pickAndRandomMultipleChoices(multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Hard), (int) numMultipleChoicesHard));
+
+        problemset.addAll(helper.pickAndRandomProblemGenerator(problemGeneratorServiceImpl.getProblemGeneratorEasy(), (int) numProblemGeneratorEasy));
+
 
         return problemset;
 
@@ -192,5 +198,70 @@ public class OnlineTestServiceImpl implements OnlineTestService{
             technicalTestRepository.save(technicalTest);
 
     }
+
+    // TODO GET SCORE FROM MULTIPLE CHOICES
+    public long getScoreMultipleChoices(MultipleChoices multipleChoices, String answer)
+    {
+        if(multipleChoices.getRealAnswer() == answer){
+            return multipleChoices.getMaxScore();
+        }else return 0;
+    }
+
+    // TODO GET SCORE FROM ESSAY
+    public long getScoreEssay(Essay essay, String answer)
+    {
+        return 0;
+    }
+
+    // TODO COUNT AND SET SCORE FROM TECHNICAL TEST
+    public void countScore(TechnicalTest technicalTest)
+    {
+        long maxScore=0;
+        long score=0;
+
+        String scoreEachAnswer = "";
+        List<Problem> problems = technicalTest.getProblems();
+
+        String applicantAnswer = technicalTest.getApplicantAnswer();
+
+        List<String> answerList = helper.parseAnswer(applicantAnswer);
+
+        for(int i=0; i<problems.size();i++){
+            long tmpScore;
+            maxScore = maxScore + problems.get(i).getMaxScore();
+            if(problems.get(i) instanceof MultipleChoices){
+                tmpScore = getScoreMultipleChoices((MultipleChoices) problems.get(i), answerList.get(i));
+                score = score + tmpScore;
+                if(i!=problems.size()-1)
+                    scoreEachAnswer = scoreEachAnswer + String.valueOf(tmpScore) + "|";
+                else scoreEachAnswer = scoreEachAnswer + String.valueOf(tmpScore);
+            }
+            else if(problems.get(i) instanceof ProblemGenerator){
+                tmpScore = getScoreMultipleChoices((MultipleChoices) problems.get(i), answerList.get(i));
+                score = score + tmpScore;
+                if(i!=problems.size()-1)
+                    scoreEachAnswer = scoreEachAnswer + String.valueOf(tmpScore) + "|";
+                else scoreEachAnswer = scoreEachAnswer + String.valueOf(tmpScore);
+            }
+            else{
+                tmpScore = getScoreEssay((Essay) problems.get(i), answerList.get(i));
+                score = score + tmpScore;
+                if(i!=problems.size()-1)
+                    scoreEachAnswer = scoreEachAnswer + String.valueOf(tmpScore) + "|";
+                else scoreEachAnswer = scoreEachAnswer + String.valueOf(tmpScore);
+            }
+
+        }
+
+        long persen = score*100/maxScore;
+
+        technicalTest.setScore(persen);
+        technicalTest.setScoreEachAnswer(scoreEachAnswer);
+
+        technicalTestRepository.save(technicalTest);
+
+    }
+
+
 
 }

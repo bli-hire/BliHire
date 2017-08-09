@@ -1,5 +1,6 @@
 package com.empatkepala.entity.OnlineTestEntity;
 
+import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.ProblemDifficulty;
 
 import javax.persistence.*;
@@ -7,6 +8,9 @@ import java.util.List;
 
 @Entity
 public class ProblemGenerator extends Problem{
+
+    @Enumerated(EnumType.STRING)
+    private Department department;
 
     private String problem;
     private String answerA;
@@ -18,7 +22,8 @@ public class ProblemGenerator extends Problem{
     @Enumerated(EnumType.STRING)
     private ProblemDifficulty problemDifficulty;
 
-    public ProblemGenerator(String problem, int answerIndex, List<String> answerList, ProblemDifficulty problemDifficulty) {
+    public ProblemGenerator(Department department, String problem, int answerIndex, List<String> answerList, ProblemDifficulty problemDifficulty) {
+        this.department = department;
         this.problem = problem;
         this.answerA = answerList.get(0);
         this.answerB = answerList.get(1);
@@ -85,5 +90,13 @@ public class ProblemGenerator extends Problem{
 
     public void setProblemDifficulty(ProblemDifficulty problemDifficulty) {
         this.problemDifficulty = problemDifficulty;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

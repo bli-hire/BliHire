@@ -1,6 +1,7 @@
 package com.empatkepala.service.impl.problemGenerator;
 
 import com.empatkepala.entity.OnlineTestEntity.ProblemGenerator;
+import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.ProblemDifficulty;
 import com.empatkepala.repository.OnlineTestRepository.ProblemGeneratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class EasyPermutasiKombinasi {
     private ProblemGenerator generateSoalType_1() {
 
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Easy;
+        Department department = Department.HumanResource;
 
         Random random = new Random();
         int a = Math.abs(random.nextInt()%10)+2;
@@ -61,7 +63,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);
@@ -70,6 +72,8 @@ public class EasyPermutasiKombinasi {
     private ProblemGenerator generateSoalType_2() {
 
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Easy;
+        Department department = Department.HumanResource;
+
         String[] listCity = new String[4];
         listCity[0] = "Bandung";
         listCity[1] = "Semarang";
@@ -95,7 +99,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);
@@ -103,6 +107,7 @@ public class EasyPermutasiKombinasi {
 
     private ProblemGenerator generateSoalType_3() {
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Easy;
+        Department department = Department.HumanResource;
 
         Random random = new Random();
         int a = Math.abs(random.nextInt()%6)+4;
@@ -118,7 +123,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);
@@ -163,6 +168,7 @@ public class EasyPermutasiKombinasi {
 
     private ProblemGenerator generateSoalType_4() {
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Easy;
+        Department department = Department.HumanResource;
 
         Random random = new Random();
         int a = Math.abs(random.nextInt()%10)+5;
@@ -182,7 +188,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);
@@ -249,6 +255,7 @@ public class EasyPermutasiKombinasi {
 
     private ProblemGenerator generateSoalType_5(){
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Easy;
+        Department department = Department.HumanResource;
 
         Random random = new Random();
         int a = Math.abs(random.nextInt()%10)+5;
@@ -272,7 +279,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);
@@ -338,6 +345,7 @@ public class EasyPermutasiKombinasi {
 
     private ProblemGenerator generateSoalType_6(){
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Medium;
+        Department department = Department.HumanResource;
 
         Random random = new Random();
         int a = Math.abs(random.nextInt()%5)+2;
@@ -359,7 +367,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);
@@ -391,6 +399,7 @@ public class EasyPermutasiKombinasi {
 
     private ProblemGenerator generateSoalType_7(){
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Medium;
+        Department department = Department.HumanResource;
 
         Random random = new Random();
         int a = Math.abs(random.nextInt()%5)+2;
@@ -412,7 +421,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);
@@ -502,6 +511,7 @@ public class EasyPermutasiKombinasi {
 
     private ProblemGenerator generateSoalType_8(){
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Easy;
+        Department department = Department.HumanResource;
 
         Random random = new Random();
         int a = Math.abs(random.nextInt()%5)+3;
@@ -517,7 +527,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);
@@ -563,6 +573,7 @@ public class EasyPermutasiKombinasi {
 
     private ProblemGenerator generateSoalType_9(){
         ProblemDifficulty problemDifficulty = ProblemDifficulty.Medium;
+        Department department = Department.HumanResource;
 
         Random random = new Random();
         int a = Math.abs(random.nextInt()%5)+3;
@@ -578,7 +589,7 @@ public class EasyPermutasiKombinasi {
 
         String jawaban = listJawaban.get(0);
         Collections.shuffle(listJawaban);
-        ProblemGenerator problemGenerator = new ProblemGenerator(soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
+        ProblemGenerator problemGenerator = new ProblemGenerator(department, soal,listJawaban.indexOf(jawaban),listJawaban, problemDifficulty);
 
         return problemGenerator;
         //problemGeneratorRepository.save(problemGenerator);

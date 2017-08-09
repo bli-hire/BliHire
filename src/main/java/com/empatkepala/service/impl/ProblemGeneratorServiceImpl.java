@@ -1,10 +1,14 @@
 package com.empatkepala.service.impl;
 
 import com.empatkepala.entity.OnlineTestEntity.MultipleChoices;
+import com.empatkepala.entity.OnlineTestEntity.ProblemGenerator;
 import com.empatkepala.service.ProblemGeneratorService;
+import com.empatkepala.service.impl.problemGenerator.EasyPermutasiKombinasi;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -27,6 +31,16 @@ public class ProblemGeneratorServiceImpl implements ProblemGeneratorService{
         }
 
 
+    }
+
+    public List<ProblemGenerator> getProblemGeneratorEasy()
+    {
+        EasyPermutasiKombinasi easyPermutasiKombinasi = new EasyPermutasiKombinasi();
+        List<ProblemGenerator> problemGeneratorList = new ArrayList<>();
+
+        problemGeneratorList.addAll(easyPermutasiKombinasi.generateProblem());
+
+        return problemGeneratorList;
     }
 
 }

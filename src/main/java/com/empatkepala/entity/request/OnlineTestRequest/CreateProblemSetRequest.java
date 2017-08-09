@@ -8,6 +8,9 @@ public class CreateProblemSetRequest {
     private long numMultipleChoicesEasy;
     private long numMultipleChoicesMedium;
     private long numMultipleChoicesHard;
+    private long numProblemGeneratorEasy;
+    private long numProblemGeneratorMedium;
+    private long numProblemGeneratorHard;
 
     private long idCV;
 
@@ -65,5 +68,29 @@ public class CreateProblemSetRequest {
 
     public void setIdCV(long idCV) {
         this.idCV = idCV;
+    }
+
+    public long getNumProblemGeneratorEasy() {
+        return numProblemGeneratorEasy;
+    }
+
+    public void setNumProblemGeneratorEasy(long numProblemGeneratorEasy) {
+        this.numProblemGeneratorEasy = numProblemGeneratorEasy;
+    }
+
+    public long getNumProblemGeneratorMedium() {
+        return numProblemGeneratorMedium;
+    }
+
+    public void setNumProblemGeneratorMedium(long numProblemGeneratorMedium) {
+        this.numProblemGeneratorMedium = numProblemGeneratorMedium;
+    }
+
+    public long getNumProblemGeneratorHard() {
+        return numProblemGeneratorHard;
+    }
+
+    public void setNumProblemGeneratorHard(long numProblemGeneratorHard) {
+        this.numProblemGeneratorHard = numProblemGeneratorHard;
     }
 }
