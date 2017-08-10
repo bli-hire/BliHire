@@ -160,9 +160,29 @@ public class OnlineTestServiceImpl implements OnlineTestService{
         long numEssayMedium = createProblemSetRequest.getNumEssayMedium();
         long numEssayHard = createProblemSetRequest.getNumEssayHard();
 
+        if(numEssayEasy > essayRepository.findAllByProblemDifficulty(ProblemDifficulty.Easy).size()){
+            numEssayEasy = essayRepository.findAllByProblemDifficulty(ProblemDifficulty.Easy).size();
+        }
+        if(numEssayMedium > essayRepository.findAllByProblemDifficulty(ProblemDifficulty.Medium).size()){
+            numEssayMedium = essayRepository.findAllByProblemDifficulty(ProblemDifficulty.Medium).size();
+        }
+        if(numEssayHard > essayRepository.findAllByProblemDifficulty(ProblemDifficulty.Hard).size()){
+            numEssayHard = essayRepository.findAllByProblemDifficulty(ProblemDifficulty.Hard).size();
+        }
+
         long numMultipleChoicesEasy = createProblemSetRequest.getNumMultipleChoicesEasy();
         long numMultipleChoicesMedium = createProblemSetRequest.getNumMultipleChoicesMedium();
         long numMultipleChoicesHard = createProblemSetRequest.getNumMultipleChoicesHard();
+
+        if(numMultipleChoicesEasy > multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Easy).size()){
+            numMultipleChoicesEasy = multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Easy).size();
+        }
+        if(numMultipleChoicesMedium > multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Medium).size()){
+            numMultipleChoicesMedium = multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Medium).size();
+        }
+        if(numMultipleChoicesHard > multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Hard).size()){
+            numMultipleChoicesHard = multipleChoicesRepository.findAllByProblemDifficulty(ProblemDifficulty.Hard).size();
+        }
 
         long numProblemGeneratorEasy = createProblemSetRequest.getNumProblemGeneratorEasy();
         long numProblemGeneratorMedium = createProblemSetRequest.getNumProblemGeneratorMedium();

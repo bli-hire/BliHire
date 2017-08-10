@@ -65,5 +65,24 @@ public class MppControllerTest {
         verify(mppService).getAllMpp();
     }
 
+    @Test
+    public void findMppById()
+    {
+        Mpp mpp = new Mpp(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL), DEPARTMENT);
+        when(mppService.getMppById(mpp.getId())).thenReturn(mpp);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .port(serverPort)
+                .get("/mpp/" + String.valueOf(mpp.getId()))
+                .then()
+                .body(containsString(DEPARTMENT.name()))
+                .statusCode(200);
+
+        verify(mppService).getMppById(mpp.getId());
+
+    }
+
 
 }
