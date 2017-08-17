@@ -10,6 +10,7 @@ import com.empatkepala.enumeration.Role;
 import com.empatkepala.service.JobVacancyService;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.embedded.LocalServerPort;
@@ -18,9 +19,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 import static com.jayway.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.arrayContaining;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -47,6 +52,22 @@ public class MppControllerTest {
     private static final String EMAIL = "dummy@account.com";
 
     private static final Department DEPARTMENT = Department.Finance;
+
+    @Test
+    public void addMpp()
+    {
+        AddMppRequest addMppRequest = new AddMppRequest();
+
+        given()
+                .contentType("application/json")
+                .content(addMppRequest)
+                .when()
+                .port(serverPort)
+                .post("/mpp")
+                .then()
+                .statusCode(200);
+        //verify(mppService).addMpp(addMppRequest);
+    }
 
     @Test
     public void findAllMpp()
@@ -82,6 +103,45 @@ public class MppControllerTest {
 
         verify(mppService).getMppById(mpp.getId());
 
+    }
+
+    @Test
+    public void approveMpp()
+    {
+
+    }
+
+    @Test
+    public void rejectMpp()
+    {
+
+    }
+
+    @Test
+    public void findByDepartment()
+    {
+        Mpp mpp = new Mpp(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL), DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppByDepartment(DEPARTMENT)).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .port(serverPort)
+                .get("/mpp/byDepartment" + DEPARTMENT)
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppByDepartment(DEPARTMENT);
+    }
+
+    @After
+    public void tearDown()
+    {
+        //verifyNoMoreInteractions(this.mppService);
     }
 
 
