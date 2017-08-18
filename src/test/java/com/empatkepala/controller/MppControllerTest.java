@@ -159,7 +159,248 @@ public class MppControllerTest {
         verify(mppService).getMppActiveByDepartment(DEPARTMENT);
     }
 
-    
+    @Test
+    public void findMppByDepartmentHistory()
+    {
+        Mpp mpp = new Mpp(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL), DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppHistoryByDepartment(DEPARTMENT)).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("Department", DEPARTMENT)
+                .port(serverPort)
+                .get("/mpp/byDepartment/history")
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppHistoryByDepartment(DEPARTMENT);
+    }
+
+    @Test
+    public void findMppByDepartmentAccepted()
+    {
+        Mpp mpp = new Mpp(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL), DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppAcceptedByDepartment(DEPARTMENT)).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("Department", DEPARTMENT)
+                .port(serverPort)
+                .get("/mpp/byDepartment/accepted")
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppAcceptedByDepartment(DEPARTMENT);
+    }
+
+    @Test
+    public void findMppByDepartmentAcceptedNotPublished()
+    {
+        Mpp mpp = new Mpp(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL), DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppAcceptedByDepartmentNotPublished(DEPARTMENT)).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("Department", DEPARTMENT)
+                .port(serverPort)
+                .get("/mpp/byDepartment/acceptedNotPublished")
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppAcceptedByDepartmentNotPublished(DEPARTMENT);
+    }
+
+    @Test
+    public void findByRequestedBy()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppByRequestedBy(userService.getUser(user.getId()))).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("userId", user.getId())
+                .port(serverPort)
+                .get("/mpp/requestedBy")
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppByRequestedBy(userService.getUser(user.getId()));
+    }
+
+    @Test
+    public void edit()
+    {
+
+    }
+
+    @Test
+    public void findMppByRequestedPending()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppByRequestedByPending(userService.getUser(user.getId()))).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("userId", user.getId())
+                .port(serverPort)
+                .get("/mpp/byRequested/pending")
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppByRequestedByPending(userService.getUser(user.getId()));
+    }
+
+    @Test
+    public void findMppByRequestedAccepted()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppByRequestedByAccepted(userService.getUser(user.getId()))).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("userId", user.getId())
+                .port(serverPort)
+                .get("/mpp/byRequested/accepted")
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppByRequestedByAccepted(userService.getUser(user.getId()));
+    }
+
+    @Test
+    public void findMppByRequestedRejected()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppByRequestedByRejected(userService.getUser(user.getId()))).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("userId", user.getId())
+                .port(serverPort)
+                .get("/mpp/byRequested/rejected")
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppByRequestedByRejected(userService.getUser(user.getId()));
+    }
+
+    @Test
+    public void findAcceptedMppByAcceptorAndDepartment()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getAcceptedMppByAcceptorAndDepartment(userService.getUser(user.getId()) , DEPARTMENT)).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("userId", user.getId())
+                .and()
+                .header("department", DEPARTMENT)
+                .port(serverPort)
+                .get("/mpp/byDepartment/accepted/ceo")
+                .then()
+                .body(containsString("Success Get Accepted Mpp By Acceptor"))
+                .statusCode(200);
+
+        verify(mppService).getAcceptedMppByAcceptorAndDepartment(userService.getUser(user.getId()) , DEPARTMENT);
+    }
+
+    @Test
+    public void findRejectedMppByRejectorAndDepartment()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getRejectedMppByRejectorAndDepartment(userService.getUser(user.getId()) , DEPARTMENT)).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("userId", user.getId())
+                .and()
+                .header("department", DEPARTMENT)
+                .port(serverPort)
+                .get("/mpp/byDepartment/rejected/ceo")
+                .then()
+                .body(containsString("Success Get Rejected Mpp By Rejector"))
+                .statusCode(200);
+
+        verify(mppService).getRejectedMppByRejectorAndDepartment(userService.getUser(user.getId()) , DEPARTMENT);
+    }
+
+    @Test
+    public void publishJobVacancy()
+    {
+
+    }
+
+    @Test
+    public void findMppByDepartmentPublished()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getPublishedMppByDepartment(DEPARTMENT)).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("department", DEPARTMENT)
+                .port(serverPort)
+                .get("/mpp/byDepartment/published")
+                .then()
+                .body(containsString("Success Get Published Mpp By Department"))
+                .statusCode(200);
+
+        verify(mppService).getPublishedMppByDepartment(DEPARTMENT);
+    }
 
     @After
     public void tearDown()
