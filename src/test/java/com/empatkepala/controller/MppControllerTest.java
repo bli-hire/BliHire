@@ -63,8 +63,9 @@ public class MppControllerTest {
                 .port(serverPort)
                 .post("/mpp")
                 .then()
+                .body(containsString("Success Add Mpp"))
                 .statusCode(200);
-        //verify(mppService).addMpp(addMppRequest);
+        verify(mppService).addMpp(addMppRequest);
     }
 
     @Test
