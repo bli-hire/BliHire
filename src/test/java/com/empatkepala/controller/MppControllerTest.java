@@ -24,9 +24,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static com.jayway.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.arrayContaining;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -118,7 +116,7 @@ public class MppControllerTest {
     }
 
     @Test
-    public void findByDepartment()
+    public void findMppByDepartment()
     {
         Mpp mpp = new Mpp(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL), DEPARTMENT);
         Collection<Mpp> data = new ArrayList<>();
@@ -129,14 +127,39 @@ public class MppControllerTest {
         given()
                 .contentType("application/json")
                 .when()
+                .header("Department", DEPARTMENT)
                 .port(serverPort)
-                .get("/mpp/byDepartment" + DEPARTMENT)
+                .get("/mpp/byDepartment")
                 .then()
                 .body(containsString(mpp.getDepartment().name()))
                 .statusCode(200);
 
         verify(mppService).getMppByDepartment(DEPARTMENT);
     }
+
+    @Test
+    public void findMppByDepartmentActive()
+    {
+        Mpp mpp = new Mpp(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL), DEPARTMENT);
+        Collection<Mpp> data = new ArrayList<>();
+        data.add(mpp);
+
+        when(mppService.getMppActiveByDepartment(DEPARTMENT)).thenReturn(data);
+
+        given()
+                .contentType("application/json")
+                .when()
+                .header("Department", DEPARTMENT)
+                .port(serverPort)
+                .get("/mpp/byDepartment/active")
+                .then()
+                .body(containsString(mpp.getDepartment().name()))
+                .statusCode(200);
+
+        verify(mppService).getMppActiveByDepartment(DEPARTMENT);
+    }
+
+    
 
     @After
     public void tearDown()
