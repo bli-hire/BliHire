@@ -5,6 +5,7 @@ import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.MppDetail;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddMppRequest;
+import com.empatkepala.entity.request.ApproveRejectMppRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
 import com.empatkepala.service.JobVacancyService;
@@ -25,6 +26,8 @@ import java.util.Collection;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -105,15 +108,107 @@ public class MppControllerTest {
     }
 
     @Test
-    public void approveMpp()
+    public void approveMppTrue()
     {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        ApproveRejectMppRequest approveRejectMppRequest = new ApproveRejectMppRequest(user.getId(), mpp.getId());
 
+        when(mppService.getMppById(approveRejectMppRequest.getIdMpp())).thenReturn(mpp);
+        when(userService.getUser(approveRejectMppRequest.getIdUser())).thenReturn(user);
+        when(mppService.approveMpp(mpp , user)).thenReturn(true);
+
+        given()
+                .contentType("application/json")
+                .content(approveRejectMppRequest)
+                .when()
+                .port(serverPort)
+                .post("/mpp/approve")
+                .then()
+                .body(containsString("Success Approve Mpp"))
+                .statusCode(200);
+
+        verify(mppService).getMppById(approveRejectMppRequest.getIdMpp());
+        verify(userService).getUser(approveRejectMppRequest.getIdUser());
+        verify(mppService).approveMpp(mpp , user);
     }
 
     @Test
-    public void rejectMpp()
+    public void approveMppFalse()
     {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        ApproveRejectMppRequest approveRejectMppRequest = new ApproveRejectMppRequest(user.getId(), mpp.getId());
 
+        when(mppService.getMppById(approveRejectMppRequest.getIdMpp())).thenReturn(mpp);
+        when(userService.getUser(approveRejectMppRequest.getIdUser())).thenReturn(user);
+        when(mppService.approveMpp(mpp , user)).thenReturn(false);
+
+        given()
+                .contentType("application/json")
+                .content(approveRejectMppRequest)
+                .when()
+                .port(serverPort)
+                .post("/mpp/approve")
+                .then()
+                .body(containsString("Gagal"))
+                .statusCode(200);
+
+        verify(mppService).getMppById(approveRejectMppRequest.getIdMpp());
+        verify(userService).getUser(approveRejectMppRequest.getIdUser());
+        verify(mppService).approveMpp(mpp , user);
+    }
+
+    @Test
+    public void rejectMppTrue()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        ApproveRejectMppRequest approveRejectMppRequest = new ApproveRejectMppRequest(user.getId(), mpp.getId());
+
+        when(mppService.getMppById(approveRejectMppRequest.getIdMpp())).thenReturn(mpp);
+        when(userService.getUser(approveRejectMppRequest.getIdUser())).thenReturn(user);
+        when(mppService.rejectMpp(mpp , user)).thenReturn(true);
+
+        given()
+                .contentType("application/json")
+                .content(approveRejectMppRequest)
+                .when()
+                .port(serverPort)
+                .post("/mpp/reject")
+                .then()
+                .body(containsString("Success Reject Mpp"))
+                .statusCode(200);
+
+        verify(mppService).getMppById(approveRejectMppRequest.getIdMpp());
+        verify(userService).getUser(approveRejectMppRequest.getIdUser());
+        verify(mppService).rejectMpp(mpp , user);
+    }
+
+    @Test
+    public void rejectMppFalse()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
+        ApproveRejectMppRequest approveRejectMppRequest = new ApproveRejectMppRequest(user.getId(), mpp.getId());
+
+        when(mppService.getMppById(approveRejectMppRequest.getIdMpp())).thenReturn(mpp);
+        when(userService.getUser(approveRejectMppRequest.getIdUser())).thenReturn(user);
+        when(mppService.rejectMpp(mpp , user)).thenReturn(false);
+
+        given()
+                .contentType("application/json")
+                .content(approveRejectMppRequest)
+                .when()
+                .port(serverPort)
+                .post("/mpp/reject")
+                .then()
+                .body(containsString("Gagal"))
+                .statusCode(200);
+
+        verify(mppService).getMppById(approveRejectMppRequest.getIdMpp());
+        verify(userService).getUser(approveRejectMppRequest.getIdUser());
+        verify(mppService).rejectMpp(mpp , user);
     }
 
     @Test
