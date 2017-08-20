@@ -47,4 +47,12 @@ public class JobVacancyServiceImpl implements JobVacancyService{
         }
 
     }
+
+    @Override
+    public void decreaseAmmount(String position) {
+        JobVacancy toUpdateJobVacancy = jobVacancyRepository.findOneByPosition(position);
+        int finalAmmount = toUpdateJobVacancy.getAmmount() - 1;
+        toUpdateJobVacancy.setAmmount(finalAmmount);
+        jobVacancyRepository.save(toUpdateJobVacancy);
+    }
 }

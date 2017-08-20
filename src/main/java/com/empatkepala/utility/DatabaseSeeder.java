@@ -65,16 +65,26 @@ public class DatabaseSeeder {
         user3.setRole(Role.DepartmentTeamMember);
         user3.setPassword("member-department");
         user3.setDepartment(Department.Technology);
-        user3.setEmail("dummy-memberd@account.com");
+        user3.setEmail("dummy-member@account.com");
         userRepository.save(user3);
 
         User user4 = new User();
         user4.setName("Human Resource");
         user4.setSurname("Account Human Resource");
         user4.setRole(Role.HR);
+        user4.setDepartment(Department.HumanResource);
         user4.setPassword("dummy-hrd");
         user4.setEmail("dummy-hrd@account.com");
         userRepository.save(user4);
+
+        User user5 = new User();
+        user5.setName("Human Resource Head");
+        user5.setSurname("Account Human Resource");
+        user5.setRole(Role.HeadHR);
+        user5.setDepartment(Department.HumanResource);
+        user5.setPassword("dummy-hrd-head");
+        user5.setEmail("dummy-hrd-head@account.com");
+        userRepository.save(user5);
 
         /**
          * Data Seed for FPK
@@ -89,7 +99,7 @@ public class DatabaseSeeder {
         fpk.setSchool("Tes");
         fpk.setSkillKnowledge("Tes");
         fpk.setWorkExperience("Tes");
-        fpk.setDateNeeded(new Date(2017,12,3));
+        fpk.setDateNeeded(new DateTime(2017,12,30,0,0));
         fpk.setJobPositionRequester("Senior Developer");
         fpkRepository.save(fpk);
 
@@ -124,9 +134,55 @@ public class DatabaseSeeder {
         fpk2.setSchool("Tes2");
         fpk2.setSkillKnowledge("Tes2");
         fpk2.setWorkExperience("Tes2");
-        fpk2.setDateNeeded(new Date(2017,12,3));
+        fpk2.setDateNeeded(new DateTime(2017,12,3,0,0));
         fpk2.setJobPositionRequester("Senior Developer");
+        fpk2.setApproveCeo(false);
+        fpk2.setApproveHead(false);
+        fpk2.setStatusHeadApprove(false);
+        fpk2.setStatusCeoApprove(false);
+        fpk2.setAccept(false);
+        fpk2.setStatusAccept(false);
         fpkRepository.save(fpk2);
+
+        Fpk fpk3 = new Fpk();
+        fpk3.setCompleteness("Ready To Publish");
+        fpk3.setReason("Ready To Publish");
+        fpk3.setDepartment(Department.HumanResource);
+        fpk3.setEmployeeStatus("Ready To Publish");
+        fpk3.setFitnessWithMpp("Ready To Publish");
+        fpk3.setNumberOfPerson(5);
+        fpk3.setSchool("Ready To Publish");
+        fpk3.setSkillKnowledge("Ready To Publish");
+        fpk3.setWorkExperience("Ready To Publish");
+        fpk3.setDateNeeded(new DateTime(2017,12,3,0,0));
+        fpk3.setJobPositionRequester("Ready To Publish");
+        fpk3.setApproveCeo(true);
+        fpk3.setApproveHead(true);
+        fpk3.setStatusHeadApprove(true);
+        fpk3.setStatusCeoApprove(true);
+        fpk3.setAccept(false);
+        fpk3.setStatusAccept(false);
+        fpkRepository.save(fpk3);
+
+        Fpk fpk4 = new Fpk();
+        fpk4.setCompleteness("Published");
+        fpk4.setReason("Published");
+        fpk4.setDepartment(Department.HumanResource);
+        fpk4.setEmployeeStatus("Published");
+        fpk4.setFitnessWithMpp("Published");
+        fpk4.setNumberOfPerson(5);
+        fpk4.setSchool("Published");
+        fpk4.setSkillKnowledge("Published");
+        fpk4.setWorkExperience("Published");
+        fpk4.setDateNeeded(new DateTime(2017,12,3,0,0));
+        fpk4.setJobPositionRequester("Published");
+        fpk4.setApproveCeo(true);
+        fpk4.setApproveHead(true);
+        fpk4.setStatusHeadApprove(true);
+        fpk4.setStatusCeoApprove(true);
+        fpk4.setAccept(true);
+        fpk4.setStatusAccept(true);
+        fpkRepository.save(fpk4);
 
         //Ini buat prepare data di data job vacancy, kalo seeder dihapus tolong tetap diadakan - Juan
         JobVacancy humanResource = new JobVacancy();
@@ -234,8 +290,10 @@ public class DatabaseSeeder {
         dataSIM.add("A");
         dataSIM.add("B1");
 
-        //cvRepository.save(new CV("123","123", "123", "123", "123", "123",dataSIM, "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123",dataBro,"123", "123", "123", "123",dataChil, "123", "123", dataSekolah, "123", "123",dataNonformal, dataAchieve, dataLanguage, dataSocial,dataExp, "123","123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "CV Received"));
-        cvRepository.save(new CV("123", "123", "123", "123", "123", "123", dataSIM, "123", "123", "123", "123", "123","123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123",dataBro,"123", "123", "123", "123",dataChil, "123","123", dataSekolah, "123", "123",dataNonformal,  dataAchieve, dataLanguage, dataSocial,dataExp, "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123"));
+
+        cvRepository.save(new CV("123", Department.Technology, "123", "123", "123", "123",dataSIM, "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123",dataBro,"123", "123", "123", "123",dataChil, "123", "123", dataSekolah, "123", "123",dataNonformal, dataAchieve, dataLanguage, dataSocial,dataExp, "123","123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "123", "CV Received"));
+
+
     }
 
 }

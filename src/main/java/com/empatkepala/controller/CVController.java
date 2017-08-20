@@ -5,8 +5,10 @@ import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.CVFormRequest;
 import com.empatkepala.entity.request.MppFormRequest;
+import com.empatkepala.entity.request.UpdateStatusApplicantRequest;
 import com.empatkepala.entity.response.CVResponse;
 import com.empatkepala.service.CVService;
+import com.empatkepala.service.JobVacancyService;
 import com.empatkepala.service.UserService;
 import com.empatkepala.view.MyPdfView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +33,16 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @RestController
 @RequestMapping(value = "/cv")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class CVController {
     @Autowired
     private CVService cvService;
 
     @Autowired
     private Environment env;
+
+    @Autowired
+    private JobVacancyService jobVacancyService;
 
 
     @RequestMapping(method = RequestMethod.GET,produces = "application/json")
@@ -53,18 +58,18 @@ public class CVController {
         return result;
     }
 
-    @RequestMapping(value = "/updateStatusApplicant", method = RequestMethod.POST)
-    public CVResponse updateStatusApplicant(
-            @RequestHeader String uid,
-            @RequestBody CVFormRequest cvFormRequest ){
-        try {
-            cvService.updateStatusApplicant(cvFormRequest,uid);
-            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null,0);
-        }catch(Exception ex){
-            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
-        }
-
-    }
+//    @RequestMapping(value = "/updateStatusApplicant", method = RequestMethod.POST)
+//    public CVResponse updateStatusApplicant(
+//            @RequestBody String uid,
+//            @RequestBody CVFormRequest cvFormRequest ){
+//        try {
+//            cvService.updateStatusApplicant(cvFormRequest,uid);
+//            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null,0);
+//        }catch(Exception ex){
+//            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
+//        }
+//
+//    }
 
     @RequestMapping(value = "/getCVByUid", method = RequestMethod.GET)
     public CVResponse getCVByUid(
@@ -129,4 +134,36 @@ public class CVController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     } // method uploadFile
+
+
+    @RequestMapping(value = "/updateStatusApplicant", method = RequestMethod.POST, produces = "application/json")
+    public CVResponse updateStatusApplicant(
+            @RequestBody UpdateStatusApplicantRequest updateStatusApplicantRequest){
+        cvService.updateStatusApplicant(updateStatusApplicantRequest.getStatusApplicant(),updateStatusApplicantRequest.getUid());
+        return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null,0);
+
+//        try {
+//            cvService.updateStatusApplicant(applicantStatus,uid);
+//            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null,0);
+//        }catch(Exception ex){
+//            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
+//        }
+
+    }
+    @RequestMapping(value = "/acceptCandidate", method = RequestMethod.POST, produces = "application/json")
+    public CVResponse acceptCandidate(
+            @RequestBody UpdateStatusApplicantRequest updateStatusApplicantRequest){
+        cvService.updateStatusApplicant(updateStatusApplicantRequest.getStatusApplicant(),updateStatusApplicantRequest.getUid());
+        jobVacancyService.decreaseAmmount(cvService.getCVByUid(updateStatusApplicantRequest.getUid()).getJobTitle());
+        return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null,0);
+
+//        try {
+//            cvService.updateStatusApplicant(applicantStatus,uid);
+//            return new CVResponse(HttpStatus.ACCEPTED.toString(),"Success Update Status Applicant",null,0);
+//        }catch(Exception ex){
+//            return new CVResponse(HttpStatus.NOT_ACCEPTABLE.toString(),ex.getMessage(),null,0);
+//        }
+
+    }
+
 }

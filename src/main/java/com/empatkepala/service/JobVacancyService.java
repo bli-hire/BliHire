@@ -16,4 +16,6 @@ public interface JobVacancyService {
     Collection<JobVacancy> getAll();
 
     void addPersonNeeded(Department department, int personNeeded, String position);
+
+    void decreaseAmmount(String position);
 }

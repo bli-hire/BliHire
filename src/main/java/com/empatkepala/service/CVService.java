@@ -20,6 +20,8 @@ public interface CVService  {
 
     void updateStatusApplicant(CVFormRequest cvFormRequest, String uid);
 
+    void updateStatusApplicant(String applicantStatus, String uid);
+
     CV getCVByUid(String uid);
 
 //    CV getLastAddedCv();
