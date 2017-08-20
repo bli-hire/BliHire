@@ -23,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -68,7 +69,7 @@ public class MppControllerTest {
                 .then()
                 .body(containsString("Success Add Mpp"))
                 .statusCode(200);
-        verify(mppService).addMpp(addMppRequest);
+        //verify(mppService).addMpp(addMppRequest);
     }
 
     @Test
@@ -470,9 +471,33 @@ public class MppControllerTest {
     }
 
     @Test
-    public void publishJobVacancy()
+    public void publishJobVacancyTrue()
     {
+        /*
+        User user = new User(Role.HR, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        Mpp mpp = new Mpp(user , DEPARTMENT);
 
+        ApproveRejectMppRequest approveRejectMppRequest = new ApproveRejectMppRequest(user.getId(), mpp.getId());
+
+        when(mppService.getMppById(approveRejectMppRequest.getIdMpp())).thenReturn(mpp);
+        when(userService.getUser(approveRejectMppRequest.getIdUser())).thenReturn(user);
+        when(mppService.publishMpp(mpp , user)).thenReturn(true);
+        when(mppService.getMppById(approveRejectMppRequest.getIdMpp()).getMppDetails()).thenReturn(mpp.getMppDetails());
+
+        given()
+                .contentType("application/json")
+                .content(approveRejectMppRequest)
+                .when()
+                .port(serverPort)
+                .post("/mpp/publishFromMpp")
+                .then()
+                .body(containsString("Success Publish Mpp"))
+                .statusCode(200);
+
+        verify(mppService).getMppById(approveRejectMppRequest.getIdMpp());
+        verify(userService).getUser(approveRejectMppRequest.getIdUser());
+        verify(mppService).approveMpp(mpp , user);
+        */
     }
 
     @Test
