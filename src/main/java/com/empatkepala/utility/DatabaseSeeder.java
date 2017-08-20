@@ -131,33 +131,46 @@ public class DatabaseSeeder {
         //Ini buat prepare data di data job vacancy, kalo seeder dihapus tolong tetap diadakan - Juan
         JobVacancy humanResource = new JobVacancy();
         humanResource.setDepartment(Department.HumanResource);
+        humanResource.setPosition("HR");
+
         JobVacancy marketing = new JobVacancy();
         marketing.setDepartment(Department.Marketing);
+        marketing.setPosition("marketing");
+
         JobVacancy tradePartnership = new JobVacancy();
         tradePartnership.setDepartment(Department.TradePartnership);
+        tradePartnership.setPosition("trade partnership");
+
         JobVacancy operation = new JobVacancy();
         operation.setDepartment(Department.Operation);
+        operation.setPosition("operation");
         JobVacancy technology = new JobVacancy();
         technology.setDepartment(Department.Technology);
+        technology.setPosition("lalala");
+        JobVacancy technology2 = new JobVacancy();
+        technology2.setDepartment(Department.Technology);
+        technology2.setPosition("dududu");
 
-        JobVacancy businessDevelopment = new JobVacancy();
-        businessDevelopment.setDepartment(Department.BusinessDevelopment);
-        JobVacancy finance = new JobVacancy();
-        finance.setDepartment(Department.Finance);
-        JobVacancy projectManagement = new JobVacancy();
-        projectManagement.setDepartment(Department.ProjectManagement);
-        JobVacancy productManagement = new JobVacancy();
-        productManagement.setDepartment(Department.ProductManagement);
+
+//        JobVacancy businessDevelopment = new JobVacancy();
+//        businessDevelopment.setDepartment(Department.BusinessDevelopment);
+//        JobVacancy finance = new JobVacancy();
+//        finance.setDepartment(Department.Finance);
+//        JobVacancy projectManagement = new JobVacancy();
+//        projectManagement.setDepartment(Department.ProjectManagement);
+//        JobVacancy productManagement = new JobVacancy();
+//        productManagement.setDepartment(Department.ProductManagement);
 
         jobVacancyRepository.save(humanResource);
         jobVacancyRepository.save(marketing);
         jobVacancyRepository.save(tradePartnership);
         jobVacancyRepository.save(operation);
         jobVacancyRepository.save(technology);
-        jobVacancyRepository.save(businessDevelopment);
-        jobVacancyRepository.save(finance);
-        jobVacancyRepository.save(projectManagement);
-        jobVacancyRepository.save(productManagement);
+        jobVacancyRepository.save(technology2);
+//        jobVacancyRepository.save(businessDevelopment);
+//        jobVacancyRepository.save(finance);
+//        jobVacancyRepository.save(projectManagement);
+//        jobVacancyRepository.save(productManagement);
 
         //....
         //...
