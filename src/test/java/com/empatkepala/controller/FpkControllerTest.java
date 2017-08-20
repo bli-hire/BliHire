@@ -66,8 +66,8 @@ public class FpkControllerTest {
         result.add(first);
         result.add(second);
 
-        fpkService.addFpk(first);
-        fpkService.addFpk(second);
+        fpkService.addFpk(first,false,false);
+        fpkService.addFpk(second,false, false );
 
 //        mvc.perform(get("/internal/fpk"))
 //                .andExpect(status().isOk());

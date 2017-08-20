@@ -7,6 +7,8 @@ import com.empatkepala.service.JobVacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 /**
  * Created by Juan on 8/4/17.
  */
@@ -17,8 +19,13 @@ public class JobVacancyServiceImpl implements JobVacancyService{
     JobVacancyRepository jobVacancyRepository;
 
     @Override
-    public JobVacancy getByDepartment(Department department) {
-        return jobVacancyRepository.findOneByDepartment(department);
+    public Collection<JobVacancy> getByDepartment(Department department) {
+        return jobVacancyRepository.findByDepartment(department);
+    }
+
+    @Override
+    public Collection<JobVacancy> getAll() {
+        return jobVacancyRepository.findAll();
     }
 
     @Override
@@ -39,5 +46,13 @@ public class JobVacancyServiceImpl implements JobVacancyService{
             jobVacancyRepository.save(newJobVacancy);
         }
 
+    }
+
+    @Override
+    public void decreaseAmmount(String position) {
+        JobVacancy toUpdateJobVacancy = jobVacancyRepository.findOneByPosition(position);
+        int finalAmmount = toUpdateJobVacancy.getAmmount() - 1;
+        toUpdateJobVacancy.setAmmount(finalAmmount);
+        jobVacancyRepository.save(toUpdateJobVacancy);
     }
 }

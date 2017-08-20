@@ -2,6 +2,7 @@ package com.empatkepala.entity.request;
 
 import com.empatkepala.entity.CV;
 import com.empatkepala.entity.CVEntity.*;
+import com.empatkepala.enumeration.Department;
 
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class CVFormRequest implements Serializable{
 
     private String title;
-    private String department;
+    private Department department;
     private String jobTitle;
     private String fullName;
     private String placeDateOfBirth;
@@ -534,11 +535,11 @@ public class CVFormRequest implements Serializable{
         this.applicantStatus = applicantStatus;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 }

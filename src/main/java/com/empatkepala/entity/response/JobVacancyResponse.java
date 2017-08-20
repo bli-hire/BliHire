@@ -9,13 +9,13 @@ import java.util.Collection;
  */
 public class JobVacancyResponse {
     private String status,message;
-    private JobVacancy data;
+    private Collection<JobVacancy> data;
     private String method;
     
     public JobVacancyResponse() {
     }
 
-    public JobVacancyResponse(String status, String message, JobVacancy data, String method) {
+    public JobVacancyResponse(String status, String message, Collection<JobVacancy> data, String method) {
         this.status = status;
         this.message = message;
         this.data = data;
@@ -38,11 +38,11 @@ public class JobVacancyResponse {
         this.message = message;
     }
 
-    public JobVacancy getData() {
+    public Collection<JobVacancy> getData() {
         return data;
     }
 
-    public void setData(JobVacancy data) {
+    public void setData(Collection<JobVacancy> data) {
         this.data = data;
     }
 
