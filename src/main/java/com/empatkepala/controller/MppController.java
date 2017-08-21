@@ -69,7 +69,7 @@ public class MppController {
 
         }
         else{
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Approve Mpp", null);
 
         }
     }
@@ -81,7 +81,7 @@ public class MppController {
 
         }
         else{
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Gagal", null);
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Reject Mpp", null);
 
         }
 
@@ -212,11 +212,11 @@ public class MppController {
     public MppResponse rejectHrdMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
 
         if(mppService.rejectHrdMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Approve Mpp By HRD", null);
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Reject Mpp By HRD", null);
 
         }
         else{
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Approve Mpp By HRD", null);
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Reject Mpp By HRD", null);
 
         }
     }
