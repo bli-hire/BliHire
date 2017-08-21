@@ -112,6 +112,17 @@ public class MppController {
         return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp to Proccess by CEO", data, data.size());
     }
 
+    @RequestMapping(value = "/byDepartment/accepted/hrd", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findAcceptedMppByHrdAcceptorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
+        Collection<Mpp> data = mppService.getAcceptedMppByHrdAcceptorAndDepartment(userService.getUser(userId), department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Accepted Mpp By Acceptor",data,data.size());
+    }
+
+    @RequestMapping(value = "/byDepartment/rejected/hrd", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findRejectedMppByHrdRejectorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
+        Collection<Mpp> data = mppService.getRejectedMppByHrdRejectorAndDepartment(userService.getUser(userId), department);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Rejected Mpp By Rejector",data,data.size());
+    }
 
 
 
