@@ -36,14 +36,12 @@ public class MppDetail {
     }
     public MppDetail(String position, int numberOfPerson, String reason, String mainResponsibility, String education, String experience, String knowledge, String employeeStatus, int expectedJoin, int pcAmmount, String pcSpec, Mpp mpp) {
         this.position = position;
-        this.numberOfPerson = numberOfPerson;
         this.reason = reason;
         this.mainResponsibility = mainResponsibility;
         this.education = education;
         this.experience = experience;
         this.knowledge = knowledge;
         this.employeeStatus = employeeStatus;
-        this.expectedJoin = expectedJoin;
         this.pcAmmount = pcAmmount;
         this.pcSpec = pcSpec;
         this.mpp = mpp;
