@@ -4,7 +4,6 @@ import com.empatkepala.entity.CV;
 import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.CVFormRequest;
-import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.entity.request.UpdateStatusApplicantRequest;
 import com.empatkepala.entity.response.CVResponse;
 import com.empatkepala.service.CVService;

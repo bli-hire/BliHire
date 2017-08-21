@@ -3,9 +3,7 @@ package com.empatkepala.service;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddMppRequest;
-import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
@@ -42,7 +40,7 @@ public interface MppService {
 
 
     Collection<Mpp> getPublishedMppByDepartment(Department department);
-    boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
+//    boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit);
     void addMpp(@RequestBody AddMppRequest addMppRequest);
 
     boolean publishMpp(Mpp mpp, User whoPublish);

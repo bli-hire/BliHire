@@ -4,10 +4,11 @@ import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.MppDetail;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.ApproveRejectMppRequest;
-import com.empatkepala.entity.request.MppFormRequest;
+import com.empatkepala.entity.request.MppDetailRequest;
 import com.empatkepala.entity.response.MppResponse;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.service.JobVacancyService;
+import com.empatkepala.service.MppDetailService;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class MppController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MppDetailService mppDetailService;
 
     @Autowired
     private JobVacancyService jobVacancyService;
@@ -121,13 +125,12 @@ public class MppController {
 
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json")
-    public MppResponse editMpp(@RequestBody MppFormRequest mppFormRequest, Long id, Long mppId){
-        mppService.editMpp(mppFormRequest, userService.getUser(id), mppService.getMppById(mppId));
-        return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Edit Mpp",null);
-
-
-    }
+//    @RequestMapping(value = "/edit", method = RequestMethod.POST, produces = "application/json")
+//    public MppResponse editMpp(@RequestBody MppFormRequest mppFormRequest, Long id, Long mppId){
+//        mppService.editMpp(mppFormRequest, userService.getUser(id), mppService.getMppById(mppId));
+//        return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Edit Mpp",null);
+//
+//    }
 
     @RequestMapping(value = "/byRequested/pending", method = RequestMethod.GET, produces = "application/json")
     public MppResponse findMppByRequestedPending(@RequestHeader Long userId){
@@ -183,4 +186,12 @@ public class MppController {
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Published Mpp By Department",data,data.size());
     }
 
+    @RequestMapping(value = "/editMppDetail", method = RequestMethod.POST, produces = "application/json")
+    public MppResponse editMpp(
+            @RequestBody MppDetailRequest mppDetailRequest,
+            @RequestHeader long idEditor,
+            @RequestHeader long idMppDetail){
+        mppDetailService.editMppDetail(idMppDetail, mppDetailRequest, userService.getUser(idEditor));
+        return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Update Mpp",null);
+    }
 }

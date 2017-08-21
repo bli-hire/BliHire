@@ -17,14 +17,14 @@ public class MppDetail {
     private long id;
 
     private String position;
-    private long numberOfPerson;
+    private int numberOfPerson = 0;
     private String reason;
     private String mainResponsibility;
     private String education;
     private String experience;
     private String knowledge;
     private String employeeStatus;
-    private int expectedJoin;
+    private int expectedJoin = 0;
     private int pcAmmount;
     private String pcSpec;
 
@@ -34,7 +34,7 @@ public class MppDetail {
     public MppDetail(){
 
     }
-    public MppDetail(String position, long numberOfPerson, String reason, String mainResponsibility, String education, String experience, String knowledge, String employeeStatus, int expectedJoin, int pcAmmount, String pcSpec, Mpp mpp) {
+    public MppDetail(String position, int numberOfPerson, String reason, String mainResponsibility, String education, String experience, String knowledge, String employeeStatus, int expectedJoin, int pcAmmount, String pcSpec, Mpp mpp) {
         this.position = position;
         this.numberOfPerson = numberOfPerson;
         this.reason = reason;
@@ -79,11 +79,11 @@ public class MppDetail {
         this.position = position;
     }
 
-    public long getNumberOfPerson() {
+    public int getNumberOfPerson() {
         return numberOfPerson;
     }
 
-    public void setNumberOfPerson(long numberOfPerson) {
+    public void setNumberOfPerson(int numberOfPerson) {
         this.numberOfPerson = numberOfPerson;
     }
 
@@ -265,4 +265,15 @@ public class MppDetail {
     }
 
 
+    public void setExpectedJoinAndNumberOfPersonTotal(){
+        this.expectedJoin += this.januaryExpect +  this.februaryExpect + this.marchExpect
+                + this.aprilExpect + this.mayExpect + this.juneExpect + this.julyExpect
+                + this.augustExpect + this.septemberExpect + this.octoberExpect + this.novemberExpect
+                + this.decemberExpect;
+
+        this.numberOfPerson += this.januaryExpect +  this.februaryExpect + this.marchExpect
+                + this.aprilExpect + this.mayExpect + this.juneExpect + this.julyExpect
+                + this.augustExpect + this.septemberExpect + this.octoberExpect + this.novemberExpect
+                + this.decemberExpect;
+    }
 }

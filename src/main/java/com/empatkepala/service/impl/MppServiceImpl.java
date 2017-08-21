@@ -5,7 +5,6 @@ import com.empatkepala.entity.MppDetail;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.MppDetailRequest;
-import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.MppDetailRepository;
@@ -193,28 +192,28 @@ public class MppServiceImpl implements MppService{
     }
 
 
-    @Override
-    public boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit) {
-        if(editor.getId() == mppFormRequest.getIdRequestedBy()){
-            Mpp preparedMpp = mppRepository.findOne(mppToEdit.getId());
-//            preparedMpp.setEducation(mppFormRequest.getEducation());
-//            preparedMpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
-//            preparedMpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
-//            preparedMpp.setExperience(mppFormRequest.getExperience());
-//            preparedMpp.setKnowledge(mppFormRequest.getKnowledge());
-//            preparedMpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
-//            preparedMpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
-//            preparedMpp.setPcAmmount(mppFormRequest.getPcAmmount());
-//            preparedMpp.setPcSpec(mppFormRequest.getPcSpec());
-//            preparedMpp.setReason(mppFormRequest.getReason());
-
-            mppRepository.save(preparedMpp);
-            return true;
-        }
-
-        return false;
-
-    }
+//    @Override
+//    public boolean editMpp(MppFormRequest mppFormRequest, User editor, Mpp mppToEdit) {
+//        if(editor.getId() == mppFormRequest.getIdRequestedBy()){
+//            Mpp preparedMpp = mppRepository.findOne(mppToEdit.getId());
+////            preparedMpp.setEducation(mppFormRequest.getEducation());
+////            preparedMpp.setEmployeeStatus(mppFormRequest.getEmployeeStatus());
+////            preparedMpp.setExpectedJoin(mppFormRequest.getExpectedJoin());
+////            preparedMpp.setExperience(mppFormRequest.getExperience());
+////            preparedMpp.setKnowledge(mppFormRequest.getKnowledge());
+////            preparedMpp.setMainResponsibility(mppFormRequest.getMainResponsibility());
+////            preparedMpp.setNumberOfPerson(mppFormRequest.getNumberOfPerson());
+////            preparedMpp.setPcAmmount(mppFormRequest.getPcAmmount());
+////            preparedMpp.setPcSpec(mppFormRequest.getPcSpec());
+////            preparedMpp.setReason(mppFormRequest.getReason());
+//
+//            mppRepository.save(preparedMpp);
+//            return true;
+//        }
+//
+//        return false;
+//
+//    }
 
     @Override
     public void addMpp(@RequestBody AddMppRequest addMppRequest) {
