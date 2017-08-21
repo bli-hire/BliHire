@@ -4,6 +4,9 @@ import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.enumeration.Department;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Collection;
@@ -48,7 +51,7 @@ public interface MppService {
     Collection<Mpp> getAcceptedMppByHrdAcceptorAndDepartment(User acceptorHrd, Department department);
 
 
-    Collection<Mpp> getMppToProccessedByHrdByDepartment(Department department);
+    Page<Mpp> getMppToProccessedByHrdByDepartment(Department department, Pageable pageable);
     Collection<Mpp> getMppToProccessedByCEOByDepartment(Department department);
 
 

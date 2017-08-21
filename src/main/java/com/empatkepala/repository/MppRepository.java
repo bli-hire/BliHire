@@ -3,6 +3,8 @@ package com.empatkepala.repository;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
 import com.empatkepala.enumeration.Department;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,18 +29,6 @@ public interface MppRepository extends JpaRepository<Mpp, Long>{
     Collection<Mpp> findByDepartmentAndAcceptHrdAndRejectHrd(Department department, boolean acceptedHrd, boolean rejectedHrd);
     Collection<Mpp> findByDepartmentAndAcceptedHrdByAndAcceptHrd(Department department, User acceptedHrdBy, boolean acceptedHrd);
     Collection<Mpp> findByDepartmentAndRejectedHrdByAndRejectHrd(Department department, User rejectedHrdBy, boolean rejectedHrd);
-    Collection<Mpp> findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(Department department, boolean accepted, boolean rejected, boolean acceptedHrd, boolean rejectedHrd);
-
-
-    //orderByNewest
-    Collection<Mpp> findByRequestedByOrderByCreatedDateDesc(User requestedBy);
-    Collection<Mpp> findByDepartmentOrderByCreatedDateDesc(Department department);
-    Collection<Mpp> findByDepartmentAndAcceptAndRejectOrderByCreatedDateDesc(Department department, boolean accepted, boolean rejected);
-    Collection<Mpp> findByRequestedByAndAcceptAndRejectOrderByCreatedDateDesc(User requestedBy, boolean accepted, boolean rejected);
-    Collection<Mpp> findByRejectedByAndDepartmentAndRejectOrderByCreatedDateDesc(User rejectedBy, Department department, boolean rejected);
-    Collection<Mpp> findByApprovedByAndDepartmentAndAcceptOrderByCreatedDateDesc(User approvedBy, Department department, boolean accepted);
-
-    Collection<Mpp> findByDepartmentAndAcceptAndRejectAndPublishedOrderByCreatedDateDesc(Department department, boolean accepted, boolean rejected, boolean published);
-    Collection<Mpp> findByDepartmentAndPublishedOrderByCreatedDateDesc(Department department, boolean published);
+    Page<Mpp> findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(Department department, boolean accepted, boolean rejected, boolean acceptedHrd, boolean rejectedHrd, Pageable pageable);
 
 }

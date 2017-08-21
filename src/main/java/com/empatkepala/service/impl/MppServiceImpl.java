@@ -13,6 +13,9 @@ import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -228,9 +231,8 @@ public class MppServiceImpl implements MppService{
 
     //untuk di proses hrd
     @Override
-    public Collection<Mpp> getMppToProccessedByHrdByDepartment(Department department) {
-        Collection<Mpp> mpps = new ArrayList<>();
-        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department,false,false,false, false));
+    public Page<Mpp> getMppToProccessedByHrdByDepartment(Department department, Pageable pageable) {
+        Page<Mpp> mpps = mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department,false,false,false, false, pageable);
         return mpps;
     }
 
@@ -239,7 +241,7 @@ public class MppServiceImpl implements MppService{
     @Override
     public Collection<Mpp> getMppToProccessedByCEOByDepartment(Department department) {
         Collection<Mpp> mpps = new ArrayList<>();
-        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department, false, false,true, false));
+//        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department, false, false,true, false));
         return mpps;
     }
 

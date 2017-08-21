@@ -12,6 +12,9 @@ import com.empatkepala.service.MppDetailService;
 import com.empatkepala.service.MppService;
 import com.empatkepala.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,10 +83,12 @@ public class MppController {
 
 
     //************ HRD's endpoint *****************
+
+    //endpoint example = localhost:8080/mpp/hrd/byDepartment/toProcess?page=1&size=5&sort=createdDate,desc
     @RequestMapping(value = "/hrd/byDepartment/toProcess", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findMppToProccessByHrd(@RequestHeader Department department, HttpServletResponse response){
-        Collection<Mpp> data = mppService.getMppToProccessedByHrdByDepartment(department);
-        return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp to Proccess by HRD", data, data.size());
+    public MppResponse findMppToProccessByHrd(@RequestHeader Department department, Pageable pageable, HttpServletResponse response){
+        Page<Mpp> data = mppService.getMppToProccessedByHrdByDepartment(department, pageable);
+        return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp to Proccess by HRD", data, true);
     }
 
     @RequestMapping(value = "/hrd/byDepartment/accepted", method = RequestMethod.GET, produces = "application/json")
