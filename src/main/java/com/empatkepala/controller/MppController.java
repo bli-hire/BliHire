@@ -92,15 +92,15 @@ public class MppController {
     }
 
     @RequestMapping(value = "/hrd/byDepartment/accepted", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findAcceptedMppByHrdAcceptorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
-        Collection<Mpp> data = mppService.getAcceptedMppByHrdAcceptorAndDepartment(userService.getUser(userId), department);
-        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Accepted Mpp By Acceptor",data,data.size());
+    public MppResponse findAcceptedMppByHrdAcceptorAndDepartment(@RequestHeader Long userId, Pageable pageable, @RequestHeader Department department){
+        Page<Mpp> data = mppService.getAcceptedMppByHrdAcceptorAndDepartment(userService.getUser(userId), department, pageable);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Accepted Mpp By Acceptor",data, true);
     }
 
     @RequestMapping(value = "/hrd/byDepartment/rejected", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findRejectedMppByHrdRejectorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
-        Collection<Mpp> data = mppService.getRejectedMppByHrdRejectorAndDepartment(userService.getUser(userId), department);
-        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Rejected Mpp By Rejector",data,data.size());
+    public MppResponse findRejectedMppByHrdRejectorAndDepartment(@RequestHeader Long userId, Pageable pageable, @RequestHeader Department department){
+        Page<Mpp> data = mppService.getRejectedMppByHrdRejectorAndDepartment(userService.getUser(userId), department, pageable);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Rejected Mpp By Rejector",data, true);
     }
 
     @RequestMapping(value = "/hrd/approve", method = RequestMethod.POST, produces = "application/json")
@@ -161,21 +161,21 @@ public class MppController {
     }
 
     @RequestMapping(value = "/ceo/byDepartment/toProcess", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findMppToProccessByCEO(@RequestHeader Department department, HttpServletResponse response){
-        Collection<Mpp> data = mppService.getMppToProccessedByCEOByDepartment(department);
-        return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp to Proccess by CEO", data, data.size());
+    public MppResponse findMppToProccessByCEO(@RequestHeader Department department, Pageable pageable, HttpServletResponse response){
+        Page<Mpp> data = mppService.getMppToProccessedByCEOByDepartment(department, pageable);
+        return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp to Proccess by CEO", data,true);
     }
 
     @RequestMapping(value = "/ceo/byDepartment/accepted", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findAcceptedMppByAcceptorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
-        Collection<Mpp> data = mppService.getAcceptedMppByAcceptorAndDepartment(userService.getUser(userId), department);
-        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Accepted Mpp By Acceptor",data,data.size());
+    public MppResponse findAcceptedMppByAcceptorAndDepartment(@RequestHeader Long userId, Pageable pageable,@RequestHeader Department department){
+        Page<Mpp> data = mppService.getAcceptedMppByAcceptorAndDepartment(userService.getUser(userId), department, pageable);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Accepted Mpp By Acceptor",data , true);
     }
 
     @RequestMapping(value = "/ceo/byDepartment/rejected", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findRejectedMppByRejectorAndDepartment(@RequestHeader Long userId, @RequestHeader Department department){
-        Collection<Mpp> data = mppService.getRejectedMppByRejectorAndDepartment(userService.getUser(userId), department);
-        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Rejected Mpp By Rejector",data,data.size());
+    public MppResponse findRejectedMppByRejectorAndDepartment(@RequestHeader Long userId, Pageable pageable,@RequestHeader Department department){
+        Page<Mpp> data = mppService.getRejectedMppByRejectorAndDepartment(userService.getUser(userId), department, pageable);
+        return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Rejected Mpp By Rejector",data,true);
     }
     //************* END CEO's ENDPOINT ******************
 

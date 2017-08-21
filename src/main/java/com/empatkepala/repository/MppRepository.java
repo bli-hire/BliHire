@@ -20,15 +20,15 @@ public interface MppRepository extends JpaRepository<Mpp, Long>{
     Collection<Mpp> findByDepartmentAndAcceptAndReject(Department department, boolean accepted, boolean rejected);
     Collection<Mpp> findByRequestedByAndAcceptAndReject(User requestedBy, boolean accepted, boolean rejected);
 
-    Collection<Mpp> findByRejectedByAndDepartmentAndReject(User rejectedBy, Department department, boolean rejected);
-    Collection<Mpp> findByApprovedByAndDepartmentAndAccept(User approvedBy, Department department, boolean accepted);
+    Page<Mpp> findByRejectedByAndDepartmentAndReject(User rejectedBy, Department department, boolean rejected, Pageable pageable);
+    Page<Mpp> findByApprovedByAndDepartmentAndAccept(User approvedBy, Department department, boolean accepted, Pageable pageable);
 
     Collection<Mpp> findByDepartmentAndAcceptAndRejectAndPublished(Department department, boolean accepted, boolean rejected, boolean published);
     Collection<Mpp> findByDepartmentAndPublished(Department department, boolean published);
 
     Collection<Mpp> findByDepartmentAndAcceptHrdAndRejectHrd(Department department, boolean acceptedHrd, boolean rejectedHrd);
-    Collection<Mpp> findByDepartmentAndAcceptedHrdByAndAcceptHrd(Department department, User acceptedHrdBy, boolean acceptedHrd);
-    Collection<Mpp> findByDepartmentAndRejectedHrdByAndRejectHrd(Department department, User rejectedHrdBy, boolean rejectedHrd);
+    Page<Mpp> findByDepartmentAndAcceptedHrdByAndAcceptHrd(Department department, User acceptedHrdBy, boolean acceptedHrd, Pageable pageable);
+    Page<Mpp> findByDepartmentAndRejectedHrdByAndRejectHrd(Department department, User rejectedHrdBy, boolean rejectedHrd, Pageable pageable);
     Page<Mpp> findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(Department department, boolean accepted, boolean rejected, boolean acceptedHrd, boolean rejectedHrd, Pageable pageable);
 
 }

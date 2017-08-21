@@ -202,30 +202,26 @@ public class MppServiceImpl implements MppService{
     }
 
     @Override
-    public Collection<Mpp> getRejectedMppByRejectorAndDepartment(User rejector, Department department) {
-        Collection<Mpp> mpps = new ArrayList<>();
-        mpps.addAll(mppRepository.findByRejectedByAndDepartmentAndReject(rejector,department, true ));
+    public Page<Mpp> getRejectedMppByRejectorAndDepartment(User rejector, Department department, Pageable pageable) {
+        Page<Mpp> mpps = mppRepository.findByRejectedByAndDepartmentAndReject(rejector,department, true , pageable);
         return mpps;
     }
 
     @Override
-    public Collection<Mpp> getAcceptedMppByAcceptorAndDepartment(User acceptor, Department department) {
-        Collection<Mpp> mpps = new ArrayList<>();
-        mpps.addAll(mppRepository.findByApprovedByAndDepartmentAndAccept(acceptor, department, true));
+    public Page<Mpp> getAcceptedMppByAcceptorAndDepartment(User acceptor, Department department, Pageable pageable) {
+        Page<Mpp> mpps = mppRepository.findByApprovedByAndDepartmentAndAccept(acceptor, department, true, pageable);
         return mpps;
     }
 
     @Override
-    public Collection<Mpp> getRejectedMppByHrdRejectorAndDepartment(User rejectorHrd, Department department) {
-        Collection<Mpp> mpps = new ArrayList<>();
-        mpps.addAll(mppRepository.findByDepartmentAndRejectedHrdByAndRejectHrd(department, rejectorHrd, true));
+    public Page<Mpp> getRejectedMppByHrdRejectorAndDepartment(User rejectorHrd, Department department, Pageable pageable) {
+        Page<Mpp> mpps = mppRepository.findByDepartmentAndRejectedHrdByAndRejectHrd(department, rejectorHrd, true, pageable);
         return mpps;
     }
 
     @Override
-    public Collection<Mpp> getAcceptedMppByHrdAcceptorAndDepartment(User acceptorHrd, Department department) {
-        Collection<Mpp> mpps = new ArrayList<>();
-        mpps.addAll(mppRepository.findByDepartmentAndAcceptedHrdByAndAcceptHrd(department, acceptorHrd, true));
+    public Page<Mpp> getAcceptedMppByHrdAcceptorAndDepartment(User acceptorHrd, Department department, Pageable pageable) {
+        Page<Mpp> mpps = mppRepository.findByDepartmentAndAcceptedHrdByAndAcceptHrd(department, acceptorHrd, true, pageable);
         return mpps;
     }
 
@@ -239,9 +235,8 @@ public class MppServiceImpl implements MppService{
 
     //untuk di proses CEO
     @Override
-    public Collection<Mpp> getMppToProccessedByCEOByDepartment(Department department) {
-        Collection<Mpp> mpps = new ArrayList<>();
-//        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department, false, false,true, false));
+    public Page<Mpp> getMppToProccessedByCEOByDepartment(Department department, Pageable pageable) {
+        Page<Mpp> mpps = mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department, false, false,true, false, pageable);
         return mpps;
     }
 

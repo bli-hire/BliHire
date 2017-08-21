@@ -43,16 +43,16 @@ public interface MppService {
     Collection<Mpp> getMppByRequestedByRejected(User requestedBy);
 
     //get accept reject by rejector / acceptor CEO by department
-    Collection<Mpp> getRejectedMppByRejectorAndDepartment(User rejector, Department department);
-    Collection<Mpp> getAcceptedMppByAcceptorAndDepartment(User acceptor, Department department);
+    Page<Mpp> getRejectedMppByRejectorAndDepartment(User rejector, Department department, Pageable pageable);
+    Page<Mpp> getAcceptedMppByAcceptorAndDepartment(User acceptor, Department department, Pageable pageable);
 
     //get accept reject by rejector / acceptor HRD by department
-    Collection<Mpp> getRejectedMppByHrdRejectorAndDepartment(User rejectorHrd, Department department);
-    Collection<Mpp> getAcceptedMppByHrdAcceptorAndDepartment(User acceptorHrd, Department department);
+    Page<Mpp> getRejectedMppByHrdRejectorAndDepartment(User rejectorHrd, Department department, Pageable pageable);
+    Page<Mpp> getAcceptedMppByHrdAcceptorAndDepartment(User acceptorHrd, Department department, Pageable pageable);
 
 
     Page<Mpp> getMppToProccessedByHrdByDepartment(Department department, Pageable pageable);
-    Collection<Mpp> getMppToProccessedByCEOByDepartment(Department department);
+    Page<Mpp> getMppToProccessedByCEOByDepartment(Department department, Pageable pageable);
 
 
 
