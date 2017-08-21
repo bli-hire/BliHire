@@ -68,7 +68,7 @@ public class FpkControllerTest {
     }
 
     @Test
-    public void findMppById()
+    public void findFpkById()
     {
         Fpk fpk = new Fpk();
         fpk.setCompleteness("Tes");
@@ -96,6 +96,8 @@ public class FpkControllerTest {
         verify(fpkService).getFpk(fpk.getIdFpk());
 
     }
+
+
 
 
 }
