@@ -52,37 +52,37 @@ public class MppController {
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET, produces = "application/json")
-    public MppResponse findById(@PathVariable Long id){
+    public MppResponse findById(@PathVariable Long id, HttpServletResponse response){
 //        return mppService.getMppById(id);
         Mpp mpp = mppService.getMppById(id);
         Collection<Mpp> data = new ArrayList<>();
         data.add(mpp);
-        return new MppResponse(HttpStatus.FOUND.toString(), "Success Get Mpp By Id", data, data.size());
+        return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp By Id", data, data.size());
 
     }
 
 
     @RequestMapping(value = "/approve", method = RequestMethod.POST, produces = "application/json")
-    public MppResponse approveMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+    public MppResponse approveMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest, HttpServletResponse response){
 
         if(mppService.approveMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Approve Mpp", null);
+            return new MppResponse(Integer.toString(response.getStatus()), "Success Approve Mpp", null);
 
         }
         else{
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Approve Mpp", null);
+            return new MppResponse(Integer.toString(response.getStatus()), "Failed Approve Mpp", null);
 
         }
     }
 
     @RequestMapping(value = "/reject", method = RequestMethod.POST, produces = "application/json")
-    public MppResponse rejectMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+    public MppResponse rejectMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest, HttpServletResponse response){
         if(mppService.rejectMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Reject Mpp", null);
+            return new MppResponse(Integer.toString(response.getStatus()), "Success Reject Mpp", null);
 
         }
         else{
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Reject Mpp", null);
+            return new MppResponse(Integer.toString(response.getStatus()), "Failed Reject Mpp", null);
 
         }
 
@@ -111,6 +111,7 @@ public class MppController {
         Collection<Mpp> data = mppService.getMppToProccessedByCEOByDepartment(department);
         return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp to Proccess by CEO", data, data.size());
     }
+
 
 
 
@@ -175,6 +176,7 @@ public class MppController {
         Collection<Mpp> data = mppService.getRejectedMppByRejectorAndDepartment(userService.getUser(userId), department);
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Rejected Mpp By Rejector",data,data.size());
     }
+
     @RequestMapping(value = "/publishFromMpp", method = RequestMethod.POST, produces = "application/json")
     public MppResponse publishJobVacancy(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
         if(mppService.publishMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
@@ -204,33 +206,33 @@ public class MppController {
     public MppResponse editMpp(
             @RequestBody MppDetailRequest mppDetailRequest,
             @RequestHeader long idEditor,
-            @RequestHeader long idMppDetail){
+            @RequestHeader long idMppDetail, HttpServletResponse response){
         mppDetailService.editMppDetail(idMppDetail, mppDetailRequest, userService.getUser(idEditor));
-        return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Update Mpp",null);
+        return new MppResponse(Integer.toString(response.getStatus()),"Success Update Mpp",null);
     }
 
     @RequestMapping(value = "/approve/hrd", method = RequestMethod.POST, produces = "application/json")
-    public MppResponse approveHrdMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+    public MppResponse approveHrdMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest, HttpServletResponse response){
 
         if(mppService.approveHrdMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Approve Mpp By HRD", null);
+            return new MppResponse(Integer.toString(response.getStatus()), "Success Approve Mpp By HRD", null);
 
         }
         else{
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Approve Mpp By HRD", null);
+            return new MppResponse(Integer.toString(response.getStatus()), "Failed Approve Mpp By HRD", null);
 
         }
     }
 
     @RequestMapping(value = "/reject/hrd", method = RequestMethod.POST, produces = "application/json")
-    public MppResponse rejectHrdMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+    public MppResponse rejectHrdMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest, HttpServletResponse response){
 
         if(mppService.rejectHrdMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Reject Mpp By HRD", null);
+            return new MppResponse(Integer.toString(response.getStatus()), "Success Reject Mpp By HRD", null);
 
         }
         else{
-            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Reject Mpp By HRD", null);
+            return new MppResponse(Integer.toString(response.getStatus()), "Failed Reject Mpp By HRD", null);
 
         }
     }
