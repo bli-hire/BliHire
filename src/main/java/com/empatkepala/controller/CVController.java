@@ -12,12 +12,19 @@ import com.empatkepala.service.JobVacancyService;
 import com.empatkepala.service.UserService;
 import com.empatkepala.view.MyPdfView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -30,6 +37,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CVController {
     @Autowired
     private CVService cvService;
+
+    @Autowired
+    private Environment env;
 
     @Autowired
     private JobVacancyService jobVacancyService;
@@ -92,16 +102,39 @@ public class CVController {
 //    }
 
     @RequestMapping(path = "/reportCV", method = RequestMethod.GET)
-    public ModelAndView report() {
+    public ModelAndView report(@RequestHeader String uid) {
 
         Map<String, Object> model = new HashMap<>();
-        Collection<CV> cvCollection= cvService.getAllCV();
-        List<CV> cvList = new ArrayList<>();
-        cvList.addAll(cvCollection);
-        model.put("cv", cvList);
-
+        CV cvCollection= cvService.findByUid(uid);
+        model.put("cv", cvCollection);
         return new ModelAndView(new MyPdfView(), model);
     }
+
+    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> uploadFile(
+            @RequestParam("uploadfile") MultipartFile uploadfile) {
+
+        try {
+            // Get the filename and build the local file path
+            String filename = uploadfile.getOriginalFilename();
+            String directory = env.getProperty("netgloo.paths.uploadedFiles");
+            String filepath = Paths.get(directory, filename).toString();
+
+            // Save the file locally
+            BufferedOutputStream stream =
+                    new BufferedOutputStream(new FileOutputStream(new File(filepath)));
+            stream.write(uploadfile.getBytes());
+            stream.close();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    } // method uploadFile
+
 
     @RequestMapping(value = "/updateStatusApplicant", method = RequestMethod.POST, produces = "application/json")
     public CVResponse updateStatusApplicant(
