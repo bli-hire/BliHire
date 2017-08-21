@@ -249,6 +249,7 @@ public class MppServiceImpl implements MppService{
             mppDetailBaru.setNovemberExpect(mppDetailRequest.getExpectJoin().getNovemberExpect());
             mppDetailBaru.setDecemberExpect(mppDetailRequest.getExpectJoin().getDecemberExpect());
 
+            mppDetailBaru.setExpectedJoinAndNumberOfPersonTotal();
             mppDetailRepository.save(mppDetailBaru);
         }
 
