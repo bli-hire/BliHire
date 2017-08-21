@@ -24,6 +24,10 @@ public interface MppService {
 
     boolean rejectMpp(Mpp mpp, User rejector);
 
+    boolean approveHrdMpp(Mpp mpp, User approver);
+
+    boolean rejectHrdMpp(Mpp mpp, User rejector);
+
     Collection<Mpp> getMppByDepartment(Department department);
     Collection<Mpp> getMppHistoryByDepartment(Department department);
     Collection<Mpp> getMppActiveByDepartment(Department department);

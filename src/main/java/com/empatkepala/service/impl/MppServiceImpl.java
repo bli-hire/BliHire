@@ -95,13 +95,41 @@ public class MppServiceImpl implements MppService{
 
     @Override
     public boolean rejectMpp(Mpp mpp, User rejector) {
-        Mpp mppToApprove = mppRepository.findOne(mpp.getId());
+        Mpp mppToReject = mppRepository.findOne(mpp.getId());
         if(rejector.getRole() == Role.CEO){
 //            mppToApprove.setApprovedBy(approver);
-            mppToApprove.setRejectedBy(rejector);
-            mppToApprove.setAccept(false);
-            mppToApprove.setReject(true);
+            mppToReject.setRejectedBy(rejector);
+            mppToReject.setAccept(false);
+            mppToReject.setReject(true);
+            mppRepository.save(mppToReject);
+            return true;
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean approveHrdMpp(Mpp mpp, User approver) {
+        Mpp mppToApprove = mppRepository.findOne(mpp.getId());
+        if(approver.getRole() == Role.HeadHR || approver.getRole() == Role.HR){
+            mppToApprove.setAcceptedHrdBy(approver);
+            mppToApprove.setAcceptHrd(true);
+            mppToApprove.setRejectHrd(false);
             mppRepository.save(mppToApprove);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean rejectHrdMpp(Mpp mpp, User rejector) {
+        Mpp mppToReject = mppRepository.findOne(mpp.getId());
+        if(rejector.getRole() == Role.HeadHR || rejector.getRole() == Role.HR){
+//            mppToApprove.setApprovedBy(approver);
+            mppToReject.setRejectedHrdBy(rejector);
+            mppToReject.setAcceptHrd(false);
+            mppToReject.setRejectHrd(true);
+            mppRepository.save(mppToReject);
             return true;
         }
         return false;
