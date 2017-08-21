@@ -194,4 +194,32 @@ public class MppController {
         mppDetailService.editMppDetail(idMppDetail, mppDetailRequest, userService.getUser(idEditor));
         return new MppResponse(HttpStatus.ACCEPTED.toString(),"Success Update Mpp",null);
     }
+
+    @RequestMapping(value = "/approve/hrd", method = RequestMethod.POST, produces = "application/json")
+    public MppResponse approveHrdMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+
+        if(mppService.approveHrdMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Approve Mpp By HRD", null);
+
+        }
+        else{
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Approve Mpp By HRD", null);
+
+        }
+    }
+
+    @RequestMapping(value = "/reject/hrd", method = RequestMethod.POST, produces = "application/json")
+    public MppResponse rejectHrdMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest){
+
+        if(mppService.rejectHrdMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Success Approve Mpp By HRD", null);
+
+        }
+        else{
+            return new MppResponse(HttpStatus.ACCEPTED.toString(), "Failed Approve Mpp By HRD", null);
+
+        }
+    }
+
+
 }
