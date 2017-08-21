@@ -24,6 +24,11 @@ public interface MppRepository extends JpaRepository<Mpp, Long>{
     Collection<Mpp> findByDepartmentAndAcceptAndRejectAndPublished(Department department, boolean accepted, boolean rejected, boolean published);
     Collection<Mpp> findByDepartmentAndPublished(Department department, boolean published);
 
+    Collection<Mpp> findByDepartmentAndAcceptHrdAndRejectHrd(Department department, boolean acceptedHrd, boolean rejectedHrd);
+    Collection<Mpp> findByDepartmentAndAcceptedHrdByAndAcceptHrd(Department department, User acceptedHrdBy, boolean acceptedHrd);
+    Collection<Mpp> findByDepartmentAndRejectedHrdByAndRejectHrd(Department department, User rejectedHrdBy, boolean rejectedHrd);
+    Collection<Mpp> findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(Department department, boolean accepted, boolean rejected, boolean acceptedHrd, boolean rejectedHrd);
+
 
     //orderByNewest
     Collection<Mpp> findByRequestedByOrderByCreatedDateDesc(User requestedBy);

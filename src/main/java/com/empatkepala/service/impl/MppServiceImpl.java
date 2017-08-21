@@ -213,6 +213,37 @@ public class MppServiceImpl implements MppService{
     }
 
     @Override
+    public Collection<Mpp> getRejectedMppByHrdRejectorAndDepartment(User rejectorHrd, Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndRejectedHrdByAndRejectHrd(department, rejectorHrd, true));
+        return mpps;
+    }
+
+    @Override
+    public Collection<Mpp> getAcceptedMppByHrdAcceptorAndDepartment(User acceptorHrd, Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptedHrdByAndAcceptHrd(department, acceptorHrd, true));
+        return mpps;
+    }
+
+    //untuk di proses hrd
+    @Override
+    public Collection<Mpp> getMppToProccessedByHrdByDepartment(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department,false,false,false, false));
+        return mpps;
+    }
+
+
+    //untuk di proses CEO
+    @Override
+    public Collection<Mpp> getMppToProccessedByCEOByDepartment(Department department) {
+        Collection<Mpp> mpps = new ArrayList<>();
+        mpps.addAll(mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department, false, false,true, false));
+        return mpps;
+    }
+
+    @Override
     public Collection<Mpp> getPublishedMppByDepartment(Department department) {
         Collection<Mpp> mpps = new ArrayList<>();
         mpps.addAll(mppRepository.findByDepartmentAndPublished(department, true));

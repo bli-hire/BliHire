@@ -36,11 +36,24 @@ public interface MppService {
 
     Collection<Mpp> getMppByRequestedBy(User requestedBy);
     Collection<Mpp> getMppByRequestedByPending(User requestedBy);
-    public Collection<Mpp> getMppByRequestedByAccepted(User requestedBy);
+    Collection<Mpp> getMppByRequestedByAccepted(User requestedBy);
     Collection<Mpp> getMppByRequestedByRejected(User requestedBy);
 
+    //get accept reject by rejector / acceptor CEO by department
     Collection<Mpp> getRejectedMppByRejectorAndDepartment(User rejector, Department department);
     Collection<Mpp> getAcceptedMppByAcceptorAndDepartment(User acceptor, Department department);
+
+    //get accept reject by rejector / acceptor HRD by department
+    Collection<Mpp> getRejectedMppByHrdRejectorAndDepartment(User rejectorHrd, Department department);
+    Collection<Mpp> getAcceptedMppByHrdAcceptorAndDepartment(User acceptorHrd, Department department);
+
+
+    Collection<Mpp> getMppToProccessedByHrdByDepartment(Department department);
+    Collection<Mpp> getMppToProccessedByCEOByDepartment(Department department);
+
+
+
+
 
 
     Collection<Mpp> getPublishedMppByDepartment(Department department);

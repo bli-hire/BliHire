@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -98,6 +99,19 @@ public class MppController {
         Collection<Mpp> data = mppService.getMppActiveByDepartment(department);
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Department",data,data.size());
     }
+
+    @RequestMapping(value = "/byDepartment/hrd/toProcess", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findMppToProccessByHrd(@RequestHeader Department department, HttpServletResponse response){
+        Collection<Mpp> data = mppService.getMppToProccessedByHrdByDepartment(department);
+        return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp to Proccess by HRD", data, data.size());
+    }
+
+    @RequestMapping(value = "/byDepartment/ceo/toProcess", method = RequestMethod.GET, produces = "application/json")
+    public MppResponse findMppToProccessByCEO(@RequestHeader Department department, HttpServletResponse response){
+        Collection<Mpp> data = mppService.getMppToProccessedByCEOByDepartment(department);
+        return new MppResponse(Integer.toString(response.getStatus()), "Success Get Mpp to Proccess by CEO", data, data.size());
+    }
+
 
 
     @RequestMapping(value = "/byDepartment/history", method = RequestMethod.GET, produces = "application/json")
