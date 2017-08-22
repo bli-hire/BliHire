@@ -1,111 +1,100 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.empatkepala.controller;
 
+
 import com.empatkepala.entity.Fpk;
-import com.empatkepala.entity.request.AddFpkRequest;
+import com.empatkepala.enumeration.Department;
 import com.empatkepala.service.FpkService;
+import com.empatkepala.service.JobVacancyService;
+import com.empatkepala.service.UserService;
+import org.joda.time.DateTime;
 import org.junit.Test;
-import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
+import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import java.util.Arrays;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.jayway.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-/**
- *
- * @author D
- */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 public class FpkControllerTest {
-    /**
-     * 1 pemanggilan 1 function 1 hasil 1 skeneraio
-     * Mock MVC -> Controller
-     **/
-    private MockMvc mvc;
-    @InjectMocks
-    private FpkController fpkController;
-    @Mock
-    private FpkService fpkService;
 
-    @Before
-    public void setup(){
-        MockitoAnnotations.initMocks(this);
-        /**
-         * MockitoAnnotiations = untuk init mock ,
-         * kalau autowired memanggil secara real,
-         * mockitoannotations.init hanya untuk test
-         **/
-        mvc = MockMvcBuilders.standaloneSetup(fpkController).build();
-    }
-    
+    @MockBean
+    FpkService fpkService;
+    @MockBean
+    UserService userService;
+    @MockBean
+    JobVacancyService jobVacancyService;
+
+    @LocalServerPort
+    private int serverPort;
+
     @Test
-    public void testGetAllFpk() throws Exception {
-        AddFpkRequest first = new AddFpkRequest();
-        AddFpkRequest second = new AddFpkRequest();
-        first.setReason("For Testing");
-        second.setReason("For Testing");
-        List<AddFpkRequest> result = new ArrayList<>();
-        result.add(first);
-        result.add(second);
+    public void getAllFpk(){
 
-        fpkService.addFpk(first,false,false);
-        fpkService.addFpk(second,false, false );
+        Fpk fpk = new Fpk();
+        fpk.setCompleteness("Tes");
+        fpk.setReason("Tes");
+        fpk.setDepartment(Department.Finance);
+        fpk.setEmployeeStatus("Tes");
+        fpk.setFitnessWithMpp("Tes");
+        fpk.setNumberOfPerson(5);
+        fpk.setSchool("Tes");
+        fpk.setSkillKnowledge("Tes");
+        fpk.setWorkExperience("Tes");
+        fpk.setDateNeeded(new DateTime(2017,12,30,0,0));
+        fpk.setJobPositionRequester("Senior Developer");
 
-//        mvc.perform(get("/internal/fpk"))
-//                .andExpect(status().isOk());
+        when(fpkService.getAllData()).thenReturn(Arrays.asList(fpk));
 
-        Mockito.when(fpkService.getAllData()).thenReturn(result);
+        given()
+                .contentType("application/json")
+                .when()
+                .port(serverPort)
+                .get("/fpk/getAllFpk")
+                .then()
+                .body(containsString("Tes"))
+                .statusCode(200);
 
-        Mockito.verify(fpkService.getAllData(),Mockito.times(1));
-        Mockito.verifyNoMoreInteractions(fpkService);
+        verify(fpkService).getAllData();
     }
 
     @Test
-    public void testGetFpk() throws Exception {
-        mvc.perform(get("internal/fpk",1L))
-                .andExpect(status().isOk());
-    }
+    public void findMppById()
+    {
+        Fpk fpk = new Fpk();
+        fpk.setCompleteness("Tes");
+        fpk.setReason("Tes");
+        fpk.setDepartment(Department.Finance);
+        fpk.setEmployeeStatus("Tes");
+        fpk.setFitnessWithMpp("Tes");
+        fpk.setNumberOfPerson(5);
+        fpk.setSchool("Tes");
+        fpk.setSkillKnowledge("Tes");
+        fpk.setWorkExperience("Tes");
+        fpk.setDateNeeded(new DateTime(2017,12,30,0,0));
+        fpk.setJobPositionRequester("Senior Developer");
+        when(fpkService.getFpk(fpk.getIdFpk())).thenReturn(fpk);
 
-    @Test
-    public void testGetFpk_NotFound() throws Exception{
-        mvc.perform(get("internal/fpk/{id}",49L))
-                .andExpect(status().isNotFound());
-    }
+        given()
+                .contentType("application/json")
+                .when()
+                .port(serverPort)
+                .get("/fpk/" + String.valueOf(fpk.getIdFpk()))
+                .then()
+                .body(containsString("Tes"))
+                .statusCode(200);
 
-    @Test
-    public void testInsertFpk() throws Exception{
-        mvc.perform(post("/internal/fpk"))
-                .andExpect(status().isCreated());
-    }
+        verify(fpkService).getFpk(fpk.getIdFpk());
 
-    @Test
-    public void testUpdateFpk() throws Exception{
-        mvc.perform(put("/internal/fpk"))
-                .andExpect(status().isCreated());
-    }
-
-    @Test
-    public void testDeleteFpk() throws Exception{
-        mvc.perform(delete("/internal/fpk"))
-                .andExpect(status().isCreated());
     }
 
 

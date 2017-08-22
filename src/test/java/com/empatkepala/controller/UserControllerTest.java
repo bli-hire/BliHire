@@ -1,9 +1,13 @@
 package com.empatkepala.controller;
 
 import com.empatkepala.entity.User;
+import com.empatkepala.entity.request.AddUserRequest;
+import com.empatkepala.entity.request.LoginRequest;
 import com.empatkepala.enumeration.Department;
 import com.empatkepala.enumeration.Role;
+import com.empatkepala.repository.UserRepository;
 import com.empatkepala.service.UserService;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.context.embedded.LocalServerPort;
@@ -16,8 +20,7 @@ import java.util.Arrays;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by ARDI on 7/27/2017.
@@ -29,6 +32,7 @@ public class UserControllerTest {
 
     @MockBean
     private UserService userService;
+
 
     @LocalServerPort
     private int serverPort;
@@ -42,7 +46,8 @@ public class UserControllerTest {
 
 
     @Test
-    public void all() {
+    public void findAllUserTest()
+    {
         when(userService.getAllUser()).thenReturn(Arrays.asList(new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL)));
 
         given()
@@ -57,6 +62,54 @@ public class UserControllerTest {
         verify(userService).getAllUser();
     }
 
+    @Test
+    public void addUser()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+        AddUserRequest addUserRequest = new AddUserRequest(NAME, SURNAME, PASSWORD, EMAIL, ROLE, DEPARTMENT);
+
+
+        given()
+                .contentType("application/json")
+                .content(addUserRequest)
+                .when()
+                .port(serverPort)
+                .post("/users/add")
+                .then()
+                .statusCode(200);
+        //verify(userService, atLeast(1)).addUser(addUserRequest);
+
+    }
+
+    @Test
+    public void login()
+    {
+        User user = new User(ROLE, DEPARTMENT, NAME, SURNAME, PASSWORD, EMAIL);
+
+        LoginRequest loginRequest = new LoginRequest();
+
+        loginRequest.setEmail(EMAIL);
+        loginRequest.setPassword(PASSWORD);
+
+        when(userService.getUser(EMAIL, PASSWORD)).thenReturn(user);
+
+        given().
+                contentType("application/json")
+                .content(loginRequest)
+                .when()
+                .port(serverPort)
+                .post("/users/login")
+                .then()
+                .statusCode(200);
+
+        verify(userService).getUser(EMAIL, PASSWORD);
+    }
+
+    @After
+    public void tearDown()
+    {
+        //verifyNoMoreInteractions(this.userService);
+    }
 
 
 }

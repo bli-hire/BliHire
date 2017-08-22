@@ -4,7 +4,6 @@ import com.empatkepala.entity.CV;
 import com.empatkepala.entity.Fpk;
 import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.request.CVFormRequest;
-import com.empatkepala.entity.request.MppFormRequest;
 import com.empatkepala.entity.request.UpdateStatusApplicantRequest;
 import com.empatkepala.entity.response.CVResponse;
 import com.empatkepala.service.CVService;
@@ -101,12 +100,24 @@ public class CVController {
 //        return new CVResponse("400","Success get last data CV", result, 1);
 //    }
 
+// <<<<<<< feature/mpp
+//     @RequestMapping(path = "/reportCV/{uid}", method = RequestMethod.GET)
+//     public ModelAndView report(@PathVariable("uid") String uid) {
+
+//         Map<String, Object> model = new HashMap<>();
+//         CV cv= cvService.getCVByUid(uid);
+//         List<CV> cvList = new ArrayList<>();
+//         cvList.add(cv);
+//         model.put("cv", cvList);
+
+// =======
     @RequestMapping(path = "/reportCV", method = RequestMethod.GET)
     public ModelAndView report(@RequestHeader String uid) {
 
         Map<String, Object> model = new HashMap<>();
         CV cvCollection= cvService.findByUid(uid);
         model.put("cv", cvCollection);
+// >>>>>>> dev
         return new ModelAndView(new MyPdfView(), model);
     }
 

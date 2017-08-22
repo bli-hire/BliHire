@@ -1,8 +1,21 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.entity.CVEntity.*;
+
+import com.empatkepala.entity.OnlineTestEntity.TechnicalTest;
+
+
 import com.empatkepala.enumeration.Department;
+
 import org.apache.commons.lang3.RandomStringUtils;
+
+
+import com.empatkepala.entity.OnlineTestEntity.TechnicalTest;
+
+import org.apache.commons.lang3.RandomStringUtils;
+
+
+
 import javax.persistence.*;
 import java.util.ArrayList;
 
@@ -83,6 +96,9 @@ public class CV {
     private String havePartTimejob;
     private String timeStartWork;
     private String applicantStatus;
+
+    @OneToOne
+    private TechnicalTest technicalTest;
 
     public CV(){}
 
@@ -630,5 +646,13 @@ public class CV {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public TechnicalTest getTechnicalTest() {
+        return technicalTest;
+    }
+
+    public void setTechnicalTest(TechnicalTest technicalTest) {
+        this.technicalTest = technicalTest;
     }
 }

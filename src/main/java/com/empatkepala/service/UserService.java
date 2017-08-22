@@ -18,7 +18,7 @@ public interface UserService {
     public User getUser(Long id);
 
     public void addUser(
-            @RequestBody AddUserRequest addUserRequest);
+            AddUserRequest addUserRequest);
 
     public User getUser(String email, String password);
 }

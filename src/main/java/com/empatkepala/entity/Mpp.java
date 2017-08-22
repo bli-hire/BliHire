@@ -1,6 +1,7 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.MppStatus;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -21,6 +22,48 @@ public class Mpp {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime createdDate = new DateTime();
 
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    private DateTime editedDate;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User editedBy;
+
+    boolean edited = false;
+
+    public boolean isEdited() {
+        return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
+    }
+
+    public MppStatus getMppStatus() {
+        return mppStatus;
+    }
+
+    public void setMppStatus(MppStatus mppStatus) {
+        this.mppStatus = mppStatus;
+    }
+
+    private MppStatus mppStatus = MppStatus.waiting_hrd;
+
+    public DateTime getEditedDate() {
+        return editedDate;
+    }
+
+    public void setEditedDate(DateTime editedDate) {
+        this.editedDate = editedDate;
+    }
+
+    public User getEditedBy() {
+        return editedBy;
+    }
+
+    public void setEditedBy(User editedBy) {
+        this.editedBy = editedBy;
+    }
+
     public Collection<MppDetail> getMppDetails() {
         return mppDetail;
     }
@@ -31,35 +74,28 @@ public class Mpp {
 
     @OneToMany(cascade = CascadeType.MERGE, mappedBy = "mpp")
     private Collection<MppDetail> mppDetail;
-
-    //    private long numberOfPerson;
     private Department department;
-    //    private String reason;
-//    private String position;
-//    private String mainResponsibility;
-//    private String education;
-//    private String experience;
-//    private String knowledge;
-//    private String employeeStatus;
-//    private int expectedJoin;
-//    private int pcAmmount;
-//    private String pcSpec;
     private boolean reject;
     private boolean accept;
-    //    private int januaryExpect;
-//    private int februaryExpect;
-//    private int marchExpect;
-//    private int aprilExpect;
-//    private int mayExpect;
-//    private int juneExpect;
-//
-//
-//    private int julyExpect;
-//    private int augustExpect;
-//    private int septemberExpect;
-//    private int octoberExpect;
-//    private int novemberExpect;
-//    private int decemberExpect;
+    private boolean acceptHrd;
+    private boolean rejectHrd;
+
+    public boolean isAcceptHrd() {
+        return acceptHrd;
+    }
+
+    public void setAcceptHrd(boolean acceptHrd) {
+        this.acceptHrd = acceptHrd;
+    }
+
+    public boolean isRejectHrd() {
+        return rejectHrd;
+    }
+
+    public void setRejectHrd(boolean rejectHrd) {
+        this.rejectHrd = rejectHrd;
+    }
+
     private boolean published;
 
 
@@ -92,6 +128,30 @@ public class Mpp {
         this.department = department;
 
     }
+
+    public User getAcceptedHrdBy() {
+        return acceptedHrdBy;
+    }
+
+    public void setAcceptedHrdBy(User acceptedHrdBy) {
+        this.acceptedHrdBy = acceptedHrdBy;
+    }
+
+    public User getRejectedHrdBy() {
+        return rejectedHrdBy;
+    }
+
+    public void setRejectedHrdBy(User rejectedHrdBy) {
+        this.rejectedHrdBy = rejectedHrdBy;
+    }
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User acceptedHrdBy;
+
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User rejectedHrdBy;
+
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private User requestedBy;
@@ -138,86 +198,6 @@ public class Mpp {
         this.createdDate = createdDate;
     }
 
-//    public long getNumberOfPerson() {
-//        return numberOfPerson;
-//    }
-//
-//    public void setNumberOfPerson(long numberOfPerson) {
-//        this.numberOfPerson = numberOfPerson;
-//    }
-//
-//    public String getReason() {
-//        return reason;
-//    }
-//
-//    public void setReason(String reason) {
-//        this.reason = reason;
-//    }
-//
-//    public String getMainResponsibility() {
-//        return mainResponsibility;
-//    }
-//
-//    public void setMainResponsibility(String mainResponsibility) {
-//        this.mainResponsibility = mainResponsibility;
-//    }
-//
-//    public String getEducation() {
-//        return education;
-//    }
-//
-//    public void setEducation(String education) {
-//        this.education = education;
-//    }
-//
-//    public String getExperience() {
-//        return experience;
-//    }
-//
-//    public void setExperience(String experience) {
-//        this.experience = experience;
-//    }
-//
-//    public String getKnowledge() {
-//        return knowledge;
-//    }
-//
-//    public void setKnowledge(String knowledge) {
-//        this.knowledge = knowledge;
-//    }
-//
-//    public String getEmployeeStatus() {
-//        return employeeStatus;
-//    }
-//
-//    public void setEmployeeStatus(String employeeStatus) {
-//        this.employeeStatus = employeeStatus;
-//    }
-//
-//    public int getExpectedJoin() {
-//        return expectedJoin;
-//    }
-//
-//    public void setExpectedJoin(int expectedJoin) {
-//        this.expectedJoin = expectedJoin;
-//    }
-//
-//    public int getPcAmmount() {
-//        return pcAmmount;
-//    }
-//
-//    public void setPcAmmount(int pcAmmount) {
-//        this.pcAmmount = pcAmmount;
-//    }
-//
-//    public String getPcSpec() {
-//        return pcSpec;
-//    }
-//
-//    public void setPcSpec(String pcSpec) {
-//        this.pcSpec = pcSpec;
-//    }
-
     public User getRequestedBy() {
         return requestedBy;
     }
@@ -258,110 +238,6 @@ public class Mpp {
     public void setAccept(boolean accept) {
         this.accept = accept;
     }
-
-//    public String getPosition() {
-//        return position;
-//    }
-//
-//    public void setPosition(String position) {
-//        this.position = position;
-//    }
-
-//    public int getJanuaryExpect() {
-//        return januaryExpect;
-//    }
-//
-//    public void setJanuaryExpect(int januaryExpect) {
-//        this.januaryExpect = januaryExpect;
-//    }
-//
-//    public int getFebruaryExpect() {
-//        return februaryExpect;
-//    }
-//
-//    public void setFebruaryExpect(int februaryExpect) {
-//        this.februaryExpect = februaryExpect;
-//    }
-//
-//    public int getMarchExpect() {
-//        return marchExpect;
-//    }
-//
-//    public void setMarchExpect(int marchExpect) {
-//        this.marchExpect = marchExpect;
-//    }
-//
-//    public int getAprilExpect() {
-//        return aprilExpect;
-//    }
-//
-//    public void setAprilExpect(int aprilExpect) {
-//        this.aprilExpect = aprilExpect;
-//    }
-//
-//    public int getMayExpect() {
-//        return mayExpect;
-//    }
-//
-//    public void setMayExpect(int mayExpect) {
-//        this.mayExpect = mayExpect;
-//    }
-//
-//    public int getJuneExpect() {
-//        return juneExpect;
-//    }
-//
-//    public void setJuneExpect(int juneExpect) {
-//        this.juneExpect = juneExpect;
-//    }
-//
-//    public int getJulyExpect() {
-//        return julyExpect;
-//    }
-//
-//    public void setJulyExpect(int julyExpect) {
-//        this.julyExpect = julyExpect;
-//    }
-//
-//    public int getAugustExpect() {
-//        return augustExpect;
-//    }
-//
-//    public void setAugustExpect(int augustExpect) {
-//        this.augustExpect = augustExpect;
-//    }
-//
-//    public int getSeptemberExpect() {
-//        return septemberExpect;
-//    }
-//
-//    public void setSeptemberExpect(int septemberExpect) {
-//        this.septemberExpect = septemberExpect;
-//    }
-//
-//    public int getOctoberExpect() {
-//        return octoberExpect;
-//    }
-//
-//    public void setOctoberExpect(int octoberExpect) {
-//        this.octoberExpect = octoberExpect;
-//    }
-//
-//    public int getNovemberExpect() {
-//        return novemberExpect;
-//    }
-//
-//    public void setNovemberExpect(int novemberExpect) {
-//        this.novemberExpect = novemberExpect;
-//    }
-
-//    public int getDecemberExpect() {
-//        return decemberExpect;
-//    }
-
-//    public void setDecemberExpect(int decemberExpect) {
-//        this.decemberExpect = decemberExpect;
-//    }
 
     public boolean isPublished() {
         return published;
