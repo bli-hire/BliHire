@@ -16,4 +16,6 @@ public interface MppDetailService {
 
     boolean editMppDetail(Long mppDetailId, MppDetailRequest mppDetailRequest, User editor);
 
+    MppDetail getMppDetailById(Long id);
+
 }

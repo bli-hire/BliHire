@@ -63,6 +63,20 @@ public class MppServiceImpl implements MppService{
         return mppRepository.findAll();
     }
 
+    @Override
+    public boolean resendMpp(Mpp mpp, User resender) {
+        Mpp mppToResend = mppRepository.findOne(mpp.getId());
+        if(resender.getRole() == Role.CEO){
+            mppToResend.setApprovedBy(null);
+            mppToResend.setAccept(false);
+            mppToResend.setReject(false);
+            mppToResend.setMppStatus(MppStatus.waiting_hrd);
+            mppRepository.save(mppToResend);
+            return true;
+        }
+        return false;
+    }
+
 //    @Override
 //    public void addMpp(@RequestBody MppFormRequest mppFormRequest)
 //    {

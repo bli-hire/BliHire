@@ -24,6 +24,8 @@ public interface MppService {
 
 //    void addMpp(@RequestBody MppFormRequest mppFormRequest);
 
+    boolean resendMpp(Mpp mpp, User resender);
+
     boolean approveMpp(Mpp mpp, User approver);
 
     boolean rejectMpp(Mpp mpp, User rejector);

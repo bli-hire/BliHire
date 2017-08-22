@@ -204,6 +204,20 @@ public class MppController {
         Page<Mpp> data = mppService.getMppByRequestedByRejectedStatus(userService.getUser(userId), pageable);
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Mpp By Requested",data,true);
     }
+
+    @RequestMapping(value = "/department/resendMpp", method = RequestMethod.POST, produces = "application/json")
+    public MppResponse resendMpp(@RequestBody ApproveRejectMppRequest approveRejectMppRequest, HttpServletResponse response){
+
+        if(mppService.resendMpp(mppService.getMppById(approveRejectMppRequest.getIdMpp()), userService.getUser(approveRejectMppRequest.getIdUser())) == true){
+            return new MppResponse(Integer.toString(response.getStatus()), "Success Approve Mpp", null);
+
+        }
+        else{
+            return new MppResponse(Integer.toString(response.getStatus()), "Failed Approve Mpp", null);
+
+        }
+    }
+
     //************* END HEAD DEPT's ENDPOINT ************
 
 
@@ -272,6 +286,12 @@ public class MppController {
     public MppResponse findMppByDepartmentPublished(@RequestHeader Department department){
         Collection<Mpp> data = mppService.getPublishedMppByDepartment(department);
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Published Mpp By Department",data,data.size());
+    }
+
+    @RequestMapping(value="/mpp-detail/{id}", method = RequestMethod.GET, produces = "application/json")
+    public MppDetail findMppDetailById(@PathVariable Long id, HttpServletResponse response){
+        MppDetail mpp = mppDetailService.getMppDetailById(id);
+        return mpp;
     }
 
 }

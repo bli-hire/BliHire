@@ -65,4 +65,9 @@ public class MppDetailServiceImpl implements MppDetailService{
 
         return true;
     }
+
+    @Override
+    public MppDetail getMppDetailById(Long id) {
+        return mppDetailRepository.findOne(id);
+    }
 }
