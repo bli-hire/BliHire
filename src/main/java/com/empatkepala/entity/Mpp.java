@@ -1,6 +1,7 @@
 package com.empatkepala.entity;
 
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.MppStatus;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -26,6 +27,16 @@ public class Mpp {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private User editedBy;
+
+    public MppStatus getMppStatus() {
+        return mppStatus;
+    }
+
+    public void setMppStatus(MppStatus mppStatus) {
+        this.mppStatus = mppStatus;
+    }
+
+    private MppStatus mppStatus = MppStatus.waiting_hrd;
 
     public DateTime getEditedDate() {
         return editedDate;

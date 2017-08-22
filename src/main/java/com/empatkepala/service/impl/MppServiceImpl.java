@@ -6,6 +6,7 @@ import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.entity.request.MppDetailRequest;
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.MppStatus;
 import com.empatkepala.enumeration.Role;
 import com.empatkepala.repository.MppDetailRepository;
 import com.empatkepala.repository.MppRepository;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Juan on 3/11/17.
@@ -89,6 +91,7 @@ public class MppServiceImpl implements MppService{
             mppToApprove.setApprovedBy(approver);
             mppToApprove.setAccept(true);
             mppToApprove.setReject(false);
+            mppToApprove.setMppStatus(MppStatus.accept_ceo);
             mppRepository.save(mppToApprove);
             return true;
         }
@@ -104,6 +107,7 @@ public class MppServiceImpl implements MppService{
             mppToReject.setRejectedBy(rejector);
             mppToReject.setAccept(false);
             mppToReject.setReject(true);
+            mppToReject.setMppStatus(MppStatus.reject_ceo);
             mppRepository.save(mppToReject);
             return true;
         }
@@ -118,6 +122,7 @@ public class MppServiceImpl implements MppService{
             mppToApprove.setAcceptedHrdBy(approver);
             mppToApprove.setAcceptHrd(true);
             mppToApprove.setRejectHrd(false);
+            mppToApprove.setMppStatus(MppStatus.accept_hrd);
             mppRepository.save(mppToApprove);
             return true;
         }
@@ -132,6 +137,7 @@ public class MppServiceImpl implements MppService{
             mppToReject.setRejectedHrdBy(rejector);
             mppToReject.setAcceptHrd(false);
             mppToReject.setRejectHrd(true);
+            mppToReject.setMppStatus(MppStatus.reject_hrd);
             mppRepository.save(mppToReject);
             return true;
         }
@@ -177,7 +183,8 @@ public class MppServiceImpl implements MppService{
 
     @Override
     public Collection<Mpp> getMppByRequestedBy(User requestedBy) {
-        return mppRepository.findByRequestedBy(requestedBy);
+//        return mppRepository.findByRequestedBy(requestedBy);
+        return null;
     }
 
     @Override
@@ -229,6 +236,7 @@ public class MppServiceImpl implements MppService{
     @Override
     public Page<Mpp> getMppToProccessedByHrdByDepartment(Department department, Pageable pageable) {
         Page<Mpp> mpps = mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department,false,false,false, false, pageable);
+//        Page<Mpp> mpps = mppRepository.findByMppStatusAndDepartment(MppStatus.waiting_hrd, department,pageable);
         return mpps;
     }
 
@@ -239,6 +247,60 @@ public class MppServiceImpl implements MppService{
         Page<Mpp> mpps = mppRepository.findByDepartmentAndAcceptAndRejectAndAcceptHrdAndRejectHrd(department, false, false,true, false, pageable);
         return mpps;
     }
+
+    @Override
+    public Page<Mpp> getMppByMppStatusAndDepartment(Department department, Pageable pageable, MppStatus mppStatus) {
+        Page<Mpp> mpps = mppRepository.findByMppStatusAndDepartment(mppStatus, department, pageable);
+        return mpps;
+    }
+
+    @Override
+    public Page<Mpp> getMppByMppStatusAndDepartmentAndProcessedBy(Department department, Pageable pageable, MppStatus mppStatus, User processor) {
+        Page<Mpp> mpps;
+        switch (mppStatus){
+            case accept_ceo:
+                mpps = mppRepository.findByMppStatusAndDepartmentAndApprovedBy(mppStatus, department, pageable, processor);
+                return mpps;
+            case reject_ceo:
+                mpps = mppRepository.findByMppStatusAndDepartmentAndRejectedBy(mppStatus, department, pageable, processor);
+                return  mpps;
+            case accept_hrd:
+                mpps = mppRepository.findByMppStatusAndDepartmentAndAcceptedHrdBy(mppStatus, department, pageable, processor);
+                return  mpps;
+            case reject_hrd:
+                mpps = mppRepository.findByMppStatusAndDepartmentAndRejectedHrdBy(mppStatus, department, pageable, processor);
+                return  mpps;
+            case waiting_hrd:
+                mpps = mppRepository.findByMppStatusAndRequestedBy(mppStatus, pageable, processor);
+            default:
+                return  null;
+        }
+    }
+
+    @Override
+    public Page<Mpp> getMppByRequestedByPendingStatus(User requestedBy, Pageable pageable) {
+        List<MppStatus> listMppStatus = new ArrayList<>();
+        listMppStatus.add(MppStatus.waiting_hrd);
+        listMppStatus.add(MppStatus.accept_hrd);
+        Page<Mpp> mpps = mppRepository.findByMppStatusInAndRequestedBy(listMppStatus ,requestedBy, pageable);
+        return mpps;
+    }
+
+    @Override
+    public Page<Mpp> getMppByRequestedByAcceptedStatus(User requestedBy, Pageable pageable) {
+        Page<Mpp> mpps = mppRepository.findByMppStatusAndRequestedBy(MppStatus.accept_ceo, pageable, requestedBy);
+        return mpps;
+    }
+
+    @Override
+    public Page<Mpp> getMppByRequestedByRejectedStatus(User requestedBy, Pageable pageable) {
+        List<MppStatus> listMppStatus = new ArrayList<>();
+        listMppStatus.add(MppStatus.reject_ceo);
+        listMppStatus.add(MppStatus.reject_hrd);
+        Page<Mpp> mpps = mppRepository.findByMppStatusInAndRequestedBy(listMppStatus, requestedBy, pageable);
+        return mpps;
+    }
+
 
     @Override
     public Collection<Mpp> getPublishedMppByDepartment(Department department) {

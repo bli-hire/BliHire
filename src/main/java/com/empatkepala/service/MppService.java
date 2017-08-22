@@ -4,6 +4,7 @@ import com.empatkepala.entity.Mpp;
 import com.empatkepala.entity.User;
 import com.empatkepala.entity.request.AddMppRequest;
 import com.empatkepala.enumeration.Department;
+import com.empatkepala.enumeration.MppStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -54,8 +55,15 @@ public interface MppService {
     Page<Mpp> getMppToProccessedByHrdByDepartment(Department department, Pageable pageable);
     Page<Mpp> getMppToProccessedByCEOByDepartment(Department department, Pageable pageable);
 
+    //for hrd and ceo to process
+    Page<Mpp> getMppByMppStatusAndDepartment(Department department, Pageable pageable, MppStatus mppStatus);
 
+    //for history
+    Page<Mpp> getMppByMppStatusAndDepartmentAndProcessedBy(Department department, Pageable pageable, MppStatus mppStatus, User processor);
 
+    Page<Mpp> getMppByRequestedByPendingStatus(User requestedBy, Pageable pageable);
+    Page<Mpp> getMppByRequestedByAcceptedStatus(User requestedBy, Pageable pageable);
+    Page<Mpp> getMppByRequestedByRejectedStatus(User requestedBy, Pageable pageable);
 
 
 
