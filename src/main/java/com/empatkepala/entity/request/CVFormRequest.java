@@ -22,7 +22,6 @@ public class CVFormRequest implements Serializable{
     private String idCardNumber;
     private ArrayList<String> drivingLicense;
     private String emailAddress;
-    private String uploadCV;
     private String twitter;
     private String facebook;
     private String linkedIn;
@@ -134,14 +133,6 @@ public class CVFormRequest implements Serializable{
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public String getUploadCV() {
-        return uploadCV;
-    }
-
-    public void setUploadCV(String uploadCV) {
-        this.uploadCV = uploadCV;
     }
 
     public String getTwitter() {

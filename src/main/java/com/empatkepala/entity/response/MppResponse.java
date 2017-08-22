@@ -1,6 +1,7 @@
 package com.empatkepala.entity.response;
 
 import com.empatkepala.entity.Mpp;
+import org.springframework.data.domain.Page;
 
 import java.util.Collection;
 
@@ -14,6 +15,16 @@ public class MppResponse {
     private String requestHeader;
     private String requestBody;
     private String method;
+    boolean pageable;
+    private Page<Mpp> dataPage;
+
+    public Page<Mpp> getDataPage() {
+        return dataPage;
+    }
+
+    public void setDataPage(Page<Mpp> dataPage) {
+        this.dataPage = dataPage;
+    }
 
     public MppResponse() {}
 
@@ -21,6 +32,13 @@ public class MppResponse {
         this.status = status;
         this.message = message;
         this.data = data;
+    }
+
+    public MppResponse(String status,String message,Page<Mpp> dataPage, boolean pageable){
+        this.status = status;
+        this.message = message;
+        this.dataPage = dataPage;
+        this.pageable = pageable;
     }
 
     public MppResponse(String status,String message,Collection<Mpp> data,int totalData){

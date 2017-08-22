@@ -5,7 +5,7 @@ package com.empatkepala.entity.request;
  */
 public class MppDetailRequest {
     private String position;
-    private long numberOfPerson;
+    private int numberOfPerson;
     private String reason;
     private String mainResponsibility;
     private String education;
@@ -24,11 +24,11 @@ public class MppDetailRequest {
         this.position = position;
     }
 
-    public long getNumberOfPerson() {
+    public int getNumberOfPerson() {
         return numberOfPerson;
     }
 
-    public void setNumberOfPerson(long numberOfPerson) {
+    public void setNumberOfPerson(int numberOfPerson) {
         this.numberOfPerson = numberOfPerson;
     }
 
