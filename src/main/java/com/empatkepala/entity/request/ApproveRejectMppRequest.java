@@ -6,6 +6,14 @@ package com.empatkepala.entity.request;
 public class ApproveRejectMppRequest {
     private long idUser, idMpp;
 
+    public ApproveRejectMppRequest(long idUser, long idMpp) {
+        this.idUser = idUser;
+        this.idMpp = idMpp;
+    }
+
+    public ApproveRejectMppRequest() {
+    }
+
     public long getIdUser() {
         return idUser;
     }
