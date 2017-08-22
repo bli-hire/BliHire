@@ -28,6 +28,16 @@ public class Mpp {
     @ManyToOne(cascade = CascadeType.MERGE)
     private User editedBy;
 
+    boolean edited = false;
+
+    public boolean isEdited() {
+        return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
+    }
+
     public MppStatus getMppStatus() {
         return mppStatus;
     }

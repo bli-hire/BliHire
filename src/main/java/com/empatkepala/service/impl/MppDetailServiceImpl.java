@@ -57,6 +57,7 @@ public class MppDetailServiceImpl implements MppDetailService{
         Mpp parentMpp = toEdit.getMpp();
         parentMpp.setEditedDate(new DateTime());
         parentMpp.setEditedBy(editor);
+        parentMpp.setEdited(true);
         mppRepository.save(parentMpp);
 
         mppDetailRepository.save(toEdit);
