@@ -41,7 +41,6 @@ public class CV {
     private String idCardNumber;
     private ArrayList<String> drivingLicense;
     private String emailAddress;
-    private String uploadCV;
     private String twitter;
     private String facebook;
     private String linkedIn;
@@ -102,7 +101,9 @@ public class CV {
     private TechnicalTest technicalTest;
 
     public CV(){}
+
     public CV(String title, Department department, String jobTitle, String fullName, String placeDateOfBirth, String idCardNumber, ArrayList<String> drivingLicense, String emailAddress, String uploadCV, String twitter, String facebook, String linkedIn, String blog, String handphone, String religion, String ethnicity, String maritalStatus, String currentAddress, String homeAddress, String homePhone, String emergencyCall, String fatherName, String fatherBirthday, String fatherLatestEducation, String fatherCurrentJob, String motherName, String motherBirthday, String motherLatestEducation, String motherCurrentJob,ArrayList<Brothers> Bro,String spouseName, String spousebirthDay, String spouseLatestEducation, String spouseCurrentJob,ArrayList<Children> Chil, String responsibilities, String responsibilitiesType, ArrayList<School> school, String reasonMajor, String titleThesis,ArrayList<NonFormalCourse> nonFrmlCrs,  ArrayList<Achievements> achievements, ArrayList<Language> language, ArrayList<SocialActivity> socialact,ArrayList<WorkExperience> WorkExp, String reasonInterestedInGDN, String reasonApplyOnThatPosition, String factorEncourageYouOnThatJob, String kindOfEnvirontment, String lifeValue, String spesificSkill, String hobbies, String describeAboutYou, String placeGetInformationGDN, String relativeWorkingOnGDN, String haveAppliedOnGDN, String havePartTimejob, String timeStartWork, String applicantStatus) {
+
 
         this.title = title;
         this.department =department;
@@ -112,7 +113,6 @@ public class CV {
         this.idCardNumber = idCardNumber;
         this.drivingLicense = drivingLicense;
         this.emailAddress = emailAddress;
-        this.uploadCV = uploadCV;
         this.twitter = twitter;
         this.facebook = facebook;
         this.linkedIn = linkedIn;
@@ -237,14 +237,6 @@ public class CV {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-
-    public String getUploadCV() {
-        return uploadCV;
-    }
-
-    public void setUploadCV(String uploadCV) {
-        this.uploadCV = uploadCV;
     }
 
     public String getTwitter() {

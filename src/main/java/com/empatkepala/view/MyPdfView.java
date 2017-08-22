@@ -26,7 +26,11 @@ public class MyPdfView extends AbstractPdfView {
         namaAtribut.add("ID CV :"); cvValue.add(Long.toString(cvs.get(0).getIdCV()));
         namaAtribut.add("Uid :"); cvValue.add(cvs.get(0).getUid());
         namaAtribut.add("Title :"); cvValue.add(cvs.get(0).getTitle());
-        namaAtribut.add("Department :"); cvValue.add(cvs.get(0).getDepartment().toString());
+// <<<<<<< feature/mpp
+//         namaAtribut.add("Department :"); cvValue.add(cvs.get(0).getDepartment().toString());
+// =======
+        namaAtribut.add("Department :"); cvValue.add(cvs.get(0).getDepartment());
+// >>>>>>> dev
         namaAtribut.add("Job Title :"); cvValue.add(cvs.get(0).getJobTitle());
         namaAtribut.add("Full Name :"); cvValue.add(cvs.get(0).getFullName());
         namaAtribut.add("Place Date Of Birth :"); cvValue.add(cvs.get(0).getPlaceDateOfBirth());
