@@ -79,6 +79,12 @@ public class MppController {
         mppDetailService.editMppDetail(idMppDetail, mppDetailRequest, userService.getUser(idEditor));
         return new MppResponse(Integer.toString(response.getStatus()),"Success Update Mpp",null);
     }
+
+    @RequestMapping(value="/mpp-detail/{id}", method = RequestMethod.GET, produces = "application/json")
+    public MppDetail findMppDetailById(@PathVariable Long id, HttpServletResponse response){
+        MppDetail mpp = mppDetailService.getMppDetailById(id);
+        return mpp;
+    }
     //************ END BASIC ENDPOINTS ************
 
 
@@ -288,10 +294,5 @@ public class MppController {
         return new MppResponse(HttpStatus.FOUND.toString(),"Success Get Published Mpp By Department",data,data.size());
     }
 
-    @RequestMapping(value="/mpp-detail/{id}", method = RequestMethod.GET, produces = "application/json")
-    public MppDetail findMppDetailById(@PathVariable Long id, HttpServletResponse response){
-        MppDetail mpp = mppDetailService.getMppDetailById(id);
-        return mpp;
-    }
 
 }
